@@ -10,11 +10,28 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <link rel="stylesheet" type="text/css" href="framework/appframework/css/icons.min.css" />  
 <link rel="stylesheet" type="text/css" href="framework/appframework/css/af.ui.min.css" />  
+
+      <link rel="stylesheet" type="text/css" href="framework/appframework/theme/main.css"  />
+      <link rel="stylesheet" type="text/css" href="framework/appframework/theme/appframework.css"  />
+      <link rel="stylesheet" type="text/css" href="framework/appframework/theme/lists.css"  />
+      <link rel="stylesheet" type="text/css" href="framework/appframework/theme/forms.css"  />
+      <link rel="stylesheet" type="text/css" href="framework/appframework/theme/buttons.css"  />        
+      <link rel="stylesheet" type="text/css" href="framework/appframework/theme/badges.css"  />        
+      <link rel="stylesheet" type="text/css" href="framework/appframework/theme/grid.css"  />
+
+      <link rel="stylesheet" type="text/css" href="framework/appframework/theme/android.css"  />
+      <link rel="stylesheet" type="text/css" href="framework/appframework/theme/win8.css"  />
+      <link rel="stylesheet" type="text/css" href="framework/appframework/theme/bb.css"  />
+      <link rel="stylesheet" type="text/css" href="framework/appframework/theme/ios.css"  />
+      <link rel="stylesheet" type="text/css" href="framework/appframework/theme/ios7.css"  />
+      <link rel="stylesheet" type="text/css" href="framework/appframework/theme/tizen.css"  />
+      
+      <link rel="stylesheet" type="text/css" href="css/customize.css"
         
 <script type="text/javascript" charset="utf-8" src="framework/appframework/js/appframework.min.js"></script>     
 <script type="text/javascript" charset="utf-8" src="framework/appframework/js/appframework.ui.min.js"></script> 
         
-        <!-- plug-in -->
+<!--							 plug-in 					-->
 <script type="text/javascript" charset="utf-8" src="framework/appframework/plugins/af.touchEvents.js"></script>     
 <script type="text/javascript" charset="utf-8" src="framework/appframework/plugins/af.actionsheet.js"></script>
 <script type="text/javascript" charset="utf-8" src="framework/appframework/plugins/af.css3animate.js"></script>
@@ -24,44 +41,164 @@
 <script type="text/javascript" charset="utf-8" src="framework/appframework/plugins/af.touchLayer.js"></script>
 <script type="text/javascript" charset="utf-8" src="framework/appframework/plugins/af.popup.js"></script>
         
-        <!--Plugin Utility-->
-<script type="text/javascript" charset="utf-8" src="framework/appframework/plugin-utl/transitions/fade.js"></script>
-<script type="text/javascript" charset="utf-8" src="framework/appframework/plugin-utl/transitions/flip.js"></script>
-<script type="text/javascript" charset="utf-8" src="framework/appframework/plugin-utl/transitions/pop.js"></script>
-<script type="text/javascript" charset="utf-8" src="framework/appframework/plugin-utl/transitions/slide.js"></script>
-<script type="text/javascript" charset="utf-8" src=".framework/appframework/plugin-utl/transitions/slideDown.js"></script>
-<script type="text/javascript" charset="utf-8" src=".framework/appframework/plugin-utl/transitions/slideUp.js"></script>
+<!--                           transition                   -->
+<script type="text/javascript" charset="utf-8" src="framework/appframework/transition/transitions/fade.js"></script>
+<script type="text/javascript" charset="utf-8" src="framework/appframework/transition/transitions/flip.js"></script>
+<script type="text/javascript" charset="utf-8" src="framework/appframework/transition/transitions/pop.js"></script>
+<script type="text/javascript" charset="utf-8" src="framework/appframework/transition/transitions/slide.js"></script>
+<script type="text/javascript" charset="utf-8" src=".framework/appframework/transition/transitions/slideDown.js"></script>
+<script type="text/javascript" charset="utf-8" src=".framework/appframework/transition/transitions/slideUp.js"></script>
 <script type="text/javascript" charset="utf-8" src="framework/appframework/plugins/af.slidemenu.js"></script>
+
+
+
         
    <script type="text/javascript">  
+   
+   
+       function loadedPanel(what) {
+                //We are going to set the badge as the number of li elements inside the target
+                $.ui.updateBadge("#aflink", $("#af").find("li").length);
+            }
+
+
+            function unloadedPanel(what) {
+                console.log("unloaded " + what.id);
+            }
+   
     if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in  
             window)) {  
         var script = document.createElement("script");  
         script.src = "framework/appframework/plugins/af.desktopBrowsers.js";  
         var tag = $("head").append(script);  
     }  
-</script>      
+</script>    
+
+  <script type="text/javascript">
+            /* This function runs once the page is loaded, but intel.xdk is not yet active */
+            //$.ui.animateHeaders=false;
+             var search=document.location.search.toLowerCase().replace("?","");
+             //if(!search)
+            $.ui.useOSThemes=true;
+            if(search.length>0) //Android fix has too many buggy issues on iOS - can't preview with $.os.android
+            {
+
+               $.ui.useOSThemes=true;
+                if(search=="win8")
+                    $.os.ie=true;
+                $.ui.ready(function(){
+                    $("#afui").get(0).className=search;
+                });
+            }
+            
+            var webRoot = "./";
+            // $.os.android=true;
+            //$.ui.autoLaunch = false;
+            $.ui.openLinksNewTab = false;
+            $.ui.splitview=false;
+            
+
+            $(document).ready(function(){
+                  // $.ui.launch();
+
+            });
+            
+ 
+
+            function showHide(obj, objToHide) {
+                var el = $("#" + objToHide)[0];
+
+                if (obj.className == "expanded") {
+                    obj.className = "collapsed";
+                } else {
+                    obj.className = "expanded";
+                }
+                $(el).toggle();
+
+            }
+
+
+            if($.os.android||$.os.ie||search=="android"){
+                $.ui.ready(function(){
+                    $("#main .list").append("<li><a id='toggleAndroidTheme'>Toggle Theme Color</a></li>");
+                    var $el=$("#afui");
+                    $("#toggleAndroidTheme").bind("click",function(e){
+                        if($el.hasClass("light"))
+                            $el.removeClass("light");
+                        else
+                            $el.addClass("light");
+                    });
+                });
+            }       
+			
+	              
+        </script>  
         
 </head>
 
 <body>
-<div id="afui"> 
+<div id="afui" > 
 	<div id="content">
-    	<div id="indexpage" title="Welcome" data-header="none" data-footer="defaultfooter" class="panel" data-nav="Mainside" selected="true">
-        	index pannel
+    
+    <!------------- 主页面 --------------------------->
+    	<div id="indexpage"  data-header="none" data-footer="defaultfooter" class="panel"  selected="true" style="background-color:green">
+        
+        
+        
+        <div class="indexpagediv">
+        	<div class="indexpagetopcontent">1122</div>
+        
+        	<div class="indexpagecenter">
+            
+            <a class="button setcenter button_indexpage" onclick='$.ui.loadContent("#maplistpage",false,false, "slide");'>查看</a>
+            
+            
+            </div>
+            
+            <div class="indexpagecenter">
+            
+            <a class="button setcenter" onclick='$.ui.loadContent("#maplistpage",false,false, "slide");'>摊位管理 </a>
+            
+            <a class="button setcenter" onclick='$.ui.loadContent("#maplistpage",false,false, "slide");'>消息一栏 </a>
+            
+            <a class="button setcenter" onclick='$.ui.loadContent("#maplistpage",false,false, "slide");'>关注摊位 </a>
+            </div>
+            
+            
+          </div>  
             
         </div> 
+        
+        
+        
+        
         <div id="mappage" title="Welcome" data-header="mapheader" data-footer="defaultfooter" class="panel" data-nav="Mainside" >
-        	map pannel
+        	摊位地图
         </div> 
         <div id="maplistpage" title="Welcome" data-header="maplistheader"  data-footer="defaultfooter" class="panel" >
-        	maplist pannel
+        	摊位列表
         </div> 
- <!-- header area -->       
+          <div id="sitemanagepage" title="Welcome" data-header="mapheader" data-footer="defaultfooter" class="panel" data-nav="Mainside" >
+        	摊位管理
+        </div> 
+        <div id="maplistpage" title="Welcome" data-header="maplistheader"  data-footer="defaultfooter" class="panel" >
+        	信息中心
+        </div> 
+
+    
+        
+  
+    
+     </div>
+     
+      <!-- header area -->       
         
         <header id="mapheader">
-            Map
-            <button onClick="$.ui.toggleSideMenu()">test</button>
+           <a  id='menubadge' onclick='af.ui.toggleSideMenu()'> Map</a>
+              <a id='menubadge' onclick='af.ui.toggleSideMenu()' class='menuButton'></a> 
+    <a href="#maplistpage">map list</a>
+            <button onclick='af.ui.toggleSideMenu()'>sdfsf</button>
+            aaa
         </header>
         <header id="maplistheader">
             list
@@ -73,18 +210,20 @@
             <a href="#maplistpage">map list</a>
             
         </footer>
-      <!-- side menu area -->    
-    
-        
-  
-       <nav id="Mainside">
+      <!-- side menu area -->  
+      <nav>
+      <ul class="list">
+                    <li class="divider" class="icon home">Home</li>
+                    <li>
+                        <a href="#af">Selectors</a>
+                    </li>
+      </ul>
+      </nav>  
+        <nav id="Mainside">
       main side
       </nav>
-     </div>
-    <aside>
-        This is a chat aside
-    </aside>
- </div>
+
+
 
 </body>
 </html>
