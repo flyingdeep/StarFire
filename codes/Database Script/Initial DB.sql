@@ -1,22 +1,26 @@
-CREATE TABLE `stand`.`user_info` (
-  `user_id` INT NOT NULL AUTO_INCREMENT,
-  `display_name` VARCHAR(10) NULL,
-  `user_name` VARCHAR(10) NOT NULL,
-  `Image_Id` VARCHAR(20) NOT NULL,
-  `user_preference` VARCHAR(500) NOT NULL,
-  `user_type` CHAR(1) NOT NULL,
-  `cell_number` VARCHAR(20) NULL,
-  `web_chart` VARCHAR(50) NULL,
-  `qq_number` VARCHAR(50) NULL,
-  `province_city_area` VARCHAR(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `stand`.`user_info` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `display_name` varchar(10) DEFAULT NULL,
+  `password` varchar(30) NOT NULL,
+  `user_name` varchar(10) NOT NULL,
+  `Image_Id` varchar(20) NOT NULL,
+  `user_preference` varchar(500) NOT NULL,
+  `user_type` char(1) NOT NULL,
+  `cell_number` varchar(20) DEFAULT NULL,
+  `web_chart` varchar(50) DEFAULT NULL,
+  `qq_number` varchar(50) DEFAULT NULL,
+  `province_city_area` varchar(100) NOT NULL,
+  `CreateDate` datetime NOT NULL,
+  `UpdateDate` datetime NOT NULL,
   PRIMARY KEY (`user_id`),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
-  UNIQUE INDEX `user_name_UNIQUE` (`user_name` ASC))
-ENGINE = MyISAM;
+  UNIQUE KEY `user_id_UNIQUE` (`user_id`),
+  UNIQUE KEY `user_name_UNIQUE` (`user_name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 
-CREATE TABLE `stand`.`stand_info` (
+
+CREATE TABLE IF NOT EXISTS  `stand`.`stand_info` (
   `stand_id` INT NOT NULL AUTO_INCREMENT,
   `stand_type` CHAR(1) NOT NULL,
   `stand_name` VARCHAR(50) NULL,
@@ -35,19 +39,20 @@ ENGINE = MyISAM;
 
 
 
-CREATE TABLE `stand_customer_mark` (
+CREATE TABLE IF NOT EXISTS  `stand_customer_mark` (
   `customer_message_id` int(11) NOT NULL AUTO_INCREMENT,
   `stand_id` int(11) NOT NULL,
   `mark` int(11) DEFAULT NULL,
   `comments` varchar(500) DEFAULT NULL,
   `create_user_id` int(11) NOT NULL,
+  `create_user_name` varchar(10) NOT NULL,  
   `create_date` datetime NOT NULL,
   PRIMARY KEY (`customer_message_id`),
   UNIQUE KEY `customer_message_id_UNIQUE` (`customer_message_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE `stand`.`stand_realtime_location` (
+CREATE TABLE IF NOT EXISTS  `stand`.`stand_realtime_location` (
   `stand_id` INT NOT NULL,
   `realtime_location_x` DECIMAL(30,10) NOT NULL,
   `realtime_location_y` DECIMAL(30,10) NOT NULL,
@@ -56,7 +61,7 @@ CREATE TABLE `stand`.`stand_realtime_location` (
 ENGINE = MyISAM;
 
 
-CREATE TABLE `stand`.`stand_owner_message` (
+CREATE TABLE IF NOT EXISTS  `stand`.`stand_owner_message` (
   `stand_owner_message_id` INT NOT NULL AUTO_INCREMENT,
   `stand_id` INT NOT NULL,
   `message` VARCHAR(500) NULL,
@@ -65,7 +70,7 @@ CREATE TABLE `stand`.`stand_owner_message` (
   UNIQUE INDEX `stand_owner_message_id_UNIQUE` (`stand_owner_message_id` ASC));
 
 
-  CREATE TABLE `stand`.`stand_type` (
+  CREATE TABLE IF NOT EXISTS  `stand`.`stand_type` (
   `stand_type_id` INT NOT NULL AUTO_INCREMENT,
   `type_name` VARCHAR(45) NOT NULL,
   `type_parent_id` INT NOT NULL,
@@ -73,7 +78,7 @@ CREATE TABLE `stand`.`stand_owner_message` (
   UNIQUE INDEX `stand_type_id_UNIQUE` (`stand_type_id` ASC));
 
 
-CREATE TABLE `stand`.`stand_location` (
+CREATE TABLE IF NOT EXISTS  `stand`.`stand_location` (
   `stand_location_id` INT NOT NULL AUTO_INCREMENT,
   `stand_id` INT NOT NULL,
   `location_x` DECIMAL(30,10) NOT NULL,
@@ -84,3 +89,34 @@ CREATE TABLE `stand`.`stand_location` (
   PRIMARY KEY (`stand_location_id`),
   UNIQUE INDEX `stand_location_id_UNIQUE` (`stand_location_id` ASC))
 ENGINE = MyISAM;
+
+
+
+CREATE TABLE IF NOT EXISTS  `stand`.`user_link_stand` (
+  `stand_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `create_date` DATETIME NOT NULL,
+  PRIMARY KEY (`stand_id`, `user_id`))
+ENGINE = MyISAM;
+
+
+CREATE TABLE IF NOT EXISTS  `stand`.`instant_message` (
+  `message_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `message` VARCHAR(500) NOT NULL,
+  `create_date` DATE NOT NULL,
+  `action` VARCHAR(500) NULL,
+  `action_type` VARCHAR(500) NULL,
+  `action_parameter` VARCHAR(500) NULL,
+  PRIMARY KEY (`message_id`))
+ENGINE = MyISAM;
+
+
+CREATE TABLE IF NOT EXISTS  `stand`.`stand_images` (
+  `user_id` INT NOT NULL,
+  `image_id` VARCHAR(20) NOT NULL,
+  `create_date` DATETIME NOT NULL,
+  `comments` VARCHAR(200) NULL,
+  PRIMARY KEY (`user_id`, `image_id`))
+ENGINE = MyISAM;
+
