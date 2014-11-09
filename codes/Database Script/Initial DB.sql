@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS `stand`.`user_info` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `display_name` varchar(10) DEFAULT NULL,
   `password` varchar(30) NOT NULL,
-  `user_name` varchar(10) NOT NULL,
+  `user_name` varchar(30) NOT NULL,
   `Image_Id` varchar(20) NOT NULL,
   `user_preference` varchar(500) NOT NULL,
   `user_type` char(1) NOT NULL,
@@ -21,8 +21,9 @@ CREATE TABLE IF NOT EXISTS `stand`.`user_info` (
 
 
 CREATE TABLE IF NOT EXISTS  `stand`.`stand_info` (
-  `stand_id` INT NOT NULL AUTO_INCREMENT,
-  `stand_type` CHAR(1) NOT NULL,
+  `stand_id` INT NOT NULL ,
+  `creator_type` int NOT NULL,
+  `stand_type` int NOT NULL,
   `stand_name` VARCHAR(50) NULL,
   `type_detail_description` VARCHAR(50) NULL,
   `description` VARCHAR(2000) NULL,
@@ -31,7 +32,8 @@ CREATE TABLE IF NOT EXISTS  `stand`.`stand_info` (
   `modify_date` DATETIME NOT NULL,
   `isactive` CHAR(1) NOT NULL DEFAULT '1',
   `mark` DECIMAL(2,1) NULL,
-  `province_city_area` VARCHAR(100) NULL,
+  `position_x` DECIMAL(30,10) NOT NULL,
+  `position_y` DECIMAL(30,10) NOT NULL,
   `realtime_location_active` CHAR(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`stand_id`),
   UNIQUE INDEX `stand_id_UNIQUE` (`stand_id` ASC))
@@ -76,20 +78,6 @@ CREATE TABLE IF NOT EXISTS  `stand`.`stand_owner_message` (
   `type_parent_id` INT NOT NULL,
   PRIMARY KEY (`stand_type_id`),
   UNIQUE INDEX `stand_type_id_UNIQUE` (`stand_type_id` ASC));
-
-
-CREATE TABLE IF NOT EXISTS  `stand`.`stand_location` (
-  `stand_location_id` INT NOT NULL AUTO_INCREMENT,
-  `stand_id` INT NOT NULL,
-  `location_x` DECIMAL(30,10) NOT NULL,
-  `location_y` DECIMAL(30,10) NOT NULL,
-  `create_date` DATETIME NOT NULL,
-  `week_workingday` VARCHAR(20) NULL,
-  `working_time` VARCHAR(200) NULL,
-  PRIMARY KEY (`stand_location_id`),
-  UNIQUE INDEX `stand_location_id_UNIQUE` (`stand_location_id` ASC))
-ENGINE = MyISAM;
-
 
 
 CREATE TABLE IF NOT EXISTS  `stand`.`user_link_stand` (
