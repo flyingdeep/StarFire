@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$/db_modules/db_biz_operation.js" libraries="{Node.js Globals}" />
+    <file url="file://$PROJECT_DIR$/db_modules/db_mysql_operation.js" libraries="{Node.js Globals}" />
+    <file url="file://$PROJECT_DIR$/helper_modules/accessServerAuth.js" libraries="{Node.js Globals}" />
+    <file url="file://$PROJECT_DIR$/testdb.js" libraries="{Node.js Globals}" />
+  </component>
+</project>
+

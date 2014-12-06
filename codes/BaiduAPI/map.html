@@ -32,11 +32,13 @@ var init_city = "上海";
 var Json_mapcenter; //map center val
 var Json_tap_postion; //finger tap position return Json
 var Json_decode_postion2address; //get address from position
+var current_map_level;
 
 
 
 //map.centerAndZoom(new BMap.Point(CONST_POINT_X, CONST_POINT_Y), CONST_DISPLAY_LEVEL);  
 map.centerAndZoom(init_city, CONST_DISPLAY_LEVEL); 
+
 
 
 var map_dragend_event = function (){
@@ -66,14 +68,18 @@ var map_click_event = function (e){
 
 };
 
+var map_zoomend_event = function (){
 
+	current_map_level = map.getZoom();
+
+}
 
 
 
 
 map.addEventListener("dragend", map_dragend_event);
 map.addEventListener("click", map_click_event);
-
+map.addEventListener("zoomend", map_zoomend_event);
 
 	  
 

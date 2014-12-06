@@ -124,8 +124,54 @@ function createJsonStandQueryOne()
 
 }
 
+// link to lbs "searchStandPostionByPoint"
 
-function transferCoords(geo_x, geo_y, ak, coords_source, coords_target,output_json_result)
+function createJsonSearchConditionForPointSearch()
+{
+
+	var resultJson = {
+	"ak": CONST_AK,
+	"geotable_id": CONST_GEOTABLE_ID,
+	"location": null,
+	"coord_type" CONST_COORDS_TYPE,
+	"radius":null,
+	"tags":null,
+	"sortby":null,
+	"filter":null,
+	"page_index":null,
+	"page_size":null
+	
+	
+	}
+	return resultJson;
+}
+
+// link to lbs "searchStandPostionByArea"
+
+function createJsonSearchConditionForAreaSearch()
+{
+
+	var resultJson = {
+	"ak": CONST_AK,
+	"geotable_id": CONST_GEOTABLE_ID,
+	"region": null,
+	"coord_type" CONST_COORDS_TYPE,
+	"tags":null,
+	"sortby":null,
+	"filter":null,
+	"page_index":null,
+	"page_size":null
+	
+	
+	}
+	return resultJson;
+}
+
+
+
+
+
+function transferCoords(geo_x, geo_y, ak, coords_source, coords_target,output_json_result,  successAction, failedAction)
 {
 	url = "http://api.map.baidu.com/geoconv/v1/?" + "coords=" + geo_x + ","+geo_y+"&ak="+ak + "&from=" + coords_source + "&to=" +coords_target;
 	
@@ -138,6 +184,7 @@ function transferCoords(geo_x, geo_y, ak, coords_source, coords_target,output_js
 				output_json_result.data = {
 					"position_x":data.result[0].x,
 					"position_y":data.result[0].y
+						successAction();
 				}
 				
 			}
@@ -145,20 +192,79 @@ function transferCoords(geo_x, geo_y, ak, coords_source, coords_target,output_js
 			{
 				output_json_result.status = "failed";
 				output_json_result.message = "Post failed";
-				
+				failedAction();
 			}
 			else
 			{
 				output_json_result.status = "failed";
 				output_json_result.message = "Api failed";
+				failedAction();
 			}
   });
 
 }
 
 
+// link to "createMakerWithInfoWindow"
+function createJsonStandInfo()
+{
+	var resultJson = 
+	{
+		"stand_id":null,
+		"title":null,
+		"address":null,
+		"postion_x":null,
+		"postion_y":null,
+		"stand_image_tip":null,
+		"create_date":null,
+		"week_working_day":null,
+		"working_time":null,
+		"description":null,
+		"creater_id":null,
+		"update_date":null,
+		"mark":null,
+		"realtime_location":null
+	}
 
+}
 
+//Create user mark on map
+function createMakerWithInfoWindow(map, Json_stand_info)
+{
+	
+	
+	var point = new BMap.Point(Json_stand_info.postion_x, Json_stand_info.postion_y);
+	var marker = new BMap.Marker(point);
+	var sContent = createInfoWindow(Json_stand_info);
+	var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
+	
+	map.addControl(new BMap.ZoomControl());          //添加地图缩放控件
+	map.addOverlay(marker);
+	marker.addEventListener("click", function(){          
+	   this.openInfoWindow(infoWindow);
+	   //图片加载完毕重绘infowindow
+	   map.centerAndZoom(point, 15);
+	   jQuery('imgDemo').load(function (){
+		   infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+	   });
+	});
+
+}
+
+// create info windowstring for sepcific mark
+function createInfoWindow(Json_stand_info)
+{
+	var content="";
+	content+ = "<div>";
+	content+ = "<header>";
+	content+ = "<img src='" + 
+	content+ =  Json_stand_info.title + "</header>";
+	content+ = "<section>";
+	content+ = "<article>";
+
+}
+
+//generate 
 
 
 

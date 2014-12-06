@@ -250,5 +250,41 @@ function searchStandPostionByPoint(search_condition, output_json_result,  succes
 
 }
 
+//search point based on area
 
+function searchStandPostionByArea(search_condition, output_json_result,  successAction, failedAction)
+{
+	querystring = "ak=" + search_condition.ak + "&geotable_id=" + search_condition.geotable_id + "&region=" + search_condition.region+"&coord_type=" +
+		search_condition.coord_type  + "&tags=" + search_condition.tags + "&sortby=" + search_condition.sortby
+		+ "&filter=" + search_condition.filter + "&page_index=" + search_condition.page_index + "&page_size=" + search_condition.page_size ;
+	url = "http://api.map.baidu.com/geosearch/v3/local?" + querystring;
+
+	jQuery.get(url, 
+	function(data,status){
+			if (status == "success" && data.status == 0 )
+			{
+				output_json_result.status = "success";
+				output_json_result.message = data.message;
+				output_json_result.data = data;
+				successAction();
+			}
+			else if (status != "success")
+			{
+				output_json_result.status = "failed";
+				output_json_result.message = "Post failed";
+				failedAction();
+				
+			}
+			else
+			{
+				output_json_result.status = "failed";
+				output_json_result.message = data.message;
+				failedAction();
+			}
+    
+  }
+
+	);
+
+}
 
