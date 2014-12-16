@@ -102,6 +102,13 @@ exports.updateStand = function(callback,standInfo)
 
 };
 
+exports.changeRealTimeLocationStatus = function(callback, standInfo)
+{
+    var whereObj = {"stand_id":standInfo.stand_id};
+    var standRealTimeLocationStatus = {"realtime_location_active":standInfo.realtime_location_active};
+    standInfoOperation.updateStand(callback,standRealTimeLocationStatus,whereObj);
+};
+
 exports.getStandCustomerMarkCommentsByStandId = function(callback, standId, offset, pageSize, order )
 {
     offset = (offset == null || offset == "")?DEFAULT_OFFSET: offset;
