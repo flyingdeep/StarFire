@@ -109,6 +109,12 @@ exports.changeRealTimeLocationStatus = function(callback, standInfo)
     standInfoOperation.updateStand(callback,standRealTimeLocationStatus,whereObj);
 };
 
+exports.getStandMarkCommentsExist = function(callback, standId, username)
+{
+
+    standCustomerMarkOperation.checkMarkExistByStandUser(callback, standId, username);
+};
+
 exports.getStandCustomerMarkCommentsByStandId = function(callback, standId, offset, pageSize, order )
 {
     offset = (offset == null || offset == "")?DEFAULT_OFFSET: offset;
@@ -125,6 +131,11 @@ exports.getStandCustomerMarkCommentsByUsername = function(callback, username,off
     order = (order == null || order == "")?DEFAULT_ORDER: order;
     standCustomerMarkOperation.fetchCustomerMarkDataByUsername(callback,username,offset, pageSize, order);
 
+};
+
+exports.createStandMarkComments = function(callback, standMarkComment)
+{
+    standCustomerMarkOperation.createMarkCommentsWithCheck(callback, standMarkComment);
 };
 
 exports.createStandOwnerMessage = function(callback,standOwnerInfo )
@@ -147,5 +158,11 @@ exports.getStandOwnerMessagesByOwnerId = function (callback,OwnerId, offset, pag
     pageSize = (pageSize == null || pageSize == "")?DEFAULT_PAGE_SIZE: pageSize;
     order = (order == null || order == "")?DEFAULT_ORDER: order;
     standOwnerMessageOperation.fetchStandOwnerMessageByOwnerId(callback,OwnerId, offset, pageSize, order);
+
+};
+
+exports.getStandType = function(callback)
+{
+    standTypeOperation.getStandType(callback);
 
 };
