@@ -1,6 +1,6 @@
-var dbOperation = require("./db_modules/db_mysql_operation.js");
-var pool = dbOperation.initMysqlPool(10,"localhost","root","root");
-var accessServerAuth = require("./helper_modules/accessServerAuth.js");
+var dbOperation = require("./../db_modules/db_mysql_operation.js");
+
+var accessServerAuth = require("./../helper_modules/accessServerAuth.js");
 //dbOperation.insertData(function(e){console.log(e)},"insert into test.newtb set ", {newTBcol:"111",newTBcol1:"222",newTBcol2:"333"});
 //dbOperation.fetchData(getresult,"select * from test.newtb",pool);
 function getresult(e){
@@ -26,12 +26,12 @@ function getresult(e){
 //dbOperation.updateData(function(e){console.log(e);}, "update test.newtb set newTBcol='cdssw' where idNewTB =13");
 //console.log(dbOperation.escape(",/'d'"));
 //console.log(dbOperation.escape("now()"));
-var bizOperation = require("./db_modules/db_biz_operation.js");
+var bizOperation = require("./../biz_modules/db_biz_operation.js");
 
 
 //----------------------------- userInfoClass --------------------------
 
-//var useroperation = new bizOperation.userInfoClass();
+var useroperation = new bizOperation.userInfoClass();
 //var jsonuser = {
 //user_name:"flyingdeep",
 //    display_name:"fly",
@@ -44,7 +44,20 @@ var bizOperation = require("./db_modules/db_biz_operation.js");
 //    province_city_area:"{\"province\":\"上海\",\"city\":\"上海\",\"area\":\"杨浦\"}",
 //    "password":"sdfasfafg"
 //};
-////useroperation.insertUser(function(e){console.log(e)},jsonuser);
+//
+//var jsonuser = {
+//    "user_name":"flyingdeepwww",
+//    "display_name":"fly",
+//    "image_id":"22345",
+//    "user_preference":"teststring1234",
+//    "user_type":"0",
+//    "cell_number":"13361846366",
+//    "web_chart":"flyingdeep",
+//    "qq_number":"13196590",
+//    "province_city_area":"{\"province\":\"上海\",\"city\":\"上海\",\"area\":\"杨浦\"}",
+//    "password":"sdfasfafg"
+//};
+//useroperation.createUser(function(e){console.log(e)},jsonuser);
 //
 //
 //var jsoncondition = {user_name:"flyingdeep",display_name:"fly"};
@@ -85,12 +98,15 @@ var bizOperation = require("./db_modules/db_biz_operation.js");
 
 //standoperation.standRemovePicLogic(function(e){console.log(e)},stand_images);
 
+
+//------------------------------- standCustomerMarkClass ---------------------------
+
 //var  standCustomerMarkoperation = new bizOperation.standCustomerMarkClass();
 //
 //
 //
 //var customerMark = {
-//    stand_id:23432,
+//    stand_id:234132,
 //    mark:444,
 //    comments: "aaaa",
 //    create_user_id: 2,
@@ -102,6 +118,12 @@ var bizOperation = require("./db_modules/db_biz_operation.js");
 //standCustomerMarkoperation.fetchCustomerMarkDataByUsername(function(e){console.log(e);},"flyingdeep",0,100,"create_date desc");
 //standCustomerMarkoperation.calculateMarkByStand(function(e){console.log(e);},23432);
 //standCustomerMarkoperation.createMarkCommentsWithCheck(function(e){console.log(e);},customerMark);
+//standCustomerMarkoperation.checkMarkExistByStandUser(function(e){console.log(e);},23432,"flyingdeep1");
+
+
+//------------------------------- standUserLinkClass ---------------------------
+
+
 //var standUserLinkMarkoperation =  new bizOperation.standUserLinkClass();
 //
 //var standUserLink =
@@ -118,8 +140,10 @@ var bizOperation = require("./db_modules/db_biz_operation.js");
 
 //standUserLinkMarkoperation.removeSandUserLinkLogic(function(e){console.log(e);},standUserLink);
 
-//
-//var  standImageoperation = new bizOperation.standImageClass();
+
+//------------------------------- standUserLinkClass ---------------------------
+
+//var  standImageoperation = new bizOperation.standUserLinkClass();
 //
 //var standImage = {
 //  stand_id : 23432,
@@ -132,19 +156,36 @@ var bizOperation = require("./db_modules/db_biz_operation.js");
 
 //standImageoperation.fetchImagesByStandId(function(e){console.log(e);},23432);
 //console.log(accessServerAuth.baseCreateCode("12314124"));
-var  HashMapoperation = new bizOperation.HashMapClass();
-var expiretime = (new Date()).getTime() + 30000;
-//console.log(expiretime);
-var hashItem =
-{
-  hash_key:"SXE1y/HwhHbI4QyyRJvKTQ==",
-  value:expiretime
-
-};
 
 
-//HashMapoperation.checkConflictHashCode(function(e){console.log(e);},"SXE1y/HwhHbI4QyyRJdKTQ==");
-//HashMapoperation.pushHashCode(function(e){console.log(e);},hashItem);
-//HashMapoperation.matchHashCode(function(e){console.log(e);},"SXE1y/HwhHbI4QyyRJvKTQ==");
-//HashMapoperation.removeHashCode(function(e){console.log(e);},"SXE1y/HwhHbI4QyyRJvKTQ==");
+//------------------------------- hashMapClass ---------------------------
+//var  HashMapoperation = new bizOperation.hashMapClass();
+//var expiretime = (new Date()).getTime() + 30000;
+////console.log(expiretime);
+//var hashItem =
+//{
+//  hash_key:"SXE1y/HwhHbI4QyyRJvKEQ==",
+//  value:expiretime
+//
+//};
 
+
+//hashMapoperation.checkConflictHashCode(function(e){console.log(e);},"SXE1y/HwhHbI4QyyRJdKTQ==");
+//hashMapoperation.pushHashCode(function(e){console.log(e);},hashItem);
+//hashMapoperation.matchHashCode(function(e){console.log(e);},"SXE1y/HwhHbI4QyyRJvKTQ==");
+//hashMapoperation.removeHashCode(function(e){console.log(e);},"SXE1y/HwhHbI4QyyRJvKTQ==");
+
+//var  standOwnerMessageoperation = new bizOperation.standOwnerMessageClass();
+//var standOwnerMessage = {
+//    stand_id:23432,
+//    message:"test2"
+//}
+//standOwnerMessageoperation.createStandOwnerMessage(function(e){console.log(e);},standOwnerMessage);
+
+//standOwnerMessageoperation.fetchStandOwnerMessageByStandId(function(e){console.log(e);},23432,1,10,"create_date desc");
+
+//standOwnerMessageoperation.fetchStandOwnerMessageByOwnerId(function(e){console.log(e);},2342,1,10,"create_date desc");
+
+//var  standTypeoperation = new bizOperation.standTypeClass();
+//
+//standTypeoperation.fetchStandType(function(e){console.log(e)});

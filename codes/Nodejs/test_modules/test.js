@@ -1,0 +1,28 @@
+var cluster = require('cluster');
+var http = require('http');
+var numCPUs = require('os').cpus().length;
+console.log(numCPUs);
+if (cluster.isMaster) {
+    // Fork workers.
+    for (var i = 0; i < numCPUs; i++) {
+        cluster.fork();
+    }
+
+    cluster.on('online', function(worker) {
+        console.log('worker ' + worker.process.pid + ' serve');
+    });
+    cluster.on('listening', function(worker, address) {
+        console.log('worker ' +worker.process.pid + " - " + address.address +":" + address.port);
+    });
+    cluster.on('exit', function(worker, code, signal) {
+        console.log('worker ' + worker.process.pid + ' died');
+    });
+} else {
+    // Workers can share any TCP connection
+    // In this case its a HTTP server
+    http.createServer(function(req, res) {
+        console.log('worker ' + cluster.worker.process.pid + ' take response');
+        res.writeHead(200);
+        res.end("hello world\n");
+    }).listen(8000);
+}

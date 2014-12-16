@@ -1,83 +1,77 @@
-var SECURITY_METHOD = "md5";
-var OUTPUT_DIGEST_METHOD = "base64"
-var MAX_HASH_KEY = 1000;
-var EXPIRE_INTERVAL = 30000; // ms
-exports.createCode = createCode;
+var crypto=require("crypto");
+var BASE64 = "base64";
+var SHA1 = "sha1";
+var MD5 = "md5";
+var UTF8 = "utf8";
+var DES = "des";
+var FIXEDMD5KEY = "!qaz2WSX#edc";
+var FIXEDDESKEY = ")p:?9OL.*ik<";
 
-exports.baseCreateCode = baseCreateCode;
+var COMMONENCRYPTCODE = BASE64;
 
-function baseCreateCode(input)
+
+
+exports.authOSS = function(policy, key)
 {
-	var crypto=require("crypto");
-	var hash = crypto.createHash(SECURITY_METHOD);
-	hash.update(input);
-	var hashResult = hash.digest(OUTPUT_DIGEST_METHOD);
-	return hashResult;
-}
 
-function createCode(input, hashMap)
-{
-	var expired_date_ms = (new Date()).getTime()+EXPIRE_INTERVAL;
-	var combined_input = input + expired_date_ms;
-	var result = baseCreateCode(input);
-	if (hashMap.count() == 0)
-	{
-		//pushHash(result);
-	}
-	else
-	{
-		while (hashMap.contains(result))
-		{
-			expired_date_ms++;
-			combined_input = input + expired_date_ms;
-			result = baseCreateCode(input);
-		}
-	}
-	return result;
-}
+    var base64policy = (new Buffer(policy)).toString(BASE64);
 
-function matchCode(inputHash, hashMap)
+    var result = crypto.createHmac(SHA1, key.update(base64policy).digest().toString(BASE64));
+    return result;
+};
+
+
+exports.encryptSymString = function(input, method)
 {
-    var current_date_ms = (new Date()).getTime();
-    if (hashMap.contains(inputHash))
+    if (method.toLowerCase() == MD5)
     {
-        var expired_date_ms = hashMap.get(inputHash);
-        if (current_date_ms<=expired_date_ms)
-        {
-            hashMap.remove(inputHash);
-            return true;
-        }
-        hashMap.remove(inputHash);
+        encryptStringMD5(input,FIXEDMD5KEY);
     }
-    return false;
+    else if (method.toLowerCase() == DES)
+    {
+        encryptStringDES(input,FIXEDDESKEY);
 
-}
+    }
 
-function cleanExpiredKey(hashMap)
+};
+
+encryptStringMD5 = function(input,key)
 {
-	var current_time_span = (new Date()).getTime();
-	for (var item in hashMap)
-	{
-		if (hashMap[item] <  current_time_span)
-		{
-			hashMap.remove(item);
-		}
-	}
 
-}
+    var cipher = crypto.createCipher(MD5, FIXEDMD5KEY);
+    cipher.update(input,UTF8,BASE64);
+    var encrypted = cipher.final(BASE64);
+    return encrypted;
+};
 
-
-
-function pushHash(key, value,hashMap)
+encryptStringDES = function(input,key)
 {
-	if (hashMap.count()>MAX_HASH_KEY )
-	{
-		
-	}
-	else 
-	{
-		hashMap.set(key, value);
-	}
-	
-}
+    var cipher = crypto.createCipher(DES, FIXEDDESKEY);
+    cipher.update(input,UTF8,BASE64);
+    var encrypted = cipher.final(BASE64);
+    return encrypted;
+};
+
+exports.decryptSymString = function(target, method)
+{
+
+    if (method.toLowerCase() == DES)
+    {
+        encryptStringDES(target,FIXEDDESKEY);
+
+    }
+
+};
+
+encryptStringDES = function(target,key)
+{
+    var decipher = crypto.createDecipher(DES,FIXEDDESKEY);
+    decipher.update(target,BASE64,UTF8);
+    var decode= decipher.final(UTF8);
+    return decode;
+};
+
+
+
+
 

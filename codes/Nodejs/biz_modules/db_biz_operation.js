@@ -18,7 +18,7 @@ var DB_USER ="root";
 var DB_PASS = "root";
 var CORMMA = /\,/g;
 
-var mysqldbOperation = require('./db_mysql_operation.js');
+var mysqldbOperation = require('./../db_modules/db_mysql_operation.js');
 
 mysqldbOperation.initMysqlPool(MAX_POOL_THREAD,DB_ADDRESS,DB_USER,DB_PASS);
 
@@ -146,7 +146,7 @@ exports.standInfoClass = function() {
         }
         var presql = "update " + TB_STAND_INFO + " set modify_date=now(),";
         var datasql = mysqldbOperation.escape(standinfo);
-        var wheresql =" where " + (mysqldbOperation.escape(sqlcondition)).replace(CORMMA," and ");
+        var wheresql =" where isdeleted = 0 and  " + (mysqldbOperation.escape(sqlcondition)).replace(CORMMA," and ");
         var sql = presql + datasql + wheresql;
         //console.log(sql);
         mysqldbOperation.updateData(callback,sql);
@@ -211,6 +211,37 @@ exports.standInfoClass = function() {
  */
 exports.standCustomerMarkClass = function()
 {
+
+    this.checkMarkExistByStandUser = function() //callback, standid, username
+    {
+        var callback = arguments[0];
+        var standid = arguments[1];
+        var username = arguments[2];
+        var sql = "select count(mark) as total from "
+            + TB_STAND_CUSTOMER_MARK + " where mark is not null and " +
+            " isdeleted=0 and " +
+            " stand_id=" + mysqldbOperation.escape(standid)+
+            " and create_user_name="+ mysqldbOperation.escape(username);
+        mysqldbOperation.fetchData(function(e)
+            {
+                if (e.length > 0)
+                {
+                    if (e[0].total >0) {
+                        callback(e[0].total);
+                    }
+                    else
+                    {
+                        callback(-1);
+                    }
+                }
+                else
+                {
+                    callback(false);
+                }
+            }
+            ,sql);
+    };
+
     this.calculateMarkByStand = function() // callback, standid
     {
         var callback = arguments[0];
@@ -248,19 +279,21 @@ exports.standCustomerMarkClass = function()
             callback(false);
             return;
         }
-        this.calculateMarkByStand(
+        this.checkMarkExistByStandUser(
             function(e)
             {
                // console.log(customerMark.stand_id);
-                if (e>0)
+
+                if (e>=0)
                 {
                     if(customerMark.mark)
                     {
                         delete customerMark.mark;
+
                         innerAddCustomerMark(callback,customerMark);
                     }
                 }
-                else if (e==0)
+                else if (e==-1)
                 {
                     if(customerMark.mark)
                     {
@@ -275,7 +308,7 @@ exports.standCustomerMarkClass = function()
                     callback(false);
                 }
             }
-            ,customerMark.stand_id);
+            ,customerMark.stand_id,customerMark.create_user_name);
 
     };
 
@@ -291,7 +324,6 @@ exports.standCustomerMarkClass = function()
             return;
         }
         var presql = "insert into "+ TB_STAND_CUSTOMER_MARK + " set create_date=now(), ";
-        //console.log(presql);
         mysqldbOperation.insertData(callback,presql,customerMark);
     };
 
@@ -313,12 +345,11 @@ exports.standCustomerMarkClass = function()
         var pagesize = arguments[3];
         var orderby = arguments[4];
         var sql = "select customer_message_id,stand_id,mark,comments," +
-            "create_user_id,create_user_name,create_date "+
-            "from " + TB_STAND_CUSTOMER_MARK + " where stand_id=" + mysqldbOperation.escape(standid) +
+            " create_user_id,create_user_name,create_date "+
+            " from " + TB_STAND_CUSTOMER_MARK + " where stand_id=" + mysqldbOperation.escape(standid) +
             " and isdeleted=0" +
             " order by " + orderby +
             " limit " + offset + "," + pagesize ;
-        console.log(sql);
         mysqldbOperation.fetchData(callback,sql);
     };
 
@@ -462,14 +493,28 @@ exports.standImageClass = function()
 
 };
 
-exports.HashMapClass = function()
+exports.hashMapClass = function()
 {
     this.pushHashCode = function() //callback, hashmap
     {
         var callback = arguments[0];
         var hashMapItem = arguments[1];
+        //console.log(hashMapItem);
+
         var sql = "insert into "+ TB_AUTH_KEY_HASHMAP + " set ";
-        mysqldbOperation.insertData(callback,sql,hashMapItem);
+        mysqldbOperation.insertData(function(e)
+            {
+                if (e===false)
+                {
+                    callback(false);
+                }
+                else
+                {
+                    callback(hashMapItem.hash_key);
+                }
+
+            }
+            ,sql,hashMapItem);
     };
 
     this.checkConflictHashCode = function()//callback, inputHash
@@ -479,7 +524,7 @@ exports.HashMapClass = function()
         var sql = "select hash_key, value " +
             "from " + TB_AUTH_KEY_HASHMAP +
             " where hash_key=" + mysqldbOperation.escape(inputHash);
-        console.log(sql);
+       // console.log(sql);
         mysqldbOperation.fetchData(function() {
             var result = arguments[0];
             if (result) {
@@ -498,7 +543,7 @@ exports.HashMapClass = function()
 
 
 
-    }
+    };
 
     this.matchHashCode = function()//callback, inputHash , output is "key/inputHash" if succeed, else -1
     {
@@ -516,6 +561,7 @@ exports.HashMapClass = function()
                //console.log(result);
                var current_date_ms = (new Date()).getTime();
                var expired_date_ms = result[0].value;
+
                if (current_date_ms<=expired_date_ms)
                {
 
@@ -528,10 +574,11 @@ exports.HashMapClass = function()
                        }
                        else
                        {
+                          // console.log("false");
                            callback(false);
                        }
                    }
-                   ,result.key);
+                   ,result[0].hash_key);
                }
                else
                {
@@ -548,7 +595,7 @@ exports.HashMapClass = function()
                                callback(false);
                            }
                        }
-                       ,result.key);
+                       ,result[0].hash_key);
                }
            }
             else
@@ -569,16 +616,80 @@ exports.HashMapClass = function()
         //console.log(sql);
         mysqldbOperation.deleteData(callback,sql);
     }
+};
 
 
+exports.standTypeClass = function()
+{
+    this.fetchStandType = function()//callback
+    {
+        var callback = arguments[0];
 
+        var sql = "select stand_type_id, type_name " +
+            " from " + TB_STAND_TYPE +
+            " where isdeleted = 0 ";
+        mysqldbOperation.fetchData(callback,sql);
+
+    };
+};
+
+exports.instantMessageClass = function()
+{
+
+   // TB_INSTANT_MESSAGE
 
 };
 
 
+exports.standOwnerMessageClass = function() {
+    this.createStandOwnerMessage = function ()//callback, standinfo
+    {
+        var callback = arguments[0];
+        var standInfo = arguments[1];
+        if (standInfo.create_date) {
+            callback(false);
+            return;
+        }
+        var presql = "insert into " + TB_STAND_OWNER_MESSAGE + " set create_date=now(),";
+        mysqldbOperation.insertData(callback, presql, standInfo);
+
+    };
+
+    this.fetchStandOwnerMessageByStandId = function() //callback, standid, offset, pagesize, order
+    {
+        var callback = arguments[0];
+        var standId = arguments[1];
+        var offset = arguments[2];
+        var pageSize = arguments[3];
+        var orderBy = arguments[4];
+        var sql = "select stand_owner_message_id,stand_id,message,create_date" +
+            " from " + TB_STAND_OWNER_MESSAGE + " where stand_id=" + mysqldbOperation.escape(standId) +
+            " and isdeleted=0" +
+            " order by " + orderBy +
+            " limit " + offset + "," + pageSize ;
+        mysqldbOperation.fetchData(callback,sql);
+    };
+
+    this.fetchStandOwnerMessageByOwnerId = function() //
+    {
+        var callback = arguments[0];
+        var ownerId = arguments[1];
+        var offset = arguments[2];
+        var pageSize = arguments[3];
+        var orderBy = arguments[4];
+        var sql = "select a.stand_owner_message_id,a.stand_id,a.message,a.create_date" +
+
+            " from " + TB_STAND_OWNER_MESSAGE + " as a left join " + TB_STAND_INFO + " as b" +
+            " on a.stand_id = b.stand_id where b.create_user_id=" + mysqldbOperation.escape(ownerId) +
+            " and a.isdeleted=0 and b.isdeleted=0" +
+            " order by "  + orderBy+
+            " limit " + offset + "," + pageSize;
+
+        mysqldbOperation.fetchData(callback,sql);
 
 
-
+    };
+};
 
 
 

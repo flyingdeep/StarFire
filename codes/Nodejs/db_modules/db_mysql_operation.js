@@ -49,7 +49,7 @@ exports.fetchData = function () //callback, sqlstring,  pool
 		{
 			
 
-			//console.log(sql);
+			console.log(sql);
 			connection.query(sql, function(err, results, fields) {
 
 				if (err)
@@ -106,12 +106,12 @@ exports.insertData = function() //callback, presql ,input Json, pool
 
 
 	    var sql = preSql+ connection.escape(insertStatement);
-    //console.log(sql);
+        //console.log(sql);
 		connection.query(sql, function(err, results) {
 			if (err)
 			{
                 message = err.stack;
-				 console.error('error connecting: ' + err.stack);
+				 //console.error('error connecting: ' + err.stack);
                 result = false;
                 callback(result);
 			}
