@@ -1,3 +1,4 @@
+var config = require("./../config.js");
 var bizOperation = require("./db_biz_operation.js");
 var authOperation = require("./../helper_modules/accessServerAuth.js");
 var hashMapHelper = require("./../helper_modules/hashMapHelper.js");

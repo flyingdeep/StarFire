@@ -1,13 +1,14 @@
 
 var bizOperation = require("../biz_modules/db_biz_operation.js");
 var crypto=require("crypto");
+var config = require("./../config.js");
 
-var SECURITY_METHOD = "md5";
-var OUTPUT_DIGEST_METHOD = "base64"
-var MAX_HASH_KEY = 1000;
-var EXPIRE_INTERVAL = 30000; // ms
-var DATABASE_HASHKEY_SUFIX = "_db";
-var MEMORY_HASHKEY_SUFIX = "_me";
+var SECURITY_METHOD = config.securityAndAuth.securityMethod;
+var OUTPUT_DIGEST_METHOD = config.securityAndAuth.outputDigestMethod;
+var MAX_HASH_KEY = config.securityAndAuth.maxHashKey;
+var EXPIRE_INTERVAL = config.securityAndAuth.expireInterval;
+var DATABASE_HASHKEY_SUFIX = config.securityAndAuth.databaseHashKeySuffix;
+var MEMORY_HASHKEY_SUFIX = config.securityAndAuth.memoryHashKeySuffix;
 
 var hashMapoperation = new bizOperation.hashMapClass();
 

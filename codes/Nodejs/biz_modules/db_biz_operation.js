@@ -1,6 +1,8 @@
 // define const
-var SCHEMA = "stand.";
-var SCHEMA_CONFIG = "config.";
+var config = require("./../config.js");
+
+var SCHEMA = config.bizService.schema;
+var SCHEMA_CONFIG = config.bizService.schemaConfig;
 //table name
 var TB_USER_INFO = SCHEMA + "user_info";
 var TB_STAND_INFO = SCHEMA + "stand_info";
@@ -12,10 +14,10 @@ var TB_STAND_OWNER_MESSAGE = SCHEMA + "stand_owner_message";
 var TB_USER_LINK_STAND = SCHEMA + "user_link_stand";
 var TB_AUTH_KEY_HASHMAP = SCHEMA_CONFIG + "auth_key_hashmap";
 
-var MAX_POOL_THREAD = 50;
-var DB_ADDRESS = "localhost";
-var DB_USER ="root";
-var DB_PASS = "root";
+var MAX_POOL_THREAD = config.bizService.maxPoolThread;
+var DB_ADDRESS = config.bizService.dbAddress;
+var DB_USER =config.bizService.dbUser;
+var DB_PASS = config.bizService.dbPass;
 var CORMMA = /\,/g;
 
 var mysqldbOperation = require('./../db_modules/db_mysql_operation.js');

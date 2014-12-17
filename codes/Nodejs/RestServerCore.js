@@ -1,18 +1,16 @@
+var config = require("./config");
 var restify = require("restify");
 var cors = require("cors");
-var hashMapBaseClass = require("./helper_modules/hashMap.js");
-
+var hashMapOperation = require("./helper_modules/hashMap.js");
 var serviceOperation = require("./biz_modules/serviceFacade.js");
-
-var HTTP_SUCCESS_CODE = "201";
+var HTTP_SUCCESS_CODE = config.serverParameters.httpSuccessCode;
 var METHOD_POST = "post";
 var METHOD_GET = "get";
 
-var SERVER_PORT = "80";
+var SERVER_PORT = config.serverParameters.serverPort;
 var SYMBOL_SLASH="/";
-var VERSION_V1 ="v1";
-var CURRENT_VERSION = SYMBOL_SLASH + VERSION_V1;
-var BASE_ROUTER = SYMBOL_SLASH + "zhaotantou" + SYMBOL_SLASH;
+var CURRENT_VERSION = SYMBOL_SLASH + config.serverParameters.lastedVersion;
+var BASE_ROUTER = SYMBOL_SLASH + config.serverParameters.baseRouter + SYMBOL_SLASH;
 
 var ROUTER_AUTHENTICATEUSER = BASE_ROUTER + "AuthenticateUser";
 var ROUTER_REGISTERUSER = BASE_ROUTER + "RegisterUser";
@@ -32,15 +30,13 @@ var ROUTER_GETIMAGEUPLOADSECURITYSTRING = BASE_ROUTER + "GetImageUploadSecurityS
 var ROUTER_GETAUTHCODE = BASE_ROUTER + "GetAuthCode";
 var ROUTER_ADDLINKTOSTAND = BASE_ROUTER + "AddLinkToStand";
 var ROUTER_REMOVELINKFROMSTAND = BASE_ROUTER + "RemoveLinkFromStand";
-var ROUTER_FETCHLINKLISTBYUSERID = BASE_ROUTER + "FetchLinkListByUserId";
-var ROUTER_FETCHLINKLISTBYSTANDID= BASE_ROUTER + "FetchLinkListByStandId";
+var ROUTER_FETCHLINKLIST = BASE_ROUTER + "fetchLinkList";
+
+var ROUTER_test = BASE_ROUTER + "test";
+console.log(ROUTER_test);
 
 
-
-
-
-
-var hashMap = new hashMapBaseClass();
+var hashMap = new hashMapOperation.hashMapBaseClass();
 
 var getCommonParameters = function(req,paraName,method)
 {
@@ -604,7 +600,7 @@ var addLinkToStandCallbackPost = function(req, res, next)
         serviceOperation.addLinkToStand,callback,requestInputParameter );
 
 };
-var RemoveLinkFromStandCallbackPost = function(req, res, next)
+var removeLinkFromStandCallbackPost = function(req, res, next)
 {
     var paraToken = "token";
     var paraInputParameter = "inputParameter";
@@ -634,13 +630,59 @@ var RemoveLinkFromStandCallbackPost = function(req, res, next)
         serviceOperation.removeLinkFromStand,callback,requestInputParameter );
 
 };
-var FetchLinkListByUserIdCallbackGet = function(req, res, next)
+var fetchLinkListCallbackGet = function(req, res, next)
 {
+    var paraToken = "token";
+    var paraUserId ="userId";
+    var paraStandId = "standId";
+    var paraOffset = "offset";
+    var paraPageSize = "pageSize";
+    var paraSort = "sort";
+    var requestToken = getCommonParameters(req,paraToken,METHOD_GET);
+    var requestUserId = getCommonParameters(req,paraUserId,METHOD_GET);
+    var requestStandId = getCommonParameters(req,paraStandId,METHOD_GET);
+    var requestOffset = getCommonParameters(req,paraOffset,METHOD_GET);
+    var requestPageSize = getCommonParameters(req,paraPageSize,METHOD_GET);
+    var requestSort = getCommonParameters(req,paraSort,METHOD_GET);
+    var result = new commonResult();
+    var callback = function(e)
+    {
+        if (e && e!= -1)
+        {
+            result.status = "True";
+            var linkList = [];
+            for (var i= 0; i<e.length; i++) {
+                linkList.push({
+                    "user_link_id": e[i].user_link_id,
+                    "stand_id": e[i].stand_id,
+                    "user_id": e[i].user_id,
+                    "create_date": e[i].create_date
+                });
+            }
+            result.detail = linkList;
+        }
+        else
+        {
+            result.status = "false";
+            result.detail = {"message":"Internal Error!"};
+        }
+        res.json(HTTP_SUCCESS_CODE,result);
 
-};
-var FetchLinkListByStandIdCallbackGets = function(req, res, next)
-{
+    };
 
+    if (requestStandId != null && requestStandId!= "" && typeof(requestStandId) != "undefined") {
+        serviceOperation.tryPassTokenToProceedAction(requestToken, hashMap,
+            serviceOperation.fetchLinkListByStandId, callback, requestStandId, requestOffset, requestPageSize, requestSort);
+    }
+    else if (requestUserId != null && requestUserId!= "" && typeof(requestUserId) != "undefined")
+    {
+        serviceOperation.tryPassTokenToProceedAction(requestToken, hashMap,
+            serviceOperation.fetchLinkListByUserId, callback, requestUserId, requestOffset, requestPageSize, requestSort);
+    }
+    else
+    {
+        callback(false);
+    }
 };
 
 
@@ -664,12 +706,15 @@ server.get(ROUTER_GETSTANDOWNERMESSAGES + CURRENT_VERSION,cors(), getStandOwnerM
 server.get(ROUTER_GETSTANDTYPES + CURRENT_VERSION,cors(), getStandTypesCallbackGet);
 server.get(ROUTER_GETIMAGEUPLOADSECURITYSTRING + CURRENT_VERSION,cors(), getImageUploadSecurityStringCallbackGet);
 server.get(ROUTER_GETAUTHCODE + CURRENT_VERSION,cors(), getAuthCodeCallbackGet);
-server.post(ROUTER_ADDLINKTOSTAND,cors(),addLinkToStandCallbackPost);
-server.post(ROUTER_REMOVELINKFROMSTAND,cors(),RemoveLinkFromStandCallbackPost);
-server.get(ROUTER_FETCHLINKLISTBYUSERID,cors(),FetchLinkListByUserIdCallbackGet);
-server.get(ROUTER_FETCHLINKLISTBYSTANDID,cors(),FetchLinkListByStandIdCallbackGet);
+server.post(ROUTER_ADDLINKTOSTAND + CURRENT_VERSION,cors(),addLinkToStandCallbackPost);
+server.post(ROUTER_REMOVELINKFROMSTAND + CURRENT_VERSION,cors(),removeLinkFromStandCallbackPost);
+server.get(ROUTER_FETCHLINKLIST + CURRENT_VERSION,cors(),fetchLinkListCallbackGet);
 
+server.get(ROUTER_test + CURRENT_VERSION,cors(),function(req, res, next)
+{
+    res.json("Hello, Success!!");
 
+});
 
 
 server.listen(SERVER_PORT, function() {

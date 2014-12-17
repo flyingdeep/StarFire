@@ -1,11 +1,12 @@
 var crypto=require("crypto");
+var config = require("./../config.js");
 var BASE64 = "base64";
 var SHA1 = "sha1";
 var MD5 = "md5";
 var UTF8 = "utf8";
 var DES = "des";
-var FIXEDMD5KEY = "!qaz2WSX#edc";
-var FIXEDDESKEY = ")p:?9OL.*ik<";
+var FIXEDMD5KEY = config.securityAndAuth.fixedMD5Key;
+var FIXEDDESKEY = config.securityAndAuth.fixedDESKey;
 
 var COMMONENCRYPTCODE = BASE64;
 
