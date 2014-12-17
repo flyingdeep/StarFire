@@ -388,7 +388,6 @@ exports.standUserLinkClass = function()
             return;
         }
 
-
         var sql = "insert into "+ TB_USER_LINK_STAND + " set create_date=now(), ";
         mysqldbOperation.insertData(callback,sql,standUserLink);
     };
@@ -421,10 +420,6 @@ exports.standUserLinkClass = function()
 
         //console.log(sql);
         mysqldbOperation.fetchData(callback,sql);
-
-
-
-
     };
 
     this.fetchSandUserLinkByUserId =function() //callback, userid, offset, pagesize,orderby with desc or none

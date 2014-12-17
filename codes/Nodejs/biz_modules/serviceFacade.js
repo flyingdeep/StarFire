@@ -5,7 +5,7 @@ var userInfoOperation =new bizOperation.userInfoClass();
 var standInfoOperation =new bizOperation.standInfoClass();
 var standCustomerMarkOperation =new bizOperation.standCustomerMarkClass();
 var standUserLinkOperation =new bizOperation.standUserLinkClass();
-var standImageOperation =new bizOperation.standImageClass();
+//var standImageOperation =new bizOperation.standImageClass();
 var standOwnerMessageOperation = new bizOperation.standOwnerMessageClass();
 var standTypeOperation = new bizOperation.standTypeClass();
 
@@ -13,6 +13,7 @@ var standTypeOperation = new bizOperation.standTypeClass();
 var DEFAULT_OFFSET = 1;
 var DEFAULT_PAGE_SIZE = 10;
 var DEFAULT_ORDER = " create_date desc ";
+var DES = "des";
 
 
 
@@ -149,13 +150,7 @@ exports.getStandType = function(callback)
 
 };
 
-exports.setStandLocation = function(callback, standLocationInfo)
-{
-    var whereObj = {"stand_id": standInfo.stand_id};
-    delete standInfo.stand_id;
-    standInfoOperation.updateStand(callback,standInfo,whereObj);
 
-};
 
 exports.getImageUploadSecurityString = function(callback,policy,key)
 {
@@ -166,7 +161,7 @@ exports.getImageUploadSecurityString = function(callback,policy,key)
 
 exports.getAuthCode = function(callback, encryptUsername, encryptPassword, hashMap)
 {
-    var user_name = encryptUsername;
+    var user_name = authOperation.decryptSymString(encryptUsername, DES);
     var password = encryptPassword;
     exports.authenticateUser(function(result)
     {
@@ -182,4 +177,28 @@ exports.getAuthCode = function(callback, encryptUsername, encryptPassword, hashM
             }
         };
     },user_name,password);
+};
+
+exports.addLinkToStand = function(callback, userLinkInfo)
+{
+
+    standUserLinkOperation.addSandUserLink(callback, userLinkInfo);
+};
+exports.removeLinkFromStand = function(callback, userLinkInfo)
+{
+    standUserLinkOperation.removeSandUserLinkLogic(callback, userLinkInfo);
+};
+exports.fetchLinkListByUserId = function(callback,userId, offset, pageSize, order)
+{
+    offset = (offset == null || offset == "")?DEFAULT_OFFSET: offset;
+    pageSize = (pageSize == null || pageSize == "")?DEFAULT_PAGE_SIZE: pageSize;
+    order = (order == null || order == "")?DEFAULT_ORDER: order;
+    standUserLinkOperation.fetchSandUserLinkByUserId(callback,userId, offset, pageSize, order);
+};
+exports.fetchLinkListByStandId = function(callback,standId, offset, pageSize, order)
+{
+    offset = (offset == null || offset == "")?DEFAULT_OFFSET: offset;
+    pageSize = (pageSize == null || pageSize == "")?DEFAULT_PAGE_SIZE: pageSize;
+    order = (order == null || order == "")?DEFAULT_ORDER: order;
+    standUserLinkOperation.fetchSandUserLinkByStandId(callback,standId, offset, pageSize, order);
 };

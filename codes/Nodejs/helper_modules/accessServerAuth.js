@@ -54,13 +54,10 @@ encryptStringDES = function(input,key)
 
 exports.decryptSymString = function(target, method)
 {
-
     if (method.toLowerCase() == DES)
     {
         encryptStringDES(target,FIXEDDESKEY);
-
     }
-
 };
 
 encryptStringDES = function(target,key)

@@ -30,6 +30,15 @@ var ROUTER_GETSTANDTYPES = BASE_ROUTER + "GetStandTypes";
 //var ROUTER_SETSTANDLOCATION = BASE_ROUTER + "SetStandLocation";
 var ROUTER_GETIMAGEUPLOADSECURITYSTRING = BASE_ROUTER + "GetImageUploadSecurityString";
 var ROUTER_GETAUTHCODE = BASE_ROUTER + "GetAuthCode";
+var ROUTER_ADDLINKTOSTAND = BASE_ROUTER + "AddLinkToStand";
+var ROUTER_REMOVELINKFROMSTAND = BASE_ROUTER + "RemoveLinkFromStand";
+var ROUTER_FETCHLINKLISTBYUSERID = BASE_ROUTER + "FetchLinkListByUserId";
+var ROUTER_FETCHLINKLISTBYSTANDID= BASE_ROUTER + "FetchLinkListByStandId";
+
+
+
+
+
 
 var hashMap = new hashMapBaseClass();
 
@@ -527,24 +536,115 @@ var getImageUploadSecurityStringCallbackGet = function(req, res, next)
     var requestPolicy = getCommonParameters(req,paraPolicy,METHOD_GET);
     var requestKey = getCommonParameters(req,paraKey,METHOD_GET);
     var result = new commonResult();
-    if (e && e!= -1)
-    {
+    var callback = function(e) {
+        if (e && e != -1) {
 
-        result.status = "True";
-        result.detail = standOwnerMessageArray;
-    }
-    else
-    {
-        result.status = "false";
-        result.detail = {"message":"Internal Error!"};
+            result.status = "True";
+            result.detail = e;
+        }
+        else {
+            result.status = "false";
+            result.detail = {"message": "Internal Error!"};
+        }
+        res.json(HTTP_SUCCESS_CODE,result);
     }
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
         serviceOperation.getImageUploadSecurityString,callback,requestPolicy,requestKey);
 };
 var getAuthCodeCallbackGet = function(req, res, next)
 {
+    var paraToken = "token";
+    var paraEncryptUsername = "username";
+    var requestToken = getCommonParameters(req,paraToken,METHOD_GET);
+    var requestEncryptUsername = getCommonParameters(req,paraEncryptUsername);
+    var result = new commonResult();
+    var callback = function(e) {
+        if (e && e != -1) {
+
+            result.status = "True";
+            result.detail = e;
+        }
+        else {
+            result.status = "false";
+            result.detail = {"message": "Internal Error!"};
+        }
+        res.json(HTTP_SUCCESS_CODE,result);
+    }
+    serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
+        serviceOperation.getAuthCode,callback,requestEncryptUsername);
+};
+
+var addLinkToStandCallbackPost = function(req, res, next)
+{
+    var paraToken = "token";
+    var paraInputParameter = "inputParameter";
+    var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
+    var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
+    var result = new commonResult();
+    var callback = function(e)
+    {
+
+        if (e && e!= -1)
+        {
+
+            result.status = "True";
+            result.detail = {
+                "stand_id":requestInputParameter.stand_id,
+                "user_id" : requestInputParameter.user_id
+            };
+        }
+        else
+        {
+            result.status = "false";
+            result.detail = {"message":"Internal Error!"};
+        }
+        res.json(HTTP_SUCCESS_CODE,result);
+    };
+    serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
+        serviceOperation.addLinkToStand,callback,requestInputParameter );
 
 };
+var RemoveLinkFromStandCallbackPost = function(req, res, next)
+{
+    var paraToken = "token";
+    var paraInputParameter = "inputParameter";
+    var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
+    var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
+    var result = new commonResult();
+    var callback = function(e)
+    {
+
+        if (e && e!= -1)
+        {
+
+            result.status = "True";
+            result.detail = {
+                "stand_id":requestInputParameter.stand_id,
+                "user_id" : requestInputParameter.user_id
+            };
+        }
+        else
+        {
+            result.status = "false";
+            result.detail = {"message":"Internal Error!"};
+        }
+        res.json(HTTP_SUCCESS_CODE,result);
+    };
+    serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
+        serviceOperation.removeLinkFromStand,callback,requestInputParameter );
+
+};
+var FetchLinkListByUserIdCallbackGet = function(req, res, next)
+{
+
+};
+var FetchLinkListByStandIdCallbackGets = function(req, res, next)
+{
+
+};
+
+
+
 
 var server = restify.createServer();
 server.use(restify.bodyParser());
@@ -562,9 +662,15 @@ server.get(ROUTER_GETSTANDMARKCOMMENTSEXIST + CURRENT_VERSION,cors(), getStandMa
 server.post(ROUTER_CREATESTANDOWNERMESSAGE + CURRENT_VERSION,cors(), createStandOwnerMessageCallbackPost);
 server.get(ROUTER_GETSTANDOWNERMESSAGES + CURRENT_VERSION,cors(), getStandOwnerMessagesCallbackGet);
 server.get(ROUTER_GETSTANDTYPES + CURRENT_VERSION,cors(), getStandTypesCallbackGet);
-//server.post(ROUTER_SETSTANDLOCATION + CURRENT_VERSION,cors(), setStandLocationCallbackPost);
 server.get(ROUTER_GETIMAGEUPLOADSECURITYSTRING + CURRENT_VERSION,cors(), getImageUploadSecurityStringCallbackGet);
 server.get(ROUTER_GETAUTHCODE + CURRENT_VERSION,cors(), getAuthCodeCallbackGet);
+server.post(ROUTER_ADDLINKTOSTAND,cors(),addLinkToStandCallbackPost);
+server.post(ROUTER_REMOVELINKFROMSTAND,cors(),RemoveLinkFromStandCallbackPost);
+server.get(ROUTER_FETCHLINKLISTBYUSERID,cors(),FetchLinkListByUserIdCallbackGet);
+server.get(ROUTER_FETCHLINKLISTBYSTANDID,cors(),FetchLinkListByStandIdCallbackGet);
+
+
+
 
 server.listen(SERVER_PORT, function() {
     console.log('%s listening at %s', server.name, server.url);
