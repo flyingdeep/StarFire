@@ -1,4 +1,5 @@
 var bizOperation = require("./db_biz_operation.js");
+var authOperation = require("./../helper_modules/accessServerAuth.js");
 var hashMapHelper = require("./../helper_modules/hashMapHelper.js");
 var userInfoOperation =new bizOperation.userInfoClass();
 var standInfoOperation =new bizOperation.standInfoClass();
@@ -35,25 +36,6 @@ exports.tryPassTokenToProceedAction = function()
     }, token, hashMap)
 };
 
-
-exports.generateAuthenticateToken = function(callback, user_name, password, hashMap)
-{
-
-    exports.authenticateUser(function(result)
-    {
-        if (result)
-        {
-            if (result && result!=-1)
-            {
-                hashMapHelper.pushHash(callback,user_name,hashMap);
-            }
-            else
-            {
-                callback(-1);
-            }
-        };
-    },user_name,password);
-};
 
 exports.tryMatchToken = function(callback, hashToken, hashMap)
 {
@@ -165,4 +147,39 @@ exports.getStandType = function(callback)
 {
     standTypeOperation.getStandType(callback);
 
+};
+
+exports.setStandLocation = function(callback, standLocationInfo)
+{
+    var whereObj = {"stand_id": standInfo.stand_id};
+    delete standInfo.stand_id;
+    standInfoOperation.updateStand(callback,standInfo,whereObj);
+
+};
+
+exports.getImageUploadSecurityString = function(callback,policy,key)
+{
+    var result =authOperation.authOSS(policy,key);
+    callback(result);
+
+};
+
+exports.getAuthCode = function(callback, encryptUsername, encryptPassword, hashMap)
+{
+    var user_name = encryptUsername;
+    var password = encryptPassword;
+    exports.authenticateUser(function(result)
+    {
+        if (result)
+        {
+            if (result && result!=-1)
+            {
+                hashMapHelper.pushHash(callback,user_name,hashMap);
+            }
+            else
+            {
+                callback(-1);
+            }
+        };
+    },user_name,password);
 };

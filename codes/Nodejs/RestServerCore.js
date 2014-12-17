@@ -27,7 +27,7 @@ var ROUTER_GETSTANDMARKCOMMENTSEXIST = BASE_ROUTER + "GetStandMarkCommentSExist"
 var ROUTER_CREATESTANDOWNERMESSAGE = BASE_ROUTER + "CreateStandOwnerMessage";
 var ROUTER_GETSTANDOWNERMESSAGES = BASE_ROUTER + "GetStandOwnerMessages";
 var ROUTER_GETSTANDTYPES = BASE_ROUTER + "GetStandTypes";
-var ROUTER_SETSTANDLOCATION = BASE_ROUTER + "SetStandLocation";
+//var ROUTER_SETSTANDLOCATION = BASE_ROUTER + "SetStandLocation";
 var ROUTER_GETIMAGEUPLOADSECURITYSTRING = BASE_ROUTER + "GetImageUploadSecurityString";
 var ROUTER_GETAUTHCODE = BASE_ROUTER + "GetAuthCode";
 
@@ -514,15 +514,32 @@ var getStandTypesCallbackGet = function(req, res, next)
         }
         res.json(HTTP_SUCCESS_CODE,result);
     };
-
+    serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
+        serviceOperation.getStandType,callback);
 };
-var setStandLocationCallbackPost = function(req, res, next)
-{
 
-};
 var getImageUploadSecurityStringCallbackGet = function(req, res, next)
 {
+    var paraToken = "token";
+    var paraPolicy = "policy";
+    var paraKey = "key";
+    var requestToken = getCommonParameters(req,paraToken,METHOD_GET);
+    var requestPolicy = getCommonParameters(req,paraPolicy,METHOD_GET);
+    var requestKey = getCommonParameters(req,paraKey,METHOD_GET);
+    var result = new commonResult();
+    if (e && e!= -1)
+    {
 
+        result.status = "True";
+        result.detail = standOwnerMessageArray;
+    }
+    else
+    {
+        result.status = "false";
+        result.detail = {"message":"Internal Error!"};
+    }
+    serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
+        serviceOperation.getImageUploadSecurityString,callback,requestPolicy,requestKey);
 };
 var getAuthCodeCallbackGet = function(req, res, next)
 {
@@ -545,7 +562,7 @@ server.get(ROUTER_GETSTANDMARKCOMMENTSEXIST + CURRENT_VERSION,cors(), getStandMa
 server.post(ROUTER_CREATESTANDOWNERMESSAGE + CURRENT_VERSION,cors(), createStandOwnerMessageCallbackPost);
 server.get(ROUTER_GETSTANDOWNERMESSAGES + CURRENT_VERSION,cors(), getStandOwnerMessagesCallbackGet);
 server.get(ROUTER_GETSTANDTYPES + CURRENT_VERSION,cors(), getStandTypesCallbackGet);
-server.post(ROUTER_SETSTANDLOCATION + CURRENT_VERSION,cors(), setStandLocationCallbackPost);
+//server.post(ROUTER_SETSTANDLOCATION + CURRENT_VERSION,cors(), setStandLocationCallbackPost);
 server.get(ROUTER_GETIMAGEUPLOADSECURITYSTRING + CURRENT_VERSION,cors(), getImageUploadSecurityStringCallbackGet);
 server.get(ROUTER_GETAUTHCODE + CURRENT_VERSION,cors(), getAuthCodeCallbackGet);
 
