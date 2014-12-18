@@ -4,7 +4,7 @@ exports.securityAndAuth= {
  securityMethod : "md5",
  outputDigestMethod : "base64",
  maxHashKey : 1000,
- expireInterval : 30000, // ms
+ expireInterval : 3000000, // ms
  databaseHashKeySuffix : "_db",
  memoryHashKeySuffix : "_me"
 };

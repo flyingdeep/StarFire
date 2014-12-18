@@ -11,9 +11,9 @@ var standOwnerMessageOperation = new bizOperation.standOwnerMessageClass();
 var standTypeOperation = new bizOperation.standTypeClass();
 
 
-var DEFAULT_OFFSET = 1;
-var DEFAULT_PAGE_SIZE = 10;
-var DEFAULT_ORDER = " create_date desc ";
+var DEFAULT_OFFSET = config.bizService.defaultOffset;
+var DEFAULT_PAGE_SIZE = config.bizService.defaultPageSize;
+var DEFAULT_ORDER = config.bizService.defaultOrder;
 var DES = "des";
 
 
@@ -45,8 +45,10 @@ exports.tryMatchToken = function(callback, hashToken, hashMap)
 
 };
 
-exports.authenticateUser = function(callback, user_name, password)
+exports.authenticateUser = function(callback, logonUserInfo)
 {
+    var user_name = logonUserInfo.user_name;
+    var password = logonUserInfo.password;
     userInfoOperation.fetchUserByUser(callback,user_name,password);
 };
 
@@ -162,8 +164,10 @@ exports.getImageUploadSecurityString = function(callback,policy,key)
 
 exports.getAuthCode = function(callback, encryptUsername, encryptPassword, hashMap)
 {
+
     var user_name = authOperation.decryptSymString(encryptUsername, DES);
     var password = encryptPassword;
+
     exports.authenticateUser(function(result)
     {
         if (result)

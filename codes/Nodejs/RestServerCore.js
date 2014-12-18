@@ -25,7 +25,6 @@ var ROUTER_GETSTANDMARKCOMMENTSEXIST = BASE_ROUTER + "GetStandMarkCommentSExist"
 var ROUTER_CREATESTANDOWNERMESSAGE = BASE_ROUTER + "CreateStandOwnerMessage";
 var ROUTER_GETSTANDOWNERMESSAGES = BASE_ROUTER + "GetStandOwnerMessages";
 var ROUTER_GETSTANDTYPES = BASE_ROUTER + "GetStandTypes";
-//var ROUTER_SETSTANDLOCATION = BASE_ROUTER + "SetStandLocation";
 var ROUTER_GETIMAGEUPLOADSECURITYSTRING = BASE_ROUTER + "GetImageUploadSecurityString";
 var ROUTER_GETAUTHCODE = BASE_ROUTER + "GetAuthCode";
 var ROUTER_ADDLINKTOSTAND = BASE_ROUTER + "AddLinkToStand";
@@ -33,17 +32,19 @@ var ROUTER_REMOVELINKFROMSTAND = BASE_ROUTER + "RemoveLinkFromStand";
 var ROUTER_FETCHLINKLIST = BASE_ROUTER + "fetchLinkList";
 
 var ROUTER_test = BASE_ROUTER + "test";
-console.log(ROUTER_test);
+
 
 
 var hashMap = new hashMapOperation.hashMapBaseClass();
 
 var getCommonParameters = function(req,paraName,method)
 {
+
     var result = null;
     if (method == METHOD_GET)
     {
         result = req.query[paraName];
+
     }
     else if (method == METHOD_POST)
     {
@@ -93,10 +94,11 @@ var authenticateUserCallbackPost = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
 
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
-        serviceOperation.generateAuthenticateToken,callback,requestInputParameter );
+        serviceOperation.authenticateUser,callback,requestInputParameter );
 };
 var registerUserCallbackPost = function(req, res, next)
 {
@@ -121,6 +123,7 @@ var registerUserCallbackPost = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
 
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
@@ -152,6 +155,7 @@ var updateUserCallbackPost = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
 
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
@@ -181,6 +185,7 @@ var updateUserPreferenceCallbackPost = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
 
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
@@ -209,6 +214,7 @@ var createStandCallbackPost = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
 
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
@@ -238,6 +244,7 @@ var updateStandCallbackPost = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
 
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
@@ -266,6 +273,7 @@ var changeRealTimeLocationStatusCallbackPost = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
 
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
@@ -315,6 +323,7 @@ var getStandCustomerMarkCommentsCallbackGet = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
 
     };
 
@@ -357,6 +366,7 @@ var createStandMarkCommentsCallbackPost = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
         serviceOperation.createStandMarkComments,callback,requestInputParameter );
@@ -398,6 +408,7 @@ var getStandMarkCommentsExistCallbackGet = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
         serviceOperation.getStandMarkCommentsExist,callback,requestStandId,requestUsername );
@@ -427,6 +438,7 @@ var createStandOwnerMessageCallbackPost = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
         serviceOperation.createStandMarkComments,callback,requestInputParameter );
@@ -473,6 +485,7 @@ var getStandOwnerMessagesCallbackGet = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
 
     };
 
@@ -518,6 +531,7 @@ var getStandTypesCallbackGet = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
         serviceOperation.getStandType,callback);
@@ -549,10 +563,11 @@ var getImageUploadSecurityStringCallbackGet = function(req, res, next)
 };
 var getAuthCodeCallbackGet = function(req, res, next)
 {
-    var paraToken = "token";
+
     var paraEncryptUsername = "username";
-    var requestToken = getCommonParameters(req,paraToken,METHOD_GET);
-    var requestEncryptUsername = getCommonParameters(req,paraEncryptUsername);
+    var paraEncryptPassword = "password";
+    var requestEncryptUsername = getCommonParameters(req,paraEncryptUsername,METHOD_GET);
+    var requestEncryptPassword = getCommonParameters(req,paraEncryptPassword,METHOD_GET);
     var result = new commonResult();
     var callback = function(e) {
         if (e && e != -1) {
@@ -565,9 +580,10 @@ var getAuthCodeCallbackGet = function(req, res, next)
             result.detail = {"message": "Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
     }
-    serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
-        serviceOperation.getAuthCode,callback,requestEncryptUsername);
+
+        serviceOperation.getAuthCode(callback,requestEncryptUsername,requestEncryptPassword,hashMap);
 };
 
 var addLinkToStandCallbackPost = function(req, res, next)
@@ -595,6 +611,7 @@ var addLinkToStandCallbackPost = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
         serviceOperation.addLinkToStand,callback,requestInputParameter );
@@ -625,6 +642,7 @@ var removeLinkFromStandCallbackPost = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
         serviceOperation.removeLinkFromStand,callback,requestInputParameter );
@@ -667,6 +685,7 @@ var fetchLinkListCallbackGet = function(req, res, next)
             result.detail = {"message":"Internal Error!"};
         }
         res.json(HTTP_SUCCESS_CODE,result);
+        next();
 
     };
 
