@@ -49,6 +49,7 @@ exports.authenticateUser = function(callback, logonUserInfo)
 {
     var user_name = logonUserInfo.user_name;
     var password = logonUserInfo.password;
+    console.log(user_name)
     userInfoOperation.fetchUserByUser(callback,user_name,password);
 };
 
