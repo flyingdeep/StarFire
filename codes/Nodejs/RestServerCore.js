@@ -66,6 +66,7 @@ var authenticateUserCallbackPost = function(req, res, next)
     var paraInputParameter = "inputParameter";
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
     var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
+    console.log(requestInputParameter);
     var result = new commonResult();
     var callback = function(e)
     {

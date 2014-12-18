@@ -8,12 +8,22 @@
   <meta name="Description" content="">
   <title>Document</title>
   <script type="text/javascript" src="js/md5.js"></script>
+  <script type="text/javascript" src="js/des.js"></script>
+  <script type="text/javascript" src="js/base64.js"></script>
  </head>
  <body>
+<input type="text" id="inputtext">
+<input type="button" value="test" onclick="document.all.output.innerHTML=b64_md5(inputtext.value);">
  <div id="output" ></div>
   <script type="text/javascript">
+
+//  var desKey = "aaa21234";
+
+var message = "sdfasfafg";
+//var ciphertext = des(desKey, message, 1, 0, "08070602");
+
   <!--
-	document.all.output.innerHTML=b64_md5("tesadsfwt");
+
   //-->
   </script>
  </body>

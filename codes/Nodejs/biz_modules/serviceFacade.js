@@ -47,9 +47,10 @@ exports.tryMatchToken = function(callback, hashToken, hashMap)
 
 exports.authenticateUser = function(callback, logonUserInfo)
 {
+
     var user_name = logonUserInfo.user_name;
     var password = logonUserInfo.password;
-    console.log(user_name)
+    console.log(logonUserInfo)
     userInfoOperation.fetchUserByUser(callback,user_name,password);
 };
 

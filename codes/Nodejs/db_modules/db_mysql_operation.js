@@ -37,10 +37,10 @@ exports.fetchData = function () //callback, sqlstring,  pool
         return;
 	}
 	pool.getConnection(function(err, connection) {
-  // connected! (unless `err` is set)
+
 		if (err)
 		{
-			message = err.stack;
+            throw err;
 			// track
 			result = false;
             callback(result);
@@ -55,7 +55,7 @@ exports.fetchData = function () //callback, sqlstring,  pool
 				if (err)
 				{
 					// console.error('error connecting: ' + err.stack);
-					message = err.stack;
+                    throw err;
 					// track
 					result = false;
                     callback(result);
@@ -96,8 +96,7 @@ exports.insertData = function() //callback, presql ,input Json, pool
   // connected! (unless `err` is set)
 	if (err)
 	{
-		message = err.stack;
-			// track
+        throw err;
 			result = false;
         callback(result);
 	}
@@ -110,7 +109,7 @@ exports.insertData = function() //callback, presql ,input Json, pool
 		connection.query(sql, function(err, results) {
 			if (err)
 			{
-                message = err.stack;
+                throw err;
 				 //console.error('error connecting: ' + err.stack);
                 result = false;
                 callback(result);
@@ -149,8 +148,7 @@ exports.deleteData = function() // callback, sqlstr, pool
         // connected! (unless `err` is set)
         if (err)
         {
-            message = err.stack;
-            // track
+            throw err;
             result = false;
             callback(result);
         }
@@ -163,9 +161,7 @@ exports.deleteData = function() // callback, sqlstr, pool
 
                 if (err)
                 {
-                    // console.error('error connecting: ' + err.stack);
-                    message = err.stack;
-                    // track
+                    throw err;
                     result = false;
                     callback(result);
 
@@ -190,11 +186,11 @@ exports.deleteData = function() // callback, sqlstr, pool
 
 
 
-exports.updateData = function() // callback, sqlstr, pool
+exports.updateData = function() // exception, callback, sqlstr, pool
 {
+    var exception;
     var pool;
     var result;
-    var message;
     var callback = arguments[0];
     var sql = arguments[1];
     if (!(pool=arguments[2]) && !(pool = _pool))
@@ -207,8 +203,7 @@ exports.updateData = function() // callback, sqlstr, pool
         // connected! (unless `err` is set)
         if (err)
         {
-            message = err.stack;
-            // track
+            exception = err;
             result = false;
             callback(result);
         }
@@ -222,8 +217,7 @@ exports.updateData = function() // callback, sqlstr, pool
                 if (err)
                 {
                     // console.error('error connecting: ' + err.stack);
-                    message = err.stack;
-                    // track
+                    throw err;
                     result = false;
                     callback(result);
 
