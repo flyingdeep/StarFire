@@ -21,7 +21,7 @@ var err =new Error("test error");
 
 var func1 = function(err,callback)
 {
-    throw new Error ("func1 error");
+    //throw new Error ("func1 error");
     var result = true;
     callback(err,result);
 };
@@ -30,19 +30,25 @@ var func1 = function(err,callback)
 
 var func2 = function(err,callback)
 {
-    var err
+
     try {
         throw new Error("func2 error");
     }
-    catch {
+    catch (ex) {
+        err = ex;
+    }
+    finally {
+
+        func1(err, callback);
 
     }
+};
 
-    func1(err, callback);
+func2(null,function(err,result){
+    //console.log(err.stack);
+    console.log(err.message);
+    console.log(err.name);
 
-
-}
-
-fun2(null,function(err,result){ console.log(err.stack); });
+});
 
 

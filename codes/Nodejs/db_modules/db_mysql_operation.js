@@ -23,17 +23,22 @@ exports.initMysqlPool=function() //poolmax,hostVal,userVal,passwordVal
 	  return pool;
 };
 
-exports.fetchData = function () //callback, sqlstring,  pool
+exports.fetchData = function () //exception,callback, sqlstring,  pool
 {
 	var pool;
 	var result; 
-	var message;
-    var  callback = arguments[0];
-    var sql = arguments[1];
-	if (!(pool=arguments[2]) && !(pool = _pool))
+    var exception = arguments[0];
+    var  callback = arguments[1];
+    var sql = arguments[2];
+    if (exception)
+    {
+        callback(exception,false);
+        return;
+    }
+	if (!(pool=arguments[3]) && !(pool = _pool))
 	{
         result = false;
-        callback(result);
+        callback(null,result);
         return;
 	}
 	pool.getConnection(function(err, connection) {
@@ -43,13 +48,11 @@ exports.fetchData = function () //callback, sqlstring,  pool
             throw err;
 			// track
 			result = false;
-            callback(result);
+            callback(err,result);
 		}
 		else
 		{
-			
-
-			console.log(sql);
+    		//console.log(sql);
 			connection.query(sql, function(err, results, fields) {
 
 				if (err)
@@ -58,14 +61,14 @@ exports.fetchData = function () //callback, sqlstring,  pool
                     throw err;
 					// track
 					result = false;
-                    callback(result);
+                    callback(err,result);
 						
 				}
 				else
 				{
 					 //console.log(results[0].newTBcol);
 					 result = results;
-                    callback(result);
+                    callback(null,result);
 				}
 			});
 			
@@ -77,18 +80,23 @@ exports.fetchData = function () //callback, sqlstring,  pool
 
 }
 
-exports.insertData = function() //callback, presql ,input Json, pool
+exports.insertData = function() //exception,callback, presql ,input Json, pool
 {
-    var callback = arguments[0]; //callback
-    var preSql =  arguments[1]; //presql
-    var insertStatement = arguments[2]; //input Json
+    var exception = arguments[0];
+    var callback = arguments[1]; //callback
+    var preSql =  arguments[2]; //presql
+    var insertStatement = arguments[3]; //input Json
 	var pool;
-	var result; 
-	var message;
-	if (!(pool=arguments[3]) && !(pool = _pool))
+	var result;
+    if (exception)
+    {
+        callback(exception,false);
+        return;
+    }
+	if (!(pool=arguments[4]) && !(pool = _pool))
 	{
 		result =  false;
-        callback(result);
+        callback(null,result);
         return;
 	}
 
@@ -98,7 +106,7 @@ exports.insertData = function() //callback, presql ,input Json, pool
 	{
         throw err;
 			result = false;
-        callback(result);
+        callback(err,result);
 	}
 	else
 	{
@@ -112,14 +120,14 @@ exports.insertData = function() //callback, presql ,input Json, pool
                 throw err;
 				 //console.error('error connecting: ' + err.stack);
                 result = false;
-                callback(result);
+                callback(err,result);
 			}
 			else
 			{
 				// console.log(results.insertId);
                 result = results.insertId;
                // console.log("success");
-                callback(result);
+                callback(null,result);
 			}
 		});
 		connection.release();
@@ -128,17 +136,22 @@ exports.insertData = function() //callback, presql ,input Json, pool
 
 }
 
-exports.deleteData = function() // callback, sqlstr, pool
+exports.deleteData = function() // exception, callback, sqlstr, pool
 {
     var pool;
     var result;
-    var message;
-    var callback = arguments[0];
-    var sql = arguments[1];
-    if (!(pool=arguments[2]) && !(pool = _pool))
+    var exception = arguments[0];
+    var callback = arguments[1];
+    var sql = arguments[2];
+    if (exception)
+    {
+        callback(exception,false);
+        return;
+    }
+    if (!(pool=arguments[3]) && !(pool = _pool))
     {
         result = false;
-        callback(result);
+        callback(null,result);
         return;
     }
 
@@ -150,7 +163,7 @@ exports.deleteData = function() // callback, sqlstr, pool
         {
             throw err;
             result = false;
-            callback(result);
+            callback(err,result);
         }
         else
         {
@@ -163,14 +176,14 @@ exports.deleteData = function() // callback, sqlstr, pool
                 {
                     throw err;
                     result = false;
-                    callback(result);
+                    callback(err,result);
 
                 }
                 else
                 {
                     //console.log(results[0].name);
                     result = results.affectedRows;
-                    callback(result);
+                    callback(null,result);
                 }
             });
 
@@ -179,33 +192,39 @@ exports.deleteData = function() // callback, sqlstr, pool
         }
 
     });
-    //return result;
 
 
-}
+
+};
 
 
 
 exports.updateData = function() // exception, callback, sqlstr, pool
 {
-    var exception;
+
     var pool;
     var result;
-    var callback = arguments[0];
-    var sql = arguments[1];
-    if (!(pool=arguments[2]) && !(pool = _pool))
+    var exception = arguments[0];
+    var callback = arguments[1];
+    var sql = arguments[2];
+    if (exception)
+    {
+        callback(exception,false);
+        return;
+    }
+    if (!(pool=arguments[3]) && !(pool = _pool))
     {
         result =  false;
-        callback(result);
+        callback(null,result);
         return;
     }
     pool.getConnection(function(err, connection) {
         // connected! (unless `err` is set)
         if (err)
         {
-            exception = err;
+
             result = false;
-            callback(result);
+            callback(err,false);
         }
         else
         {
@@ -219,14 +238,14 @@ exports.updateData = function() // exception, callback, sqlstr, pool
                     // console.error('error connecting: ' + err.stack);
                     throw err;
                     result = false;
-                    callback(result);
+                    callback(err,result);
 
                 }
                 else
                 {
                     //console.log(results[0].name);
                     result = results.changedRows;
-                    callback(result);
+                    callback(null,result);
                 }
             });
 
@@ -235,7 +254,6 @@ exports.updateData = function() // exception, callback, sqlstr, pool
         }
 
     });
-    return result;
 }
 
 //connection.end();
