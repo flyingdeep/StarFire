@@ -1,6 +1,10 @@
+exports.globalCommon = {
+    debugFlag : 0
+};
+
 exports.securityAndAuth= {
  fixedMD5Key : "!qaz2WSX#edc",
- fixedDESKey : ")p:?9OL.*ik<",
+ fixedDESKey : "FifthSea",
  securityMethod : "md5",
  outputDigestMethod : "base64",
  maxHashKey : 1000,

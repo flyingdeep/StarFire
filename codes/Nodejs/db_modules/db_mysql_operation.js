@@ -30,6 +30,7 @@ exports.fetchData = function () //exception,callback, sqlstring,  pool
     var exception = arguments[0];
     var  callback = arguments[1];
     var sql = arguments[2];
+
     if (exception)
     {
         callback(exception,false);
@@ -58,18 +59,17 @@ exports.fetchData = function () //exception,callback, sqlstring,  pool
 				if (err)
 				{
 					// console.error('error connecting: ' + err.stack);
-                    throw err;
+
 					// track
-					result = false;
-                    callback(err,result);
-						
+
+                    callback(err,false);
+					return;
 				}
-				else
-				{
-					 //console.log(results[0].newTBcol);
+
+
 					 result = results;
                     callback(null,result);
-				}
+
 			});
 			
 			connection.release();

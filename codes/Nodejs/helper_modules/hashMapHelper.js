@@ -74,58 +74,90 @@ exports.pushLocalHash = function(input,hashMap)
 
 exports.pushServerHash = function(exception, callback, input)
 {
-
-    exports.createServerNoConflictKey(function(e)
+    if (exception)
     {
-        if (e)
+        callback(exception,false);
+        return;
+
+    }
+    exports.createServerNoConflictKey(exception,function(err,e)
+    {
+        if (err)
         {
-            var hashValue = exports.generateValue();
-            var hashMapItem = {hash_key: e, value: hashValue};
-            hashMapoperation.pushHashCode(callback,hashMapItem);
+            callback(err,false);
+            return;
+
         }
-        else
+        try {
+            if (e) {
+                var hashValue = exports.generateValue();
+                var hashMapItem = {hash_key: e, value: hashValue};
+                hashMapoperation.pushHashCode(err, callback, hashMapItem);
+            }
+            else {
+                callback(new Error("createServerNoConflictKey - inner Exception"),e);
+            }
+        }
+        catch (ex)
         {
-            callback(e);
+            callback(ex,false);
         }
 
     },input);
 };
 
-exports.pushHash = function(callback,input,hashMap)
-{
-    if (hashMap.count()>MAX_HASH_KEY )
-    {
-        exports.pushServerHash(function(e) {
-            if (e && e != -1)
-            {
-                callback(e + DATABASE_HASHKEY_SUFIX);
-            }
-            else {
-                callback(e);
-            }
-        },input);
-    }
-    else
-    {
-        var localResult = exports.pushLocalHash(input,hashMap);
-        callback(localResult + MEMORY_HASHKEY_SUFIX);
-    }
-};
-
-exports.matchServerHash = function(callback,inputHash)
-{
-    hashMapoperation.matchHashCode(callback,inputHash);
-
-};
-
-exports.matchHash = function (exception, callback,inputHash,hashMap)
+exports.pushHash = function(exception, callback,input,hashMap)
 {
     if (exception)
     {
         callback(exception,false);
         return;
     }
+    if (hashMap.count()>MAX_HASH_KEY )
+    {
+        exports.pushServerHash(exception,function(err,e) {
+            if (err)
+            {
+                callback(err,false);
+                return;
+            }
+            if (e && e != -1)
+            {
+                callback(err,e + DATABASE_HASHKEY_SUFIX);
+            }
+            else {
+                callback(new Error("pushServerHash - inner Exception"),e);
+            }
+        },input);
+    }
+    else
+    {
+        var localResult = exports.pushLocalHash(input,hashMap);
+        callback(null,localResult + MEMORY_HASHKEY_SUFIX);
+    }
+};
+
+exports.matchServerHash = function(exception, callback,inputHash)
+{
+    if (exception)
+    {
+        callback(exception,false);
+        return;
+    }
+    hashMapoperation.matchHashCode(exception,callback,inputHash);
+
+};
+
+exports.matchHash = function (exception, callback,inputHash,hashMap)
+{
+
+    if (exception)
+    {
+        callback(exception,false);
+        return;
+    }
     try {
+
         var tokenType = inputHash.substring(inputHash.length - 3);
         if (tokenType == MEMORY_HASHKEY_SUFIX) {
             callback(exception, exports.matchLocalHash(inputHash, hashMap));
@@ -139,7 +171,7 @@ exports.matchHash = function (exception, callback,inputHash,hashMap)
     }
     catch(e)
     {
-
+        callback(e,false);
     }
 
 

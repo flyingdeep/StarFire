@@ -20,17 +20,18 @@ var DES = "des";
 
 exports.tryPassTokenToProceedAction = function()
 {
-
     var token = arguments[0];
     var hashMap = arguments[1];
     var method = arguments[2];
     var exception = arguments[3];
     var callback = arguments[4];
+
     if (exception)
     {
         callback(exception,false);
         return;
     }
+
     exports.tryMatchToken(exception,function(err,e)
     {
 
@@ -53,6 +54,7 @@ exports.tryPassTokenToProceedAction = function()
 
 exports.tryMatchToken = function(exception, callback, hashToken, hashMap)
 {
+
     if (exception)
     {
         callback(exception,false);
@@ -62,19 +64,21 @@ exports.tryMatchToken = function(exception, callback, hashToken, hashMap)
 
 };
 
-exports.authenticateUser = function(exception, callback, logonUserInfo)
+exports.authenticateUser = function(exception, callback, user_name, password)
 {
 
     if (exception)
     {
+
         callback(exception,false);
         return;
     }
-    var user_name = logonUserInfo.user_name;
-    var password = logonUserInfo.password;
-    //console.log(logonUserInfo)
+
+
     userInfoOperation.fetchUserByUser(exception,callback,user_name,password);
 };
+
+
 
 exports.registerUser = function(exception, callback, userinfo)
 {
@@ -269,57 +273,104 @@ exports.getImageUploadSecurityString = function(exception,callback,policy,key)
 
 };
 
+exports.testGetAuthCode =function(exception,callback, encryptUsername, encryptPassword, hashMap)
+{
+    var user_name = authOperation.decryptSymString(encryptUsername, DES);
+    var password = encryptPassword;
+
+console.log("aaa");
+
+
+        callback(null,"good");
+
+
+}
+
+var pushServerHash = function(exception, callback, input)
+{
+    callback(null,"ddd");
+};
+
+
 exports.getAuthCode = function(exception,callback, encryptUsername, encryptPassword, hashMap)
 {
 
+
     var user_name = authOperation.decryptSymString(encryptUsername, DES);
     var password = encryptPassword;
+
     if (exception)
     {
         callback(exception,false);
         return;
     }
+
     exports.authenticateUser(exception,function(err, result)
     {
+
         if (err)
         {
             callback(err,false);
             return;
         }
-        if (result)
+        if (result && result!=-1)
         {
-            if (result && result!=-1)
+
+            if (result.length && result.length == 1)
             {
-                hashMapHelper.pushHash(callback,user_name,hashMap);
+                hashMapHelper.pushHash(err,callback,user_name,hashMap);
             }
             else
             {
-                callback(-1);
+                callback(new Error("No user found!"),-1);
             }
-        };
+        }
+        else
+        {
+            callback(new Error("authenticateUser - innerException"),false);
+        }
     },user_name,password);
 };
 
-exports.addLinkToStand = function(callback, userLinkInfo)
+exports.addLinkToStand = function(exception, callback, userLinkInfo)
 {
-
-    standUserLinkOperation.addSandUserLink(callback, userLinkInfo);
+    if (exception)
+    {
+        callback(exception,false);
+        return;
+    }
+    standUserLinkOperation.addSandUserLink(exception,callback, userLinkInfo);
 };
-exports.removeLinkFromStand = function(callback, userLinkInfo)
+exports.removeLinkFromStand = function(exception,callback, userLinkInfo)
 {
-    standUserLinkOperation.removeSandUserLinkLogic(callback, userLinkInfo);
+    if (exception)
+    {
+        callback(exception,false);
+        return;
+    }
+    standUserLinkOperation.removeSandUserLinkLogic(exception,callback, userLinkInfo);
 };
-exports.fetchLinkListByUserId = function(callback,userId, offset, pageSize, order)
+exports.fetchLinkListByUserId = function(exception,callback,userId, offset, pageSize, order)
 {
+    if (exception)
+    {
+        callback(exception,false);
+        return;
+    }
     offset = (offset == null || offset == "")?DEFAULT_OFFSET: offset;
     pageSize = (pageSize == null || pageSize == "")?DEFAULT_PAGE_SIZE: pageSize;
     order = (order == null || order == "")?DEFAULT_ORDER: order;
-    standUserLinkOperation.fetchSandUserLinkByUserId(callback,userId, offset, pageSize, order);
+    standUserLinkOperation.fetchSandUserLinkByUserId(exception, callback,userId, offset, pageSize, order);
 };
-exports.fetchLinkListByStandId = function(callback,standId, offset, pageSize, order)
+exports.fetchLinkListByStandId = function(exception,callback,standId, offset, pageSize, order)
 {
+    if (exception)
+    {
+        callback(exception,false);
+        return;
+    }
     offset = (offset == null || offset == "")?DEFAULT_OFFSET: offset;
     pageSize = (pageSize == null || pageSize == "")?DEFAULT_PAGE_SIZE: pageSize;
     order = (order == null || order == "")?DEFAULT_ORDER: order;
-    standUserLinkOperation.fetchSandUserLinkByStandId(callback,standId, offset, pageSize, order);
+    standUserLinkOperation.fetchSandUserLinkByStandId(exception, callback,standId, offset, pageSize, order);
 };

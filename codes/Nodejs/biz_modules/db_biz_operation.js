@@ -31,14 +31,18 @@ exports.userInfoClass = function()
 {
     this.fetchUserByUser = function() //exception, callback,username,password
     {
-        var exception = arguments[1];
-        var callback = arguments[2];
-        var username = arguments[3];
-        var password = arguments[4];
+
+
+        var exception = arguments[0];
+        var callback = arguments[1];
+        var username = arguments[2];
+        var password = arguments[3];
         var passwordwheresql = "";
         var sql = "";
+
         if (exception)
         {
+
             callback(exception,false);
             return;
         }
@@ -53,12 +57,14 @@ exports.userInfoClass = function()
                 "web_chart,qq_number,province_city_area,createdate,updatedate " +
                 "from " + TB_USER_INFO + " where user_name=" + mysqldbOperation.escape(username) +
                 " and isdeleted=0" + passwordwheresql;
+
         }
         catch (e)
         {
             exception = e;
         }
         finally {
+
             mysqldbOperation.fetchData(exception, callback, sql);
         }
     };

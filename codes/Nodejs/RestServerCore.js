@@ -12,6 +12,8 @@ var SYMBOL_SLASH="/";
 var CURRENT_VERSION = SYMBOL_SLASH + config.serverParameters.lastedVersion;
 var BASE_ROUTER = SYMBOL_SLASH + config.serverParameters.baseRouter + SYMBOL_SLASH;
 
+var DEBUG_FLAG =config.globalCommon.debugFlag;
+
 var ROUTER_AUTHENTICATEUSER = BASE_ROUTER + "AuthenticateUser";
 var ROUTER_REGISTERUSER = BASE_ROUTER + "RegisterUser";
 var ROUTER_UPDATEUSER = BASE_ROUTER + "UpdateUser";
@@ -32,8 +34,6 @@ var ROUTER_REMOVELINKFROMSTAND = BASE_ROUTER + "RemoveLinkFromStand";
 var ROUTER_FETCHLINKLIST = BASE_ROUTER + "fetchLinkList";
 
 var ROUTER_test = BASE_ROUTER + "test";
-
-
 
 var hashMap = new hashMapOperation.hashMapBaseClass();
 
@@ -67,27 +67,45 @@ var authenticateUserCallbackPost = function(req, res, next)
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
     var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
     console.log(requestInputParameter);
+    console.log(requestToken);
+    
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception, e)
     {
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e!= -1)
         {
 
-            result.status = "True";
-            result.detail = {
-             "user_id" : e[0].user_id,
-             "display_name":e[0].display_name,
-            "user_name":e[0].user_name,
-            "image_id":e[0].image_id,
-            "user_preference":e[0].user_preference,
-            "user_type":e[0].user_type,
-            "cell_number":e[0].cell_number,
-            "web_chart":e[0].web_chart,
-            "qq_number":e[0].qq_number,
-            "province_city_area":e[0].province_city_area,
-            "createdate":e[0].createdate,
-            "updatedate":e[0].updatedate
-            };
+            result.status = "true";
+            if (e.length >0) {
+                result.detail = {
+                    "user_id": e[0].user_id,
+                    "display_name": e[0].display_name,
+                    "user_name": e[0].user_name,
+                    "image_id": e[0].image_id,
+                    "user_preference": e[0].user_preference,
+                    "user_type": e[0].user_type,
+                    "cell_number": e[0].cell_number,
+                    "web_chart": e[0].web_chart,
+                    "qq_number": e[0].qq_number,
+                    "province_city_area": e[0].province_city_area,
+                    "createdate": e[0].createdate,
+                    "updatedate": e[0].updatedate
+                };
+            }
+            else
+            {
+                result.detail = {"message": "Specific user does not exist!"};
+            }
         }
         else
         {
@@ -99,7 +117,7 @@ var authenticateUserCallbackPost = function(req, res, next)
 
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
-        serviceOperation.authenticateUser,callback,requestInputParameter );
+        serviceOperation.authenticateUser,null,callback,requestInputParameter );
 };
 var registerUserCallbackPost = function(req, res, next)
 {
@@ -113,7 +131,7 @@ var registerUserCallbackPost = function(req, res, next)
         if (e && e!= -1)
         {
 
-            result.status = "True";
+            result.status = "true";
             result.detail = {
                 "user_name":requestInputParameter.user_name
             };
@@ -132,6 +150,7 @@ var registerUserCallbackPost = function(req, res, next)
 
 
 
+
 };
 var updateUserCallbackPost = function(req, res, next)
 {
@@ -145,7 +164,7 @@ var updateUserCallbackPost = function(req, res, next)
         if (e && e!= -1)
         {
 
-            result.status = "True";
+            result.status = "true";
             result.detail = {
                 "user_name":requestInputParameter.user_name
             };
@@ -175,7 +194,7 @@ var updateUserPreferenceCallbackPost = function(req, res, next)
         if (e && e!= -1)
         {
 
-            result.status = "True";
+            result.status = "true";
             result.detail = {
                 "user_name":requestInputParameter.user_name
             };
@@ -204,7 +223,7 @@ var createStandCallbackPost = function(req, res, next)
         if (e && e!= -1)
         {
 
-            result.status = "True";
+            result.status = "true";
             result.detail = {
                 "stand_id":requestInputParameter.stand_id
             };
@@ -234,7 +253,7 @@ var updateStandCallbackPost = function(req, res, next)
         if (e && e!= -1)
         {
 
-            result.status = "True";
+            result.status = "true";
             result.detail = {
                 "stand_id":requestInputParameter.stand_id
             };
@@ -263,7 +282,7 @@ var changeRealTimeLocationStatusCallbackPost = function(req, res, next)
         if (e && e!= -1)
         {
 
-            result.status = "True";
+            result.status = "true";
             result.detail = {
                 "stand_id":requestInputParameter.stand_id
             };
@@ -301,7 +320,7 @@ var getStandCustomerMarkCommentsCallbackGet = function(req, res, next)
         if (e && e!= -1)
         {
 
-            result.status = "True";
+            result.status = "true";
            var standCustomerMarkCommentsArray = [];
 
             for (var i= 0; i<e.length; i++) {
@@ -355,7 +374,7 @@ var createStandMarkCommentsCallbackPost = function(req, res, next)
         if (e && e!= -1)
         {
 
-            result.status = "True";
+            result.status = "true";
             result.detail = {
                 "stand_id":requestInputParameter.stand_id,
                 "create_user_name" : requestInputParameter.create_user_name
@@ -386,7 +405,7 @@ var getStandMarkCommentsExistCallbackGet = function(req, res, next)
         if (e && e!= -1)
         {
 
-            result.status = "True";
+            result.status = "true";
             result.detail = {
                 "stand_id":requestStandId,
                 "create_user_name" : requestUsername,
@@ -395,7 +414,7 @@ var getStandMarkCommentsExistCallbackGet = function(req, res, next)
         }
         else if (e==-1)
         {
-            result.status = "True";
+            result.status = "true";
             result.detail = {
                 "stand_id":requestStandId,
                 "create_user_name" : requestUsername,
@@ -427,7 +446,7 @@ var createStandOwnerMessageCallbackPost = function(req, res, next)
         if (e && e!= -1)
         {
 
-            result.status = "True";
+            result.status = "true";
             result.detail = {
                 "stand_id":requestInputParameter.stand_id,
                 "create_user_name" : requestInputParameter.create_user_name
@@ -465,7 +484,7 @@ var getStandOwnerMessagesCallbackGet = function(req, res, next)
         if (e && e!= -1)
         {
 
-            result.status = "True";
+            result.status = "true";
             var standOwnerMessageArray = [];
 
             for (var i= 0; i<e.length; i++) {
@@ -513,7 +532,7 @@ var getStandTypesCallbackGet = function(req, res, next)
     {
         if (e && e!= -1)
         {
-            result.status = "True";
+            result.status = "true";
             var standTypeArray = [];
 
             for (var i= 0; i<e.length; i++) {
@@ -550,7 +569,7 @@ var getImageUploadSecurityStringCallbackGet = function(req, res, next)
     var callback = function(e) {
         if (e && e != -1) {
 
-            result.status = "True";
+            result.status = "true";
             result.detail = e;
         }
         else {
@@ -570,21 +589,42 @@ var getAuthCodeCallbackGet = function(req, res, next)
     var requestEncryptUsername = getCommonParameters(req,paraEncryptUsername,METHOD_GET);
     var requestEncryptPassword = getCommonParameters(req,paraEncryptPassword,METHOD_GET);
     var result = new commonResult();
-    var callback = function(e) {
+
+    var callback = function(exception, e) {
+        if (exception && DEBUG_FLAG )
+        {
+
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+          //  return;
+        }
+
         if (e && e != -1) {
 
-            result.status = "True";
+            result.status = "true";
             result.detail = e;
+        }
+        else if (e == -1)
+        {
+            result.status = "true";
+            result.detail = "Specific user doesn't exist";
         }
         else {
             result.status = "false";
             result.detail = {"message": "Internal Error!"};
         }
-        res.json(HTTP_SUCCESS_CODE,result);
-        next();
+
+        res.json(result);
+       next();
     }
 
-        serviceOperation.getAuthCode(callback,requestEncryptUsername,requestEncryptPassword,hashMap);
+        //serviceOperation.getAuthCode(null,callback,requestEncryptUsername,requestEncryptPassword,hashMap);
+
+    serviceOperation.testGetAuthCode(null,callback,requestEncryptUsername,requestEncryptPassword,hashMap);
 };
 
 var addLinkToStandCallbackPost = function(req, res, next)
@@ -600,7 +640,7 @@ var addLinkToStandCallbackPost = function(req, res, next)
         if (e && e!= -1)
         {
 
-            result.status = "True";
+            result.status = "true";
             result.detail = {
                 "stand_id":requestInputParameter.stand_id,
                 "user_id" : requestInputParameter.user_id
@@ -631,7 +671,7 @@ var removeLinkFromStandCallbackPost = function(req, res, next)
         if (e && e!= -1)
         {
 
-            result.status = "True";
+            result.status = "true";
             result.detail = {
                 "stand_id":requestInputParameter.stand_id,
                 "user_id" : requestInputParameter.user_id
@@ -668,7 +708,7 @@ var fetchLinkListCallbackGet = function(req, res, next)
     {
         if (e && e!= -1)
         {
-            result.status = "True";
+            result.status = "true";
             var linkList = [];
             for (var i= 0; i<e.length; i++) {
                 linkList.push({
@@ -733,6 +773,7 @@ server.get(ROUTER_FETCHLINKLIST + CURRENT_VERSION,cors(),fetchLinkListCallbackGe
 server.get(ROUTER_test + CURRENT_VERSION,cors(),function(req, res, next)
 {
     res.json("Hello, Success!!");
+    next();
 
 });
 
