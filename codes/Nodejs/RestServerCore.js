@@ -103,7 +103,7 @@ var authenticateUserCallbackPost = function(req, res, next)
             }
             else
             {
-                result.detail = {"message": "Specific user does not exist!"};
+                result.detail = {"message": "Invalid user or password"};
             }
         }
         else
@@ -623,7 +623,6 @@ var getAuthCodeCallbackGet = function(req, res, next)
 
        serviceOperation.getAuthCode(null,callback,requestEncryptUsername,requestEncryptPassword,hashMap);
 
-  //  serviceOperation.testGetAuthCode(null,callback,requestEncryptUsername,requestEncryptPassword,hashMap);
 };
 
 var addLinkToStandCallbackPost = function(req, res, next)

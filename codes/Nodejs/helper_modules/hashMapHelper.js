@@ -159,11 +159,12 @@ exports.matchHash = function (exception, callback,inputHash,hashMap)
     try {
 
         var tokenType = inputHash.substring(inputHash.length - 3);
+        var refinedHash = inputHash.substr(0,inputHash.length - 3);
         if (tokenType == MEMORY_HASHKEY_SUFIX) {
-            callback(exception, exports.matchLocalHash(inputHash, hashMap));
+            callback(exception, exports.matchLocalHash(refinedHash, hashMap));
         }
         else if (tokenType == DATABASE_HASHKEY_SUFIX) {
-            exports.matchServerHash(exception, callback, inputHash);
+            exports.matchServerHash(exception, callback, refinedHash);
         }
         else {
             callback(new Error("Invalid token key"),-1);

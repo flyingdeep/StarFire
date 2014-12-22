@@ -16,20 +16,6 @@ var DEFAULT_PAGE_SIZE = config.bizService.defaultPageSize;
 var DEFAULT_ORDER = config.bizService.defaultOrder;
 var DES = "des";
 
-var sliceObjectAtt = function (e)
-{
-    var result = e;
-    for (var item in e)
-    {
-
-
-        if ( parseInt(item)<3)
-        {
-            delete result[item];
-        }
-    }
-    return result;
-}
 
 
 exports.tryPassTokenToProceedAction = function()
@@ -45,11 +31,22 @@ exports.tryPassTokenToProceedAction = function()
         callback(exception,false);
         return;
     }
-    console.log(arguments);
-    var paraArray = arguments.slice(3);
+
+    var paraArray = [];
+    for (var i= 3; i<arguments.length;i++)
+    {
+        paraArray.push(arguments[i]);
+
+    }
+    //console.log(paraArray);
+
     exports.tryMatchToken(exception,function(err,e)
     {
-
+        if (e == -1)
+        {
+            callback(err,-1);
+            return;
+        }
         if (err)
         {
             callback(err,false);
@@ -75,11 +72,11 @@ exports.tryMatchToken = function(exception, callback, hashToken, hashMap)
         callback(exception,false);
         return;
     }
-    hashMapHelper.matchHash(callback,hashToken,hashMap);
+    hashMapHelper.matchHash(exception, callback,hashToken,hashMap);
 
 };
 
-exports.authenticateUser = function(exception, callback, user_name, password)
+exports.authenticateUser = function(exception, callback, userInfo)
 {
 
     if (exception)
@@ -88,6 +85,8 @@ exports.authenticateUser = function(exception, callback, user_name, password)
         callback(exception,false);
         return;
     }
+    var user_name = userInfo.user_name;
+    var password  = userInfo.password;
 
 
     userInfoOperation.fetchUserByUser(exception,callback,user_name,password);
@@ -316,7 +315,7 @@ exports.getAuthCode = function(exception,callback, encryptUsername, encryptPassw
   // var user_name = authOperation.decryptSymString(encryptUsername, DES);
    var user_name = encryptUsername;
     var password = encryptPassword;
-
+    var userInfo = {"user_name":user_name,"password":password};
     if (exception)
     {
         callback(exception,false);
@@ -347,7 +346,7 @@ exports.getAuthCode = function(exception,callback, encryptUsername, encryptPassw
         {
             callback(new Error("authenticateUser - innerException"),false);
         }
-    },user_name,password);
+    },userInfo);
 };
 
 exports.addLinkToStand = function(exception, callback, userLinkInfo)
