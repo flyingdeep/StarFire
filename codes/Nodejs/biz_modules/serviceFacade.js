@@ -16,6 +16,20 @@ var DEFAULT_PAGE_SIZE = config.bizService.defaultPageSize;
 var DEFAULT_ORDER = config.bizService.defaultOrder;
 var DES = "des";
 
+var sliceObjectAtt = function (e)
+{
+    var result = e;
+    for (var item in e)
+    {
+
+
+        if ( parseInt(item)<3)
+        {
+            delete result[item];
+        }
+    }
+    return result;
+}
 
 
 exports.tryPassTokenToProceedAction = function()
@@ -31,7 +45,8 @@ exports.tryPassTokenToProceedAction = function()
         callback(exception,false);
         return;
     }
-
+    console.log(arguments);
+    var paraArray = arguments.slice(3);
     exports.tryMatchToken(exception,function(err,e)
     {
 
@@ -42,7 +57,7 @@ exports.tryPassTokenToProceedAction = function()
         }
         if (e==true)
         {
-            method.apply(this,arguments.slice(3));
+            method.apply(this,paraArray);
         }
         else
         {
@@ -275,13 +290,15 @@ exports.getImageUploadSecurityString = function(exception,callback,policy,key)
 
 exports.testGetAuthCode =function(exception,callback, encryptUsername, encryptPassword, hashMap)
 {
-    var user_name = authOperation.decryptSymString(encryptUsername, DES);
-    var password = encryptPassword;
+
 
 console.log("aaa");
 
-
+    pushServerHash(null, function(){
         callback(null,"good");
+
+    },"aaaa")
+
 
 
 }
@@ -296,7 +313,8 @@ exports.getAuthCode = function(exception,callback, encryptUsername, encryptPassw
 {
 
 
-    var user_name = authOperation.decryptSymString(encryptUsername, DES);
+  // var user_name = authOperation.decryptSymString(encryptUsername, DES);
+   var user_name = encryptUsername;
     var password = encryptPassword;
 
     if (exception)

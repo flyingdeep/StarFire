@@ -66,8 +66,7 @@ var authenticateUserCallbackPost = function(req, res, next)
     var paraInputParameter = "inputParameter";
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
     var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
-    console.log(requestInputParameter);
-    console.log(requestToken);
+
     
     var result = new commonResult();
     var callback = function(exception, e)
@@ -611,7 +610,7 @@ var getAuthCodeCallbackGet = function(req, res, next)
         else if (e == -1)
         {
             result.status = "true";
-            result.detail = "Specific user doesn't exist";
+            result.detail = "Username or password is invalid";
         }
         else {
             result.status = "false";
@@ -622,9 +621,9 @@ var getAuthCodeCallbackGet = function(req, res, next)
        next();
     }
 
-        //serviceOperation.getAuthCode(null,callback,requestEncryptUsername,requestEncryptPassword,hashMap);
+       serviceOperation.getAuthCode(null,callback,requestEncryptUsername,requestEncryptPassword,hashMap);
 
-    serviceOperation.testGetAuthCode(null,callback,requestEncryptUsername,requestEncryptPassword,hashMap);
+  //  serviceOperation.testGetAuthCode(null,callback,requestEncryptUsername,requestEncryptPassword,hashMap);
 };
 
 var addLinkToStandCallbackPost = function(req, res, next)

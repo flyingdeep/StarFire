@@ -41,7 +41,7 @@ var encryptStringDES = function(input,key)
 //    cipher.update(input,UTF8,BASE64);
 //    var encrypted = cipher.final(BASE64);
 //    return encrypted;
-
+    var cipher = crypto.createCipher(DES, FIXEDDESKEY);
     return customDes.strEnc(input,key);
 };
 
