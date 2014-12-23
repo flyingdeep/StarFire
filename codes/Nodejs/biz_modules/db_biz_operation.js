@@ -20,6 +20,17 @@ var DB_USER =config.bizService.dbUser;
 var DB_PASS = config.bizService.dbPass;
 var CORMMA = /\,/g;
 
+var MESSAGE_NO_KEY_EXISTS = "No key exists";
+var MESSAGE_INVALID_DATE_USERNAME= "create_date or modify_date should not be included as parameter, " +
+    "or user_name cannot be none";
+var MESSAGE_INVALID_DATE = "createdate or modifydate should not be included as parameter";
+var MESSAGE_STAND_MARK_ERR = "Stand mark is invalid (<= 0)";
+var MESSAGE_NO_MARK_RECORD = "No Mark record";
+var MESSAGE_CHECKMARKEXISTBYSTANDUSER_INNER = "checkMarkExistByStandUser - inner Exception ";
+var MESSAGE_REMOVEHASHCODEINNER_INNER = "removeHashCodeInner - inner Exception";
+var MESSAGE_CHECKCONFLICTHASHCODE_INNER = "checkConflictHashCode - inner Exception";
+var MESSAGE_PUSHHASHCODE_INNER = "pushHashCode - inner Exception";
+
 var mysqldbOperation = require('./../db_modules/db_mysql_operation.js');
 
 mysqldbOperation.initMysqlPool(MAX_POOL_THREAD,DB_ADDRESS,DB_USER,DB_PASS);
@@ -125,8 +136,9 @@ exports.userInfoClass = function()
 
         if (userinfo.createdate || userinfo.updatedate || !userinfo.user_name)
         {
-            callback(new Error("create_date or modify_date should not be included as parameter, " +
-                "or user_name cannot be none"), false);
+            var bizError = new Error(MESSAGE_INVALID_DATE_USERNAME);
+            bizError.Name = "biz";
+            callback(bizError, -1);
             return;
         }
 
@@ -158,7 +170,11 @@ exports.userInfoClass = function()
         }
         if (userinfo.createdate || userinfo.updatedate)
         {
-            callback(new Error("createdate or modifydate should not be included as parameter"), false);
+
+            var bizError = new Error(MESSAGE_INVALID_DATE);
+            bizError.Name = "biz";
+            callback(bizError, -1);
+
             return;
         }
         try {
@@ -199,7 +215,9 @@ exports.standInfoClass = function() {
         }
         if (standinfo.create_date || standinfo.modify_date)
         {
-            callback(new Error("create_date or modify_date should not be included as parameter"), false);
+            var bizError =  new Error(MESSAGE_INVALID_DATE);
+            bizError.Name = "biz";
+            callback(bizError, -1);
             return;
         }
 
@@ -236,7 +254,9 @@ exports.standInfoClass = function() {
         }
         if (standinfo.create_date || standinfo.modify_date)
         {
-            callback(new Error("create_date or modify_date should not be included as parameter"), false);
+            var bizError = new Error(MESSAGE_INVALID_DATE);
+            bizError.Name = "biz";
+            callback(bizError, -1);
             return;
         }
         try {
@@ -296,7 +316,9 @@ exports.standInfoClass = function() {
         }
         if (standimages.create_date || standimages.modify_date)
         {
-            callback(new Error("create_date or modify_date should not be included as parameter"), false);
+            var bizError = new Error(MESSAGE_INVALID_DATE);
+            bizError.Name = "biz";
+            callback(bizError, -1);
             return;
         }
 
@@ -330,7 +352,9 @@ exports.standInfoClass = function() {
         }
         if (standimages.create_date )
         {
-            callback(new Error("create_date should not be included as parameter"), false);
+            var bizError = new Error(MESSAGE_INVALID_DATE);
+            bizError.Name = "biz";
+            callback(bizError, -1);
             return;
         }
         try {
@@ -400,11 +424,22 @@ exports.standCustomerMarkClass = function()
                                 callback(err, e[0].total);
                             }
                             else {
-                                callback(new Error("Stand mark is invalid (<= 0)"), -1);
+                                var bizError = new Error(MESSAGE_STAND_MARK_ERR);
+                                bizError.Name = "biz";
+                                callback(bizError, -1);
                             }
                         }
-                        else {
-                            callback(new Error("No Mark record or inner default "), false);
+                        else if (e.length && e.length == 0) {
+
+                            var bizError = new Error(MESSAGE_NO_MARK_RECORD);
+
+                            bizError.Name = "biz";
+                            callback(bizError, -1);
+
+                        }
+                        else
+                        {
+                            callback(new Error(MESSAGE_CHECKMARKEXISTBYSTANDUSER_INNER), false);
                         }
                     }
                     catch(e)
@@ -470,7 +505,9 @@ exports.standCustomerMarkClass = function()
         }
         if (customerMark.create_date)
         {
-            callback(new Error("create_date should not be included as parameter"), false);
+            var bizError = new Error(MESSAGE_INVALID_DATE);
+            bizError.Name = "biz";
+            callback(bizError, -1);
             return;
         }
         this.checkMarkExistByStandUser(exception,
@@ -529,7 +566,10 @@ exports.standCustomerMarkClass = function()
         }
         if (customerMark.create_date)
         {
-            callback(new Error("create_date should not be included as parameter"), false);
+            var bizError = new Error(MESSAGE_INVALID_DATE);
+            bizError.Name = "biz";
+            callback(bizError, -1);
+
             return;
         }
         presql = "insert into "+ TB_STAND_CUSTOMER_MARK + " set create_date=now(), ";
@@ -621,7 +661,10 @@ exports.standUserLinkClass = function()
         }
         if (standUserLink.create_date)
         {
-            callback(new Error("create_date should not be included as parameter"), false);
+            var bizError = new Error(MESSAGE_INVALID_DATE);
+            bizError.Name = "biz";
+            callback(bizError, -1);
+
             return;
         }
 
@@ -717,7 +760,10 @@ exports.standImageClass = function()
           }
           if (standImage.create_date)
           {
-              callback(new Error("create_date should not be included as parameter"), false);
+              var bizError = new Error(MESSAGE_INVALID_DATE);
+              bizError.Name = "biz";
+              callback(bizError, -1);
+
               return;
           }
           var sql = "insert into "+ TB_STAND_IMAGES + " set create_date=now(), ";
@@ -788,7 +834,8 @@ exports.hashMapClass = function()
                 }
                 if (e===false)
                 {
-                    callback(new Error("pushHashCode - inner Exception"),false);
+
+                    callback(new Error(MESSAGE_PUSHHASHCODE_INNER),false);
                 }
                 else
                 {
@@ -823,7 +870,9 @@ exports.hashMapClass = function()
             }
             if (result) {
                 if (result.length != 0) {
-                    callback(new Error("No key exists"),-1)
+                    var bizError = new Error(MESSAGE_NO_KEY_EXISTS);
+                    bizError.Name = "biz";
+                    callback(bizError,-1)
                 }
                 else
                 {
@@ -831,7 +880,8 @@ exports.hashMapClass = function()
                 }
               }
             else {
-                callback(new Error("checkConflictHashCode - inner Exception"),result);
+
+                callback(new Error(MESSAGE_CHECKCONFLICTHASHCODE_INNER),result);
             }
         },sql );
 
@@ -883,7 +933,8 @@ exports.hashMapClass = function()
                                 }
                                 else {
                                     // console.log("false");
-                                    callback(new Error("removeHashCodeInner - inner Exception"),false);
+
+                                    callback(new Error(MESSAGE_REMOVEHASHCODEINNER_INNER),false);
                                 }
                             }
                             , result[0].hash_key);
@@ -897,14 +948,17 @@ exports.hashMapClass = function()
                                     callback(null, -1);
                                 }
                                 else {
-                                    callback(new Error("removeHashCodeInner - inner Exception"),false);
+
+                                    callback(new Error(MESSAGE_REMOVEHASHCODEINNER_INNER),false);
                                 }
                             }
                             , result[0].hash_key);
                     }
                 }
                 else {
-                    callback(new Error("No key exists"), -1);
+                    var bizError = new Error(MESSAGE_NO_KEY_EXISTS);
+                    bizError.Name = "biz";
+                    callback(bizError, -1);
                 }
             }
             catch (e)
@@ -973,7 +1027,9 @@ exports.standOwnerMessageClass = function() {
             return;
         }
         if (standInfo.create_date) {
-            callback(new Error("create_date shouldn't be included in parameters "),false);
+            var bizError = new Error(MESSAGE_INVALID_DATE);
+            bizError.Name = "biz";
+            callback(bizError, -1);
             return;
         }
         var presql = "insert into " + TB_STAND_OWNER_MESSAGE + " set create_date=now(),";
@@ -1028,18 +1084,3 @@ exports.standOwnerMessageClass = function() {
 
     };
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -71,6 +71,7 @@ var authenticateUserCallbackPost = function(req, res, next)
     var result = new commonResult();
     var callback = function(exception, e)
     {
+
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
@@ -81,6 +82,8 @@ var authenticateUserCallbackPost = function(req, res, next)
             next();
             return;
         }
+        if (exception && exception)
+
         if (e && e!= -1)
         {
 

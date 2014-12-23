@@ -339,7 +339,9 @@ exports.getAuthCode = function(exception,callback, encryptUsername, encryptPassw
             }
             else
             {
-                callback(new Error("No user found!"),-1);
+                var bizError = new Error("No user found!");
+                bizError.Name = "biz";
+                callback(bizError,-1);
             }
         }
         else

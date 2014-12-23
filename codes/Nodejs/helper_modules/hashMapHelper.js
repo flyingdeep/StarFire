@@ -167,7 +167,9 @@ exports.matchHash = function (exception, callback,inputHash,hashMap)
             exports.matchServerHash(exception, callback, refinedHash);
         }
         else {
-            callback(new Error("Invalid token key"),-1);
+            var bizError = new Error("Invalid token key");
+            bizError.name = "biz";
+            callback(bizError,-1);
         }
     }
     catch(e)
