@@ -32,3 +32,19 @@ exports.serverParameters = {
   lastedVersion  :"v1",
   baseRouter  : "zhaotantou"
 };
+
+exports.messages = {
+
+   messageNoKeyExists : "No key exists",
+   messageInvalidDateUsername : "create_date or modify_date should not be included as parameter, or user_name cannot be none",
+   messageInvalidDate : "createdate or modifydate should not be included as parameter",
+   messageStandMarkErr : "Stand mark is invalid (<= 0)",
+   message_no_mark_record : "No Mark record",
+   MESSAGE_CHECKMARKEXISTBYSTANDUSER_INNER : "checkMarkExistByStandUser - inner Exception ",
+   MESSAGE_REMOVEHASHCODEINNER_INNER : "removeHashCodeInner - inner Exception",
+   MESSAGE_CHECKCONFLICTHASHCODE_INNER : "checkConflictHashCode - inner Exception",
+   MESSAGE_PUSHHASHCODE_INNER : "pushHashCode - inner Exception",
+   MESSAGE_MANDATORY_MARK : "If mark is never set before, mark is mandatory",
+   MESSAGE_CHECKMARKEXISTBYSTANDUSER_INNER : "checkMarkExistByStandUser - inner error"
+
+};

@@ -23,20 +23,14 @@ exports.initMysqlPool=function() //poolmax,hostVal,userVal,passwordVal
 	  return pool;
 };
 
-exports.fetchData = function () //exception,callback, sqlstring,  pool
+exports.fetchData = function () //callback, sqlstring,  pool
 {
 	var pool;
-	var result; 
-    var exception = arguments[0];
-    var  callback = arguments[1];
-    var sql = arguments[2];
+	var result;
+    var  callback = arguments[0];
+    var sql = arguments[1];
 
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
-	if (!(pool=arguments[3]) && !(pool = _pool))
+	if (!(pool=arguments[2]) && !(pool = _pool))
 	{
         result = false;
         callback(null,result);
@@ -80,20 +74,14 @@ exports.fetchData = function () //exception,callback, sqlstring,  pool
 
 }
 
-exports.insertData = function() //exception,callback, presql ,input Json, pool
+exports.insertData = function() //callback, presql ,input Json, pool
 {
-    var exception = arguments[0];
-    var callback = arguments[1]; //callback
-    var preSql =  arguments[2]; //presql
-    var insertStatement = arguments[3]; //input Json
+    var callback = arguments[0]; //callback
+    var preSql =  arguments[1]; //presql
+    var insertStatement = arguments[2]; //input Json
 	var pool;
 	var result;
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
-	if (!(pool=arguments[4]) && !(pool = _pool))
+	if (!(pool=arguments[3]) && !(pool = _pool))
 	{
 		result =  false;
         callback(null,result);
@@ -136,19 +124,15 @@ exports.insertData = function() //exception,callback, presql ,input Json, pool
 
 }
 
-exports.deleteData = function() // exception, callback, sqlstr, pool
+exports.deleteData = function() // callback, sqlstr, pool
 {
     var pool;
     var result;
-    var exception = arguments[0];
-    var callback = arguments[1];
-    var sql = arguments[2];
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
-    if (!(pool=arguments[3]) && !(pool = _pool))
+
+    var callback = arguments[0];
+    var sql = arguments[1];
+
+    if (!(pool=arguments[2]) && !(pool = _pool))
     {
         result = false;
         callback(null,result);
@@ -199,20 +183,14 @@ exports.deleteData = function() // exception, callback, sqlstr, pool
 
 
 
-exports.updateData = function() // exception, callback, sqlstr, pool
+exports.updateData = function() //  callback, sqlstr, pool
 {
 
     var pool;
     var result;
-    var exception = arguments[0];
-    var callback = arguments[1];
-    var sql = arguments[2];
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
-    if (!(pool=arguments[3]) && !(pool = _pool))
+    var callback = arguments[0];
+    var sql = arguments[1];
+    if (!(pool=arguments[2]) && !(pool = _pool))
     {
         result =  false;
         callback(null,result);

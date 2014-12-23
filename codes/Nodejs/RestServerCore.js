@@ -119,7 +119,7 @@ var authenticateUserCallbackPost = function(req, res, next)
 
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
-        serviceOperation.authenticateUser,null,callback,requestInputParameter );
+        serviceOperation.authenticateUser,callback,requestInputParameter );
 };
 var registerUserCallbackPost = function(req, res, next)
 {
@@ -624,7 +624,7 @@ var getAuthCodeCallbackGet = function(req, res, next)
        next();
     }
 
-       serviceOperation.getAuthCode(null,callback,requestEncryptUsername,requestEncryptPassword,hashMap);
+       serviceOperation.getAuthCode(callback,requestEncryptUsername,requestEncryptPassword,hashMap);
 
 };
 

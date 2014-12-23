@@ -72,15 +72,10 @@ exports.pushLocalHash = function(input,hashMap)
     return key;
 };
 
-exports.pushServerHash = function(exception, callback, input)
+exports.pushServerHash = function(callback, input)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
 
-    }
-    exports.createServerNoConflictKey(exception,function(err,e)
+    exports.createServerNoConflictKey(function(err,e)
     {
         if (err)
         {
@@ -92,7 +87,7 @@ exports.pushServerHash = function(exception, callback, input)
             if (e) {
                 var hashValue = exports.generateValue();
                 var hashMapItem = {hash_key: e, value: hashValue};
-                hashMapoperation.pushHashCode(err, callback, hashMapItem);
+                hashMapoperation.pushHashCode(callback, hashMapItem);
             }
             else {
                 callback(new Error("createServerNoConflictKey - inner Exception"),e);
@@ -106,16 +101,11 @@ exports.pushServerHash = function(exception, callback, input)
     },input);
 };
 
-exports.pushHash = function(exception, callback,input,hashMap)
+exports.pushHash = function(callback,input,hashMap)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
     if (hashMap.count()>MAX_HASH_KEY )
     {
-        exports.pushServerHash(exception,function(err,e) {
+        exports.pushServerHash(function(err,e) {
             if (err)
             {
                 callback(err,false);
@@ -133,38 +123,27 @@ exports.pushHash = function(exception, callback,input,hashMap)
     else
     {
         var localResult = exports.pushLocalHash(input,hashMap);
-        callback(null,localResult + MEMORY_HASHKEY_SUFIX);
+        callback(localResult + MEMORY_HASHKEY_SUFIX);
     }
 };
 
-exports.matchServerHash = function(exception, callback,inputHash)
+exports.matchServerHash = function(callback,inputHash)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
-    hashMapoperation.matchHashCode(exception,callback,inputHash);
+    hashMapoperation.matchHashCode(callback,inputHash);
 
 };
 
-exports.matchHash = function (exception, callback,inputHash,hashMap)
+exports.matchHash = function (callback,inputHash,hashMap)
 {
-
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
     try {
 
         var tokenType = inputHash.substring(inputHash.length - 3);
         var refinedHash = inputHash.substr(0,inputHash.length - 3);
         if (tokenType == MEMORY_HASHKEY_SUFIX) {
-            callback(exception, exports.matchLocalHash(refinedHash, hashMap));
+            callback(exports.matchLocalHash(refinedHash, hashMap));
         }
         else if (tokenType == DATABASE_HASHKEY_SUFIX) {
-            exports.matchServerHash(exception, callback, refinedHash);
+            exports.matchServerHash(callback, refinedHash);
         }
         else {
             var bizError = new Error("Invalid token key");
@@ -181,12 +160,10 @@ exports.matchHash = function (exception, callback,inputHash,hashMap)
 };
 
 
-exports.createServerNoConflictKey = function(exception, callback,input)
+exports.createServerNoConflictKey = function(callback,input)
 {
-    if (exception)
-    {
-        callback(exception, false);
-    }
+    var exception = null;
+    var conflictCallback = null;
     try {
         var expired_date_ms = exports.generateValue();
         var generatedHashCode = exports.baseCreateCode(exports.generateKey(input, expired_date_ms));
@@ -199,7 +176,7 @@ exports.createServerNoConflictKey = function(exception, callback,input)
                 if (e == -1) {
                     expired_date_ms++;
                     generatedHashCode = exports.baseCreateCode(exports.generateKey(input, expired_date_ms));
-                    hashMapoperation.checkConflictHashCode(err, conflictCallback, generatedHashCode);
+                    hashMapoperation.checkConflictHashCode(conflictCallback, generatedHashCode);
                 }
                 else if (e) {
                     callback(err, generatedHashCode);
@@ -219,7 +196,13 @@ exports.createServerNoConflictKey = function(exception, callback,input)
          exception = e;
     }
     finally {
-        hashMapoperation.checkConflictHashCode(exception, conflictCallback, generatedHashCode);
+        if (exception)
+        {
+            callback(exception,false);
+        }
+        else {
+            hashMapoperation.checkConflictHashCode(conflictCallback, generatedHashCode);
+        }
     }
 };
 

@@ -23,14 +23,7 @@ exports.tryPassTokenToProceedAction = function()
     var token = arguments[0];
     var hashMap = arguments[1];
     var method = arguments[2];
-    var exception = arguments[3];
-    var callback = arguments[4];
-
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
+    var callback = arguments[3];
 
     var paraArray = [];
     for (var i= 3; i<arguments.length;i++)
@@ -40,7 +33,7 @@ exports.tryPassTokenToProceedAction = function()
     }
     //console.log(paraArray);
 
-    exports.tryMatchToken(exception,function(err,e)
+    exports.tryMatchToken(function(err,e)
     {
         if (e == -1)
         {
@@ -64,215 +57,131 @@ exports.tryPassTokenToProceedAction = function()
 };
 
 
-exports.tryMatchToken = function(exception, callback, hashToken, hashMap)
+exports.tryMatchToken = function(callback, hashToken, hashMap)
 {
 
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
-    hashMapHelper.matchHash(exception, callback,hashToken,hashMap);
+    hashMapHelper.matchHash(callback,hashToken,hashMap);
 
 };
 
-exports.authenticateUser = function(exception, callback, userInfo)
+exports.authenticateUser = function(callback, userInfo)
 {
-
-    if (exception)
-    {
-
-        callback(exception,false);
-        return;
-    }
     var user_name = userInfo.user_name;
     var password  = userInfo.password;
 
 
-    userInfoOperation.fetchUserByUser(exception,callback,user_name,password);
+    userInfoOperation.fetchUserByUser(callback,user_name,password);
 };
 
 
 
-exports.registerUser = function(exception, callback, userinfo)
+exports.registerUser = function(callback, userinfo)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
-    userInfoOperation.createUser(exception,callback, userinfo);
+    userInfoOperation.createUser(callback, userinfo);
 
 };
 
-exports.updateUser =function(exception,callback, userinfo)
+exports.updateUser =function(callback, userinfo)
 {
-
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
     var whereObj = {"user_name":userinfo.user_name};
     delete userinfo.user_name;
     delete userinfo.user_id;
-    userInfoOperation.updateUser(exception,callback, userinfo,whereObj);
+    userInfoOperation.updateUser(callback, userinfo,whereObj);
 };
 
-exports.updateUserPreference = function(exception, callback,userinfo)
+exports.updateUserPreference = function(callback,userinfo)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
     var whereObj = {"user_name":userinfo.user_name};
     var userPreference  = {"user_preference":userinfo.user_preference};
-    userInfoOperation.updateUser(exception,callback, userPreference,whereObj);
+    userInfoOperation.updateUser(callback, userPreference,whereObj);
 }
 
-exports.createStand =function(exception, callback,standInfo)
+exports.createStand =function(callback,standInfo)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
-    standInfoOperation.createStand(exception,callback,standInfo);
+    standInfoOperation.createStand(callback,standInfo);
 
 };
 
-exports.updateStand = function(exception,callback,standInfo)
+exports.updateStand = function(callback,standInfo)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
     var whereObj = {"stand_id": standInfo.stand_id};
     delete standInfo.stand_id;
-    standInfoOperation.updateStand(exception,callback,standInfo,whereObj);
+    standInfoOperation.updateStand(callback,standInfo,whereObj);
 
 };
 
-exports.changeRealTimeLocationStatus = function(exception,callback, standInfo)
+exports.changeRealTimeLocationStatus = function(callback, standInfo)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
     var whereObj = {"stand_id":standInfo.stand_id};
     var standRealTimeLocationStatus = {"realtime_location_active":standInfo.realtime_location_active};
-    standInfoOperation.updateStand(exception,callback,standRealTimeLocationStatus,whereObj);
+    standInfoOperation.updateStand(callback,standRealTimeLocationStatus,whereObj);
 };
 
-exports.getStandMarkCommentsExist = function(exception,callback, standId, username)
+exports.getStandMarkCommentsExist = function(callback, standId, username)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
-    standCustomerMarkOperation.checkMarkExistByStandUser(exception,callback, standId, username);
+    standCustomerMarkOperation.checkMarkExistByStandUser(callback, standId, username);
 };
 
-exports.getStandCustomerMarkCommentsByStandId = function(exception,callback, standId, offset, pageSize, order )
+exports.getStandCustomerMarkCommentsByStandId = function(callback, standId, offset, pageSize, order )
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
     offset = (offset == null || offset == "")?DEFAULT_OFFSET: offset;
     pageSize = (pageSize == null || pageSize == "")?DEFAULT_PAGE_SIZE: pageSize;
     order = (order == null || order == "")?DEFAULT_ORDER: order;
-    standCustomerMarkOperation.fetchCustomerMarkDataByStandId(exception,callback,standId, offset, pageSize,order);
+    standCustomerMarkOperation.fetchCustomerMarkDataByStandId(callback,standId, offset, pageSize,order);
 
 };
 
-exports.getStandCustomerMarkCommentsByUsername = function(exception,callback, username,offset, pageSize, order )
+exports.getStandCustomerMarkCommentsByUsername = function(callback, username,offset, pageSize, order )
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
+
     offset = (offset == null || offset == "")?DEFAULT_OFFSET: offset;
     pageSize = (pageSize == null || pageSize == "")?DEFAULT_PAGE_SIZE: pageSize;
     order = (order == null || order == "")?DEFAULT_ORDER: order;
-    standCustomerMarkOperation.fetchCustomerMarkDataByUsername(exception,callback,username,offset, pageSize, order);
+    standCustomerMarkOperation.fetchCustomerMarkDataByUsername(callback,username,offset, pageSize, order);
 
 };
 
-exports.createStandMarkComments = function(exception,callback, standMarkComment)
+exports.createStandMarkComments = function(callback, standMarkComment)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
-    standCustomerMarkOperation.createMarkCommentsWithCheck(exception,callback, standMarkComment);
+    standCustomerMarkOperation.createMarkCommentsWithCheck(callback, standMarkComment);
 };
 
-exports.createStandOwnerMessage = function(exception,callback,standOwnerInfo )
+exports.createStandOwnerMessage = function(callback,standOwnerInfo )
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
-    standOwnerMessageOperation.createStandOwnerMessage(exception,callback, standOwnerInfo);
+    standOwnerMessageOperation.createStandOwnerMessage(callback, standOwnerInfo);
 };
 
-exports.getStandOwnerMessagesByStandId = function (exception,callback,standId, offset, pageSize, order)
+exports.getStandOwnerMessagesByStandId = function (callback,standId, offset, pageSize, order)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
     offset = (offset == null || offset == "")?DEFAULT_OFFSET: offset;
     pageSize = (pageSize == null || pageSize == "")?DEFAULT_PAGE_SIZE: pageSize;
     order = (order == null || order == "")?DEFAULT_ORDER: order;
-    standOwnerMessageOperation.fetchStandOwnerMessageByStandId(exception,callback,standId, offset, pageSize, order);
+    standOwnerMessageOperation.fetchStandOwnerMessageByStandId(callback,standId, offset, pageSize, order);
 
 };
 
-exports.getStandOwnerMessagesByOwnerId = function (exception,callback,OwnerId, offset, pageSize, order)
+exports.getStandOwnerMessagesByOwnerId = function (callback,OwnerId, offset, pageSize, order)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
+
     offset = (offset == null || offset == "")?DEFAULT_OFFSET: offset;
     pageSize = (pageSize == null || pageSize == "")?DEFAULT_PAGE_SIZE: pageSize;
     order = (order == null || order == "")?DEFAULT_ORDER: order;
-    standOwnerMessageOperation.fetchStandOwnerMessageByOwnerId(exception,callback,OwnerId, offset, pageSize, order);
+    standOwnerMessageOperation.fetchStandOwnerMessageByOwnerId(callback,OwnerId, offset, pageSize, order);
 
 };
 
-exports.getStandType = function(exception,callback)
+exports.getStandType = function(callback)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
-    standTypeOperation.getStandType(exception,callback);
+    standTypeOperation.getStandType(callback);
 
 };
 
 
 
-exports.getImageUploadSecurityString = function(exception,callback,policy,key)
+exports.getImageUploadSecurityString = function(callback,policy,key)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
+    var exception = null;
+
     var result = "";
     try {
         result = authOperation.authOSS(policy, key);
@@ -282,33 +191,19 @@ exports.getImageUploadSecurityString = function(exception,callback,policy,key)
         exception = e;
     }
     finally {
-        callback(exception, result);
+        if (exception)
+        {
+            callback(exception,false);
+        }
+        else {
+            callback(null, result);
+        }
     }
 
 };
 
-exports.testGetAuthCode =function(exception,callback, encryptUsername, encryptPassword, hashMap)
-{
 
-
-console.log("aaa");
-
-    pushServerHash(null, function(){
-        callback(null,"good");
-
-    },"aaaa")
-
-
-
-}
-
-var pushServerHash = function(exception, callback, input)
-{
-    callback(null,"ddd");
-};
-
-
-exports.getAuthCode = function(exception,callback, encryptUsername, encryptPassword, hashMap)
+exports.getAuthCode = function(callback, encryptUsername, encryptPassword, hashMap)
 {
 
 
@@ -316,13 +211,7 @@ exports.getAuthCode = function(exception,callback, encryptUsername, encryptPassw
    var user_name = encryptUsername;
     var password = encryptPassword;
     var userInfo = {"user_name":user_name,"password":password};
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
-
-    exports.authenticateUser(exception,function(err, result)
+    exports.authenticateUser(function(err, result)
     {
 
         if (err)
@@ -351,45 +240,25 @@ exports.getAuthCode = function(exception,callback, encryptUsername, encryptPassw
     },userInfo);
 };
 
-exports.addLinkToStand = function(exception, callback, userLinkInfo)
+exports.addLinkToStand = function(callback, userLinkInfo)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
     standUserLinkOperation.addSandUserLink(exception,callback, userLinkInfo);
 };
-exports.removeLinkFromStand = function(exception,callback, userLinkInfo)
+exports.removeLinkFromStand = function(callback, userLinkInfo)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
-    standUserLinkOperation.removeSandUserLinkLogic(exception,callback, userLinkInfo);
+    standUserLinkOperation.removeSandUserLinkLogic(callback, userLinkInfo);
 };
-exports.fetchLinkListByUserId = function(exception,callback,userId, offset, pageSize, order)
+exports.fetchLinkListByUserId = function(callback,userId, offset, pageSize, order)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
     offset = (offset == null || offset == "")?DEFAULT_OFFSET: offset;
     pageSize = (pageSize == null || pageSize == "")?DEFAULT_PAGE_SIZE: pageSize;
     order = (order == null || order == "")?DEFAULT_ORDER: order;
-    standUserLinkOperation.fetchSandUserLinkByUserId(exception, callback,userId, offset, pageSize, order);
+    standUserLinkOperation.fetchSandUserLinkByUserId(callback,userId, offset, pageSize, order);
 };
-exports.fetchLinkListByStandId = function(exception,callback,standId, offset, pageSize, order)
+exports.fetchLinkListByStandId = function(callback,standId, offset, pageSize, order)
 {
-    if (exception)
-    {
-        callback(exception,false);
-        return;
-    }
     offset = (offset == null || offset == "")?DEFAULT_OFFSET: offset;
     pageSize = (pageSize == null || pageSize == "")?DEFAULT_PAGE_SIZE: pageSize;
     order = (order == null || order == "")?DEFAULT_ORDER: order;
-    standUserLinkOperation.fetchSandUserLinkByStandId(exception, callback,standId, offset, pageSize, order);
+    standUserLinkOperation.fetchSandUserLinkByStandId( callback,standId, offset, pageSize, order);
 };
