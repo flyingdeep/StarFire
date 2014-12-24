@@ -22,7 +22,8 @@ exports.bizService = {
  dbPass : "root",
  defaultOffset : 1,
  defaultPageSize : 10,
- defaultOrder : " create_date desc "
+ defaultOrder : " create_date desc ",
+ bizErrorWords : "biz"
 };
 
 
@@ -39,12 +40,18 @@ exports.messages = {
    messageInvalidDateUsername : "create_date or modify_date should not be included as parameter, or user_name cannot be none",
    messageInvalidDate : "createdate or modifydate should not be included as parameter",
    messageStandMarkErr : "Stand mark is invalid (<= 0)",
-   message_no_mark_record : "No Mark record",
-   MESSAGE_CHECKMARKEXISTBYSTANDUSER_INNER : "checkMarkExistByStandUser - inner Exception ",
-   MESSAGE_REMOVEHASHCODEINNER_INNER : "removeHashCodeInner - inner Exception",
-   MESSAGE_CHECKCONFLICTHASHCODE_INNER : "checkConflictHashCode - inner Exception",
-   MESSAGE_PUSHHASHCODE_INNER : "pushHashCode - inner Exception",
-   MESSAGE_MANDATORY_MARK : "If mark is never set before, mark is mandatory",
-   MESSAGE_CHECKMARKEXISTBYSTANDUSER_INNER : "checkMarkExistByStandUser - inner error"
+   messageNoMarkRecord : "No Mark record",
+   message_checkMarkExistByStandUser_inner : "checkMarkExistByStandUser - inner Exception ",
+   message_removeHashCodeInner_inner : "removeHashCodeInner - inner Exception",
+   message_checkConflictHashCode_inner : "checkConflictHashCode - inner Exception",
+   message_pushHashCode_inner : "pushHashCode - inner Exception",
+   messageMandatoryMark : "If mark is never set before, mark is mandatory",
+   message_checkMarkExistByStandUser_inner : "checkMarkExistByStandUser - inner error",
+   message_createServerNoConflictKey_inner : "createServerNoConflictKey - inner Exception",
+   message_pushServerHash_inner : "pushServerHash - inner Exception",
+   messageInvalidTokenKey : "Invalid token key",
+   message_checkConflictHashCode_inner : "checkConflictHashCode - inner Exception",
+   message_noUser : "No user found!",
+   message_authenticateUser_inner : "authenticateUser - innerException"
 
 };

@@ -20,18 +20,18 @@ var DB_USER =config.bizService.dbUser;
 var DB_PASS = config.bizService.dbPass;
 var CORMMA = /\,/g;
 
-var MESSAGE_NO_KEY_EXISTS = "No key exists";
-var MESSAGE_INVALID_DATE_USERNAME= "create_date or modify_date should not be included as parameter, " +
-    "or user_name cannot be none";
-var MESSAGE_INVALID_DATE = "createdate or modifydate should not be included as parameter";
-var MESSAGE_STAND_MARK_ERR = "Stand mark is invalid (<= 0)";
-var MESSAGE_NO_MARK_RECORD = "No Mark record";
-var MESSAGE_CHECKMARKEXISTBYSTANDUSER_INNER = "checkMarkExistByStandUser - inner Exception ";
-var MESSAGE_REMOVEHASHCODEINNER_INNER = "removeHashCodeInner - inner Exception";
-var MESSAGE_CHECKCONFLICTHASHCODE_INNER = "checkConflictHashCode - inner Exception";
-var MESSAGE_PUSHHASHCODE_INNER = "pushHashCode - inner Exception";
-var MESSAGE_MANDATORY_MARK = "If mark is never set before, mark is mandatory";
-var MESSAGE_CHECKMARKEXISTBYSTANDUSER_INNER = "checkMarkExistByStandUser - inner error";
+var BIZ_ERROR_WORDS = config.bizService.bizErrorWords;
+var MESSAGE_NO_KEY_EXISTS = config.messages.messageNoKeyExists;
+var MESSAGE_INVALID_DATE_USERNAME= config.messages.messageInvalidDateUsername;
+var MESSAGE_INVALID_DATE = config.messages.messageInvalidDate;
+var MESSAGE_STAND_MARK_ERR = config.messages.messageStandMarkErr;
+var MESSAGE_NO_MARK_RECORD = config.messages.messageNoMarkRecord;
+var MESSAGE_CHECKMARKEXISTBYSTANDUSER_INNER = config.messages.message_checkMarkExistByStandUser_inner;
+var MESSAGE_REMOVEHASHCODEINNER_INNER = config.messages.message_removeHashCodeInner_inner;
+var MESSAGE_CHECKCONFLICTHASHCODE_INNER = config.messages.message_checkConflictHashCode_inner;
+var MESSAGE_PUSHHASHCODE_INNER = config.messages.message_pushHashCode_inner;
+var MESSAGE_MANDATORY_MARK = config.messages.messageMandatoryMark;
+var MESSAGE_CHECKMARKEXISTBYSTANDUSER_INNER = config.messages.message_checkMarkExistByStandUser_inner;
 
 var mysqldbOperation = require('./../db_modules/db_mysql_operation.js');
 
@@ -133,7 +133,7 @@ exports.userInfoClass = function()
         if (userinfo.createdate || userinfo.updatedate || !userinfo.user_name)
         {
             var bizError = new Error(MESSAGE_INVALID_DATE_USERNAME);
-            bizError.Name = "biz";
+            bizError.Name = BIZ_ERROR_WORDS;
             callback(bizError, -1);
             return;
         }
@@ -164,7 +164,7 @@ exports.userInfoClass = function()
         {
 
             var bizError = new Error(MESSAGE_INVALID_DATE);
-            bizError.Name = "biz";
+            bizError.Name = BIZ_ERROR_WORDS;
             callback(bizError, -1);
 
             return;
@@ -210,7 +210,7 @@ exports.standInfoClass = function() {
         if (standinfo.create_date || standinfo.modify_date)
         {
             var bizError =  new Error(MESSAGE_INVALID_DATE);
-            bizError.Name = "biz";
+            bizError.Name = BIZ_ERROR_WORDS;
             callback(bizError, -1);
             return;
         }
@@ -243,7 +243,7 @@ exports.standInfoClass = function() {
         if (standinfo.create_date || standinfo.modify_date)
         {
             var bizError = new Error(MESSAGE_INVALID_DATE);
-            bizError.Name = "biz";
+            bizError.Name = BIZ_ERROR_WORDS;
             callback(bizError, -1);
             return;
         }
@@ -306,7 +306,7 @@ exports.standInfoClass = function() {
         if (standimages.create_date || standimages.modify_date)
         {
             var bizError = new Error(MESSAGE_INVALID_DATE);
-            bizError.Name = "biz";
+            bizError.Name = BIZ_ERROR_WORDS;
             callback(bizError, -1);
             return;
         }
@@ -337,7 +337,7 @@ exports.standInfoClass = function() {
         if (standimages.create_date )
         {
             var bizError = new Error(MESSAGE_INVALID_DATE);
-            bizError.Name = "biz";
+            bizError.Name = BIZ_ERROR_WORDS;
             callback(bizError, -1);
             return;
         }
@@ -412,7 +412,7 @@ exports.standCustomerMarkClass = function()
                                 }
                                 else {
                                     var bizError = new Error(MESSAGE_STAND_MARK_ERR);
-                                    bizError.Name = "biz";
+                                    bizError.Name = BIZ_ERROR_WORDS;
                                     callback(bizError, -1);
                                 }
                             }
@@ -420,7 +420,7 @@ exports.standCustomerMarkClass = function()
 
                                 var bizError = new Error(MESSAGE_NO_MARK_RECORD);
 
-                                bizError.Name = "biz";
+                                bizError.Name = BIZ_ERROR_WORDS;
                                 callback(bizError, -1);
 
                             }
@@ -491,7 +491,7 @@ exports.standCustomerMarkClass = function()
         if (customerMark.create_date)
         {
             var bizError = new Error(MESSAGE_INVALID_DATE);
-            bizError.Name = "biz";
+            bizError.Name = BIZ_ERROR_WORDS;
             callback(bizError, -1);
             return;
         }
@@ -519,7 +519,7 @@ exports.standCustomerMarkClass = function()
                         }
                         else {
                             var bizError = new Error(MESSAGE_MANDATORY_MARK);
-                            bizError.Name = "biz";
+                            bizError.Name = BIZ_ERROR_WORDS;
                             callback(bizError, -1);
                         }
                     }
@@ -547,7 +547,7 @@ exports.standCustomerMarkClass = function()
         if (customerMark.create_date)
         {
             var bizError = new Error(MESSAGE_INVALID_DATE);
-            bizError.Name = "biz";
+            bizError.Name = BIZ_ERROR_WORDS;
             callback(bizError, -1);
 
             return;
@@ -615,7 +615,7 @@ exports.standUserLinkClass = function()
         if (standUserLink.create_date)
         {
             var bizError = new Error(MESSAGE_INVALID_DATE);
-            bizError.Name = "biz";
+            bizError.Name = BIZ_ERROR_WORDS;
             callback(bizError, -1);
 
             return;
@@ -686,7 +686,7 @@ exports.standImageClass = function()
           if (standImage.create_date)
           {
               var bizError = new Error(MESSAGE_INVALID_DATE);
-              bizError.Name = "biz";
+              bizError.Name = BIZ_ERROR_WORDS;
               callback(bizError, -1);
 
               return;
@@ -778,7 +778,7 @@ exports.hashMapClass = function()
             if (result) {
                 if (result.length != 0) {
                     var bizError = new Error(MESSAGE_NO_KEY_EXISTS);
-                    bizError.Name = "biz";
+                    bizError.Name = BIZ_ERROR_WORDS;
                     callback(bizError,-1)
                 }
                 else
@@ -847,7 +847,7 @@ exports.hashMapClass = function()
                 }
                 else {
                     var bizError = new Error(MESSAGE_NO_KEY_EXISTS);
-                    bizError.Name = "biz";
+                    bizError.Name = BIZ_ERROR_WORDS;
                     callback(bizError, -1);
                 }
             }
@@ -900,7 +900,7 @@ exports.standOwnerMessageClass = function() {
         var standInfo = arguments[1];
         if (standInfo.create_date) {
             var bizError = new Error(MESSAGE_INVALID_DATE);
-            bizError.Name = "biz";
+            bizError.Name = BIZ_ERROR_WORDS;
             callback(bizError, -1);
             return;
         }

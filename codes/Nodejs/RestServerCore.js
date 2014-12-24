@@ -602,7 +602,7 @@ var getAuthCodeCallbackGet = function(req, res, next)
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
             next();
-          //  return;
+            return;
         }
 
         if (e && e != -1) {

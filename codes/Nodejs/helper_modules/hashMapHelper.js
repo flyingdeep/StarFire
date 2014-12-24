@@ -10,6 +10,13 @@ var EXPIRE_INTERVAL = config.securityAndAuth.expireInterval;
 var DATABASE_HASHKEY_SUFIX = config.securityAndAuth.databaseHashKeySuffix;
 var MEMORY_HASHKEY_SUFIX = config.securityAndAuth.memoryHashKeySuffix;
 
+var BIZ_ERROR_WORDS = config.bizService.bizErrorWords;
+var MESSAGE_CREATESERVERNOCONFLICTKEY_INNER= config.messages.message_createServerNoConflictKey_inner;
+var MESSAGE_PUSHSERVERHASH_INNER = config.messages.message_pushServerHash_inner;
+var MESSAGE_INVALIDTOKENKEY = config.messages.messageInvalidTokenKey;
+var MESSAGE_CHECKCONFLICTHASHCODE_INNER = config.messages.message_checkConflictHashCode_inner;
+
+
 var hashMapoperation = new bizOperation.hashMapClass();
 
 exports.baseCreateCode = function(input)
@@ -87,10 +94,10 @@ exports.pushServerHash = function(callback, input)
             if (e) {
                 var hashValue = exports.generateValue();
                 var hashMapItem = {hash_key: e, value: hashValue};
-                hashMapoperation.pushHashCode(callback, hashMapItem);
+                hashMapoperation.pushHashCode(callback,input, hashMapItem);
             }
             else {
-                callback(new Error("createServerNoConflictKey - inner Exception"),e);
+                callback(new Error(MESSAGE_CREATESERVERNOCONFLICTKEY_INNER),e);
             }
         }
         catch (ex)
@@ -116,14 +123,15 @@ exports.pushHash = function(callback,input,hashMap)
                 callback(err,e + DATABASE_HASHKEY_SUFIX);
             }
             else {
-                callback(new Error("pushServerHash - inner Exception"),e);
+
+                callback(new Error(MESSAGE_PUSHSERVERHASH_INNER),e);
             }
         },input);
     }
     else
     {
         var localResult = exports.pushLocalHash(input,hashMap);
-        callback(localResult + MEMORY_HASHKEY_SUFIX);
+        callback(null,localResult + MEMORY_HASHKEY_SUFIX);
     }
 };
 
@@ -146,8 +154,9 @@ exports.matchHash = function (callback,inputHash,hashMap)
             exports.matchServerHash(callback, refinedHash);
         }
         else {
-            var bizError = new Error("Invalid token key");
-            bizError.name = "biz";
+
+            var bizError = new Error(MESSAGE_INVALIDTOKENKEY);
+            bizError.name = BIZ_ERROR_WORDS;
             callback(bizError,-1);
         }
     }
@@ -182,7 +191,8 @@ exports.createServerNoConflictKey = function(callback,input)
                     callback(err, generatedHashCode);
                 }
                 else {
-                    callback(new Error("checkConflictHashCode - inner Exception"), e);
+
+                    callback(new Error(MESSAGE_CHECKCONFLICTHASHCODE_INNER), e);
                 }
             }
             catch(ex)

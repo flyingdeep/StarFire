@@ -10,13 +10,15 @@ var standUserLinkOperation =new bizOperation.standUserLinkClass();
 var standOwnerMessageOperation = new bizOperation.standOwnerMessageClass();
 var standTypeOperation = new bizOperation.standTypeClass();
 
-
+var BIZ_ERROR_WORDS = config.bizService.bizErrorWords;
 var DEFAULT_OFFSET = config.bizService.defaultOffset;
 var DEFAULT_PAGE_SIZE = config.bizService.defaultPageSize;
 var DEFAULT_ORDER = config.bizService.defaultOrder;
 var DES = "des";
 
-
+var MESSAGE_INVALIDTOKENKEY = config.messages.messageInvalidTokenKey;
+var MESSAGE_NOUSER = config.messages.message_noUser;
+var MESSAGE_AUTHENTICATEUSER_INNER = config.messages.message_authenticateUser_inner;
 
 exports.tryPassTokenToProceedAction = function()
 {
@@ -51,7 +53,8 @@ exports.tryPassTokenToProceedAction = function()
         }
         else
         {
-            callback(new Error("Token is invalid or Expired"),e);
+
+            callback(new Error(MESSAGE_INVALIDTOKENKEY),e);
         }
     }, token, hashMap)
 };
@@ -224,18 +227,19 @@ exports.getAuthCode = function(callback, encryptUsername, encryptPassword, hashM
 
             if (result.length && result.length == 1)
             {
-                hashMapHelper.pushHash(err,callback,user_name,hashMap);
+                hashMapHelper.pushHash(callback,user_name,hashMap);
             }
             else
             {
-                var bizError = new Error("No user found!");
-                bizError.Name = "biz";
+                var bizError = new Error(MESSAGE_NOUSER);
+                bizError.Name = BIZ_ERROR_WORDS;
                 callback(bizError,-1);
             }
         }
         else
         {
-            callback(new Error("authenticateUser - innerException"),false);
+
+            callback(new Error(MESSAGE_AUTHENTICATEUSER_INNER),false);
         }
     },userInfo);
 };
