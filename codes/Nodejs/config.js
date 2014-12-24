@@ -28,7 +28,7 @@ exports.bizService = {
 
 
 exports.serverParameters = {
-  httpSuccessCode  : 201,
+  httpSuccessCode  : 200,
   serverPort  : 8080,
   lastedVersion  :"v1",
   baseRouter  : "zhaotantou"

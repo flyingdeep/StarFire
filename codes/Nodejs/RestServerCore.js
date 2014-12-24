@@ -7,6 +7,8 @@ var HTTP_SUCCESS_CODE = config.serverParameters.httpSuccessCode;
 var METHOD_POST = "post";
 var METHOD_GET = "get";
 
+var BIZ_ERROR_WORDS = config.bizService.bizErrorWords;
+
 var SERVER_PORT = config.serverParameters.serverPort;
 var SYMBOL_SLASH="/";
 var CURRENT_VERSION = SYMBOL_SLASH + config.serverParameters.lastedVersion;
@@ -72,6 +74,16 @@ var authenticateUserCallbackPost = function(req, res, next)
     var callback = function(exception, e)
     {
 
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
@@ -82,7 +94,7 @@ var authenticateUserCallbackPost = function(req, res, next)
             next();
             return;
         }
-        if (exception && exception)
+
 
         if (e && e!= -1)
         {
@@ -128,8 +140,29 @@ var registerUserCallbackPost = function(req, res, next)
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
     var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception,e)
     {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
         if (e && e!= -1)
         {
 
@@ -161,8 +194,28 @@ var updateUserCallbackPost = function(req, res, next)
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
     var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception,e)
     {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e!= -1)
         {
 
@@ -191,8 +244,28 @@ var updateUserPreferenceCallbackPost = function(req, res, next)
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
     var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception, e)
     {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e!= -1)
         {
 
@@ -220,8 +293,28 @@ var createStandCallbackPost = function(req, res, next)
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
     var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception, e)
     {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e!= -1)
         {
 
@@ -250,8 +343,29 @@ var updateStandCallbackPost = function(req, res, next)
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
     var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception, e)
     {
+
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e!= -1)
         {
 
@@ -279,8 +393,29 @@ var changeRealTimeLocationStatusCallbackPost = function(req, res, next)
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
     var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception, e)
     {
+
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e!= -1)
         {
 
@@ -317,8 +452,28 @@ var getStandCustomerMarkCommentsCallbackGet = function(req, res, next)
     var requestPageSize = getCommonParameters(req,paraPageSize,METHOD_GET);
     var requestSort = getCommonParameters(req,paraSort,METHOD_GET);
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception, e)
     {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e!= -1)
         {
 
@@ -370,9 +525,28 @@ var createStandMarkCommentsCallbackPost = function(req, res, next)
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
     var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception,e)
     {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
 
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e!= -1)
         {
 
@@ -402,8 +576,28 @@ var getStandMarkCommentsExistCallbackGet = function(req, res, next)
     var requestUsername = getCommonParameters(req,paraUsername,METHOD_GET);
     var requestStandId = getCommonParameters(req,paraStandId,METHOD_GET);
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception,e)
     {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e!= -1)
         {
 
@@ -442,9 +636,28 @@ var createStandOwnerMessageCallbackPost = function(req, res, next)
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
     var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception,e)
     {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
 
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e!= -1)
         {
 
@@ -481,8 +694,28 @@ var getStandOwnerMessagesCallbackGet = function(req, res, next)
     var requestPageSize = getCommonParameters(req,paraPageSize,METHOD_GET);
     var requestSort = getCommonParameters(req,paraSort,METHOD_GET);
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception, e)
     {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e!= -1)
         {
 
@@ -530,8 +763,28 @@ var getStandTypesCallbackGet = function(req, res, next)
     var paraToken = "token";
     var requestToken = getCommonParameters(req,paraToken,METHOD_GET);
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception, e)
     {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e!= -1)
         {
             result.status = "true";
@@ -568,7 +821,27 @@ var getImageUploadSecurityStringCallbackGet = function(req, res, next)
     var requestPolicy = getCommonParameters(req,paraPolicy,METHOD_GET);
     var requestKey = getCommonParameters(req,paraKey,METHOD_GET);
     var result = new commonResult();
-    var callback = function(e) {
+    var callback = function(exception,e) {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e != -1) {
 
             result.status = "true";
@@ -585,7 +858,6 @@ var getImageUploadSecurityStringCallbackGet = function(req, res, next)
 };
 var getAuthCodeCallbackGet = function(req, res, next)
 {
-
     var paraEncryptUsername = "username";
     var paraEncryptPassword = "password";
     var requestEncryptUsername = getCommonParameters(req,paraEncryptUsername,METHOD_GET);
@@ -595,7 +867,6 @@ var getAuthCodeCallbackGet = function(req, res, next)
     var callback = function(exception, e) {
         if (exception && DEBUG_FLAG )
         {
-
             result.status = "false";
             result.detail = {"message":exception.message, "detail":exception.stack};
             console.log(exception.message);
@@ -604,9 +875,7 @@ var getAuthCodeCallbackGet = function(req, res, next)
             next();
             return;
         }
-
         if (e && e != -1) {
-
             result.status = "true";
             result.detail = e;
         }
@@ -619,13 +888,10 @@ var getAuthCodeCallbackGet = function(req, res, next)
             result.status = "false";
             result.detail = {"message": "Internal Error!"};
         }
-
         res.json(result);
        next();
     }
-
        serviceOperation.getAuthCode(callback,requestEncryptUsername,requestEncryptPassword,hashMap);
-
 };
 
 var addLinkToStandCallbackPost = function(req, res, next)
@@ -635,9 +901,28 @@ var addLinkToStandCallbackPost = function(req, res, next)
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
     var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception, e)
     {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
 
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e!= -1)
         {
 
@@ -666,9 +951,28 @@ var removeLinkFromStandCallbackPost = function(req, res, next)
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
     var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception, e)
     {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
 
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e!= -1)
         {
 
@@ -705,8 +1009,28 @@ var fetchLinkListCallbackGet = function(req, res, next)
     var requestPageSize = getCommonParameters(req,paraPageSize,METHOD_GET);
     var requestSort = getCommonParameters(req,paraSort,METHOD_GET);
     var result = new commonResult();
-    var callback = function(e)
+    var callback = function(exception,e)
     {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+
+            result.status = "false";
+            result.detail = {"message":exception.message};
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
         if (e && e!= -1)
         {
             result.status = "true";

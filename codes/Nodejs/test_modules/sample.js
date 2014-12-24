@@ -5,7 +5,7 @@ var sss = new Error("adfasdf");
 
 var bbb = new Error("ddes");
 
-console.log(sss.Name)
+console.log(sss.message)
 
 
 
