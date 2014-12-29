@@ -52,6 +52,8 @@ exports.messages = {
    messageInvalidTokenKey : "Invalid token key",
    message_checkConflictHashCode_inner : "checkConflictHashCode - inner Exception",
    message_noUser : "No user found!",
-   message_authenticateUser_inner : "authenticateUser - innerException"
+   message_authenticateUser_inner : "authenticateUser - innerException",
+   message_noUserPass : "Cannot fetch user_name or password",
+    message_inputParaError: "Wrong format of inputParameter"
 
 };

@@ -37,6 +37,16 @@ var mysqldbOperation = require('./../db_modules/db_mysql_operation.js');
 
 mysqldbOperation.initMysqlPool(MAX_POOL_THREAD,DB_ADDRESS,DB_USER,DB_PASS);
 
+var convertJsonToStringByField = function(fieldName, objJson)
+{
+    if (typeof(objJson[fieldName] == "Object"))
+    {
+        objJson[fieldName] = JSON.stringify(objJson[fieldName]);
+    }
+
+};
+
+
 /*
     User_info related
 */
@@ -129,6 +139,7 @@ exports.userInfoClass = function()
         var exception =  null;
         var callback = arguments[0];
         var userinfo = arguments[1];
+        convertJsonToStringByField("province_city_area",userinfo);
 
         if (userinfo.createdate || userinfo.updatedate || !userinfo.user_name)
         {
@@ -159,6 +170,8 @@ exports.userInfoClass = function()
         var userinfo = arguments[1];
         var sqlcondition = arguments[2];
         var sql="";
+
+        convertJsonToStringByField("province_city_area",userinfo);
 
         if (userinfo.createdate || userinfo.updatedate)
         {

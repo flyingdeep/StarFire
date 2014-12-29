@@ -39,6 +39,25 @@ var ROUTER_test = BASE_ROUTER + "test";
 
 var hashMap = new hashMapOperation.hashMapBaseClass();
 
+var tryParseJsonString = function(e)
+{
+    var result = null;
+    try {
+       result = JSON.parse(e)
+    }
+    catch (ex)
+    {
+        //result = null;
+    }
+    finally
+    {
+        return result;
+    }
+
+
+};
+
+
 var getCommonParameters = function(req,paraName,method)
 {
 
@@ -67,9 +86,7 @@ var authenticateUserCallbackPost = function(req, res, next)
     var paraToken = "token";
     var paraInputParameter = "inputParameter";
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
-    var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
-
-    
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
     var result = new commonResult();
     var callback = function(exception, e)
     {
@@ -118,6 +135,7 @@ var authenticateUserCallbackPost = function(req, res, next)
             }
             else
             {
+                result.status = "false";
                 result.detail = {"message": "Invalid user or password"};
             }
         }
@@ -138,7 +156,7 @@ var registerUserCallbackPost = function(req, res, next)
     var paraToken = "token";
     var paraInputParameter = "inputParameter";
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
-    var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
     var result = new commonResult();
     var callback = function(exception,e)
     {
@@ -192,7 +210,7 @@ var updateUserCallbackPost = function(req, res, next)
     var paraToken = "token";
     var paraInputParameter = "inputParameter";
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
-    var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
     var result = new commonResult();
     var callback = function(exception,e)
     {

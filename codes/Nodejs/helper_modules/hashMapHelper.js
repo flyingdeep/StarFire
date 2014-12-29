@@ -148,7 +148,18 @@ exports.matchHash = function (callback,inputHash,hashMap)
         var tokenType = inputHash.substring(inputHash.length - 3);
         var refinedHash = inputHash.substr(0,inputHash.length - 3);
         if (tokenType == MEMORY_HASHKEY_SUFIX) {
-            callback(null,exports.matchLocalHash(refinedHash, hashMap));
+            var m_result = exports.matchLocalHash(refinedHash, hashMap);
+            if (m_result == true)
+            {
+                callback(null,m_result);
+            }
+            else{
+                var bizError = new Error(MESSAGE_INVALIDTOKENKEY);
+                bizError.Name = BIZ_ERROR_WORDS;
+                callback(bizError,m_result);
+
+            }
+
         }
         else if (tokenType == DATABASE_HASHKEY_SUFIX) {
             exports.matchServerHash(callback, refinedHash);

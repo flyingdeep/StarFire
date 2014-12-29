@@ -19,6 +19,8 @@ var DES = "des";
 var MESSAGE_INVALIDTOKENKEY = config.messages.messageInvalidTokenKey;
 var MESSAGE_NOUSER = config.messages.message_noUser;
 var MESSAGE_AUTHENTICATEUSER_INNER = config.messages.message_authenticateUser_inner;
+var NO_USER_PASSWORD = config.messages.message_noUserPass;
+var INPUT_PARA_ERROR = config.messages.message_inputParaError;
 
 exports.tryPassTokenToProceedAction = function()
 {
@@ -69,55 +71,103 @@ exports.tryMatchToken = function(callback, hashToken, hashMap)
 
 exports.authenticateUser = function(callback, userInfo)
 {
+
     var user_name = userInfo.user_name;
     var password  = userInfo.password;
+    if (user_name && password) {
+        userInfoOperation.fetchUserByUser(callback, user_name, password);
+    }
+    else
+    {
 
-
-    userInfoOperation.fetchUserByUser(callback,user_name,password);
+        callback(new Error(NO_USER_PASSWORD),false);
+    }
 };
 
 
 
 exports.registerUser = function(callback, userinfo)
 {
-    userInfoOperation.createUser(callback, userinfo);
+    if (userinfo) {
+        userInfoOperation.createUser(callback, userinfo);
+    }
+    else
+    {
+
+        callback(new Error(INPUT_PARA_ERROR),false);
+
+    }
 
 };
 
 exports.updateUser =function(callback, userinfo)
 {
-    var whereObj = {"user_name":userinfo.user_name};
-    delete userinfo.user_name;
-    delete userinfo.user_id;
-    userInfoOperation.updateUser(callback, userinfo,whereObj);
+    if (userinfo) {
+        var whereObj = {"user_name": userinfo.user_name};
+        delete userinfo.user_name;
+        delete userinfo.user_id;
+        userInfoOperation.updateUser(callback, userinfo, whereObj);
+    }
+    else
+    {
+
+        callback(new Error(INPUT_PARA_ERROR),false);
+
+    }
 };
 
 exports.updateUserPreference = function(callback,userinfo)
 {
-    var whereObj = {"user_name":userinfo.user_name};
-    var userPreference  = {"user_preference":userinfo.user_preference};
-    userInfoOperation.updateUser(callback, userPreference,whereObj);
+    if (userinfo) {
+        var whereObj = {"user_name": userinfo.user_name};
+        var userPreference = {"user_preference": userinfo.user_preference};
+        userInfoOperation.updateUser(callback, userPreference, whereObj);
+    }
+    else
+    {
+
+        callback(new Error(INPUT_PARA_ERROR),false);
+
+    }
 }
 
 exports.createStand =function(callback,standInfo)
 {
-    standInfoOperation.createStand(callback,standInfo);
+    if (standInfo) {
+        standInfoOperation.createStand(callback, standInfo);
+    }
+    else
+    {
+        callback(new Error(INPUT_PARA_ERROR),false);
+    }
 
 };
 
 exports.updateStand = function(callback,standInfo)
 {
-    var whereObj = {"stand_id": standInfo.stand_id};
-    delete standInfo.stand_id;
-    standInfoOperation.updateStand(callback,standInfo,whereObj);
+    if (standInfo) {
+        var whereObj = {"stand_id": standInfo.stand_id};
+        delete standInfo.stand_id;
+        standInfoOperation.updateStand(callback, standInfo, whereObj);
+    }
+    else
+    {
+        callback(new Error(INPUT_PARA_ERROR),false);
+    }
 
 };
 
 exports.changeRealTimeLocationStatus = function(callback, standInfo)
 {
-    var whereObj = {"stand_id":standInfo.stand_id};
-    var standRealTimeLocationStatus = {"realtime_location_active":standInfo.realtime_location_active};
-    standInfoOperation.updateStand(callback,standRealTimeLocationStatus,whereObj);
+    if (standInfo) {
+        var whereObj = {"stand_id": standInfo.stand_id};
+        var standRealTimeLocationStatus = {"realtime_location_active": standInfo.realtime_location_active};
+        standInfoOperation.updateStand(callback, standRealTimeLocationStatus, whereObj);
+    }
+    else
+    {
+        callback(new Error(INPUT_PARA_ERROR),false);
+    }
 };
 
 exports.getStandMarkCommentsExist = function(callback, standId, username)
@@ -146,12 +196,23 @@ exports.getStandCustomerMarkCommentsByUsername = function(callback, username,off
 
 exports.createStandMarkComments = function(callback, standMarkComment)
 {
-    standCustomerMarkOperation.createMarkCommentsWithCheck(callback, standMarkComment);
+    if (standMarkComment) {
+        standCustomerMarkOperation.createMarkCommentsWithCheck(callback, standMarkComment);
+    }
+    else
+    {
+        callback(new Error(INPUT_PARA_ERROR),false);
+    }
 };
 
 exports.createStandOwnerMessage = function(callback,standOwnerInfo )
 {
-    standOwnerMessageOperation.createStandOwnerMessage(callback, standOwnerInfo);
+    if (standOwnerInfo) {
+        standOwnerMessageOperation.createStandOwnerMessage(callback, standOwnerInfo);
+    }
+    else {
+        callback(new Error(INPUT_PARA_ERROR), false);
+    }
 };
 
 exports.getStandOwnerMessagesByStandId = function (callback,standId, offset, pageSize, order)
@@ -208,9 +269,6 @@ exports.getImageUploadSecurityString = function(callback,policy,key)
 
 exports.getAuthCode = function(callback, encryptUsername, encryptPassword, hashMap)
 {
-
-
-  // var user_name = authOperation.decryptSymString(encryptUsername, DES);
    var user_name = encryptUsername;
     var password = encryptPassword;
     var userInfo = {"user_name":user_name,"password":password};
@@ -246,11 +304,21 @@ exports.getAuthCode = function(callback, encryptUsername, encryptPassword, hashM
 
 exports.addLinkToStand = function(callback, userLinkInfo)
 {
-    standUserLinkOperation.addSandUserLink(exception,callback, userLinkInfo);
+    if (userLinkInfo) {
+        standUserLinkOperation.addSandUserLink(exception, callback, userLinkInfo);
+    }
+    else {
+         callback(new Error(INPUT_PARA_ERROR), false);
+    }
 };
 exports.removeLinkFromStand = function(callback, userLinkInfo)
 {
-    standUserLinkOperation.removeSandUserLinkLogic(callback, userLinkInfo);
+    if (userLinkInfo) {
+        standUserLinkOperation.removeSandUserLinkLogic(callback, userLinkInfo);
+    }
+    else {
+        callback(new Error(INPUT_PARA_ERROR), false);
+    }
 };
 exports.fetchLinkListByUserId = function(callback,userId, offset, pageSize, order)
 {
