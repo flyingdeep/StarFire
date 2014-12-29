@@ -171,8 +171,8 @@ exports.userInfoClass = function()
         var sqlcondition = arguments[2];
         var sql="";
 
-        convertJsonToStringByField("province_city_area",userinfo);
-
+        //convertJsonToStringByField("province_city_area",userinfo);
+        convertJsonToStringByField("user_preference",userinfo);
         if (userinfo.createdate || userinfo.updatedate)
         {
 

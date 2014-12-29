@@ -260,7 +260,7 @@ var updateUserPreferenceCallbackPost = function(req, res, next)
     var paraToken = "token";
     var paraInputParameter = "inputParameter";
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
-    var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
     var result = new commonResult();
     var callback = function(exception, e)
     {
@@ -309,7 +309,7 @@ var createStandCallbackPost = function(req, res, next)
     var paraToken = "token";
     var paraInputParameter = "inputParameter";
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
-    var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
     var result = new commonResult();
     var callback = function(exception, e)
     {
@@ -359,7 +359,7 @@ var updateStandCallbackPost = function(req, res, next)
     var paraToken = "token";
     var paraInputParameter = "inputParameter";
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
-    var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
     var result = new commonResult();
     var callback = function(exception, e)
     {
@@ -409,7 +409,7 @@ var changeRealTimeLocationStatusCallbackPost = function(req, res, next)
     var paraToken = "token";
     var paraInputParameter = "inputParameter";
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
-    var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
     var result = new commonResult();
     var callback = function(exception, e)
     {
@@ -541,7 +541,7 @@ var createStandMarkCommentsCallbackPost = function(req, res, next)
     var paraToken = "token";
     var paraInputParameter = "inputParameter";
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
-    var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
     var result = new commonResult();
     var callback = function(exception,e)
     {
@@ -652,7 +652,7 @@ var createStandOwnerMessageCallbackPost = function(req, res, next)
     var paraToken = "token";
     var paraInputParameter = "inputParameter";
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
-    var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
     var result = new commonResult();
     var callback = function(exception,e)
     {
@@ -917,7 +917,7 @@ var addLinkToStandCallbackPost = function(req, res, next)
     var paraToken = "token";
     var paraInputParameter = "inputParameter";
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
-    var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
     var result = new commonResult();
     var callback = function(exception, e)
     {
@@ -967,7 +967,7 @@ var removeLinkFromStandCallbackPost = function(req, res, next)
     var paraToken = "token";
     var paraInputParameter = "inputParameter";
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
-    var requestInputParameter = getCommonParameters(req,paraInputParameter,METHOD_POST);
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
     var result = new commonResult();
     var callback = function(exception, e)
     {

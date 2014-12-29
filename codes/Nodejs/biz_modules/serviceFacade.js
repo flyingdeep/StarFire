@@ -119,15 +119,20 @@ exports.updateUser =function(callback, userinfo)
 exports.updateUserPreference = function(callback,userinfo)
 {
     if (userinfo) {
-        var whereObj = {"user_name": userinfo.user_name};
-        var userPreference = {"user_preference": userinfo.user_preference};
-        userInfoOperation.updateUser(callback, userPreference, whereObj);
+
+        if (userinfo.user_preference) {
+            var whereObj = {"user_name": userinfo.user_name};
+            var userPreference = {"user_preference": userinfo.user_preference};
+            userInfoOperation.updateUser(callback, userPreference, whereObj);
+        }
+        else
+        {
+            callback(new Error(INPUT_PARA_ERROR), false)
+        }
     }
     else
     {
-
         callback(new Error(INPUT_PARA_ERROR),false);
-
     }
 }
 
@@ -145,7 +150,7 @@ exports.createStand =function(callback,standInfo)
 
 exports.updateStand = function(callback,standInfo)
 {
-    if (standInfo) {
+    if (standInfo && standInfo.stand_id) {
         var whereObj = {"stand_id": standInfo.stand_id};
         delete standInfo.stand_id;
         standInfoOperation.updateStand(callback, standInfo, whereObj);
@@ -159,7 +164,7 @@ exports.updateStand = function(callback,standInfo)
 
 exports.changeRealTimeLocationStatus = function(callback, standInfo)
 {
-    if (standInfo) {
+    if (standInfo && standInfo.stand_id && standInfo.realtime_location_active) {
         var whereObj = {"stand_id": standInfo.stand_id};
         var standRealTimeLocationStatus = {"realtime_location_active": standInfo.realtime_location_active};
         standInfoOperation.updateStand(callback, standRealTimeLocationStatus, whereObj);

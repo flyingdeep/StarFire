@@ -40,8 +40,7 @@ exports.fetchData = function () //callback, sqlstring,  pool
 
 		if (err)
 		{
-            throw err;
-			// track
+          //  throw err;
 			result = false;
             callback(err,result);
 		}
@@ -52,10 +51,6 @@ exports.fetchData = function () //callback, sqlstring,  pool
 
 				if (err)
 				{
-					// console.error('error connecting: ' + err.stack);
-
-					// track
-
                     callback(err,false);
 					return;
 				}
@@ -92,7 +87,7 @@ exports.insertData = function() //callback, presql ,input Json, pool
   // connected! (unless `err` is set)
 	if (err)
 	{
-        throw err;
+       // throw err;
 			result = false;
         callback(err,result);
 	}
@@ -105,7 +100,7 @@ exports.insertData = function() //callback, presql ,input Json, pool
 		connection.query(sql, function(err, results) {
 			if (err)
 			{
-                throw err;
+                //throw err;
 				 //console.error('error connecting: ' + err.stack);
                 result = false;
                 callback(err,result);
@@ -145,7 +140,7 @@ exports.deleteData = function() // callback, sqlstr, pool
         // connected! (unless `err` is set)
         if (err)
         {
-            throw err;
+            //throw err;
             result = false;
             callback(err,result);
         }
@@ -158,7 +153,7 @@ exports.deleteData = function() // callback, sqlstr, pool
 
                 if (err)
                 {
-                    throw err;
+                    //throw err;
                     result = false;
                     callback(err,result);
 
@@ -214,7 +209,7 @@ exports.updateData = function() //  callback, sqlstr, pool
                 if (err)
                 {
                     // console.error('error connecting: ' + err.stack);
-                    throw err;
+
                     result = false;
                     callback(err,result);
 

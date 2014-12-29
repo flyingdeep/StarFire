@@ -67,7 +67,7 @@ var useroperation = new bizOperation.userInfoClass();
 
 //var standoperation = new bizOperation.standInfoClass();
 //var stand = {
-//    stand_Id:23432,
+//    stand_id:23432,
 //    creator_type:1,
 //    stand_type:2,
 //    stand_name:"stand444",
