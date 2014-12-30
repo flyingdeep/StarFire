@@ -1,3 +1,4 @@
+var cluster = require('cluster');
 var config = require("./config");
 var restify = require("restify");
 var cors = require("cors");
@@ -37,6 +38,7 @@ var ROUTER_FETCHLINKLIST = BASE_ROUTER + "FetchLinkList";
 
 var ROUTER_test = BASE_ROUTER + "test";
 
+var numCPUs = require('os').cpus().length;
 var hashMap = new hashMapOperation.hashMapBaseClass();
 
 var tryParseJsonString = function(e)
@@ -1089,44 +1091,59 @@ var fetchLinkListCallbackGet = function(req, res, next)
 };
 
 
+var startRestifyServer = function() {
+    var server = restify.createServer();
+    server.use(restify.bodyParser());
+    server.use(restify.queryParser());
+    server.post(ROUTER_AUTHENTICATEUSER + CURRENT_VERSION, cors(), authenticateUserCallbackPost);
+    server.post(ROUTER_REGISTERUSER + CURRENT_VERSION, cors(), registerUserCallbackPost);
+    server.post(ROUTER_UPDATEUSER + CURRENT_VERSION, cors(), updateUserCallbackPost);
+    server.post(ROUTER_UPDATEUSERPREFERENCE + CURRENT_VERSION, cors(), updateUserPreferenceCallbackPost);
+    server.post(ROUTER_CREATESTAND + CURRENT_VERSION, cors(), createStandCallbackPost);
+    server.post(ROUTER_UPDATESTAND + CURRENT_VERSION, cors(), updateStandCallbackPost);
+    server.post(ROUTER_CHANGEREALTIMELOCATIONSTATUS + CURRENT_VERSION, cors(), changeRealTimeLocationStatusCallbackPost);
+    server.get(ROUTER_GETSTANDCUSTOMERMARKCOMMENTS + CURRENT_VERSION, cors(), getStandCustomerMarkCommentsCallbackGet);
+    server.post(ROUTER_CREATESTANDMARKCOMMENTS + CURRENT_VERSION, cors(), createStandMarkCommentsCallbackPost);
+    server.get(ROUTER_GETSTANDMARKCOMMENTSEXIST + CURRENT_VERSION, cors(), getStandMarkCommentsExistCallbackGet);
+    server.post(ROUTER_CREATESTANDOWNERMESSAGE + CURRENT_VERSION, cors(), createStandOwnerMessageCallbackPost);
+    server.get(ROUTER_GETSTANDOWNERMESSAGES + CURRENT_VERSION, cors(), getStandOwnerMessagesCallbackGet);
+    server.get(ROUTER_GETSTANDTYPES + CURRENT_VERSION, cors(), getStandTypesCallbackGet);
+    server.get(ROUTER_GETIMAGEUPLOADSECURITYSTRING + CURRENT_VERSION, cors(), getImageUploadSecurityStringCallbackGet);
+    server.get(ROUTER_GETAUTHCODE + CURRENT_VERSION, cors(), getAuthCodeCallbackGet);
+    server.post(ROUTER_ADDLINKTOSTAND + CURRENT_VERSION, cors(), addLinkToStandCallbackPost);
+    server.post(ROUTER_REMOVELINKFROMSTAND + CURRENT_VERSION, cors(), removeLinkFromStandCallbackPost);
+    server.get(ROUTER_FETCHLINKLIST + CURRENT_VERSION, cors(), fetchLinkListCallbackGet);
+    server.get(ROUTER_test + CURRENT_VERSION, cors(), function (req, res, next) {
+        res.json("Hello, Success!!");
+        next();
 
+    });
+    server.listen(SERVER_PORT, function() {
+        console.log(numCPUs + "thread node activated...");
+        console.log('%s listening at %s', server.name, server.url);
+    });
+};
 
-var server = restify.createServer();
-server.use(restify.bodyParser());
-server.use(restify.queryParser());
-server.post(ROUTER_AUTHENTICATEUSER + CURRENT_VERSION,cors(), authenticateUserCallbackPost);
-server.post(ROUTER_REGISTERUSER + CURRENT_VERSION,cors(), registerUserCallbackPost);
-server.post(ROUTER_UPDATEUSER + CURRENT_VERSION,cors(), updateUserCallbackPost);
-server.post(ROUTER_UPDATEUSERPREFERENCE + CURRENT_VERSION,cors(), updateUserPreferenceCallbackPost);
-server.post(ROUTER_CREATESTAND + CURRENT_VERSION,cors(), createStandCallbackPost);
-server.post(ROUTER_UPDATESTAND + CURRENT_VERSION,cors(), updateStandCallbackPost);
-server.post(ROUTER_CHANGEREALTIMELOCATIONSTATUS + CURRENT_VERSION,cors(), changeRealTimeLocationStatusCallbackPost);
-server.get(ROUTER_GETSTANDCUSTOMERMARKCOMMENTS + CURRENT_VERSION,cors(), getStandCustomerMarkCommentsCallbackGet);
-server.post(ROUTER_CREATESTANDMARKCOMMENTS + CURRENT_VERSION,cors(), createStandMarkCommentsCallbackPost);
-server.get(ROUTER_GETSTANDMARKCOMMENTSEXIST + CURRENT_VERSION,cors(), getStandMarkCommentsExistCallbackGet);
-server.post(ROUTER_CREATESTANDOWNERMESSAGE + CURRENT_VERSION,cors(), createStandOwnerMessageCallbackPost);
-server.get(ROUTER_GETSTANDOWNERMESSAGES + CURRENT_VERSION,cors(), getStandOwnerMessagesCallbackGet);
-server.get(ROUTER_GETSTANDTYPES + CURRENT_VERSION,cors(), getStandTypesCallbackGet);
-server.get(ROUTER_GETIMAGEUPLOADSECURITYSTRING + CURRENT_VERSION,cors(), getImageUploadSecurityStringCallbackGet);
-server.get(ROUTER_GETAUTHCODE + CURRENT_VERSION,cors(), getAuthCodeCallbackGet);
-server.post(ROUTER_ADDLINKTOSTAND + CURRENT_VERSION,cors(),addLinkToStandCallbackPost);
-server.post(ROUTER_REMOVELINKFROMSTAND + CURRENT_VERSION,cors(),removeLinkFromStandCallbackPost);
-server.get(ROUTER_FETCHLINKLIST + CURRENT_VERSION,cors(),fetchLinkListCallbackGet);
-
-server.get(ROUTER_test + CURRENT_VERSION,cors(),function(req, res, next)
-{
-    res.json("Hello, Success!!");
-    next();
-
-});
-
-
-server.listen(SERVER_PORT, function() {
-    console.log('%s listening at %s', server.name, server.url);
-});
-
-
-
+if (cluster.isMaster) {
+    // Fork workers.
+    for (var i = 0; i < numCPUs; i++) {
+        cluster.fork();
+    }
+    if (DEBUG_FLAG) {
+        cluster.on('online', function (worker) {
+            console.log('worker ' + worker.process.pid + ' serve');
+        });
+        cluster.on('listening', function (worker, address) {
+            console.log('worker ' + worker.process.pid + " - " + address.address + ":" + address.port);
+        });
+        cluster.on('exit', function (worker, code, signal) {
+            console.log('worker ' + worker.process.pid + ' died');
+        });
+    }
+}
+else {
+    startRestifyServer();
+}
 
 
 

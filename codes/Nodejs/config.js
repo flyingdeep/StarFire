@@ -1,5 +1,5 @@
 exports.globalCommon = {
-    debugFlag : 0
+    debugFlag : 1
 };
 
 exports.securityAndAuth= {

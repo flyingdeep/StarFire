@@ -606,7 +606,7 @@ exports.standCustomerMarkClass = function()
 
         var sql = "select customer_message_id,stand_id,mark,comments," +
             "create_user_id,create_user_name,create_date "+
-            "from " + TB_STAND_CUSTOMER_MARK + " where create_user_name=" + mysqldbOperation.escape(username) +
+            "from " + TB_STAND_CUSTOMER_MARK + " where create_user_name=" +   +
             " and isdeleted=0" +
             " order by " + orderby +
              " limit " + offset + "," + pagesize;
@@ -621,20 +621,47 @@ exports.standCustomerMarkClass = function()
  */
 exports.standUserLinkClass = function()
 {
-    this.addSandUserLink = function() //exception,callback,callback standUserLink
+    this.addSandUserLink = function() //callback,callback standUserLink
     {
         var callback = arguments[0];
         var standUserLink = arguments[1];
+        var sql = "";
         if (standUserLink.create_date)
         {
             var bizError = new Error(MESSAGE_INVALID_DATE);
             bizError.Name = BIZ_ERROR_WORDS;
             callback(bizError, -1);
-
             return;
         }
-        var sql = "insert into "+ TB_USER_LINK_STAND + " set create_date=now(), ";
-        mysqldbOperation.insertData(callback,sql,standUserLink);
+
+        sql = "select count(1) as total from " + TB_USER_LINK_STAND +
+            " where isdeleted = 1 and stand_id =" + mysqldbOperation.escape(standUserLink.stand_id)+
+            " and user_id=" + mysqldbOperation.escape(standUserLink.user_id);
+              mysqldbOperation.fetchData(function(exception, e)
+            {
+                if (exception)
+                {
+                    callback(exception,e);
+                    return;
+                }
+                if (e[0].total ==1)
+                {
+                    sql = "update "+ TB_USER_LINK_STAND + " set create_date=now(), isdeleted =0 "+
+                    " where stand_id=" + mysqldbOperation.escape(standUserLink.stand_id)+
+                    " and user_id=" + mysqldbOperation.escape(standUserLink.user_id);
+                    mysqldbOperation.updateData(callback,sql);
+                }
+                else
+                {
+                    sql = "insert into "+ TB_USER_LINK_STAND + " set create_date=now(), ";
+                    mysqldbOperation.insertData(callback,sql,standUserLink);
+                }
+
+
+
+            },sql);
+
+
     };
 
     this.removeSandUserLinkLogic = function() //callback,sandUserLink
@@ -656,11 +683,10 @@ exports.standUserLinkClass = function()
         var offset = arguments[2];
         var pagesize = arguments[3];
         var orderby = arguments[4];
-        var sql = "select b.display_name, b.user_name, b.image_id, b.user_type,b.cell_number," +
-            "b.web_chart, b.qq_number, b.province_city_area " +
-            " from " + TB_USER_LINK_STAND + " as a left join " + TB_USER_INFO + " as b" +
-            " on a.user_id = b.user_id where a.stand_id=" + mysqldbOperation.escape(standId) +
-            " and a.isdeleted=0 and b.isdeleted=0" +
+        var sql = "select user_link_id,user_id, stand_id, create_date " +
+            " from " + TB_USER_LINK_STAND +
+            " where stand_id= " + mysqldbOperation.escape(standId) +
+            " and isdeleted=0 " +
             " order by "  + orderby+
             " limit " + offset + "," + pagesize;
 
@@ -675,11 +701,9 @@ exports.standUserLinkClass = function()
         var offset = arguments[2];
         var pagesize = arguments[3];
         var orderby = arguments[4];
-        var sql = "select b.stand_id, b.stand_name, b.stand_type, b.creator_type," +
-            "b.type_detail_description, b.description, b.create_user_id, " +
-            "b.modify_date, b.mark, b.position_x, b.position_y" +
+        var sql = "select a.user_link_id,a.user_id, a.stand_id, a.create_date " +
             " from " + TB_USER_LINK_STAND + " as a left join " + TB_STAND_INFO + " as b" +
-            " on a.stand_id = b.stand_id where a.user_id=" + mysqldbOperation.escape(userid) +
+            " on a.stand_id = b.stand_id where b.create_user_id=" + mysqldbOperation.escape(userid) +
             " and a.isdeleted=0 and b.isdeleted=0" +
             " order by " + orderby +
             " limit " + offset + "," + pagesize;
