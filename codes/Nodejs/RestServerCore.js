@@ -25,7 +25,7 @@ var ROUTER_UPDATESTAND = BASE_ROUTER + "UpdateStand";
 var ROUTER_CHANGEREALTIMELOCATIONSTATUS = BASE_ROUTER + "ChangeRealTimeLocationStatus";
 var ROUTER_GETSTANDCUSTOMERMARKCOMMENTS = BASE_ROUTER + "GetStandCustomerMarkComments";
 var ROUTER_CREATESTANDMARKCOMMENTS = BASE_ROUTER + "CreateStandMarkComments";
-var ROUTER_GETSTANDMARKCOMMENTSEXIST = BASE_ROUTER + "GetStandMarkCommentSExist";
+var ROUTER_GETSTANDMARKCOMMENTSEXIST = BASE_ROUTER + "GetStandMarkCommentsExist";
 var ROUTER_CREATESTANDOWNERMESSAGE = BASE_ROUTER + "CreateStandOwnerMessage";
 var ROUTER_GETSTANDOWNERMESSAGES = BASE_ROUTER + "GetStandOwnerMessages";
 var ROUTER_GETSTANDTYPES = BASE_ROUTER + "GetStandTypes";
@@ -33,7 +33,7 @@ var ROUTER_GETIMAGEUPLOADSECURITYSTRING = BASE_ROUTER + "GetImageUploadSecurityS
 var ROUTER_GETAUTHCODE = BASE_ROUTER + "GetAuthCode";
 var ROUTER_ADDLINKTOSTAND = BASE_ROUTER + "AddLinkToStand";
 var ROUTER_REMOVELINKFROMSTAND = BASE_ROUTER + "RemoveLinkFromStand";
-var ROUTER_FETCHLINKLIST = BASE_ROUTER + "fetchLinkList";
+var ROUTER_FETCHLINKLIST = BASE_ROUTER + "FetchLinkList";
 
 var ROUTER_test = BASE_ROUTER + "test";
 
@@ -616,7 +616,7 @@ var getStandMarkCommentsExistCallbackGet = function(req, res, next)
             next();
             return;
         }
-        if (e && e!= -1)
+        if (e && e>0)
         {
 
             result.status = "true";
@@ -626,7 +626,7 @@ var getStandMarkCommentsExistCallbackGet = function(req, res, next)
                 "isMarked": true
             };
         }
-        else if (e==-1)
+        else if (e==0)
         {
             result.status = "true";
             result.detail = {
@@ -694,19 +694,19 @@ var createStandOwnerMessageCallbackPost = function(req, res, next)
         next();
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
-        serviceOperation.createStandMarkComments,callback,requestInputParameter );
+        serviceOperation.createStandOwnerMessage,callback,requestInputParameter );
 
 };
 var getStandOwnerMessagesCallbackGet = function(req, res, next)
 {
     var paraToken = "token";
-    var paraUsername ="username";
+    var paraUserId ="userId";
     var paraStandId = "standId";
     var paraOffset = "offset";
     var paraPageSize = "pageSize";
     var paraSort = "sort";
     var requestToken = getCommonParameters(req,paraToken,METHOD_GET);
-    var requestUsername = getCommonParameters(req,paraUsername,METHOD_GET);
+    var requestUserId = getCommonParameters(req,paraUserId,METHOD_GET);
     var requestStandId = getCommonParameters(req,paraStandId,METHOD_GET);
     var requestOffset = getCommonParameters(req,paraOffset,METHOD_GET);
     var requestPageSize = getCommonParameters(req,paraPageSize,METHOD_GET);
@@ -766,10 +766,10 @@ var getStandOwnerMessagesCallbackGet = function(req, res, next)
         serviceOperation.tryPassTokenToProceedAction(requestToken, hashMap,
             serviceOperation.getStandOwnerMessagesByStandId, callback, requestStandId, requestOffset, requestPageSize, requestSort);
     }
-    else if (requestUsername != null && requestUsername!= "" && typeof(requestUsername) != "undefined")
+    else if (requestUserId != null && requestUserId!= "" && typeof(requestUserId) != "undefined")
     {
         serviceOperation.tryPassTokenToProceedAction(requestToken, hashMap,
-            serviceOperation.getStandOwnerMessagesByOwnerId, callback, requestUsername, requestOffset, requestPageSize, requestSort);
+            serviceOperation.getStandOwnerMessagesByOwnerId, callback, requestUserId, requestOffset, requestPageSize, requestSort);
     }
     else
     {

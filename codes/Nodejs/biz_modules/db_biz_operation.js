@@ -420,8 +420,8 @@ exports.standCustomerMarkClass = function()
                         }
                         try {
                             if (e.length && e.length > 0) {
-                                if (e[0].total > 0) {
-                                    callback(err, e[0].total);
+                                if (e[0].total >= 0) {
+                                    callback(null, e[0].total);
                                 }
                                 else {
                                     var bizError = new Error(MESSAGE_STAND_MARK_ERR);
@@ -499,8 +499,8 @@ exports.standCustomerMarkClass = function()
     {
         var innerAddCustomerMark = this.addCustomerMark;
         var exception = null;
-        var callback = arguments[1];
-        var customerMark = arguments[2];
+        var callback = arguments[0];
+        var customerMark = arguments[1];
         if (customerMark.create_date)
         {
             var bizError = new Error(MESSAGE_INVALID_DATE);
@@ -519,14 +519,14 @@ exports.standCustomerMarkClass = function()
                     return;
                 }
                 try {
-                    if (e >= 0) {
+                    if (e > 0) {
                         if (customerMark.mark) {
                             delete customerMark.mark;
 
                             innerAddCustomerMark(callback, customerMark);
                         }
                     }
-                    else if (e == -1) {
+                    else if (e == 0) {
                         if (customerMark.mark) {
                             innerAddCustomerMark(callback, customerMark);
                         }

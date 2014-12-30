@@ -241,7 +241,7 @@ exports.getStandOwnerMessagesByOwnerId = function (callback,OwnerId, offset, pag
 
 exports.getStandType = function(callback)
 {
-    standTypeOperation.getStandType(callback);
+    standTypeOperation.fetchStandType(callback);
 
 };
 
@@ -310,7 +310,7 @@ exports.getAuthCode = function(callback, encryptUsername, encryptPassword, hashM
 exports.addLinkToStand = function(callback, userLinkInfo)
 {
     if (userLinkInfo) {
-        standUserLinkOperation.addSandUserLink(exception, callback, userLinkInfo);
+        standUserLinkOperation.addSandUserLink(callback, userLinkInfo);
     }
     else {
          callback(new Error(INPUT_PARA_ERROR), false);
