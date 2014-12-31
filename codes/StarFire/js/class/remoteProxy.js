@@ -22,6 +22,8 @@ var remoteClientClass = function()
     var ROUTER_REMOVELINKFROMSTAND = BASE_ROUTER + "RemoveLinkFromStand";
     var ROUTER_FETCHLINKLIST = BASE_ROUTER + "FetchLinkList";
     var BASE_VERSION = "/v1";
+
+
     this.authenticateUserBase = function(token, userAuthJson)
     {
         var inputJson = {
@@ -350,8 +352,163 @@ var remoteClientClass = function()
     };
 };
 
-var remoteProxyClass = function()
+var serverProxyClass = function(username,password)
 {
+    this.username = username;
+    this.password = password;
+    var remoteClient = new remoteClientClass();
+    var result = null;
+    var reformJsonObject = function (e)
+    {
+        for (var item in e)
+        {
+            if (e[item] == null)
+            {
+                delete e[item]
+            }
+        }
+    };
+    var getAuth = function() {
+        var resultJson = remoteClient.getAuthCodeBase(this.username, this.password);
+        if (resultJson.status == "true") {
+            result = resultJson.detail;
+        }
+        return null;
+    }
+
+    this.authenticateUser = function(username,password)
+    {
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+           var userAuthJson = {
+             "user_name" : username,
+             "password": password
+           };
+          var resultJson = remoteClient.authenticateUserBase(token,userAuthJson);
+          if (resultJson && resultJson.status == "true")
+          {
+              result = resultJson.detail;
+          }
+        }
+        return result;
+    };
+    this.registerUser = function(displayName, username, imageId, userPreference, userType, cellNumber,webChat, qqNumber,provinceCityArea,password)
+    {
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var userAuthJson = {
+                "user_name" : username,
+                "password": password,
+                "display_name":displayName,
+                "image_id" : imageId,
+                "user_preference":userPreference,
+                "user_type": userType,
+                "cell_number" : cellNumber,
+                "web_chat" : webChat,
+                "qq_number" :qqNumber,
+                "province_city_area" : provinceCityArea
+            };
+            reformJsonObject(userAuthJson);
+            var resultJson = remoteClient.authenticateUserBase(token,userAuthJson);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
+    };
+    this.updateUser = function(displayName, username, imageId, userPreference, userType, cellNumber,webChat, qqNumber,provinceCityArea,password)
+    {
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var userAuthJson = {
+                "user_name" : username,
+                "password": password,
+                "display_name":displayName,
+                "image_id" : imageId,
+                "user_preference":userPreference,
+                "user_type": userType,
+                "cell_number" : cellNumber,
+                "web_chat" : webChat,
+                "qq_number" :qqNumber,
+                "province_city_area" : provinceCityArea
+            };
+            reformJsonObject(userAuthJson);
+            var resultJson = remoteClient.authenticateUserBase(token,userAuthJson);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
+    };
+    this.updateUserPreference = function()
+    {
+
+    };
+    this.createStand = function()
+    {
+
+    };
+    this.updateStand = function()
+    {
+
+    };
+    this.changeRealTimeLocationStatus = function()
+    {
+
+    };
+    this.getStandCustomerMarkComments = function()
+    {
+
+    };
+    this.createStandMarkComments = function()
+    {
+
+    };
+    this.getStandMarkCommentsExist = function()
+    {
+
+    };
+    this.createStandOwnerMessage = function()
+    {
+
+    };
+    this.getStandOwnerMessages = function()
+    {
+
+    };
+    this.getStandTypes = function()
+    {
+
+    };
+    this.getImageUploadSecurityString = function()
+    {
+
+    };
+    this.getAuthCode = function()
+    {
+
+    };
+    this.addLinkToStand = function()
+    {
+
+    };
+    this.removeLinkFromStand = function()
+    {
+
+    };
+    this.fetchLinkList = function()
+    {
+
+    };
+
 
 
 

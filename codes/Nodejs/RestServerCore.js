@@ -45,7 +45,8 @@ var tryParseJsonString = function(e)
 {
     var result = null;
     try {
-       result = JSON.parse(e)
+       result = JSON.parse(e);
+        reformJsonObject(result);
     }
     catch (ex)
     {
@@ -57,6 +58,17 @@ var tryParseJsonString = function(e)
     }
 
 
+};
+
+var reformJsonObject = function (e)
+{
+    for (var item in e)
+    {
+        if (e[item] == null)
+        {
+            delete e[item]
+        }
+    }
 };
 
 
