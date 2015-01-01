@@ -43,13 +43,19 @@ var hashMap = new hashMapOperation.hashMapBaseClass();
 
 var tryParseJsonString = function(e)
 {
+
     var result = null;
     try {
+        console.log(e);
        result = JSON.parse(e);
+        console.log(result);
         reformJsonObject(result);
+        console.log(result);
     }
     catch (ex)
     {
+        console.log("error!!!!!!!!!!!");
+        console.log(ex.stack);
         //result = null;
     }
     finally
@@ -131,6 +137,7 @@ var authenticateUserCallbackPost = function(req, res, next)
         {
 
             result.status = "true";
+
             if (e.length >0) {
                 result.detail = {
                     "user_id": e[0].user_id,

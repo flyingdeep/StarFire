@@ -1,8 +1,9 @@
 var remoteClientClass = function()
 {
-    var REST_SERVER_DOMAIN = "http://localhost/";
+    var REST_SERVER_DOMAIN = "http://localhost";
     var APP_URI = "zhaotantou";
-    var BASE_ROUTER = REST_SERVER_DOMAIN + APP_URI + "/";
+    var PORT = "8080";
+    var BASE_ROUTER = REST_SERVER_DOMAIN + ":" + PORT + "/" + APP_URI + "/";
     var ROUTER_AUTHENTICATEUSER = BASE_ROUTER + "AuthenticateUser";
     var ROUTER_REGISTERUSER = BASE_ROUTER + "RegisterUser";
     var ROUTER_UPDATEUSER = BASE_ROUTER + "UpdateUser";
@@ -24,19 +25,23 @@ var remoteClientClass = function()
     var BASE_VERSION = "/v1";
 
 
-    this.authenticateUserBase = function(token, userAuthJson)
+    this.authenticateUserBase = function(callback, token, userAuthJson)
     {
         var inputJson = {
            "token":token,
-            "inputParameter": userAuthJson
+            "inputParameter": JSON.stringify(userAuthJson)
         };
         var targetUrl = ROUTER_AUTHENTICATEUSER + BASE_VERSION;
         jQuery.post(targetUrl, inputJson,
-            function(data,status)
-            {
+            function(data,status){
                 if (status == "success")
                 {
-                    return data;
+
+                     callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
@@ -280,7 +285,7 @@ var remoteClientClass = function()
         );
     };
 
-    this.getAuthCodeBase = function(username, password)
+    this.getAuthCodeBase = function(callback, username, password)
     {
         var paraString = "?";
         paraString =paraString + "username=" + encodeURIComponent(username);
@@ -291,7 +296,11 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
@@ -368,31 +377,46 @@ var serverProxyClass = function(username,password)
             }
         }
     };
-    var getAuth = function() {
-        var resultJson = remoteClient.getAuthCodeBase(this.username, this.password);
-        if (resultJson.status == "true") {
-            result = resultJson.detail;
-        }
-        return null;
+    var getAuth = function(callback) {
+        var result = null;
+        var resultJson = remoteClient.getAuthCodeBase(function(resultJson)
+        {
+            if (resultJson && resultJson.status == "true") {
+                result = resultJson.detail;
+            }
+            callback(result);
+        },username, password);
     }
 
-    this.authenticateUser = function(username,password)
+    this.authenticateUser = function(callback,username,password)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
-        {
-           var userAuthJson = {
-             "user_name" : username,
-             "password": password
-           };
-          var resultJson = remoteClient.authenticateUserBase(token,userAuthJson);
-          if (resultJson && resultJson.status == "true")
-          {
-              result = resultJson.detail;
-          }
-        }
-        return result;
+        getAuth(
+            function(token)
+            {
+
+                if (token)
+                {
+                    var userAuthJson = {
+                        "user_name" : username,
+                        "password": password
+                    };
+
+                    var resultJson = remoteClient.authenticateUserBase(function(resultJson)
+                        {
+
+                            if (resultJson && resultJson.status == "true")
+                            {
+                                result = resultJson.detail;
+
+                            }
+                            callback(result);
+                        }
+                        ,token,userAuthJson);
+                }
+            }
+        );
+
     };
     this.registerUser = function(displayName, username, imageId, userPreference, userType, cellNumber,webChat, qqNumber,provinceCityArea,password)
     {
@@ -448,68 +472,259 @@ var serverProxyClass = function(username,password)
         }
         return result;
     };
-    this.updateUserPreference = function()
+    this.updateUserPreference = function(user_name,userPreference)
     {
-
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var userPreferenceJson = {
+                "user_name" : username,
+                "user_preference":userPreference
+            };
+            reformJsonObject(userPreferenceJson);
+            var resultJson = remoteClient.updateUserPreferenceBase(token,userPreferenceJson);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
     };
-    this.createStand = function()
+    this.createStand = function(standId, creatorType, standType, standName, typeDetailDescription, description, createUserId, positionX, PositionY)
     {
-
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var standInfoJson = {
+                "stand_id" : standId,
+                "creator_type":creatorType,
+                "stand_type":standType,
+                "stand_name":standName,
+                "type_detail_description":typeDetailDescription,
+                "description":description,
+                "create_user_id":createUserId,
+                "isactive" :1,
+                "mark": 0,
+                "position_x": positionX,
+                "position_y": PositionY,
+                "realtime_location_active": 0
+            };
+            reformJsonObject(standInfoJson);
+            var resultJson = remoteClient.createStandBase(token,standInfoJson);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
     };
-    this.updateStand = function()
+    this.updateStand = function(standId, standName, typeDetailDescription, description, isActive, positionX, PositionY)
     {
-
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var standInfoJson = {
+                "stand_id" : standId,
+                "stand_name":standName,
+                "type_detail_description":typeDetailDescription,
+                "description":description,
+                "isactive" :isActive,
+                "position_x": positionX,
+                "position_y": PositionY
+            };
+            reformJsonObject(standInfoJson);
+            var resultJson = remoteClient.createStandBase(token,standInfoJson);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
     };
-    this.changeRealTimeLocationStatus = function()
+    this.changeRealTimeLocationStatus = function(standId,realTimeLocationActive)
     {
-
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var standInfoJson = {
+                "stand_id" : standId,
+                "realtime_location_active":realTimeLocationActive
+            };
+            reformJsonObject(standInfoJson);
+            var resultJson = remoteClient.createStandBase(token,standInfoJson);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
     };
-    this.getStandCustomerMarkComments = function()
+    this.getStandCustomerMarkComments = function(username, standId,offset,pageSize, sort)
     {
-
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var resultJson = remoteClient.getStandCustomerMarkCommentsBase(token,username, standId,offset,pageSize, sort);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
     };
-    this.createStandMarkComments = function()
+    this.createStandMarkComments = function(standId,mark,comments,createUserId, createUserName)
     {
-
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var standMarkCommentsJson = {
+                "stand_id" : standId,
+                "mark":mark,
+                "comments":comments,
+                "create_user_id":createUserId,
+                "create_user_name":createUserName
+            };
+            reformJsonObject(standMarkCommentsJson);
+            var resultJson = remoteClient.createStandMarkCommentsBase(token,standMarkCommentsJson);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
     };
-    this.getStandMarkCommentsExist = function()
+    this.getStandMarkCommentsExist = function(username, standId)
     {
-
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var resultJson = remoteClient.getStandMarkCommentsExistBase(token,username, standId);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
     };
-    this.createStandOwnerMessage = function()
+    this.createStandOwnerMessage = function(standId,message)
     {
-
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var standOwnerMessageJson = {
+                "stand_id" : standId,
+                "message":message
+            };
+            reformJsonObject(standOwnerMessageJson);
+            var resultJson = remoteClient.createStandOwnerMessageBase(token,standOwnerMessageJson);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
     };
-    this.getStandOwnerMessages = function()
+    this.getStandOwnerMessages = function(userId, standId,offset,pageSize,sort)
     {
-
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var resultJson = remoteClient.getStandOwnerMessagesBase(token,userId, standId,offset,pageSize,sort);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
     };
     this.getStandTypes = function()
     {
-
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var resultJson = remoteClient.getStandTypesBase(token);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
     };
-    this.getImageUploadSecurityString = function()
+    this.getImageUploadSecurityString = function(policy,key)
     {
-
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var resultJson = remoteClient.getImageUploadSecurityStringBase(token,policy,key);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
     };
-    this.getAuthCode = function()
+    this.addLinkToStand = function(standId,userId)
     {
-
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var linkToStandInfo = {
+                "stand_id" : standId,
+                "user_id" : userId
+            };
+            reformJsonObject(linkToStandInfo);
+            var resultJson = remoteClient.addLinkToStandBase(token,linkToStandInfo);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
     };
-    this.addLinkToStand = function()
+    this.removeLinkFromStand = function(standId,userId)
     {
-
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var linkToStandInfo = {
+                "stand_id" : standId,
+                "user_id" : userId
+            };
+            reformJsonObject(linkToStandInfo);
+            var resultJson = remoteClient.removeLinkFromStandBase(token,linkToStandInfo);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
     };
-    this.removeLinkFromStand = function()
+    this.fetchLinkList = function(userId, standId,offset,pageSize,sort)
     {
-
+        var result = null;
+        var token = getAuth();
+        if (token)
+        {
+            var resultJson = remoteClient.fetchLinkListBase(token,userId, standId,offset,pageSize,sort);
+            if (resultJson && resultJson.status == "true")
+            {
+                result = resultJson.detail;
+            }
+        }
+        return result;
     };
-    this.fetchLinkList = function()
-    {
-
-    };
-
-
-
 
 };

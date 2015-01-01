@@ -7,24 +7,15 @@
   <meta name="Keywords" content="">
   <meta name="Description" content="">
   <title>Document</title>
-  <script type="text/javascript" src="js/md5.js"></script>
-  <script type="text/javascript" src="js/des.js"></script>
-  <script type="text/javascript" src="js/base64.js"></script>
+  <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="js/class/remoteProxy.js"></script>
  </head>
  <body>
-<input type="text" id="inputtext">
-<input type="button" value="test" onclick="document.all.output.innerHTML=b64_md5(inputtext.value);">
- <div id="output" ></div>
   <script type="text/javascript">
+        var serverProxy = new serverProxyClass("flyingdeep","K+2C13bP9ZwBopvJZwhu7g");
+       serverProxy.authenticateUser(function(e){alert(e)},"flyingdeep","K+2C13bP9ZwBopvJZwhu7g");
 
-//  var desKey = "aaa21234";
 
-var message = "sdfasfafg";
-//var ciphertext = des(desKey, message, 1, 0, "08070602");
-
-  <!--
-
-  //-->
   </script>
  </body>
 </html>
