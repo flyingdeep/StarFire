@@ -96,7 +96,6 @@ exports.insertData = function() //callback, presql ,input Json, pool
 
 
 	    var sql = preSql+ connection.escape(insertStatement);
-        //console.log(sql);
 		connection.query(sql, function(err, results) {
 			if (err)
 			{

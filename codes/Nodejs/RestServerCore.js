@@ -44,26 +44,21 @@ var hashMap = new hashMapOperation.hashMapBaseClass();
 var tryParseJsonString = function(e)
 {
 
-    var result = null;
+    var result = e;
     try {
-        console.log(e);
-       result = JSON.parse(e);
-        console.log(result);
+        if (typeof(e) == "string")
+        {
+            result = JSON.parse(e);
+        }
         reformJsonObject(result);
-        console.log(result);
     }
     catch (ex)
     {
-        console.log("error!!!!!!!!!!!");
-        console.log(ex.stack);
-        //result = null;
     }
     finally
     {
         return result;
     }
-
-
 };
 
 var reformJsonObject = function (e)
@@ -97,9 +92,9 @@ var getCommonParameters = function(req,paraName,method)
 
 var commonResult = function ()
 {
-    this.status = "Unknown";
-    this.detail = "Unknown";
-}
+    this.status = "unknown";
+    this.detail = "unknown";
+};
 
 var authenticateUserCallbackPost = function(req, res, next)
 {
@@ -113,9 +108,11 @@ var authenticateUserCallbackPost = function(req, res, next)
 
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
-
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -136,23 +133,28 @@ var authenticateUserCallbackPost = function(req, res, next)
         if (e && e!= -1)
         {
 
-            result.status = "true";
-
             if (e.length >0) {
+                result.status = "true";
                 result.detail = {
-                    "user_id": e[0].user_id,
-                    "display_name": e[0].display_name,
-                    "user_name": e[0].user_name,
-                    "image_id": e[0].image_id,
-                    "user_preference": e[0].user_preference,
-                    "user_type": e[0].user_type,
-                    "cell_number": e[0].cell_number,
-                    "web_chart": e[0].web_chart,
-                    "qq_number": e[0].qq_number,
-                    "province_city_area": e[0].province_city_area,
-                    "createdate": e[0].createdate,
-                    "updatedate": e[0].updatedate
+                    "success" : "true",
+                    "result":
+                    {
+                        "user_id": e[0].user_id,
+                        "display_name": e[0].display_name,
+                        "user_name": e[0].user_name,
+                        "image_id": e[0].image_id,
+                        "user_preference": e[0].user_preference,
+                        "user_type": e[0].user_type,
+                        "cell_number": e[0].cell_number,
+                        "web_chart": e[0].web_chart,
+                        "qq_number": e[0].qq_number,
+                        "province_city_area": e[0].province_city_area,
+                        "createdate": e[0].createdate,
+                        "updatedate": e[0].updatedate
+                    }
                 };
+
+
             }
             else
             {
@@ -184,8 +186,11 @@ var registerUserCallbackPost = function(req, res, next)
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
 
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -204,10 +209,13 @@ var registerUserCallbackPost = function(req, res, next)
 
         if (e && e!= -1)
         {
-
             result.status = "true";
             result.detail = {
-                "user_name":requestInputParameter.user_name
+                "success" : "true",
+                "result":
+                {
+                    "user_name":requestInputParameter.user_name
+                }
             };
         }
         else
@@ -238,8 +246,11 @@ var updateUserCallbackPost = function(req, res, next)
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
 
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -257,11 +268,15 @@ var updateUserCallbackPost = function(req, res, next)
         }
         if (e && e!= -1)
         {
-
             result.status = "true";
             result.detail = {
-                "user_name":requestInputParameter.user_name
+                "success" : "true",
+                "result":
+                {
+                    "user_name":requestInputParameter.user_name
+                }
             };
+
         }
         else
         {
@@ -288,8 +303,11 @@ var updateUserPreferenceCallbackPost = function(req, res, next)
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
 
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -310,7 +328,11 @@ var updateUserPreferenceCallbackPost = function(req, res, next)
 
             result.status = "true";
             result.detail = {
-                "user_name":requestInputParameter.user_name
+                "success" : "true",
+                "result":
+                {
+                    "user_name":requestInputParameter.user_name
+                }
             };
         }
         else
@@ -331,14 +353,18 @@ var createStandCallbackPost = function(req, res, next)
     var paraInputParameter = "inputParameter";
     var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
     var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
+    //console.log(getCommonParameters(req,paraInputParameter,METHOD_POST));
     var result = new commonResult();
     var callback = function(exception, e)
     {
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
 
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -356,10 +382,13 @@ var createStandCallbackPost = function(req, res, next)
         }
         if (e && e!= -1)
         {
-
             result.status = "true";
             result.detail = {
-                "stand_id":requestInputParameter.stand_id
+                "success" : "true",
+                "result":
+                {
+                    "stand_id":requestInputParameter.stand_id
+                }
             };
         }
         else
@@ -388,8 +417,11 @@ var updateStandCallbackPost = function(req, res, next)
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
 
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -407,10 +439,13 @@ var updateStandCallbackPost = function(req, res, next)
         }
         if (e && e!= -1)
         {
-
             result.status = "true";
             result.detail = {
-                "stand_id":requestInputParameter.stand_id
+                "success" : "true",
+                "result":
+                {
+                    "stand_id":requestInputParameter.stand_id
+                }
             };
         }
         else
@@ -438,8 +473,11 @@ var changeRealTimeLocationStatusCallbackPost = function(req, res, next)
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
 
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -460,7 +498,11 @@ var changeRealTimeLocationStatusCallbackPost = function(req, res, next)
 
             result.status = "true";
             result.detail = {
-                "stand_id":requestInputParameter.stand_id
+                "success" : "true",
+                "result":
+                {
+                    "stand_id":requestInputParameter.stand_id
+                }
             };
         }
         else
@@ -496,8 +538,11 @@ var getStandCustomerMarkCommentsCallbackGet = function(req, res, next)
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
 
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -530,8 +575,10 @@ var getStandCustomerMarkCommentsCallbackGet = function(req, res, next)
                 });
 
             }
-
-            result.detail = standCustomerMarkCommentsArray;
+            result.detail = {
+                "success" : "true",
+                "result": standCustomerMarkCommentsArray
+            };
         }
         else
         {
@@ -569,8 +616,11 @@ var createStandMarkCommentsCallbackPost = function(req, res, next)
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
 
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -591,8 +641,12 @@ var createStandMarkCommentsCallbackPost = function(req, res, next)
 
             result.status = "true";
             result.detail = {
-                "stand_id":requestInputParameter.stand_id,
-                "create_user_name" : requestInputParameter.create_user_name
+                "success" : "true",
+                "result":
+                {
+                    "stand_id":requestInputParameter.stand_id,
+                    "create_user_name" : requestInputParameter.create_user_name
+                }
             };
         }
         else
@@ -620,8 +674,11 @@ var getStandMarkCommentsExistCallbackGet = function(req, res, next)
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
 
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -642,18 +699,26 @@ var getStandMarkCommentsExistCallbackGet = function(req, res, next)
 
             result.status = "true";
             result.detail = {
-                "stand_id":requestStandId,
-                "create_user_name" : requestUsername,
-                "isMarked": true
+                "success" : "true",
+                "result":
+                {
+                    "stand_id":requestStandId,
+                    "create_user_name" : requestUsername,
+                    "isMarked": true
+                }
             };
         }
         else if (e==0)
         {
             result.status = "true";
             result.detail = {
-                "stand_id":requestStandId,
-                "create_user_name" : requestUsername,
-                "isMarked": false
+                "success" : "true",
+                "result":
+                {
+                    "stand_id":requestStandId,
+                    "create_user_name" : requestUsername,
+                    "isMarked": false
+                }
             };
 
         }
@@ -679,9 +744,11 @@ var createStandOwnerMessageCallbackPost = function(req, res, next)
     {
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
-
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -702,8 +769,12 @@ var createStandOwnerMessageCallbackPost = function(req, res, next)
 
             result.status = "true";
             result.detail = {
-                "stand_id":requestInputParameter.stand_id,
-                "create_user_name" : requestInputParameter.create_user_name
+                "success" : "true",
+                "result":
+                {
+                    "stand_id":requestInputParameter.stand_id,
+                    "create_user_name" : requestInputParameter.create_user_name
+                }
             };
         }
         else
@@ -737,9 +808,11 @@ var getStandOwnerMessagesCallbackGet = function(req, res, next)
     {
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
-
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -770,8 +843,11 @@ var getStandOwnerMessagesCallbackGet = function(req, res, next)
                 });
 
             }
+            result.detail = {
+                "success" : "true",
+                "result":standOwnerMessageArray
+            };
 
-            result.detail = standOwnerMessageArray;
         }
         else
         {
@@ -806,9 +882,11 @@ var getStandTypesCallbackGet = function(req, res, next)
     {
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
-
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -837,7 +915,10 @@ var getStandTypesCallbackGet = function(req, res, next)
                 });
 
             }
-            result.detail = standTypeArray;
+            result.detail = {
+                "success" : "true",
+                "result":standTypeArray
+            };
         }
         else
         {
@@ -863,9 +944,11 @@ var getImageUploadSecurityStringCallbackGet = function(req, res, next)
     var callback = function(exception,e) {
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
-
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -884,7 +967,10 @@ var getImageUploadSecurityStringCallbackGet = function(req, res, next)
         if (e && e != -1) {
 
             result.status = "true";
-            result.detail = e;
+            result.detail = {
+                "success" : "true",
+                "result":e
+            };
         }
         else {
             result.status = "false";
@@ -916,12 +1002,18 @@ var getAuthCodeCallbackGet = function(req, res, next)
         }
         if (e && e != -1) {
             result.status = "true";
-            result.detail = e;
+            result.detail = {
+                "success" : "true",
+                "result":e
+            };
         }
         else if (e == -1)
         {
             result.status = "true";
-            result.detail = "Username or password is invalid";
+            result.detail = {
+                "success" : "false",
+                "result":"Username or password is invalid"
+            };
         }
         else {
             result.status = "false";
@@ -944,9 +1036,11 @@ var addLinkToStandCallbackPost = function(req, res, next)
     {
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
-
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -967,8 +1061,11 @@ var addLinkToStandCallbackPost = function(req, res, next)
 
             result.status = "true";
             result.detail = {
-                "stand_id":requestInputParameter.stand_id,
-                "user_id" : requestInputParameter.user_id
+                "success" : "true",
+                "result":{
+                    "stand_id":requestInputParameter.stand_id,
+                    "user_id" : requestInputParameter.user_id
+                }
             };
         }
         else
@@ -994,9 +1091,11 @@ var removeLinkFromStandCallbackPost = function(req, res, next)
     {
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
-
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -1017,8 +1116,11 @@ var removeLinkFromStandCallbackPost = function(req, res, next)
 
             result.status = "true";
             result.detail = {
-                "stand_id":requestInputParameter.stand_id,
-                "user_id" : requestInputParameter.user_id
+                "success" : "true",
+                "result":{
+                    "stand_id":requestInputParameter.stand_id,
+                    "user_id" : requestInputParameter.user_id
+                }
             };
         }
         else
@@ -1052,9 +1154,11 @@ var fetchLinkListCallbackGet = function(req, res, next)
     {
         if (exception && exception.Name == BIZ_ERROR_WORDS)
         {
-
-            result.status = "false";
-            result.detail = {"message":exception.message};
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
             res.json(HTTP_SUCCESS_CODE,result);
             next();
             return;
@@ -1082,7 +1186,10 @@ var fetchLinkListCallbackGet = function(req, res, next)
                     "create_date": e[i].create_date
                 });
             }
-            result.detail = linkList;
+            result.detail = {
+                "success" : "true",
+                "result":linkList
+            };
         }
         else
         {
@@ -1143,26 +1250,28 @@ var startRestifyServer = function() {
     });
 };
 
-if (cluster.isMaster) {
-    // Fork workers.
-    for (var i = 0; i < numCPUs; i++) {
-        cluster.fork();
-    }
-    if (DEBUG_FLAG) {
-        cluster.on('online', function (worker) {
-            console.log('worker ' + worker.process.pid + ' serve');
-        });
-        cluster.on('listening', function (worker, address) {
-            console.log('worker ' + worker.process.pid + " - " + address.address + ":" + address.port);
-        });
-        cluster.on('exit', function (worker, code, signal) {
-            console.log('worker ' + worker.process.pid + ' died');
-        });
-    }
-}
-else {
-    startRestifyServer();
-}
+startRestifyServer();
+
+//if (cluster.isMaster) {
+//    // Fork workers.
+//    for (var i = 0; i < numCPUs; i++) {
+//        cluster.fork();
+//    }
+//    if (DEBUG_FLAG) {
+//        cluster.on('online', function (worker) {
+//            console.log('worker ' + worker.process.pid + ' serve');
+//        });
+//        cluster.on('listening', function (worker, address) {
+//            console.log('worker ' + worker.process.pid + " - " + address.address + ":" + address.port);
+//        });
+//        cluster.on('exit', function (worker, code, signal) {
+//            console.log('worker ' + worker.process.pid + ' died');
+//        });
+//    }
+//}
+//else {
+//    startRestifyServer();
+//}
 
 
 

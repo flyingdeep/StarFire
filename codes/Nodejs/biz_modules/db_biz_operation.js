@@ -39,7 +39,7 @@ mysqldbOperation.initMysqlPool(MAX_POOL_THREAD,DB_ADDRESS,DB_USER,DB_PASS);
 
 var convertJsonToStringByField = function(fieldName, objJson)
 {
-    if (typeof(objJson[fieldName] == "Object"))
+    if (objJson[fieldName] && typeof(objJson[fieldName] == "object"))
     {
         objJson[fieldName] = JSON.stringify(objJson[fieldName]);
     }
@@ -140,6 +140,7 @@ exports.userInfoClass = function()
         var callback = arguments[0];
         var userinfo = arguments[1];
         convertJsonToStringByField("province_city_area",userinfo);
+        convertJsonToStringByField("user_preference",userinfo);
 
         if (userinfo.createdate || userinfo.updatedate || !userinfo.user_name)
         {
@@ -170,8 +171,7 @@ exports.userInfoClass = function()
         var userinfo = arguments[1];
         var sqlcondition = arguments[2];
         var sql="";
-
-        //convertJsonToStringByField("province_city_area",userinfo);
+        convertJsonToStringByField("province_city_area",userinfo);
         convertJsonToStringByField("user_preference",userinfo);
         if (userinfo.createdate || userinfo.updatedate)
         {
@@ -236,7 +236,7 @@ exports.standInfoClass = function() {
                 var result = arguments[1];
                 if (!err && typeof(result)!="boolean")
                 {
-                    callback(err,standinfo.stand_Id);
+                    callback(err,standinfo.stand_id);
                 }
                 else
                 {

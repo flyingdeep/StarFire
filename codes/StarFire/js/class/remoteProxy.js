@@ -47,11 +47,11 @@ var remoteClientClass = function()
         );
     };
 
-    this.registerUserBase = function(token, userInfoJson)
+    this.registerUserBase = function(callback, token, userInfoJson)
     {
         var inputJson = {
             "token":token,
-            "inputParameter": userInfoJson
+            "inputParameter": JSON.stringify(userInfoJson)
         };
         var targetUrl = ROUTER_REGISTERUSER + BASE_VERSION;
         jQuery.post(targetUrl, inputJson,
@@ -59,17 +59,21 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
     };
 
-    this.updateUserBase = function(token, userInfoJson)
+    this.updateUserBase = function(callback,token, userInfoJson)
     {
         var inputJson = {
             "token":token,
-            "inputParameter": userInfoJson
+            "inputParameter": JSON.stringify(userInfoJson)
         };
         var targetUrl = ROUTER_UPDATEUSER + BASE_VERSION;
         jQuery.post(targetUrl, inputJson,
@@ -77,17 +81,21 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
     };
 
-    this.updateUserPreferenceBase = function(token, userPreferenceJson)
+    this.updateUserPreferenceBase = function(callback,token, userPreferenceJson)
     {
         var inputJson = {
             "token":token,
-            "inputParameter": userPreferenceJson
+            "inputParameter": JSON.stringify(userPreferenceJson)
         };
         var targetUrl = ROUTER_UPDATEUSERPREFERENCE + BASE_VERSION;
         jQuery.post(targetUrl, inputJson,
@@ -95,17 +103,21 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
     };
 
-    this.createStandBase = function(token, standInfoJson)
+    this.createStandBase = function(callback, token, standInfoJson)
     {
         var inputJson = {
             "token":token,
-            "inputParameter": standInfoJson
+            "inputParameter": JSON.stringify(standInfoJson)
         };
         var targetUrl = ROUTER_CREATESTAND + BASE_VERSION;
         jQuery.post(targetUrl, inputJson,
@@ -113,17 +125,21 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
     };
 
-    this.updateStandBase = function(token, standInfoJson)
+    this.updateStandBase = function(callback, token, standInfoJson)
     {
         var inputJson = {
             "token":token,
-            "inputParameter": standInfoJson
+            "inputParameter": JSON.stringify(standInfoJson)
         };
         var targetUrl = ROUTER_UPDATESTAND + BASE_VERSION;
         jQuery.post(targetUrl, inputJson,
@@ -131,17 +147,21 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
     };
 
-    this.changeRealTimeLocationStatusBase = function(token, standInfoJson)
+    this.changeRealTimeLocationStatusBase = function(callback, token, standInfoJson)
     {
         var inputJson = {
             "token":token,
-            "inputParameter": standInfoJson
+            "inputParameter": JSON.stringify(standInfoJson)
         };
         var targetUrl = ROUTER_CHANGEREALTIMELOCATIONSTATUS + BASE_VERSION;
         jQuery.post(targetUrl, inputJson,
@@ -149,13 +169,17 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
     };
 
-    this.getStandCustomerMarkCommentsBase = function(token, username, standId,offset,pageSize, sort)
+    this.getStandCustomerMarkCommentsBase = function(callback, token, username, standId,offset,pageSize, sort)
     {
         var paraString = "?";
         paraString =paraString + "token=" + encodeURIComponent(token);
@@ -170,17 +194,21 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
     };
 
-    this.createStandMarkCommentsBase = function(token, standMarkCommentsJson)
+    this.createStandMarkCommentsBase = function(callback, token, standMarkCommentsJson)
     {
         var inputJson = {
             "token":token,
-            "inputParameter": standMarkCommentsJson
+            "inputParameter": JSON.stringify(standMarkCommentsJson)
         };
         var targetUrl = ROUTER_CREATESTANDMARKCOMMENTS + BASE_VERSION;
         jQuery.post(targetUrl, inputJson,
@@ -188,13 +216,17 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
     };
 
-    this.getStandMarkCommentsExistBase = function(token, username, standId)
+    this.getStandMarkCommentsExistBase = function(callback,token, username, standId)
     {
         var paraString = "?";
         paraString =paraString + "token=" + encodeURIComponent(token);
@@ -206,17 +238,21 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
     };
 
-    this.createStandOwnerMessageBase = function(token, standOwnerMessageJson)
+    this.createStandOwnerMessageBase = function(callback, token, standOwnerMessageJson)
     {
         var inputJson = {
             "token":token,
-            "inputParameter": standOwnerMessageJson
+            "inputParameter": JSON.stringify(standOwnerMessageJson)
         };
         var targetUrl = ROUTER_CREATESTANDOWNERMESSAGE + BASE_VERSION;
         jQuery.post(targetUrl, inputJson,
@@ -224,13 +260,17 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
     };
 
-    this.getStandOwnerMessagesBase = function(token, userId, standId,offset,pageSize,sort)
+    this.getStandOwnerMessagesBase = function(callback, token, userId, standId,offset,pageSize,sort)
     {
         var paraString = "?";
         paraString =paraString + "token=" + encodeURIComponent(token);
@@ -245,13 +285,17 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
     };
 
-    this.getStandTypesBase = function(token)
+    this.getStandTypesBase = function(callback, token)
     {
         var paraString = "?";
         paraString =paraString + "token=" + encodeURIComponent(token);
@@ -261,13 +305,17 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
     };
 
-    this.getImageUploadSecurityStringBase = function(token, policy, key)
+    this.getImageUploadSecurityStringBase = function(callback, token, policy, key)
     {
         var paraString = "?";
         paraString =paraString + "token=" + encodeURIComponent(token);
@@ -279,7 +327,11 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
@@ -305,11 +357,11 @@ var remoteClientClass = function()
             }
         );
     };
-    this.addLinkToStandBase = function(token, linkToStandInfo)
+    this.addLinkToStandBase = function(callback, token, linkToStandInfo)
     {
         var inputJson = {
             "token":token,
-            "inputParameter": linkToStandInfo
+            "inputParameter": JSON.stringify(linkToStandInfo)
         };
         var targetUrl = ROUTER_ADDLINKTOSTAND + BASE_VERSION;
         jQuery.post(targetUrl, inputJson,
@@ -317,16 +369,20 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
     };
-    this.removeLinkFromStandBase = function(token, linkToStandInfo)
+    this.removeLinkFromStandBase = function(callback, token, linkToStandInfo)
     {
         var inputJson = {
             "token":token,
-            "inputParameter": linkToStandInfo
+            "inputParameter": JSON.stringify(linkToStandInfo)
         };
         var targetUrl = ROUTER_REMOVELINKFROMSTAND + BASE_VERSION;
         jQuery.post(targetUrl, inputJson,
@@ -334,12 +390,16 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
     };
-    this.fetchLinkListBase = function(token, userId, standId,offset,pageSize,sort)
+    this.fetchLinkListBase = function(callback, token, userId, standId,offset,pageSize,sort)
     {
         var paraString = "?";
         paraString =paraString + "token=" + encodeURIComponent(token);
@@ -354,7 +414,11 @@ var remoteClientClass = function()
             {
                 if (status == "success")
                 {
-                    return data;
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
                 }
             }
         );
@@ -379,10 +443,10 @@ var serverProxyClass = function(username,password)
     };
     var getAuth = function(callback) {
         var result = null;
-        var resultJson = remoteClient.getAuthCodeBase(function(resultJson)
+        remoteClient.getAuthCodeBase(function(resultJson)
         {
-            if (resultJson && resultJson.status == "true") {
-                result = resultJson.detail;
+            if (resultJson && resultJson.status == "true" && resultJson.detail.success == "true") {
+                result = resultJson.detail.result;
             }
             callback(result);
         },username, password);
@@ -414,317 +478,507 @@ var serverProxyClass = function(username,password)
                         }
                         ,token,userAuthJson);
                 }
+                else
+                {
+                    callback(null);
+                }
             }
         );
 
     };
-    this.registerUser = function(displayName, username, imageId, userPreference, userType, cellNumber,webChat, qqNumber,provinceCityArea,password)
+    this.registerUser = function(callback, displayName, username, imageId, userPreference, userType, cellNumber,webChat, qqNumber,provinceCityArea,password)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
-        {
-            var userAuthJson = {
-                "user_name" : username,
-                "password": password,
-                "display_name":displayName,
-                "image_id" : imageId,
-                "user_preference":userPreference,
-                "user_type": userType,
-                "cell_number" : cellNumber,
-                "web_chat" : webChat,
-                "qq_number" :qqNumber,
-                "province_city_area" : provinceCityArea
-            };
-            reformJsonObject(userAuthJson);
-            var resultJson = remoteClient.authenticateUserBase(token,userAuthJson);
-            if (resultJson && resultJson.status == "true")
+        getAuth(
+            function(token)
             {
-                result = resultJson.detail;
+                if (token)
+                {
+                    var userAuthJson = {
+                        "user_name" : username,
+                        "password": password,
+                        "display_name":displayName,
+                        "image_id" : imageId,
+                        "user_preference":userPreference,
+                        "user_type": userType,
+                        "cell_number" : cellNumber,
+                        "web_chat" : webChat,
+                        "qq_number" :qqNumber,
+                        "province_city_area" : provinceCityArea
+                    };
+                    reformJsonObject(userAuthJson);
+                    remoteClient.registerUserBase(function(resultJson)
+                        {
+                            if (resultJson && resultJson.status == "true")
+                            {
+                                result = resultJson.detail;
+                            }
+                            callback(result);
+                        },
+                    token,userAuthJson);
+                }
+                else
+                {
+                    callback(null);
+                }
             }
-        }
-        return result;
+
+        );
+
     };
-    this.updateUser = function(displayName, username, imageId, userPreference, userType, cellNumber,webChat, qqNumber,provinceCityArea,password)
+    this.updateUser = function(callback, displayName, username, imageId, userPreference, userType, cellNumber,webChat, qqNumber,provinceCityArea,password)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
-        {
-            var userAuthJson = {
-                "user_name" : username,
-                "password": password,
-                "display_name":displayName,
-                "image_id" : imageId,
-                "user_preference":userPreference,
-                "user_type": userType,
-                "cell_number" : cellNumber,
-                "web_chat" : webChat,
-                "qq_number" :qqNumber,
-                "province_city_area" : provinceCityArea
-            };
-            reformJsonObject(userAuthJson);
-            var resultJson = remoteClient.authenticateUserBase(token,userAuthJson);
-            if (resultJson && resultJson.status == "true")
+        getAuth(function(token)
             {
-                result = resultJson.detail;
+                if (token)
+                {
+                    var userAuthJson = {
+                        "user_name" : username,
+                        "password": password,
+                        "display_name":displayName,
+                        "image_id" : imageId,
+                        "user_preference":userPreference,
+                        "user_type": userType,
+                        "cell_number" : cellNumber,
+                        "web_chat" : webChat,
+                        "qq_number" :qqNumber,
+                        "province_city_area" : provinceCityArea
+                    };
+                    reformJsonObject(userAuthJson);
+                    remoteClient.authenticateUserBase(function(resultJson)
+                    {
+                        if (resultJson && resultJson.status == "true")
+                        {
+                            result = resultJson.detail;
+                        }
+                        callback(result);
+                    }, token,userAuthJson);
+
+                }
+                else
+                {
+                    callback(null);
+                }
+
             }
-        }
-        return result;
+        );
+
     };
-    this.updateUserPreference = function(user_name,userPreference)
+    this.updateUserPreference = function(callback, user_name,userPreference)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
-        {
-            var userPreferenceJson = {
-                "user_name" : username,
-                "user_preference":userPreference
-            };
-            reformJsonObject(userPreferenceJson);
-            var resultJson = remoteClient.updateUserPreferenceBase(token,userPreferenceJson);
-            if (resultJson && resultJson.status == "true")
+        getAuth(function(token)
             {
-                result = resultJson.detail;
+                if (token)
+                {
+                    var userPreferenceJson = {
+                        "user_name" : user_name,
+                        "user_preference":userPreference
+                    };
+                    reformJsonObject(userPreferenceJson);
+                    remoteClient.updateUserPreferenceBase(function(resultJson)
+                    {
+                        if (resultJson && resultJson.status == "true")
+                        {
+                            result = resultJson.detail;
+                        }
+                        callback(result);
+
+                    },token,userPreferenceJson);
+
+                }
+                else
+                {
+                    callback(null);
+                }
             }
-        }
-        return result;
+        );
+
     };
-    this.createStand = function(standId, creatorType, standType, standName, typeDetailDescription, description, createUserId, positionX, PositionY)
+    this.createStand = function(callback, standId, creatorType, standType, standName, typeDetailDescription, description, createUserId, positionX, PositionY)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
-        {
-            var standInfoJson = {
-                "stand_id" : standId,
-                "creator_type":creatorType,
-                "stand_type":standType,
-                "stand_name":standName,
-                "type_detail_description":typeDetailDescription,
-                "description":description,
-                "create_user_id":createUserId,
-                "isactive" :1,
-                "mark": 0,
-                "position_x": positionX,
-                "position_y": PositionY,
-                "realtime_location_active": 0
-            };
-            reformJsonObject(standInfoJson);
-            var resultJson = remoteClient.createStandBase(token,standInfoJson);
-            if (resultJson && resultJson.status == "true")
-            {
-                result = resultJson.detail;
-            }
-        }
-        return result;
+       getAuth(function(token)
+           {
+               if (token)
+               {
+                   var standInfoJson = {
+                       "stand_id" : standId,
+                       "creator_type":creatorType,
+                       "stand_type":standType,
+                       "stand_name":standName,
+                       "type_detail_description":typeDetailDescription,
+                       "description":description,
+                       "create_user_id":createUserId,
+                       "isactive" :1,
+                       "mark": 0,
+                       "position_x": positionX,
+                       "position_y": PositionY,
+                       "realtime_location_active": 0
+                   };
+                   reformJsonObject(standInfoJson);
+                   remoteClient.createStandBase(function(resultJson)
+                   {
+
+                       if (resultJson && resultJson.status == "true")
+                       {
+                           result = resultJson.detail;
+                       }
+                       callback(result);
+                   },
+                   token,standInfoJson);
+
+               }
+               else
+               {
+                   callback(null);
+               }
+
+           }
+       );
+
     };
-    this.updateStand = function(standId, standName, typeDetailDescription, description, isActive, positionX, PositionY)
+    this.updateStand = function(callback, standId, standName, typeDetailDescription, description, isActive, positionX, PositionY)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
-        {
-            var standInfoJson = {
-                "stand_id" : standId,
-                "stand_name":standName,
-                "type_detail_description":typeDetailDescription,
-                "description":description,
-                "isactive" :isActive,
-                "position_x": positionX,
-                "position_y": PositionY
-            };
-            reformJsonObject(standInfoJson);
-            var resultJson = remoteClient.createStandBase(token,standInfoJson);
-            if (resultJson && resultJson.status == "true")
+        getAuth(function(token)
             {
-                result = resultJson.detail;
+                if (token)
+                {
+                    var standInfoJson = {
+                        "stand_id" : standId,
+                        "stand_name":standName,
+                        "type_detail_description":typeDetailDescription,
+                        "description":description,
+                        "isactive" :isActive,
+                        "position_x": positionX,
+                        "position_y": PositionY
+                    };
+                    reformJsonObject(standInfoJson);
+                    remoteClient.updateStandBase(function(resultJson)
+                    {
+                        if (resultJson && resultJson.status == "true")
+                        {
+                            result = resultJson.detail;
+                        }
+                        callback(result);
+                    },
+                    token,standInfoJson);
+
+                }
+                else
+                {
+                    callback(null);
+                }
+
+
             }
-        }
-        return result;
+        );
+
     };
-    this.changeRealTimeLocationStatus = function(standId,realTimeLocationActive)
+    this.changeRealTimeLocationStatus = function(callback,standId,realTimeLocationActive)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
-        {
-            var standInfoJson = {
-                "stand_id" : standId,
-                "realtime_location_active":realTimeLocationActive
-            };
-            reformJsonObject(standInfoJson);
-            var resultJson = remoteClient.createStandBase(token,standInfoJson);
-            if (resultJson && resultJson.status == "true")
+        getAuth(function(token)
             {
-                result = resultJson.detail;
+                if (token)
+                {
+                    var standInfoJson = {
+                        "stand_id" : standId,
+                        "realtime_location_active":realTimeLocationActive
+                    };
+                    reformJsonObject(standInfoJson);
+                    remoteClient.changeRealTimeLocationStatusBase(function(resultJson)
+                    {
+                        if (resultJson && resultJson.status == "true")
+                        {
+                            result = resultJson.detail;
+                        }
+                        callback(result);
+
+                    },token,standInfoJson);
+                }
+                else
+                {
+                    callback(null);
+                }
+
             }
-        }
-        return result;
+        );
+
     };
-    this.getStandCustomerMarkComments = function(username, standId,offset,pageSize, sort)
+    this.getStandCustomerMarkComments = function(callback, username, standId,offset,pageSize, sort)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
-        {
-            var resultJson = remoteClient.getStandCustomerMarkCommentsBase(token,username, standId,offset,pageSize, sort);
-            if (resultJson && resultJson.status == "true")
+        getAuth(function(token)
             {
-                result = resultJson.detail;
+                if (token)
+                {
+                    remoteClient.getStandCustomerMarkCommentsBase(function(resultJson)
+                    {
+                        if (resultJson && resultJson.status == "true")
+                        {
+                            result = resultJson.detail;
+                        }
+                        callback(result);
+                    },
+                    token,username, standId,offset,pageSize, sort);
+
+                }
+                else
+                {
+                    callback(null);
+                }
+
             }
-        }
-        return result;
+        );
     };
-    this.createStandMarkComments = function(standId,mark,comments,createUserId, createUserName)
+    this.createStandMarkComments = function(callback, standId,mark,comments,createUserId, createUserName)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
-        {
-            var standMarkCommentsJson = {
-                "stand_id" : standId,
-                "mark":mark,
-                "comments":comments,
-                "create_user_id":createUserId,
-                "create_user_name":createUserName
-            };
-            reformJsonObject(standMarkCommentsJson);
-            var resultJson = remoteClient.createStandMarkCommentsBase(token,standMarkCommentsJson);
-            if (resultJson && resultJson.status == "true")
+        getAuth(function(token)
             {
-                result = resultJson.detail;
+                if (token)
+                {
+                    var standMarkCommentsJson = {
+                        "stand_id" : standId,
+                        "mark":mark,
+                        "comments":comments,
+                        "create_user_id":createUserId,
+                        "create_user_name":createUserName
+                    };
+                    reformJsonObject(standMarkCommentsJson);
+                    remoteClient.createStandMarkCommentsBase(function(resultJson)
+                    {
+                        if (resultJson && resultJson.status == "true")
+                        {
+                            result = resultJson.detail;
+                        }
+                        callback(result);
+
+                    },token,standMarkCommentsJson);
+
+                }
+                else
+                {
+                    callback(null);
+                }
+
+
             }
-        }
-        return result;
+        );
     };
-    this.getStandMarkCommentsExist = function(username, standId)
+    this.getStandMarkCommentsExist = function(callback, username, standId)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
-        {
-            var resultJson = remoteClient.getStandMarkCommentsExistBase(token,username, standId);
-            if (resultJson && resultJson.status == "true")
+        getAuth(function(token)
             {
-                result = resultJson.detail;
+                if (token)
+                {
+                    remoteClient.getStandMarkCommentsExistBase(function(resultJson)
+                    {
+                        if (resultJson && resultJson.status == "true")
+                        {
+                            result = resultJson.detail;
+                        }
+                        callback(result);
+                    },token,username, standId);
+
+                }
+                else
+                {
+                    callback(null);
+                }
             }
-        }
-        return result;
+        );
     };
-    this.createStandOwnerMessage = function(standId,message)
+    this.createStandOwnerMessage = function(callback,standId,message)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
+        getAuth(function(token)
         {
-            var standOwnerMessageJson = {
-                "stand_id" : standId,
-                "message":message
-            };
-            reformJsonObject(standOwnerMessageJson);
-            var resultJson = remoteClient.createStandOwnerMessageBase(token,standOwnerMessageJson);
-            if (resultJson && resultJson.status == "true")
+            if (token)
             {
-                result = resultJson.detail;
+                var standOwnerMessageJson = {
+                    "stand_id" : standId,
+                    "message":message
+                };
+                reformJsonObject(standOwnerMessageJson);
+                remoteClient.createStandOwnerMessageBase(function(resultJson)
+                {
+                    if (resultJson && resultJson.status == "true")
+                    {
+                        result = resultJson.detail;
+                    }
+                    callback(result);
+                },token,standOwnerMessageJson);
+
             }
-        }
-        return result;
+            else{
+                callback(null);
+            }
+
+        });
+
     };
-    this.getStandOwnerMessages = function(userId, standId,offset,pageSize,sort)
+    this.getStandOwnerMessages = function(callback, userId, standId,offset,pageSize,sort)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
-        {
-            var resultJson = remoteClient.getStandOwnerMessagesBase(token,userId, standId,offset,pageSize,sort);
-            if (resultJson && resultJson.status == "true")
+        getAuth(function(token)
             {
-                result = resultJson.detail;
+                if (token)
+                {
+                    remoteClient.getStandOwnerMessagesBase(function(resultJson)
+                    {
+                        if (resultJson && resultJson.status == "true")
+                        {
+                            result = resultJson.detail;
+                        }
+                        callback(result);
+                    },token,userId, standId,offset,pageSize,sort);
+                }
+                else
+                {
+                    callback(null);
+                }
+
             }
-        }
-        return result;
+        );
     };
-    this.getStandTypes = function()
+    this.getStandTypes = function(callback)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
-        {
-            var resultJson = remoteClient.getStandTypesBase(token);
-            if (resultJson && resultJson.status == "true")
+        getAuth(function(token)
             {
-                result = resultJson.detail;
+                if (token)
+                {
+                    remoteClient.getStandTypesBase(function(resultJson)
+                    {
+                        if (resultJson && resultJson.status == "true")
+                        {
+                            result = resultJson.detail;
+                        }
+                        callback(result);
+                    },token);
+
+                }
+                else
+                {
+                    callback(null);
+                }
+
             }
-        }
-        return result;
+        );
+
     };
-    this.getImageUploadSecurityString = function(policy,key)
+    this.getImageUploadSecurityString = function(callback,policy,key)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
-        {
-            var resultJson = remoteClient.getImageUploadSecurityStringBase(token,policy,key);
-            if (resultJson && resultJson.status == "true")
+        getAuth(function(token)
             {
-                result = resultJson.detail;
+                if (token)
+                {
+                    remoteClient.getImageUploadSecurityStringBase(function(resultJson)
+                    {
+                        if (resultJson && resultJson.status == "true")
+                        {
+                            result = resultJson.detail;
+                        }
+                        callback(result);
+                    },
+                    token,policy,key);
+                }
+                else
+                {
+                    callback(null);
+                }
             }
-        }
-        return result;
+        );
     };
-    this.addLinkToStand = function(standId,userId)
+    this.addLinkToStand = function(callback, standId,userId)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
-        {
-            var linkToStandInfo = {
-                "stand_id" : standId,
-                "user_id" : userId
-            };
-            reformJsonObject(linkToStandInfo);
-            var resultJson = remoteClient.addLinkToStandBase(token,linkToStandInfo);
-            if (resultJson && resultJson.status == "true")
+        getAuth(function(token)
             {
-                result = resultJson.detail;
+                if (token)
+                {
+                    var linkToStandInfo = {
+                        "stand_id" : standId,
+                        "user_id" : userId
+                    };
+                    reformJsonObject(linkToStandInfo);
+                    remoteClient.addLinkToStandBase(function(resultJson)
+                    {
+                        if (resultJson && resultJson.status == "true")
+                        {
+                            result = resultJson.detail;
+                        }
+                        callback(result);
+                    },token,linkToStandInfo);
+
+                }
+                else
+                {
+                    callback(null);
+                }
+
             }
-        }
-        return result;
+        );
+
     };
-    this.removeLinkFromStand = function(standId,userId)
+    this.removeLinkFromStand = function(callback, standId,userId)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
-        {
-            var linkToStandInfo = {
-                "stand_id" : standId,
-                "user_id" : userId
-            };
-            reformJsonObject(linkToStandInfo);
-            var resultJson = remoteClient.removeLinkFromStandBase(token,linkToStandInfo);
-            if (resultJson && resultJson.status == "true")
+        getAuth(function(token)
             {
-                result = resultJson.detail;
+                if (token)
+                {
+                    var linkToStandInfo = {
+                        "stand_id" : standId,
+                        "user_id" : userId
+                    };
+                    reformJsonObject(linkToStandInfo);
+                    remoteClient.removeLinkFromStandBase(function(resultJson)
+                    {
+                        if (resultJson && resultJson.status == "true")
+                        {
+                            result = resultJson.detail;
+                        }
+                        callback(result);
+                    },token,linkToStandInfo);
+
+                }
+                else
+                {
+                    callback(null);
+
+                }
             }
-        }
-        return result;
+        );
     };
-    this.fetchLinkList = function(userId, standId,offset,pageSize,sort)
+    this.fetchLinkList = function(callback, userId, standId,offset,pageSize,sort)
     {
         var result = null;
-        var token = getAuth();
-        if (token)
+        getAuth(function(token)
         {
-            var resultJson = remoteClient.fetchLinkListBase(token,userId, standId,offset,pageSize,sort);
-            if (resultJson && resultJson.status == "true")
+            if (token)
             {
-                result = resultJson.detail;
+                remoteClient.fetchLinkListBase(function(resultJson)
+                {
+                    if (resultJson && resultJson.status == "true")
+                    {
+                        result = resultJson.detail;
+                    }
+                },token,userId, standId,offset,pageSize,sort);
+
             }
-        }
-        return result;
+            else
+            {
+                callback(null);
+            }
+
+        });
     };
 
 };
