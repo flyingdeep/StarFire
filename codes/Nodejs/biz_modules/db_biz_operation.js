@@ -70,7 +70,7 @@ exports.userInfoClass = function()
             }
 
             sql = "select user_id,user_name,password,display_name," +
-                "image_id,user_preference,user_type,cell_number," +
+                "image_id,user_preference,user_type,email,cell_number," +
                 "web_chat,qq_number,province_city_area,createdate,updatedate " +
                 "from " + TB_USER_INFO + " where user_name=" + mysqldbOperation.escape(username) +
                 " and isdeleted=0" + passwordwheresql;

@@ -486,7 +486,7 @@ var serverProxyClass = function(username,password)
         );
 
     };
-    this.registerUser = function(callback, displayName, username, imageId, userPreference, userType, cellNumber,webChat, qqNumber,provinceCityArea,password)
+    this.registerUser = function(callback, displayName, username, imageId, userPreference, userType, email, cellNumber,webChat, qqNumber,provinceCityArea,password)
     {
         var result = null;
         getAuth(
@@ -501,6 +501,7 @@ var serverProxyClass = function(username,password)
                         "image_id" : imageId,
                         "user_preference":userPreference,
                         "user_type": userType,
+                        "email":email,
                         "cell_number" : cellNumber,
                         "web_chat" : webChat,
                         "qq_number" :qqNumber,
