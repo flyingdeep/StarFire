@@ -1,0 +1,14 @@
+var CONST_POINT_X = 116.404;
+var CONST_POINT_Y = 39.915;
+var CONST_DISPLAY_LEVEL = 14;
+var CONST_GEOTABLE_ID = 84451;
+var CONST_AK = "NpZPLFzDKjPWEenu8D2yf4vS";
+var CONST_TRANSFER_COORDS_SOURCE_TYPE = 1; //GPS device angle coords
+var CONST_TRANSFER_COORDS_TARGET_TYPE = 5; //Baidu long lang coords
+
+var CONST_COORDS_TYPE = 3; //Baidu long lang coords
+
+
+var CONST_REALTIME_LOCATION = "0";
+var CONST_ISACTIVE = "1";
+var CONST_INIT_MARK = null;
