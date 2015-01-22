@@ -186,6 +186,7 @@
             "point_x": pt.lng,
             "point_y":  pt.lat
         };
+        alert(Json_tap_postion.point_x + "  " + Json_tap_postion.point_y);
         gc.getLocation(pt, function(rs){
             var addComp = rs.addressComponents;
             Json_decode_postion2address = {

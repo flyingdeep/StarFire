@@ -52,6 +52,7 @@ function createNewJsonStandPositionInfoInstance()
 {
 	//var datetime_string = formatDate(new Date(),"yyyy-MM-dd hh:mm:ss");
 	var datetime_int = (new Date()).getTime();
+    alert(datetime_int);
 	var resultJson = {
 		"title":  null,
 		"address": null,
