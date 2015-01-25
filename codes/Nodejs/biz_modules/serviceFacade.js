@@ -2,6 +2,7 @@ var config = require("./../config.js");
 var bizOperation = require("./db_biz_operation.js");
 var authOperation = require("./../helper_modules/accessServerAuth.js");
 var hashMapHelper = require("./../helper_modules/hashMapHelper.js");
+var baiduApiOperation = require("./baiduApiOperation.js");
 var userInfoOperation =new bizOperation.userInfoClass();
 var standInfoOperation =new bizOperation.standInfoClass();
 var standCustomerMarkOperation =new bizOperation.standCustomerMarkClass();
@@ -9,6 +10,8 @@ var standUserLinkOperation =new bizOperation.standUserLinkClass();
 //var standImageOperation =new bizOperation.standImageClass();
 var standOwnerMessageOperation = new bizOperation.standOwnerMessageClass();
 var standTypeOperation = new bizOperation.standTypeClass();
+
+var baiduLBSOperation = baiduApiOperation.baiduLBSClass();
 
 var BIZ_ERROR_WORDS = config.bizService.bizErrorWords;
 var DEFAULT_OFFSET = config.bizService.defaultOffset;
@@ -21,6 +24,13 @@ var MESSAGE_NOUSER = config.messages.message_noUser;
 var MESSAGE_AUTHENTICATEUSER_INNER = config.messages.message_authenticateUser_inner;
 var NO_USER_PASSWORD = config.messages.message_noUserPass;
 var INPUT_PARA_ERROR = config.messages.message_inputParaError;
+
+var CONST_STAND_LOCATION_INFO_TABLEID = config.baiduLBS.stand_location_info_tableId;
+var CONST_STAND_REALTIME_LOCATION_TABLEID = config.baiduLBS.stand_realTime_location_tableId;
+var CONST_AK = config.baiduLBS.ak;
+var CONST_COORDS_TYPE = config.baiduLBS.coords_type;
+var CONST_REALTIME_LOCATION = config.baiduLBS.realTime_location;
+var CONST_ISACTIVE = config.baiduLBS.isactive;
 
 exports.tryPassTokenToProceedAction = function()
 {
@@ -338,4 +348,64 @@ exports.fetchLinkListByStandId = function(callback,standId, offset, pageSize, or
     pageSize = (pageSize == null || pageSize == "")?DEFAULT_PAGE_SIZE: pageSize;
     order = (order == null || order == "")?DEFAULT_ORDER: order;
     standUserLinkOperation.fetchSandUserLinkByStandId( callback,standId, offset, pageSize, order);
+};
+
+exports.createBaiduLBSGeoDataPoi = function(callback, title,address,tags,latitude,longtitude,description,create_user,creater_id, stand_image_tip)
+{
+    var geotable_id =  CONST_STAND_LOCATION_INFO_TABLEID;
+    var ak = CONST_AK;
+    var coord_type = CONST_COORDS_TYPE;
+    var realtime_location = CONST_REALTIME_LOCATION;
+    var isactive = CONST_ISACTIVE;
+    var create_date = (new Date()).getTime();
+    var update_date = create_date;
+    var mark =0;
+    var PoiInfoJson = {
+        "stand_image_tip": stand_image_tip,
+        "title" : title,
+        "address" : address,
+        "tags":tags,
+        "latitude" : latitude,
+        "longtitude":longtitude,
+        "coord_type":coord_type,
+        "geotable_id": geotable_id,
+        "ak":ak,
+        "create_date" : create_date,
+        "update_date" : update_date,
+        "realtime_location" : realtime_location,
+        "isactive" : isactive,
+        "mark" : mark,
+        "description":description,
+        "create_user":create_user,
+        "creater_id" : creater_id
+    };
+    baiduLBSOperation.createBaiduLBSGeoDataPoi(callback,PoiInfoJson);
+};
+
+exports.createBaiduLBSGeoDataPoi = function(callback, title,address,tags,latitude,longtitude,description,create_user,creater_id, stand_image_tip)
+{
+    var geotable_id =  CONST_STAND_LOCATION_INFO_TABLEID;
+    var ak = CONST_AK;
+    var coord_type = CONST_COORDS_TYPE;
+    var realtime_location = CONST_REALTIME_LOCATION;
+    var isactive = CONST_ISACTIVE;
+    var create_date = (new Date()).getTime();
+    var update_date = create_date;
+    var mark =0;
+    var PoiInfoJson = {
+        "stand_image_tip": stand_image_tip,
+        "title" : title,
+        "address" : address,
+        "tags":tags,
+        "latitude" : latitude,
+        "longtitude":longtitude,
+        "coord_type":coord_type,
+        "geotable_id": geotable_id,
+        "ak":ak,
+        "update_date" : update_date,
+        "realtime_location" : realtime_location,
+        "isactive" : isactive,
+        "description":description
+    };
+    baiduLBSOperation.updateBaiduLBSGeoDataPoi(callback,PoiInfoJson);
 };

@@ -1,5 +1,5 @@
 var cluster = require('cluster');
-var config = require("./config");
+var config = require("./config.js");
 var restify = require("restify");
 var cors = require("cors");
 var hashMapOperation = require("./helper_modules/hashMap.js");
@@ -37,6 +37,16 @@ var ROUTER_REMOVELINKFROMSTAND = BASE_ROUTER + "RemoveLinkFromStand";
 var ROUTER_FETCHLINKLIST = BASE_ROUTER + "FetchLinkList";
 
 var ROUTER_test = BASE_ROUTER + "test";
+
+var ROUTER_BAIDU_LBS_CREATEPOI = BASE_ROUTER + "BaiduLBS/CreatPoi";
+//var ROUTER_BAIDU_LBS_QUERYPOILIST = BASE_ROUTER + "BaiduLBS/QueryPoiList";
+//var ROUTER_BAIDU_LBS_QUERYSINGLEPOIDETAIL = BASE_ROUTER + "GeoData/QuerySinglePoiDetail";
+var ROUTER_BAIDU_LBS_UPDATEPOI = BASE_ROUTER + "BaiduLBS/UpdatePoi";
+var ROUTER_BAIDU_LBS_DELETEPOI = BASE_ROUTER + "BaiduLBS/DeletePoi";
+
+//var ROUTER_BAIDU_LBS_QUERYNEARBY = BASE_ROUTER + "BaiduLBS/QueryNearby";
+//var ROUTER_BAIDU_LBS_QUERYLOCAL = BASE_ROUTER + "BaiduLBS/QueryLocal";
+
 
 var numCPUs = require('os').cpus().length;
 var hashMap = new hashMapOperation.hashMapBaseClass();

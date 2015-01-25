@@ -57,3 +57,13 @@ exports.messages = {
     message_inputParaError: "Wrong format of inputParameter"
 
 };
+
+exports.baiduLBS = {
+  retries : 3,
+  stand_location_info_tableId : 84451,
+  stand_realTime_location_tableId : 84648,
+  ak : "NpZPLFzDKjPWEenu8D2yf4vS",
+  coords_type : 3, //Baidu long lang coords
+ realTime_location : "0",
+ isactive : "1"
+};
