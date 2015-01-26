@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7ad25bf-38ad-43db-8397-e87c816d9f56" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/Nodejs/biz_modules/baiduApiOperation.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/Nodejs/RestServerCore.js" afterPath="$PROJECT_DIR$/codes/Nodejs/RestServerCore.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/Nodejs/config.js" afterPath="$PROJECT_DIR$/codes/Nodejs/config.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/Nodejs/biz_modules/serviceFacade.js" afterPath="$PROJECT_DIR$/codes/Nodejs/biz_modules/serviceFacade.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/test/testBaiduMapService.html" afterPath="$PROJECT_DIR$/codes/StarFire/test/testBaiduMapService.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="StarFire.iws" />
@@ -33,8 +30,8 @@
       <file leaf-file-name="config.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/Nodejs/config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="792" max-vertical-offset="1650">
-              <caret line="62" column="29" selection-start-line="62" selection-start-column="2" selection-end-line="62" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="844" max-vertical-offset="1650">
+              <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -43,18 +40,18 @@
       <file leaf-file-name="initial.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/js/baidu/initial.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="440">
+            <state vertical-scroll-proportion="0.0" vertical-offset="176" max-vertical-offset="440">
               <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="12" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="serviceFacade.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="serviceFacade.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/Nodejs/biz_modules/serviceFacade.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.72624433" vertical-offset="8268" max-vertical-offset="9174">
-              <caret line="405" column="48" selection-start-line="405" selection-start-column="48" selection-end-line="405" selection-end-column="48" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="8236" max-vertical-offset="9504">
+              <caret line="384" column="32" selection-start-line="384" selection-start-column="8" selection-end-line="384" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -63,7 +60,7 @@
       <file leaf-file-name="baiduApiOperation.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/Nodejs/biz_modules/baiduApiOperation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2178">
+            <state vertical-scroll-proportion="0.0" vertical-offset="220" max-vertical-offset="2178">
               <caret line="10" column="62" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="62" />
               <folding />
             </state>
@@ -83,7 +80,7 @@
       <file leaf-file-name="db_biz_operation.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/Nodejs/biz_modules/db_biz_operation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.925926" vertical-offset="3565" max-vertical-offset="21758">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3565" max-vertical-offset="21758">
               <caret line="173" column="65" selection-start-line="173" selection-start-column="65" selection-end-line="173" selection-end-column="65" />
               <folding />
             </state>
@@ -100,21 +97,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RestServerCore.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/codes/Nodejs/RestServerCore.js">
+      <file leaf-file-name="testBaiduMapService.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/codes/StarFire/test/testBaiduMapService.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3058" max-vertical-offset="28490">
-              <caret line="44" column="68" selection-start-line="44" selection-start-column="68" selection-end-line="44" selection-end-column="68" />
+            <state vertical-scroll-proportion="-17.193548" vertical-offset="347" max-vertical-offset="1122">
+              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testBaiduMapService.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/codes/StarFire/test/testBaiduMapService.html">
+      <file leaf-file-name="RestServerCore.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/codes/Nodejs/RestServerCore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.741936" vertical-offset="207" max-vertical-offset="1122">
-              <caret line="33" column="131" selection-start-line="33" selection-start-column="107" selection-end-line="33" selection-end-column="131" />
+            <state vertical-scroll-proportion="-1.1836228" vertical-offset="31380" max-vertical-offset="32252">
+              <caret line="1383" column="56" selection-start-line="1383" selection-start-column="39" selection-end-line="1383" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -150,18 +147,18 @@
         <option value="$PROJECT_DIR$/codes/StarFire/js/baidu/maphelper.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/js/baidu/lbscloud.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/test/testBaiduMapService.html" />
-        <option value="$PROJECT_DIR$/codes/Nodejs/RestServerCore.js" />
         <option value="$PROJECT_DIR$/codes/Nodejs/biz_modules/baiduApiOperation.js" />
         <option value="$PROJECT_DIR$/codes/Nodejs/config.js" />
         <option value="$PROJECT_DIR$/codes/Nodejs/biz_modules/serviceFacade.js" />
+        <option value="$PROJECT_DIR$/codes/Nodejs/RestServerCore.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1296" />
+    <option name="height" value="1000" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -189,7 +186,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -205,20 +201,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="codes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -372,8 +354,23 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarFire" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarFire" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="codes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -411,14 +408,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
-      <method />
-    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -429,14 +418,12 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
-      <option name="cucumberJsArguments" />
-      <option name="executablePath" />
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
       <option name="filePath" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -444,6 +431,16 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
+      <option name="filePath" />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -484,14 +481,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24895833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2484375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -562,7 +559,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="792" max-vertical-offset="5258">
           <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -605,7 +601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="4393" max-vertical-offset="5258">
           <caret line="230" column="7" selection-start-line="230" selection-start-column="7" selection-end-line="230" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -817,7 +812,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.032258" vertical-offset="3056" max-vertical-offset="5258">
           <caret line="146" column="46" selection-start-line="146" selection-start-column="42" selection-end-line="146" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -837,26 +831,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/test/testBaiduMapService.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.741936" vertical-offset="207" max-vertical-offset="1122">
-          <caret line="33" column="131" selection-start-line="33" selection-start-column="107" selection-end-line="33" selection-end-column="131" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codes/Nodejs/RestServerCore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="484" max-vertical-offset="28490">
-          <caret line="44" column="68" selection-start-line="44" selection-start-column="68" selection-end-line="44" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/codes/Nodejs/config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="792" max-vertical-offset="1650">
-          <caret line="62" column="29" selection-start-line="62" selection-start-column="2" selection-end-line="62" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1518" max-vertical-offset="1650">
+          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -873,13 +851,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.9386282" vertical-offset="2772" max-vertical-offset="5258">
           <caret line="15" column="24" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/codes/Nodejs/biz_modules/db_biz_operation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.925926" vertical-offset="3565" max-vertical-offset="21758">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3565" max-vertical-offset="21758">
           <caret line="173" column="65" selection-start-line="173" selection-start-column="65" selection-end-line="173" selection-end-column="65" />
           <folding />
         </state>
@@ -895,8 +872,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/codes/Nodejs/biz_modules/serviceFacade.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72624433" vertical-offset="8268" max-vertical-offset="9174">
-          <caret line="405" column="48" selection-start-line="405" selection-start-column="48" selection-end-line="405" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="8236" max-vertical-offset="9504">
+          <caret line="384" column="32" selection-start-line="384" selection-start-column="8" selection-end-line="384" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/test/testBaiduMapService.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.193548" vertical-offset="347" max-vertical-offset="1122">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/Nodejs/RestServerCore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.1836228" vertical-offset="31380" max-vertical-offset="32252">
+          <caret line="1383" column="56" selection-start-line="1383" selection-start-column="39" selection-end-line="1383" selection-end-column="56" />
           <folding />
         </state>
       </provider>

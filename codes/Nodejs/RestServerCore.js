@@ -1226,6 +1226,171 @@ var fetchLinkListCallbackGet = function(req, res, next)
     }
 };
 
+var createBaiduLBSGeoDataPoiCallbackPost = function(req, res, next)
+{
+    var paraToken = "token";
+    var paraInputParameter = "inputParameter";
+    var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
+    var result = new commonResult();
+    var callback = function(exception, e)
+    {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+        if (e && e!= -1)
+        {
+
+            result.status = "true";
+            result.detail = {
+                "success" : "true",
+                "result":{
+                    "stand_id":e.id
+                }
+            };
+        }
+        else
+        {
+            result.status = "false";
+            result.detail = {"message":"Internal Error!"};
+        }
+        res.json(HTTP_SUCCESS_CODE,result);
+        next();
+    };
+    serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
+        serviceOperation.createBaiduLBSGeoDataPoi,callback,requestInputParameter);
+
+};
+
+var updateBaiduLBSGeoDataPoiCallbackPost = function(req, res, next)
+{
+    var paraToken = "token";
+    var paraInputParameter = "inputParameter";
+    var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
+    var result = new commonResult();
+    var callback = function(exception, e)
+    {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+        if (e && e!= -1)
+        {
+
+            result.status = "true";
+            result.detail = {
+                "success" : "true",
+                "result":{
+                    "stand_id":e.id
+                }
+            };
+        }
+        else
+        {
+            result.status = "false";
+            result.detail = {"message":"Internal Error!"};
+        }
+        res.json(HTTP_SUCCESS_CODE,result);
+        next();
+    };
+    serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
+        serviceOperation.updateBaiduLBSGeoDataPoi,callback,requestInputParameter);
+
+};
+
+var deleteBaiduLBSGeoDataPoiCallbackPost = function(req, res, next)
+{
+    var paraToken = "token";
+    var paraInputParameter = "inputParameter";
+    var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
+    var result = new commonResult();
+    var callback = function(exception, e)
+    {
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+        if (e && e!= -1)
+        {
+
+            result.status = "true";
+            result.detail = {
+                "success" : "true",
+                "result":{
+                    "stand_id":e.id
+                }
+            };
+        }
+        else
+        {
+            result.status = "false";
+            result.detail = {"message":"Internal Error!"};
+        }
+        res.json(HTTP_SUCCESS_CODE,result);
+        next();
+    };
+    serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
+        serviceOperation.updateBaiduLBSGeoDataPoi,callback,requestInputParameter);
+
+};
+
 
 var startRestifyServer = function() {
     var server = restify.createServer();
@@ -1249,6 +1414,12 @@ var startRestifyServer = function() {
     server.post(ROUTER_ADDLINKTOSTAND + CURRENT_VERSION, cors(), addLinkToStandCallbackPost);
     server.post(ROUTER_REMOVELINKFROMSTAND + CURRENT_VERSION, cors(), removeLinkFromStandCallbackPost);
     server.get(ROUTER_FETCHLINKLIST + CURRENT_VERSION, cors(), fetchLinkListCallbackGet);
+    server.post(ROUTER_BAIDU_LBS_CREATEPOI + CURRENT_VERSION, cors(), createBaiduLBSGeoDataPoiCallbackPost);
+    server.post(ROUTER_BAIDU_LBS_UPDATEPOI + CURRENT_VERSION, cors(), updateBaiduLBSGeoDataPoiCallbackPost);
+    server.post(ROUTER_BAIDU_LBS_DELETEPOI + CURRENT_VERSION, cors(), deleteBaiduLBSGeoDataPoiCallbackPost);
+
+
+
     server.get(ROUTER_test + CURRENT_VERSION, cors(), function (req, res, next) {
         res.json("Hello, Success!!");
         next();
