@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a7ad25bf-38ad-43db-8397-e87c816d9f56" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/Nodejs/RestServerCore.js" afterPath="$PROJECT_DIR$/codes/Nodejs/RestServerCore.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/js/baidu/initial.js" afterPath="$PROJECT_DIR$/codes/StarFire/js/baidu/initial.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/js/baidu/lbscloud.js" afterPath="$PROJECT_DIR$/codes/StarFire/js/baidu/lbscloud.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/js/baidu/maphelper.js" afterPath="$PROJECT_DIR$/codes/StarFire/js/baidu/maphelper.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/Nodejs/biz_modules/serviceFacade.js" afterPath="$PROJECT_DIR$/codes/Nodejs/biz_modules/serviceFacade.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -31,7 +34,7 @@
         <entry file="file://$PROJECT_DIR$/codes/Nodejs/config.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="844" max-vertical-offset="1650">
-              <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+              <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="63" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -40,8 +43,18 @@
       <file leaf-file-name="initial.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/js/baidu/initial.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="176" max-vertical-offset="440">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="12" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="616">
+              <caret line="21" column="17" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="remoteProxy.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/remoteProxy.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="21802">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="5" selection-end-column="76" />
               <folding />
             </state>
           </provider>
@@ -50,8 +63,8 @@
       <file leaf-file-name="serviceFacade.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/Nodejs/biz_modules/serviceFacade.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="8236" max-vertical-offset="9504">
-              <caret line="384" column="32" selection-start-line="384" selection-start-column="8" selection-end-line="384" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="8324" max-vertical-offset="9526">
+              <caret line="406" column="48" selection-start-line="406" selection-start-column="48" selection-end-line="406" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -60,28 +73,18 @@
       <file leaf-file-name="baiduApiOperation.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/Nodejs/biz_modules/baiduApiOperation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="220" max-vertical-offset="2178">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1359" max-vertical-offset="2178">
               <caret line="10" column="62" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lbscloud.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/codes/StarFire/js/baidu/lbscloud.js">
+      <file leaf-file-name="maphelper.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/codes/StarFire/js/baidu/maphelper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2133" max-vertical-offset="6556">
-              <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="105" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="db_biz_operation.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/codes/Nodejs/biz_modules/db_biz_operation.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3565" max-vertical-offset="21758">
-              <caret line="173" column="65" selection-start-line="173" selection-start-column="65" selection-end-line="173" selection-end-column="65" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2866" max-vertical-offset="6248">
+              <caret line="151" column="49" selection-start-line="151" selection-start-column="49" selection-end-line="151" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -90,8 +93,8 @@
       <file leaf-file-name="default.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/default.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3987" max-vertical-offset="4840">
-              <caret line="188" column="74" selection-start-line="188" selection-start-column="74" selection-end-line="188" selection-end-column="74" />
+            <state vertical-scroll-proportion="-20.419355" vertical-offset="3987" max-vertical-offset="4840">
+              <caret line="210" column="0" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -107,11 +110,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RestServerCore.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="RestServerCore.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/Nodejs/RestServerCore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.1836228" vertical-offset="31380" max-vertical-offset="32252">
-              <caret line="1383" column="56" selection-start-line="1383" selection-start-column="39" selection-end-line="1383" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="28399" max-vertical-offset="32252">
+              <caret line="1307" column="25" selection-start-line="1307" selection-start-column="19" selection-end-line="1307" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lbscloud.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/codes/StarFire/js/baidu/lbscloud.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.60545903" vertical-offset="4484" max-vertical-offset="6468">
+              <caret line="226" column="52" selection-start-line="226" selection-start-column="51" selection-end-line="226" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -144,13 +157,14 @@
         <option value="$PROJECT_DIR$/codes/StarFire/test/testNodejs.html" />
         <option value="$PROJECT_DIR$/codes/StarFire/default.html" />
         <option value="$PROJECT_DIR$/codes/BaiduAPI/js/maphelper.js" />
-        <option value="$PROJECT_DIR$/codes/StarFire/js/baidu/maphelper.js" />
-        <option value="$PROJECT_DIR$/codes/StarFire/js/baidu/lbscloud.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/test/testBaiduMapService.html" />
         <option value="$PROJECT_DIR$/codes/Nodejs/biz_modules/baiduApiOperation.js" />
         <option value="$PROJECT_DIR$/codes/Nodejs/config.js" />
-        <option value="$PROJECT_DIR$/codes/Nodejs/biz_modules/serviceFacade.js" />
+        <option value="$PROJECT_DIR$/codes/StarFire/js/baidu/maphelper.js" />
+        <option value="$PROJECT_DIR$/codes/StarFire/js/baidu/initial.js" />
         <option value="$PROJECT_DIR$/codes/Nodejs/RestServerCore.js" />
+        <option value="$PROJECT_DIR$/codes/Nodejs/biz_modules/serviceFacade.js" />
+        <option value="$PROJECT_DIR$/codes/StarFire/js/baidu/lbscloud.js" />
       </list>
     </option>
   </component>
@@ -192,180 +206,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="StarFire" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="codes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="codes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="codes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="codes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="baidu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="codes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Nodejs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="codes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Nodejs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="db_modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="codes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Nodejs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="biz_modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="codes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -477,13 +317,18 @@
       <created>1421939001148</created>
       <updated>1421939001148</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Update Node.js Baidu LBS">
+      <created>1422264612777</created>
+      <updated>1422264612777</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -498,7 +343,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896176" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -521,7 +365,8 @@
     </option>
     <MESSAGE value="Update UI documents" />
     <MESSAGE value="Merging UI code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merging UI code" />
+    <MESSAGE value="Update Node.js Baidu LBS" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Node.js Baidu LBS" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -737,13 +582,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/remoteProxy.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2091" max-vertical-offset="21802">
-          <caret line="503" column="38" selection-start-line="503" selection-start-column="38" selection-end-line="503" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/codes/Nodejs/test_modules/test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
@@ -793,14 +631,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/baidu/maphelper.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="819" max-vertical-offset="6248">
-          <caret line="54" column="24" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/codes/BaiduAPI/map.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="841" max-vertical-offset="1694">
@@ -812,38 +642,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.032258" vertical-offset="3056" max-vertical-offset="5258">
           <caret line="146" column="46" selection-start-line="146" selection-start-column="42" selection-end-line="146" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/default.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3987" max-vertical-offset="4840">
-          <caret line="188" column="74" selection-start-line="188" selection-start-column="74" selection-end-line="188" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/baidu/lbscloud.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2133" max-vertical-offset="6556">
-          <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="105" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codes/Nodejs/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1518" max-vertical-offset="1650">
-          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/baidu/initial.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="440">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="12" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -862,6 +660,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/test/testBaiduMapService.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.193548" vertical-offset="347" max-vertical-offset="1122">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/default.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.419355" vertical-offset="3987" max-vertical-offset="4840">
+          <caret line="210" column="0" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/Nodejs/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="844" max-vertical-offset="1650">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="63" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/remoteProxy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="21802">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="5" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/codes/Nodejs/biz_modules/baiduApiOperation.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2178">
@@ -872,24 +702,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/codes/Nodejs/biz_modules/serviceFacade.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="8236" max-vertical-offset="9504">
-          <caret line="384" column="32" selection-start-line="384" selection-start-column="8" selection-end-line="384" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="8324" max-vertical-offset="9526">
+          <caret line="406" column="48" selection-start-line="406" selection-start-column="48" selection-end-line="406" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/test/testBaiduMapService.html">
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/baidu/initial.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.193548" vertical-offset="347" max-vertical-offset="1122">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="616">
+          <caret line="21" column="17" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/baidu/maphelper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2866" max-vertical-offset="6248">
+          <caret line="151" column="49" selection-start-line="151" selection-start-column="49" selection-end-line="151" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/codes/Nodejs/RestServerCore.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.1836228" vertical-offset="31380" max-vertical-offset="32252">
-          <caret line="1383" column="56" selection-start-line="1383" selection-start-column="39" selection-end-line="1383" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="28399" max-vertical-offset="32252">
+          <caret line="1307" column="25" selection-start-line="1307" selection-start-column="19" selection-end-line="1307" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/baidu/lbscloud.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.60545903" vertical-offset="4484" max-vertical-offset="6468">
+          <caret line="226" column="52" selection-start-line="226" selection-start-column="51" selection-end-line="226" selection-end-column="52" />
           <folding />
         </state>
       </provider>

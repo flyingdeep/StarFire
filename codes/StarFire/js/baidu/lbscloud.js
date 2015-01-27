@@ -1,5 +1,10 @@
 // creat a new postion
- function creatLbsPostion( Json_stand_position_info, output_json_result, successAction, failedAction)
+ var CONST_POI_CREATE = CONST_ZHAOTANTOU_API_URI + "BaiduLBS/CreatPoi";
+var CONST_POI_UPDATE = CONST_ZHAOTANTOU_API_URI + "BaiduLBS/UpdatePoi";
+var CONST_POI_DELETE = CONST_ZHAOTANTOU_API_URI + "BaiduLBS/DeletePoi";
+
+
+ function creatLbsPostion( callback, Json_stand_position_info, output_json_result)
  {
     var jsonInput ={
         "title":  Json_stand_position_info.title,
@@ -7,45 +12,34 @@
         "tags": Json_stand_position_info.tags,
         "latitude": Json_stand_position_info.latitude,
         "longitude": Json_stand_position_info.longitude,
-        "coord_type": Json_stand_position_info.coord_type,
-        "geotable_id": Json_stand_position_info.geotable_id,
-        "ak" : Json_stand_position_info.ak,
         // customized fields
-
-        "realtime_location":Json_stand_position_info.realtime_location,
-        "isactive":Json_stand_position_info.isactive,
-        "mark":Json_stand_position_info.mark,
-        "update_date":Json_stand_position_info.update_date,
         "creater_id" : Json_stand_position_info.creater_id,
         "create_user" : Json_stand_position_info.create_user,
         "description" : Json_stand_position_info.description,
-        "create_date" : Json_stand_position_info.create_date,
         "stand_image_tip" : Json_stand_position_info.stand_image_tip
     };
     var inputString =  JSON.stringify(jsonInput);
 
-	jQuery.post("http://api.map.baidu.com/geodata/v3/poi/create",inputString
+	jQuery.post(CONST_POI_CREATE,inputString
 	 ,function(data,status){
             alert("response");
 			if (status == "success" && data.status == 0 )
 			{
 				output_json_result.status = "success";
-				output_json_result.message = data.message;
-				output_json_result.data = data.id;
-				successAction();
+				output_json_result.message = "true";
+				output_json_result.data = data.detail.result;
 			}
 			else if (status != "success")
 			{
 				output_json_result.status = "failed";
 				output_json_result.message = "Post failed";
-				failedAction();
 			}
 			else
 			{
 				output_json_result.status = "failed";
 				output_json_result.message = data.message;
-				failedAction();
 			}
+            callback(output_json_result);
     
   });
  }
@@ -57,12 +51,12 @@
  // query one point by id
 
 
-function queryLbsPostion(Json_stand_queryone, output_json_result)
+function queryLbsPostionList(Json_stand_queryone, output_json_result)
 {
 	querystring = "id=" + Json_stand_queryone.id + "&geotable_id=" + Json_stand_queryone.geotable_id + "&ak=" + Json_stand_queryone.ak;
-	url = "http://api.map.baidu.com/geodata/v3/poi/detail?" + querystring;
+	url = BAIDU_LBS_URI+"geodata/v3/poi/list?callback=?&" + querystring;
 
-	jQuery.get(url, 
+	jQuery.getJSON(url,
 	function(data,status){
 			if (status == "success" && data.status == 0 )
 			{
@@ -95,12 +89,12 @@ function queryLbsPostion(Json_stand_queryone, output_json_result)
  // query one point by id
 
 
-function queryLbsPostion(Json_stand_querymultiple, output_json_result)
+function queryLbsPostionSingleDetail(Json_stand_querymultiple, output_json_result)
 {
 	querystring = "id=" + Json_stand_queryone.id + "&geotable_id=" + Json_stand_queryone.geotable_id + "&ak=" + Json_stand_queryone.ak;
-	url = "http://api.map.baidu.com/geodata/v3/poi/detail?" + querystring;
+	url = BAIDU_LBS_URI+"geodata/v3/poi/detail?callback=?&" + querystring;
 
-	jQuery.get(url, 
+	jQuery.getJSON(url,
 	function(data,status){
 			if (status == "success" && data.status == 0 )
 			{
@@ -119,7 +113,7 @@ function queryLbsPostion(Json_stand_querymultiple, output_json_result)
 			else
 			{
 				output_json_result.status = "failed";
-				output_json_result.message = data.message;
+				output_json_result.message = data.detail.message;
 				failedAction();
 			}
     
@@ -132,9 +126,9 @@ function queryLbsPostion(Json_stand_querymultiple, output_json_result)
 
 // update one point
 
- function updateLbsPostion( Json_stand_position_info, output_json_result,  successAction, failedAction)
+ function updateLbsPostion(callback,Json_stand_position_info, output_json_result)
  {
-	jQuery.post("http://api.map.baidu.com/geodata/v3/poi/update",
+	jQuery.post(CONST_POI_UPDATE,
 	 {
 		"id" : Json_stand_position_info.idb,
 		"title":  Json_stand_position_info.title,
@@ -162,22 +156,23 @@ function queryLbsPostion(Json_stand_querymultiple, output_json_result)
 			if (status == "success" && data.status == 0 )
 			{
 				output_json_result.status = "success";
-				output_json_result.message = data.message;
-				output_json_result.data = data.id;
-				successAction();
+				output_json_result.message = "true";
+				output_json_result.data = data.detail.result;
+
 			}
 			else if (status != "success")
 			{
 				output_json_result.status = "failed";
 				output_json_result.message = "Post failed";
-				failedAction();
+
 			}
 			else
 			{
 				output_json_result.status = "failed";
-				output_json_result.message = data.message;
-				failedAction();
+				output_json_result.message = data.detail.message;
+
 			}
+            callback(output_json_result);
     
   });
  }
@@ -186,28 +181,29 @@ function queryLbsPostion(Json_stand_querymultiple, output_json_result)
 
  function deleteLbsPostion( id, output_json_result,  successAction, failedAction)
  {
-	jQuery.post("http://api.map.baidu.com/geodata/v3/poi/delete", 
+	jQuery.post(CONST_POI_DELETE,
 	 {"id":id},
 		function(data,status){
-			if (status == "success" && data.status == 0 )
-			{
-				output_json_result.status = "success";
-				output_json_result.message = data.message;
-				output_json_result.data = data.id;
-				successAction();
-			}
-			else if (status != "success")
-			{
-				output_json_result.status = "failed";
-				output_json_result.message = "Post failed";
-				failedAction();
-			}
-			else
-			{
-				output_json_result.status = "failed";
-				output_json_result.message = data.message;
-				failedAction();
-			}
+            if (status == "success" && data.status == 0 )
+            {
+                output_json_result.status = "success";
+                output_json_result.message = "true";
+                output_json_result.data = data.detail.result;
+
+            }
+            else if (status != "success")
+            {
+                output_json_result.status = "failed";
+                output_json_result.message = "Post failed";
+
+            }
+            else
+            {
+                output_json_result.status = "failed";
+                output_json_result.message = data.detail.message;
+
+            }
+            callback(output_json_result);
     
   });
 
@@ -216,35 +212,36 @@ function queryLbsPostion(Json_stand_querymultiple, output_json_result)
 
 //search point based on target postion
 
-function searchStandPostionByPoint(search_condition, output_json_result,  successAction, failedAction)
+function searchStandPostionByPoint(callback,search_condition, output_json_result)
 {
 	querystring = "ak=" + search_condition.ak + "&geotable_id=" + search_condition.geotable_id + "&location=" + search_condition.location+"&coord_type=" +
 		search_condition.coord_type + "&radius=" + search_condition.radius + "&tags=" + search_condition.tags + "&sortby=" + search_condition.sortby
 		+ "&filter=" + search_condition.filter + "&page_index=" + search_condition.page_index + "&page_size=" + search_condition.page_size ;
-	url = "http://api.map.baidu.com/geosearch/v3/nearby?" + querystring;
+	url = BAIDU_LBS_URI+"geosearch/v3/nearby?callback=?&" + querystring;
 
 	jQuery.get(url, 
 	function(data,status){
 			if (status == "success" && data.status == 0 )
 			{
 				output_json_result.status = "success";
-				output_json_result.message = data.message;
+				output_json_result.message = "true";
 				output_json_result.data = data;
-				successAction();
+
 			}
 			else if (status != "success")
 			{
 				output_json_result.status = "failed";
 				output_json_result.message = "Post failed";
-				failedAction();
+
 				
 			}
 			else
 			{
 				output_json_result.status = "failed";
 				output_json_result.message = data.message;
-				failedAction();
+
 			}
+        callback(output_json_result);
     
   }
 
@@ -254,38 +251,37 @@ function searchStandPostionByPoint(search_condition, output_json_result,  succes
 
 //search point based on area
 
-function searchStandPostionByArea(search_condition, output_json_result,  successAction, failedAction)
+function searchStandPostionByArea(callback, search_condition, output_json_result)
 {
 	querystring = "ak=" + search_condition.ak + "&geotable_id=" + search_condition.geotable_id + "&region=" + search_condition.region+"&coord_type=" +
 		search_condition.coord_type  + "&tags=" + search_condition.tags + "&sortby=" + search_condition.sortby
 		+ "&filter=" + search_condition.filter + "&page_index=" + search_condition.page_index + "&page_size=" + search_condition.page_size ;
-	url = "http://api.map.baidu.com/geosearch/v3/local?" + querystring;
+	url = BAIDU_LBS_URI+"geosearch/v3/local?callback=?&" + querystring;
 
-	jQuery.get(url, 
+	jQuery.getJSON(url,
 	function(data,status){
 			if (status == "success" && data.status == 0 )
 			{
 				output_json_result.status = "success";
-				output_json_result.message = data.message;
+				output_json_result.message = "true";
 				output_json_result.data = data;
-				successAction();
+
 			}
 			else if (status != "success")
 			{
 				output_json_result.status = "failed";
 				output_json_result.message = "Post failed";
-				failedAction();
+
 				
 			}
 			else
 			{
 				output_json_result.status = "failed";
 				output_json_result.message = data.message;
-				failedAction();
-			}
-    
-  }
 
+			}
+        callback(output_json_result);
+        }
 	);
 
 }

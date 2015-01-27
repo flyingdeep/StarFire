@@ -131,7 +131,7 @@ var authenticateUserCallbackPost = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -209,7 +209,7 @@ var registerUserCallbackPost = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -269,7 +269,7 @@ var updateUserCallbackPost = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -326,7 +326,7 @@ var updateUserPreferenceCallbackPost = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -383,7 +383,7 @@ var createStandCallbackPost = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -440,7 +440,7 @@ var updateStandCallbackPost = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -496,7 +496,7 @@ var changeRealTimeLocationStatusCallbackPost = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -561,7 +561,7 @@ var getStandCustomerMarkCommentsCallbackGet = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -639,7 +639,7 @@ var createStandMarkCommentsCallbackPost = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -697,7 +697,7 @@ var getStandMarkCommentsExistCallbackGet = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -767,7 +767,7 @@ var createStandOwnerMessageCallbackPost = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -831,7 +831,7 @@ var getStandOwnerMessagesCallbackGet = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -905,7 +905,7 @@ var getStandTypesCallbackGet = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -967,7 +967,7 @@ var getImageUploadSecurityStringCallbackGet = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -1003,7 +1003,7 @@ var getAuthCodeCallbackGet = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -1059,7 +1059,7 @@ var addLinkToStandCallbackPost = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -1114,7 +1114,7 @@ var removeLinkFromStandCallbackPost = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -1177,7 +1177,7 @@ var fetchLinkListCallbackGet = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -1250,7 +1250,7 @@ var createBaiduLBSGeoDataPoiCallbackPost = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -1305,7 +1305,7 @@ var updateBaiduLBSGeoDataPoiCallbackPost = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);
@@ -1360,7 +1360,7 @@ var deleteBaiduLBSGeoDataPoiCallbackPost = function(req, res, next)
         if (exception && DEBUG_FLAG )
         {
             result.status = "false";
-            result.detail = {"message":exception.message, "detail":exception.stack};
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
             console.log(exception.message);
             console.log(exception.stack);
             res.json(HTTP_SUCCESS_CODE,result);

@@ -382,7 +382,7 @@ exports.createBaiduLBSGeoDataPoi = function(callback, title,address,tags,latitud
     baiduLBSOperation.createBaiduLBSGeoDataPoi(callback,PoiInfoJson);
 };
 
-exports.updateBaiduLBSGeoDataPoi = function(callback, title,address,tags,latitude,longtitude,description,create_user,creater_id, stand_image_tip)
+exports.updateBaiduLBSGeoDataPoi = function(callback,stand_id, title,address,tags,latitude,longtitude,description, stand_image_tip)
 {
     var geotable_id =  CONST_STAND_LOCATION_INFO_TABLEID;
     var ak = CONST_AK;
@@ -393,6 +393,7 @@ exports.updateBaiduLBSGeoDataPoi = function(callback, title,address,tags,latitud
     var update_date = create_date;
     var mark =0;
     var PoiInfoJson = {
+        "id":stand_id,
         "stand_image_tip": stand_image_tip,
         "title" : title,
         "address" : address,

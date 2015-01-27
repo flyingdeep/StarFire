@@ -60,7 +60,7 @@ function createNewJsonStandPositionInfoInstance()
 		"latitude": null,
 		"longitude": null,
 		"coord_type": 3,
-		"geotable_id": CONST_GEOTABLE_ID,
+		"geotable_id": CONST_STAND_LOCATION_INFO_TABLEID,
 		"ak" : CONST_AK,
 	// customized fields
 		"realtime_location":CONST_REALTIME_LOCATION,
@@ -91,7 +91,7 @@ function createUpdateJsonStandPositionInfoInstance()
 		"latitude": null,
 		"longitude": null,
 		"coord_type": 3,
-		"geotable_id": CONST_GEOTABLE_ID,
+		"geotable_id": CONST_STAND_LOCATION_INFO_TABLEID,
 		"ak" : CONST_AK,
 
 
@@ -117,7 +117,7 @@ function createJsonStandQueryOne()
 {
 	var resultJson = {
 		"id":  null,
-		"geotable_id": CONST_GEOTABLE_ID,
+		"geotable_id": CONST_STAND_LOCATION_INFO_TABLEID,
 		"ak": CONST_AK
 	}
 	return resultJson;
@@ -132,7 +132,7 @@ function createJsonSearchConditionForPointSearch()
 
 	var resultJson = {
 	"ak": CONST_AK,
-	"geotable_id": CONST_GEOTABLE_ID,
+	"geotable_id": CONST_STAND_LOCATION_INFO_TABLEID,
 	"location": null,
 	"coord_type": CONST_COORDS_TYPE,
 	"radius":null,
@@ -154,7 +154,7 @@ function createJsonSearchConditionForAreaSearch()
 
 	var resultJson = {
 	"ak": CONST_AK,
-	"geotable_id": CONST_GEOTABLE_ID,
+	"geotable_id": CONST_STAND_LOCATION_INFO_TABLEID,
 	"region": null,
 	"coord_type": CONST_COORDS_TYPE,
 	"tags":null,
