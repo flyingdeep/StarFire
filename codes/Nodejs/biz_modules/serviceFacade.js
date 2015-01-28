@@ -350,7 +350,7 @@ exports.fetchLinkListByStandId = function(callback,standId, offset, pageSize, or
     standUserLinkOperation.fetchSandUserLinkByStandId( callback,standId, offset, pageSize, order);
 };
 
-exports.createBaiduLBSGeoDataPoi = function(callback, title,address,tags,latitude,longtitude,description,create_user,creater_id, stand_image_tip)
+exports.createBaiduLBSGeoDataPoi = function(callback, standInfo)
 {
     var geotable_id =  CONST_STAND_LOCATION_INFO_TABLEID;
     var ak = CONST_AK;
@@ -361,12 +361,12 @@ exports.createBaiduLBSGeoDataPoi = function(callback, title,address,tags,latitud
     var update_date = create_date;
     var mark =0;
     var PoiInfoJson = {
-        "stand_image_tip": stand_image_tip,
-        "title" : title,
-        "address" : address,
-        "tags":tags,
-        "latitude" : latitude,
-        "longtitude":longtitude,
+        "stand_image_tip": standInfo.stand_image_tip,
+        "title" : standInfo.title,
+        "address" : standInfo.address,
+        "tags":standInfo.tags,
+        "latitude" : standInfo.latitude,
+        "longtitude":standInfo.longtitude,
         "coord_type":coord_type,
         "geotable_id": geotable_id,
         "ak":ak,
@@ -375,53 +375,48 @@ exports.createBaiduLBSGeoDataPoi = function(callback, title,address,tags,latitud
         "realtime_location" : realtime_location,
         "isactive" : isactive,
         "mark" : mark,
-        "description":description,
-        "create_user":create_user,
-        "creater_id" : creater_id
+        "description":standInfo.description,
+        "create_user":standInfo.create_user,
+        "creater_id" : standInfo.creater_id
     };
     baiduLBSOperation.createBaiduLBSGeoDataPoi(callback,PoiInfoJson);
 };
 
-exports.updateBaiduLBSGeoDataPoi = function(callback,stand_id, title,address,tags,latitude,longtitude,description, stand_image_tip)
+exports.updateBaiduLBSGeoDataPoi = function(callback,standInfo)
 {
     var geotable_id =  CONST_STAND_LOCATION_INFO_TABLEID;
     var ak = CONST_AK;
     var coord_type = CONST_COORDS_TYPE;
-    var realtime_location = CONST_REALTIME_LOCATION;
-    var isactive = CONST_ISACTIVE;
-    var create_date = (new Date()).getTime();
-    var update_date = create_date;
+    var update_date = (new Date()).getTime();;
     var mark =0;
     var PoiInfoJson = {
-        "id":stand_id,
-        "stand_image_tip": stand_image_tip,
-        "title" : title,
-        "address" : address,
-        "tags":tags,
-        "latitude" : latitude,
-        "longtitude":longtitude,
+        "id":standInfo.stand_id,
+        "stand_image_tip": standInfo.stand_image_tip,
+        "title" : standInfo.title,
+        "address" : standInfo.address,
+        "tags":standInfo.tags,
+        "latitude" : standInfo.latitude,
+        "longtitude":standInfo.longtitude,
         "coord_type":coord_type,
         "geotable_id": geotable_id,
         "ak":ak,
         "update_date" : update_date,
-        "realtime_location" : realtime_location,
-        "isactive" : isactive,
-        "description":description
+        "realtime_location" : standInfo.realtime_location,
+        "isactive" : standInfo.isactive,
+        "mark":mark,
+        "description":standInfo.description
     };
     baiduLBSOperation.updateBaiduLBSGeoDataPoi(callback,PoiInfoJson);
 };
 
-exports.deleteBaiduLBSGeoDataPoi = function(callback, title,tags,create_user,creater_id)
+exports.deleteBaiduLBSGeoDataPoi = function(callback, standInfo)
 {
     var geotable_id =  CONST_STAND_LOCATION_INFO_TABLEID;
     var ak = CONST_AK;
     var PoiInfoJson = {
-        "title" : title,
-        "tags":tags,
+        "id" : standInfo.id,
         "geotable_id": geotable_id,
-        "ak":ak,
-        "create_user":create_user,
-        "creater_id" : creater_id
+        "ak":ak
     };
     baiduLBSOperation.deleteBaiduLBSGeoDataPoi(callback,PoiInfoJson);
 };

@@ -31,13 +31,11 @@
 //                alert("failed");
 //            }
 //    )
-    $.getJSON("http://api.map.baidu.com/geodata/v3/poi/detail?callback=?&id=537234303&geotable_id=84451&ak=NpZPLFzDKjPWEenu8D2yf4vS",function(data,status){
-                alert(status);
-        if (status == "success" && data.status == 0 ) {
 
-        }
-        }
-    );
+
+    var JsonInput = createNewJsonStandPositionInfoInstance();
+creatLbsPostion(function(e){alert(JSON.stringify(e));},JsonInput);
+
 
 
 

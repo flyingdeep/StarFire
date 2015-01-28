@@ -18,5 +18,6 @@ var CONST_INIT_MARK = null;
 var REST_SERVER_DOMAIN = "http://localhost";
 var APP_URI = "zhaotantou";
 var PORT = "8080";
+var LASTED_VERSION = "v1";
 var CONST_ZHAOTANTOU_API_URI  = REST_SERVER_DOMAIN + ":" + PORT + "/" + APP_URI + "/";
 var BAIDU_LBS_URI = "http://api.map.baidu.com/";

@@ -1,10 +1,10 @@
 // creat a new postion
- var CONST_POI_CREATE = CONST_ZHAOTANTOU_API_URI + "BaiduLBS/CreatPoi";
-var CONST_POI_UPDATE = CONST_ZHAOTANTOU_API_URI + "BaiduLBS/UpdatePoi";
-var CONST_POI_DELETE = CONST_ZHAOTANTOU_API_URI + "BaiduLBS/DeletePoi";
+ var CONST_POI_CREATE = CONST_ZHAOTANTOU_API_URI + "BaiduLBS/CreatPoi/" +LASTED_VERSION;
+var CONST_POI_UPDATE = CONST_ZHAOTANTOU_API_URI + "BaiduLBS/UpdatePoi/" +LASTED_VERSION;
+var CONST_POI_DELETE = CONST_ZHAOTANTOU_API_URI + "BaiduLBS/DeletePoi/" +LASTED_VERSION;
 
 
- function creatLbsPostion( callback, Json_stand_position_info, output_json_result)
+ function creatLbsPostion( callback, Json_stand_position_info)
  {
     var jsonInput ={
         "title":  Json_stand_position_info.title,
@@ -19,10 +19,10 @@ var CONST_POI_DELETE = CONST_ZHAOTANTOU_API_URI + "BaiduLBS/DeletePoi";
         "stand_image_tip" : Json_stand_position_info.stand_image_tip
     };
     var inputString =  JSON.stringify(jsonInput);
-
+    var output_json_result = createOutputJsonInstance();
 	jQuery.post(CONST_POI_CREATE,inputString
 	 ,function(data,status){
-            alert("response");
+           // alert("response");
 			if (status == "success" && data.status == 0 )
 			{
 				output_json_result.status = "success";
@@ -51,11 +51,11 @@ var CONST_POI_DELETE = CONST_ZHAOTANTOU_API_URI + "BaiduLBS/DeletePoi";
  // query one point by id
 
 
-function queryLbsPostionList(Json_stand_queryone, output_json_result)
+function queryLbsPostionList(Json_stand_queryone)
 {
 	querystring = "id=" + Json_stand_queryone.id + "&geotable_id=" + Json_stand_queryone.geotable_id + "&ak=" + Json_stand_queryone.ak;
 	url = BAIDU_LBS_URI+"geodata/v3/poi/list?callback=?&" + querystring;
-
+    var output_json_result = createOutputJsonInstance();
 	jQuery.getJSON(url,
 	function(data,status){
 			if (status == "success" && data.status == 0 )
@@ -89,11 +89,11 @@ function queryLbsPostionList(Json_stand_queryone, output_json_result)
  // query one point by id
 
 
-function queryLbsPostionSingleDetail(Json_stand_querymultiple, output_json_result)
+function queryLbsPostionSingleDetail(Json_stand_querymultiple)
 {
 	querystring = "id=" + Json_stand_queryone.id + "&geotable_id=" + Json_stand_queryone.geotable_id + "&ak=" + Json_stand_queryone.ak;
 	url = BAIDU_LBS_URI+"geodata/v3/poi/detail?callback=?&" + querystring;
-
+    var output_json_result = createOutputJsonInstance();
 	jQuery.getJSON(url,
 	function(data,status){
 			if (status == "success" && data.status == 0 )
@@ -126,8 +126,9 @@ function queryLbsPostionSingleDetail(Json_stand_querymultiple, output_json_resul
 
 // update one point
 
- function updateLbsPostion(callback,Json_stand_position_info, output_json_result)
+ function updateLbsPostion(callback,Json_stand_position_info)
  {
+     var output_json_result = createOutputJsonInstance();
 	jQuery.post(CONST_POI_UPDATE,
 	 {
 		"id" : Json_stand_position_info.idb,
@@ -136,21 +137,13 @@ function queryLbsPostionSingleDetail(Json_stand_querymultiple, output_json_resul
 		"tags": Json_stand_position_info.tags,
 		"latitude": Json_stand_position_info.latitude,
 		"longitude": Json_stand_position_info.longitude,
-		"coord_type": Json_stand_position_info.coord_type,
-		"geotable_id": Json_stand_position_info.geotable_id,
-		"ak" : Json_stand_position_info.ak,
+
 	// customized fields
 
 		"realtime_location":Json_stand_position_info.realtime_location,
 			"isactive":Json_stand_position_info.isactive,
 			"mark":Json_stand_position_info.mark,
-			"update_date":Json_stand_position_info.update_date,
-			"creater_id" : Json_stand_position_info.creater_id,
-			"create_user" : Json_stand_position_info.create_user,
 			"description" : Json_stand_position_info.description,
-			"working_time" : Json_stand_position_info.working_time,
-			"week_working_day" : Json_stand_position_info.week_working_day,
-			"create_date" : Json_stand_position_info.create_date,
 			"stand_image_tip" : Json_stand_position_info.stand_image_tip
 	},function(data,status){
 			if (status == "success" && data.status == 0 )
@@ -179,8 +172,9 @@ function queryLbsPostionSingleDetail(Json_stand_querymultiple, output_json_resul
 
  //delete one point
 
- function deleteLbsPostion( id, output_json_result,  successAction, failedAction)
+ function deleteLbsPostion( id, output_json_result)
  {
+     var output_json_result = createOutputJsonInstance();
 	jQuery.post(CONST_POI_DELETE,
 	 {"id":id},
 		function(data,status){
@@ -212,13 +206,13 @@ function queryLbsPostionSingleDetail(Json_stand_querymultiple, output_json_resul
 
 //search point based on target postion
 
-function searchStandPostionByPoint(callback,search_condition, output_json_result)
+function searchStandPostionByPoint(callback,search_condition)
 {
 	querystring = "ak=" + search_condition.ak + "&geotable_id=" + search_condition.geotable_id + "&location=" + search_condition.location+"&coord_type=" +
 		search_condition.coord_type + "&radius=" + search_condition.radius + "&tags=" + search_condition.tags + "&sortby=" + search_condition.sortby
 		+ "&filter=" + search_condition.filter + "&page_index=" + search_condition.page_index + "&page_size=" + search_condition.page_size ;
 	url = BAIDU_LBS_URI+"geosearch/v3/nearby?callback=?&" + querystring;
-
+    var output_json_result = createOutputJsonInstance();
 	jQuery.get(url, 
 	function(data,status){
 			if (status == "success" && data.status == 0 )
@@ -251,13 +245,13 @@ function searchStandPostionByPoint(callback,search_condition, output_json_result
 
 //search point based on area
 
-function searchStandPostionByArea(callback, search_condition, output_json_result)
+function searchStandPostionByArea(callback, search_condition)
 {
 	querystring = "ak=" + search_condition.ak + "&geotable_id=" + search_condition.geotable_id + "&region=" + search_condition.region+"&coord_type=" +
 		search_condition.coord_type  + "&tags=" + search_condition.tags + "&sortby=" + search_condition.sortby
 		+ "&filter=" + search_condition.filter + "&page_index=" + search_condition.page_index + "&page_size=" + search_condition.page_size ;
 	url = BAIDU_LBS_URI+"geosearch/v3/local?callback=?&" + querystring;
-
+    var output_json_result = createOutputJsonInstance();
 	jQuery.getJSON(url,
 	function(data,status){
 			if (status == "success" && data.status == 0 )
