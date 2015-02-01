@@ -3,6 +3,15 @@
 var CONST_POI_UPDATE = CONST_ZHAOTANTOU_API_URI + "BaiduLBS/UpdatePoi/" +LASTED_VERSION;
 var CONST_POI_DELETE = CONST_ZHAOTANTOU_API_URI + "BaiduLBS/DeletePoi/" +LASTED_VERSION;
 
+function creatLbsPostionBase()
+{}
+
+function updateLbsPostionBase()
+{}
+
+function deleteLbsPostion()
+{}
+
 
  function creatLbsPostion( callback, Json_stand_position_info)
  {
@@ -43,6 +52,86 @@ var CONST_POI_DELETE = CONST_ZHAOTANTOU_API_URI + "BaiduLBS/DeletePoi/" +LASTED_
     
   });
  }
+
+// update one point
+
+function updateLbsPostion(callback,Json_stand_position_info)
+{
+    var output_json_result = createOutputJsonInstance();
+    jQuery.post(CONST_POI_UPDATE,
+        {
+            "id" : Json_stand_position_info.idb,
+            "title":  Json_stand_position_info.title,
+            "address": Json_stand_position_info.address,
+            "tags": Json_stand_position_info.tags,
+            "latitude": Json_stand_position_info.latitude,
+            "longitude": Json_stand_position_info.longitude,
+
+            // customized fields
+
+            "realtime_location":Json_stand_position_info.realtime_location,
+            "isactive":Json_stand_position_info.isactive,
+            "mark":Json_stand_position_info.mark,
+            "description" : Json_stand_position_info.description,
+            "stand_image_tip" : Json_stand_position_info.stand_image_tip
+        },function(data,status){
+            if (status == "success" && data.status == 0 )
+            {
+                output_json_result.status = "success";
+                output_json_result.message = "true";
+                output_json_result.data = data.detail.result;
+
+            }
+            else if (status != "success")
+            {
+                output_json_result.status = "failed";
+                output_json_result.message = "Post failed";
+
+            }
+            else
+            {
+                output_json_result.status = "failed";
+                output_json_result.message = data.detail.message;
+
+            }
+            callback(output_json_result);
+
+        });
+}
+
+//delete one point
+
+function deleteLbsPostion( id, output_json_result)
+{
+    var output_json_result = createOutputJsonInstance();
+    jQuery.post(CONST_POI_DELETE,
+        {"id":id},
+        function(data,status){
+            if (status == "success" && data.status == 0 )
+            {
+                output_json_result.status = "success";
+                output_json_result.message = "true";
+                output_json_result.data = data.detail.result;
+
+            }
+            else if (status != "success")
+            {
+                output_json_result.status = "failed";
+                output_json_result.message = "Post failed";
+
+            }
+            else
+            {
+                output_json_result.status = "failed";
+                output_json_result.message = data.detail.message;
+
+            }
+            callback(output_json_result);
+
+        });
+
+
+}
 
 
 
@@ -124,85 +213,7 @@ function queryLbsPostionSingleDetail(Json_stand_querymultiple)
 
 
 
-// update one point
 
- function updateLbsPostion(callback,Json_stand_position_info)
- {
-     var output_json_result = createOutputJsonInstance();
-	jQuery.post(CONST_POI_UPDATE,
-	 {
-		"id" : Json_stand_position_info.idb,
-		"title":  Json_stand_position_info.title,
-		"address": Json_stand_position_info.address,
-		"tags": Json_stand_position_info.tags,
-		"latitude": Json_stand_position_info.latitude,
-		"longitude": Json_stand_position_info.longitude,
-
-	// customized fields
-
-		"realtime_location":Json_stand_position_info.realtime_location,
-			"isactive":Json_stand_position_info.isactive,
-			"mark":Json_stand_position_info.mark,
-			"description" : Json_stand_position_info.description,
-			"stand_image_tip" : Json_stand_position_info.stand_image_tip
-	},function(data,status){
-			if (status == "success" && data.status == 0 )
-			{
-				output_json_result.status = "success";
-				output_json_result.message = "true";
-				output_json_result.data = data.detail.result;
-
-			}
-			else if (status != "success")
-			{
-				output_json_result.status = "failed";
-				output_json_result.message = "Post failed";
-
-			}
-			else
-			{
-				output_json_result.status = "failed";
-				output_json_result.message = data.detail.message;
-
-			}
-            callback(output_json_result);
-    
-  });
- }
-
- //delete one point
-
- function deleteLbsPostion( id, output_json_result)
- {
-     var output_json_result = createOutputJsonInstance();
-	jQuery.post(CONST_POI_DELETE,
-	 {"id":id},
-		function(data,status){
-            if (status == "success" && data.status == 0 )
-            {
-                output_json_result.status = "success";
-                output_json_result.message = "true";
-                output_json_result.data = data.detail.result;
-
-            }
-            else if (status != "success")
-            {
-                output_json_result.status = "failed";
-                output_json_result.message = "Post failed";
-
-            }
-            else
-            {
-                output_json_result.status = "failed";
-                output_json_result.message = data.detail.message;
-
-            }
-            callback(output_json_result);
-    
-  });
-
- 
- }
 
 //search point based on target postion
 

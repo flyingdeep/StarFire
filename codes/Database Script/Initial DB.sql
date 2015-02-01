@@ -1,3 +1,4 @@
+use stand;
 CREATE TABLE `instant_message` (
   `message_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -119,3 +120,22 @@ CREATE TABLE `user_link_stand` (
   KEY `USERIDINDEX` (`user_id`,`isdeleted`),
   KEY `STANDINDEX` (`isdeleted`,`stand_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+use config;
+CREATE TABLE `auth_key_hashmap` (
+  `hash_key` varchar(50) NOT NULL,
+  `value` bigint(20) NOT NULL,
+  PRIMARY KEY (`hash_key`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `auth_user` (
+  `userId` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `area` varchar(400) DEFAULT NULL,
+  `isdeleted` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`userId`),
+  UNIQUE KEY `username_UNIQUE` (`username`),
+  UNIQUE KEY `userId_UNIQUE` (`userId`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+

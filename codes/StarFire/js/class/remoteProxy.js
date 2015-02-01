@@ -446,7 +446,7 @@ var serverProxyClass = function(username,password)
         remoteClient.getAuthCodeBase(function(resultJson)
         {
             if (resultJson && resultJson.status == "true" && resultJson.detail.success == "true") {
-                result = resultJson.detail.result;
+                result = resultJson.detail.result.token;
             }
             callback(result);
         },username, password);

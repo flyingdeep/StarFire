@@ -4,6 +4,7 @@ var config = require("./../config.js");
 var SCHEMA = config.bizService.schema;
 var SCHEMA_CONFIG = config.bizService.schemaConfig;
 //table name
+var TB_AUTH_USER = SCHEMA_CONFIG + "auth_user";
 var TB_USER_INFO = SCHEMA + "user_info";
 var TB_STAND_INFO = SCHEMA + "stand_info";
 var TB_STAND_TYPE = SCHEMA + "stand_type";
@@ -45,6 +46,45 @@ var convertJsonToStringByField = function(fieldName, objJson)
     }
 
 };
+
+
+/*
+access_token related
+ */
+exports.authUserClass = function()
+{
+    this.checkAuthUser = function()//callback, username, password
+    {
+        var exception = null;
+        var callback = arguments[0];
+        var username = arguments[1];
+        var password = arguments[2];
+        var sql = "";
+
+        try {
+            sql = "select area " +
+                "from " + TB_AUTH_USER + " where username=" + mysqldbOperation.escape(username) +
+                " and isdeleted=0 and password=" + mysqldbOperation.escape(password);
+            // console.log(sql);
+        }
+        catch (e)
+        {
+            exception = e;
+        }
+        finally {
+            if (exception)
+            {
+                callback(exception,false);
+            }
+            else {
+                mysqldbOperation.fetchData(callback, sql);
+            }
+        }
+    };
+
+};
+
+
 
 
 /*

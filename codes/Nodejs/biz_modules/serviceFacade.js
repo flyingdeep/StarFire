@@ -10,6 +10,7 @@ var standUserLinkOperation =new bizOperation.standUserLinkClass();
 //var standImageOperation =new bizOperation.standImageClass();
 var standOwnerMessageOperation = new bizOperation.standOwnerMessageClass();
 var standTypeOperation = new bizOperation.standTypeClass();
+var authUserOperation =new bizOperation.authUserClass();
 
 var baiduLBSOperation = baiduApiOperation.baiduLBSClass();
 
@@ -78,6 +79,8 @@ exports.tryMatchToken = function(callback, hashToken, hashMap)
     hashMapHelper.matchHash(callback,hashToken,hashMap);
 
 };
+
+
 
 exports.authenticateUser = function(callback, userInfo)
 {
@@ -286,8 +289,7 @@ exports.getAuthCode = function(callback, encryptUsername, encryptPassword, hashM
 {
    var user_name = encryptUsername;
     var password = encryptPassword;
-    var userInfo = {"user_name":user_name,"password":password};
-    exports.authenticateUser(function(err, result)
+    authUserOperation.checkAuthUser(function(err, result)
     {
 
         if (err)
@@ -300,7 +302,16 @@ exports.getAuthCode = function(callback, encryptUsername, encryptPassword, hashM
 
             if (result.length && result.length == 1)
             {
-                hashMapHelper.pushHash(callback,user_name,hashMap);
+                console.log(result[0].area);
+                hashMapHelper.pushHash(function(exception,e)
+                {
+                    var returnResult = {
+                        "token":e,
+                        "area" : result[0].area
+                    }
+
+                    callback(exception,returnResult)
+                },user_name,hashMap);
             }
             else
             {
@@ -314,7 +325,7 @@ exports.getAuthCode = function(callback, encryptUsername, encryptPassword, hashM
 
             callback(new Error(MESSAGE_AUTHENTICATEUSER_INNER),false);
         }
-    },userInfo);
+    },user_name,password);
 };
 
 exports.addLinkToStand = function(callback, userLinkInfo)
