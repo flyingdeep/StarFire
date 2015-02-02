@@ -339,10 +339,12 @@ var remoteClientClass = function()
 
     this.getAuthCodeBase = function(callback, username, password)
     {
+
         var paraString = "?";
         paraString =paraString + "username=" + encodeURIComponent(username);
         paraString =paraString + "&password=" + encodeURIComponent(password);
         var targetUrl = ROUTER_GETAUTHCODE + BASE_VERSION + paraString;
+
         jQuery.get(targetUrl,
             function(data,status)
             {
@@ -443,14 +445,29 @@ var serverProxyClass = function(username,password)
     };
     var getAuth = function(callback) {
         var result = null;
+
         remoteClient.getAuthCodeBase(function(resultJson)
         {
+
             if (resultJson && resultJson.status == "true" && resultJson.detail.success == "true") {
                 result = resultJson.detail.result.token;
             }
             callback(result);
         },username, password);
     }
+
+    //getAuth expose to outside
+    this.getAuthExternal = function(callback)
+    {
+        getAuth(callback);
+    };
+
+    //reformJsonObject expose to outside
+    this.reformJsonObjectExternal = function(e)
+    {
+        reformJsonObject(e);
+    };
+
 
     this.authenticateUser = function(callback,username,password)
     {
@@ -466,7 +483,7 @@ var serverProxyClass = function(username,password)
                         "password": password
                     };
 
-                    var resultJson = remoteClient.authenticateUserBase(function(resultJson)
+                    remoteClient.authenticateUserBase(function(resultJson)
                         {
 
                             if (resultJson && resultJson.status == "true")

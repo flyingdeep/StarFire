@@ -12,7 +12,7 @@ var standOwnerMessageOperation = new bizOperation.standOwnerMessageClass();
 var standTypeOperation = new bizOperation.standTypeClass();
 var authUserOperation =new bizOperation.authUserClass();
 
-var baiduLBSOperation = baiduApiOperation.baiduLBSClass();
+var baiduLBSOperation =new baiduApiOperation.baiduLBSClass();
 
 var BIZ_ERROR_WORDS = config.bizService.bizErrorWords;
 var DEFAULT_OFFSET = config.bizService.defaultOffset;
@@ -391,6 +391,7 @@ exports.createBaiduLBSGeoDataPoi = function(callback, standInfo)
         "creater_id" : standInfo.creater_id
     };
     baiduLBSOperation.createBaiduLBSGeoDataPoi(callback,PoiInfoJson);
+
 };
 
 exports.updateBaiduLBSGeoDataPoi = function(callback,standInfo)

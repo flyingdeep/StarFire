@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <title>testBaiduMapService</title>
     <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/class/remoteProxy.js"></script>
     <script type="text/javascript" src="../js/baidu/initial.js"></script>
     <script type="text/javascript" src="../js/baidu/lbscloud.js"></script>
     <script type="text/javascript" src="../js/baidu/maphelper.js"></script>
 </head>
 <body>
 <script type="text/javascript">
-//    var Json_stand_position_info = createNewJsonStandPositionInfoInstance();
-//    Json_stand_position_info.title = "阿牛的煎饼摊";
-//    Json_stand_position_info.address = "上海市卢湾区淮海中路496号";
-//    Json_stand_position_info.tags = "测试地址";
-//    Json_stand_position_info.latitude = 121.49911;
-//    Json_stand_position_info.longtitude = 31.254101 ;
-//    Json_stand_position_info.creater_id = 1;
-//    Json_stand_position_info.create_user = "flyingdeep";
-//    Json_stand_position_info.description = "我的测试case地址";
+    var Json_stand_position_info = createNewJsonStandPositionInfoInstance();
+    Json_stand_position_info.title = "阿牛的煎饼摊";
+    Json_stand_position_info.address = "上海市卢湾区淮海中路496号";
+    Json_stand_position_info.tags = "测试地址";
+    Json_stand_position_info.latitude = 121.49911;
+    Json_stand_position_info.longtitude = 31.254101 ;
+    Json_stand_position_info.creater_id = 1;
+    Json_stand_position_info.create_user = "flyingdeep";
+    Json_stand_position_info.description = "我的测试case地址";
 //    var output_json_result =createOutputJsonInstance();
 //    creatLbsPostion(Json_stand_position_info, output_json_result,
 //            function()
@@ -33,8 +34,11 @@
 //    )
 
 
-    var JsonInput = createNewJsonStandPositionInfoInstance();
-creatLbsPostion(function(e){alert(JSON.stringify(e));},JsonInput);
+ //   var JsonInput = createNewJsonStandPositionInfoInstance();
+
+var baiduLBS = new baiduLBSClass(serverProxyClass);
+
+baiduLBS.createLbsPosition(function(e){alert(JSON.stringify(e));},Json_stand_position_info);
 
 
 
