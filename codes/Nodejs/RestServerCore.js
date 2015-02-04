@@ -156,7 +156,7 @@ var authenticateUserCallbackPost = function(req, res, next)
                         "user_preference": e[0].user_preference,
                         "user_type": e[0].user_type,
                         "cell_number": e[0].cell_number,
-                        "web_chart": e[0].web_chart,
+                        "web_chat": e[0].web_chat,
                         "qq_number": e[0].qq_number,
                         "province_city_area": e[0].province_city_area,
                         "createdate": e[0].createdate,

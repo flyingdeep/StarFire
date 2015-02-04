@@ -348,6 +348,7 @@ var remoteClientClass = function()
         jQuery.get(targetUrl,
             function(data,status)
             {
+
                 if (status == "success")
                 {
                     callback(data);
@@ -444,8 +445,8 @@ var serverProxyClass = function(username,password)
         }
     };
     var getAuth = function(callback) {
-        var result = null;
 
+        var result = null;
         remoteClient.getAuthCodeBase(function(resultJson)
         {
 

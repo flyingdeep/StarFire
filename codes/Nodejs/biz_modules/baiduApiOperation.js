@@ -14,7 +14,7 @@ var URI_BAIDU_LBS_GEODATA_POI_DELETE = "/geodata/v3/poi/delete";
 //var URI_BAIDU_LBS_GEOSEARCH_NEARBY = "/geosearch/v3/nearby";
 //var URI_BAIDU_LBS_GEOSEARCH_LOCAL = "/geosearch/v3/local";
 
-var client = restify.createJsonClient({
+var client = restify.createStringClient({
     url: BASE_DOMAIN
 });
 
@@ -27,12 +27,13 @@ exports.baiduLBSClass = function() {
         };
         client.post(options, PoiInfoJson,
             function (err, req, res, data) {
+                var dataJson = JSON.parse(data);
                 if (err) {
                     callback(err, false);
                     return;
                 }
-                if (data.status == 0) {
-                    callback(data.id, true);
+                if (dataJson.status == 0) {
+                    callback(null,dataJson.id);
 
                 }
                 else {
@@ -51,12 +52,14 @@ exports.baiduLBSClass = function() {
         };
         client.post(options, PoiInfoJson,
             function (err, req, res, data) {
+
                 if (err) {
                     callback(err, false);
                     return;
                 }
-                if (data.status == 0) {
-                    callback(data.id, true);
+                var dataJson = JSON.parse(data);
+                if (dataJson.status == 0) {
+                    callback(null,dataJson.id);
 
                 }
                 else {
@@ -75,12 +78,14 @@ exports.baiduLBSClass = function() {
         };
         client.post(options, PoiInfoJson,
             function (err, req, res, data) {
+
                 if (err) {
                     callback(err, false);
                     return;
                 }
+                var dataJson = JSON.parse(data);
                 if (data.status == 0) {
-                    callback(data.id, true);
+                    callback(null, JSON.parse(data).id);
 
                 }
                 else {

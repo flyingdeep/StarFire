@@ -39,7 +39,7 @@ var useroperation = new bizOperation.userInfoClass();
 //    user_preference:"teststring1234",
 //    user_type:"0",
 //    cell_number:"13361846366",
-//    web_chart:"flyingdeep",
+//    web_chat:"flyingdeep",
 //    qq_number:"13196590",
 //    province_city_area:"{\"province\":\"上海\",\"city\":\"上海\",\"area\":\"杨浦\"}",
 //    "password":"sdfasfafg"
@@ -52,7 +52,7 @@ var useroperation = new bizOperation.userInfoClass();
 //    "user_preference":"teststring1234",
 //    "user_type":"0",
 //    "cell_number":"13361846366",
-//    "web_chart":"flyingdeep",
+//    "web_chat":"flyingdeep",
 //    "qq_number":"13196590",
 //    "province_city_area":"{\"province\":\"上海\",\"city\":\"上海\",\"area\":\"杨浦\"}",
 //    "password":"sdfasfafg"

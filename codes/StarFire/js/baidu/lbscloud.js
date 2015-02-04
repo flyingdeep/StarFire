@@ -13,9 +13,8 @@ var baiduLBSClass = function(authClass) {
             "title": Json_stand_position_info.title,
             "address": Json_stand_position_info.address,
             "tags": Json_stand_position_info.tags,
-            "latitude": Json_stand_position_info.latitude,
             "longitude": Json_stand_position_info.longitude,
-            // customized fields
+            "latitude": Json_stand_position_info.latitude,
             "creater_id": Json_stand_position_info.creater_id,
             "create_user": Json_stand_position_info.create_user,
             "description": Json_stand_position_info.description,
@@ -26,23 +25,32 @@ var baiduLBSClass = function(authClass) {
             "token": token,
             "inputParameter": inputString
         };
+
         var output_json_result = createOutputJsonInstance();
         jQuery.post(CONST_POI_CREATE, inputJson
             , function (data, status) {
-                // alert("response");
-                if (status == "success" && data.status == 0) {
-                    output_json_result.status = "success";
-                    output_json_result.message = "true";
-                    output_json_result.data = data.detail.result;
-                }
-                else if (status != "success") {
-                    output_json_result.status = "failed";
-                    output_json_result.message = "Post failed";
+                if (status == "success")
+                {
+                    output_json_result = data;
                 }
                 else {
                     output_json_result.status = "failed";
-                    output_json_result.message = data.message;
+                    output_json_result.message = "Post failed";
                 }
+
+//                if (status == "success" && data.status == 0) {
+//                    output_json_result.status = "success";
+//                    output_json_result.message = "true";
+//                    output_json_result.data = data.detail.result;
+//                }
+//                else if (status != "success") {
+//                    output_json_result.status = "failed";
+//                    output_json_result.message = "Post failed";
+//                }
+//                else {
+//                    output_json_result.status = "failed";
+//                    output_json_result.message = data.message;
+//                }
                 callback(output_json_result);
 
             });
@@ -130,13 +138,12 @@ var baiduLBSClass = function(authClass) {
 
     this.createLbsPosition = function(callback, Json_stand_position_info) {
         var result = null;
-        alert("1");
         baseAuth.getAuthExternal(
             function (token) {
-                alert("2");
                 if (token) {
 
                     baseAuth.reformJsonObjectExternal(Json_stand_position_info);
+
                     createLbsPositionBase(callback, token, Json_stand_position_info);
                 }
                 else {
