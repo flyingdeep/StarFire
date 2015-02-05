@@ -136,6 +136,7 @@ var baiduLBSClass = function(authClass) {
             });
     }
 
+
     this.createLbsPosition = function(callback, Json_stand_position_info) {
         var result = null;
         baseAuth.getAuthExternal(
