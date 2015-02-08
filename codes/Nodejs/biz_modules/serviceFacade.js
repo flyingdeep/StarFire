@@ -402,7 +402,7 @@ exports.updateBaiduLBSGeoDataPoi = function(callback,standInfo)
     var update_date = (new Date()).getTime();;
     var mark =0;
     var PoiInfoJson = {
-        "id":standInfo.stand_id,
+        "id":standInfo.id,
         "stand_image_tip": standInfo.stand_image_tip,
         "title" : standInfo.title,
         "address" : standInfo.address,

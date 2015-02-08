@@ -84,8 +84,8 @@ exports.baiduLBSClass = function() {
                     return;
                 }
                 var dataJson = JSON.parse(data);
-                if (data.status == 0) {
-                    callback(null, JSON.parse(data).id);
+                if (dataJson.status == 0) {
+                    callback(null, dataJson.id);
 
                 }
                 else {

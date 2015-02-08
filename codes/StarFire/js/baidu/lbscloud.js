@@ -37,20 +37,6 @@ var baiduLBSClass = function(authClass) {
                     output_json_result.status = "failed";
                     output_json_result.message = "Post failed";
                 }
-
-//                if (status == "success" && data.status == 0) {
-//                    output_json_result.status = "success";
-//                    output_json_result.message = "true";
-//                    output_json_result.data = data.detail.result;
-//                }
-//                else if (status != "success") {
-//                    output_json_result.status = "failed";
-//                    output_json_result.message = "Post failed";
-//                }
-//                else {
-//                    output_json_result.status = "failed";
-//                    output_json_result.message = data.message;
-//                }
                 callback(output_json_result);
 
             });
@@ -59,8 +45,9 @@ var baiduLBSClass = function(authClass) {
 // update one point
 
     function updateLbsPositionBase(callback, token, Json_stand_position_info) {
+
         var jsonInput = {
-            "id": Json_stand_position_info.idb,
+            "id": Json_stand_position_info.id,
             "title": Json_stand_position_info.title,
             "address": Json_stand_position_info.address,
             "tags": Json_stand_position_info.tags,
@@ -83,21 +70,13 @@ var baiduLBSClass = function(authClass) {
         var output_json_result = createOutputJsonInstance();
         jQuery.post(CONST_POI_UPDATE, inputJson
             , function (data, status) {
-                if (status == "success" && data.status == 0) {
-                    output_json_result.status = "success";
-                    output_json_result.message = "true";
-                    output_json_result.data = data.detail.result;
-
-                }
-                else if (status != "success") {
-                    output_json_result.status = "failed";
-                    output_json_result.message = "Post failed";
-
+                if (status == "success")
+                {
+                    output_json_result = data;
                 }
                 else {
                     output_json_result.status = "failed";
-                    output_json_result.message = data.detail.message;
-
+                    output_json_result.message = "Post failed";
                 }
                 callback(output_json_result);
 
@@ -117,20 +96,13 @@ var baiduLBSClass = function(authClass) {
         jQuery.post(CONST_POI_DELETE,
             inputJson,
             function (data, status) {
-                if (status == "success" && data.status == 0) {
-                    output_json_result.status = "success";
-                    output_json_result.message = "true";
-                    output_json_result.data = data.detail.result;
-
-                }
-                else if (status != "success") {
-                    output_json_result.status = "failed";
-                    output_json_result.message = "Post failed";
-
+                if (status == "success")
+                {
+                    output_json_result = data;
                 }
                 else {
                     output_json_result.status = "failed";
-                    output_json_result.message = data.detail.message;
+                    output_json_result.message = "Post failed";
                 }
                 callback(output_json_result);
             });
@@ -203,20 +175,20 @@ var baiduLBSClass = function(authClass) {
                     output_json_result.status = "success";
                     output_json_result.message = data.message;
                     output_json_result.data = data.poi;
-                    successAction();
+
                 }
                 else if (status != "success") {
                     output_json_result.status = "failed";
                     output_json_result.message = "Post failed";
-                    failedAction();
+
 
                 }
                 else {
                     output_json_result.status = "failed";
                     output_json_result.message = data.message;
-                    failedAction();
-                }
 
+                }
+                callback(output_json_result);
             }
         );
     };
@@ -226,8 +198,8 @@ var baiduLBSClass = function(authClass) {
 
 
     this.queryLbsPostionSingleDetail = function(Json_stand_querymultiple) {
-        querystring = "id=" + Json_stand_queryone.id + "&geotable_id=" + Json_stand_queryone.geotable_id + "&ak=" + Json_stand_queryone.ak;
-        url = BAIDU_LBS_URI + "geodata/v3/poi/detail?callback=?&" + querystring;
+        var querystring = "id=" + Json_stand_querymultiple.id + "&geotable_id=" + Json_stand_querymultiple.geotable_id + "&ak=" + Json_stand_querymultiple.ak;
+        var url = BAIDU_LBS_URI + "geodata/v3/poi/detail?callback=?&" + querystring;
         var output_json_result = createOutputJsonInstance();
         jQuery.getJSON(url,
             function (data, status) {
@@ -235,26 +207,26 @@ var baiduLBSClass = function(authClass) {
                     output_json_result.status = "success";
                     output_json_result.message = data.message;
                     output_json_result.data = data.poi;
-                    successAction();
+
                 }
                 else if (status != "success") {
                     output_json_result.status = "failed";
                     output_json_result.message = "Post failed";
-                    failedAction();
+
 
                 }
                 else {
                     output_json_result.status = "failed";
                     output_json_result.message = data.detail.message;
-                    failedAction();
-                }
 
+                }
+                callback(output_json_result);
             }
         );
     };
 
 
-//search point based on target postion
+//search point based on target position
 
     this.searchStandPostionByPoint = function(callback, search_condition) {
         querystring = "ak=" + search_condition.ak + "&geotable_id=" + search_condition.geotable_id + "&location=" + search_condition.location + "&coord_type=" +

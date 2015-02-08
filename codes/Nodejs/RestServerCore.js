@@ -1264,7 +1264,7 @@ var createBaiduLBSGeoDataPoiCallbackPost = function(req, res, next)
             result.detail = {
                 "success" : "true",
                 "result":{
-                    "stand_id":e.id
+                    "stand_id": e
                 }
             };
         }
@@ -1319,7 +1319,7 @@ var updateBaiduLBSGeoDataPoiCallbackPost = function(req, res, next)
             result.detail = {
                 "success" : "true",
                 "result":{
-                    "stand_id":e.id
+                    "stand_id":e
                 }
             };
         }
@@ -1374,7 +1374,7 @@ var deleteBaiduLBSGeoDataPoiCallbackPost = function(req, res, next)
             result.detail = {
                 "success" : "true",
                 "result":{
-                    "stand_id":e.id
+                    "stand_id":e
                 }
             };
         }
@@ -1387,7 +1387,7 @@ var deleteBaiduLBSGeoDataPoiCallbackPost = function(req, res, next)
         next();
     };
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
-        serviceOperation.updateBaiduLBSGeoDataPoi,callback,requestInputParameter);
+        serviceOperation.deleteBaiduLBSGeoDataPoi,callback,requestInputParameter);
 
 };
 

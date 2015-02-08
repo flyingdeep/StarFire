@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+
+    <title>找摊位</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" type="text/css" href="framework/appframework/css/icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="framework/appframework/css/af.ui.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="framework/appframework/theme/main.css"  />
+    <link rel="stylesheet" type="text/css" href="framework/appframework/theme/appframework.css"  />
+    <link rel="stylesheet" type="text/css" href="framework/appframework/theme/lists.css"  />
+    <link rel="stylesheet" type="text/css" href="framework/appframework/theme/forms.css"  />
+    <link rel="stylesheet" type="text/css" href="framework/appframework/theme/buttons.css"  />
+    <link rel="stylesheet" type="text/css" href="framework/appframework/theme/badges.css"  />
+    <link rel="stylesheet" type="text/css" href="framework/appframework/theme/grid.css"  />
+
+    <link rel="stylesheet" type="text/css" href="framework/appframework/theme/android.css"  />
+    <link rel="stylesheet" type="text/css" href="framework/appframework/theme/win8.css"  />
+    <link rel="stylesheet" type="text/css" href="framework/appframework/theme/bb.css"  />
+    <link rel="stylesheet" type="text/css" href="framework/appframework/theme/ios.css"  />
+    <link rel="stylesheet" type="text/css" href="framework/appframework/theme/ios7.css"  />
+    <link rel="stylesheet" type="text/css" href="framework/appframework/theme/tizen.css"  />
+
+    <link rel="stylesheet" type="text/css" href="css/customize.css" />
+
+
+    <style type="text/css">
+        body, html,#mapcontainer {width: 100%;height: 100%;overflow: hidden;margin:0;}
+    </style>
+
+    <script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="./js/jq.appframework.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&ak=NpZPLFzDKjPWEenu8D2yf4vS&v=1.0"></script>
+    <script type="text/javascript" src="./js/class/remoteProxy.js"></script>
+    <script type="text/javascript" src="./js/baidu/maphelper.js"></script>
+    <script type="text/javascript" src="./js/baidu/initial.js"></script>
+
+    <!--<script type="text/javascript" charset="utf-8" src="framework/appframework/js/appframework.min.js"></script>  -->
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/js/appframework.ui.min.js"></script>
+
+    <!--							 plug-in 					-->
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/plugins/af.touchEvents.js"></script>
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/plugins/af.actionsheet.js"></script>
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/plugins/af.css3animate.js"></script>
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/plugins/af.passwordBox.js"></script>
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/plugins/af.scroller.js"></script>
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/plugins/af.selectBox.js"></script>
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/plugins/af.touchLayer.js"></script>
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/plugins/af.popup.js"></script>
+
+    <!--                           transition                   -->
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/transition/fade.js"></script>
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/transition/flip.js"></script>
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/transition/pop.js"></script>
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/transition/slide.js"></script>
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/transition/slideDown.js"></script>
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/transition/slideUp.js"></script>
+    <script type="text/javascript" charset="utf-8" src="framework/appframework/plugins/af.slidemenu.js"></script>
+    <script type="text/javascript">
+
+
+        function loadedPanel(what) {
+            //We are going to set the badge as the number of li elements inside the target
+            $.ui.updateBadge("#aflink", $("#af").find("li").length);
+        }
+
+
+        function unloadedPanel(what) {
+            console.log("unloaded " + what.id);
+        }
+
+        if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in
+                window)) {
+            var script = document.createElement("script");
+            script.src = "framework/appframework/plugins/af.desktopBrowsers.js";
+            var tag = $("head").append(script);
+        }
+    </script>
+
+    <script type="text/javascript">
+        /* This function runs once the page is loaded, but intel.xdk is not yet active */
+        //$.ui.animateHeaders=false;
+        var search=document.location.search.toLowerCase().replace("?","");
+        //if(!search)
+        $.ui.useOSThemes=true;
+        if(search.length>0) //Android fix has too many buggy issues on iOS - can't preview with $.os.android
+        {
+
+            $.ui.useOSThemes=true;
+            if(search=="win8")
+                $.os.ie=true;
+            $.ui.ready(function(){
+                $("#afui").get(0).className=search;
+            });
+        }
+
+        var webRoot = "./";
+        // $.os.android=true;
+        //$.ui.autoLaunch = false;
+        $.ui.openLinksNewTab = false;
+        $.ui.splitview=false;
+
+
+        $(document).ready(function(){
+            // $.ui.launch();
+
+        });
+
+
+
+        function showHide(obj, objToHide) {
+            var el = $("#" + objToHide)[0];
+
+            if (obj.className == "expanded") {
+                obj.className = "collapsed";
+            } else {
+                obj.className = "expanded";
+            }
+            $(el).toggle();
+
+        }
+
+
+        if($.os.android||$.os.ie||search=="android"){
+            $.ui.ready(function(){
+                $("#main .list").append("<li><a id='toggleAndroidTheme'>Toggle Theme Color</a></li>");
+                var $el=$("#afui");
+                $("#toggleAndroidTheme").bind("click",function(e){
+                    if($el.hasClass("light"))
+                        $el.removeClass("light");
+                    else
+                        $el.addClass("light");
+                });
+            });
+        }
+
+
+    </script>
+
+</head>
+<body>
+
+
+<div id="afui" >
+
+    <div id="content">
+        <div id="page1"  data-title="welcome" class="panel" >
+        page 1
+            <input type="checkbox" name="confirm" id="confirm">  <label for="confirm">Do you agree to the terms?</label>
+        </div>
+        <div id="page2" data-title="bye"  class="panel"  selected="true"  data-nav="main_nav" >
+        page 2
+        </div>
+    </div>
+    <div id="navbar">
+        <a href="#page1" class="icon home">Home</a>
+    </div>
+    <nav >
+        <div class='title'>Home</div>
+        <ul>
+            <li ><a class="icon home mini" href="#page2">page2</a></li>
+        </ul>
+    </nav>
+    <nav id="main_nav">
+        <div class='title'>Home</div>
+        <ul>
+            <li ><a class="icon home mini" href="#page1">page1</a></li>
+        </ul>
+    </nav>
+</div>
+
+
+</div>
+
+<script type="text/javascript">
+
+
+</script>
+
+
+
+</body>
+</html>
