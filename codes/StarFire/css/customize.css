@@ -1,55 +1,12 @@
-@charset "utf-8";
-/* CSS Document */
-
-#afui .setcenter{
-margin-top:30%;
-margin-bottom:30%;
-margin-left:3%;
-margin-right:3%;
-
+#mapPanel{
+    padding:0;
 }
 
-#afui .button_indexpage {
-	position:relative;
-	display:inline-block;
-	padding:20px 42px;
-	margin:8px 0;
-	font-weight:bold;
-	color:#000;
-	text-align:center;
-	vertical-align:top;
-	cursor:pointer;
-	background-color:#eee;
-	border:1px solid #666;
-	border-radius:26px;
-	/*box-shadow: 0 1px 0 #fff;*/
-
-	text-decoration: none;
-	z-index:2;
+#mapContainer{
+     z-index: 40;
 }
 
-#afui .indexpagecenter {
-	
-text-align:center; 
-
-align-content:center;	
-		
-}
-
-#afui .indexpagediv {
-height:100%;
-width:100%;
-position:absolute;
-left:0px;
-top:0px;
-text-align:center; 
-padding:0px;
-align-content:center;	
-background-color:red;
-}
-
-#afui .indexpagetopcontent{
-height:30%;
-background-color:white;
-
+#mapHeader{
+    height:50px;
+    background-color:#befcbc ;
 }

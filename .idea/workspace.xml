@@ -2,55 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7ad25bf-38ad-43db-8397-e87c816d9f56" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/af.actionsheet.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/af.actionsheet.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/af.animateheader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/af.animation.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/af.desktopBrowsers.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/af.drawer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/af.grower.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/af.popup.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/af.popup.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/af.shim.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/af.splashscreen.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/af.splashscreen.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/af.swipereveal.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/af.swipereveal.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/af.toast.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/af.toast.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/af.touchEvents.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/build/af.ui.base.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/build/af.ui.base.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/build/af.ui.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/af.ui.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/build/af.ui.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/android.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/anim2.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/animation.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/appframework.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/build/appframework.ui.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/build/appframework.ui.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/badges.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/bb.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/buttons.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/js/fastclick.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/firefox.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/forms.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/grid.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/build/icons.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/icons.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/build/icons.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/ios.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/lists.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/main.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/test/partialview.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/splitview.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/tizen.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/less/win8.less" />
-      <change type="DELETED" beforePath="E:\MyApp\Project\StarFire\codes\StarFire\js\jq.appframework.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/document/技术详细设计.xlsx" afterPath="$PROJECT_DIR$/document/技术详细设计.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/default_test.html" afterPath="$PROJECT_DIR$/codes/StarFire/default_test.html" />
+      <change type="DELETED" beforePath="E:\MyApp\Project\StarFire\codes\StarFire\boilerplate.css" afterPath="" />
+      <change type="DELETED" beforePath="E:\MyApp\Project\StarFire\codes\StarFire\respond.min.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/css/customize.css" afterPath="$PROJECT_DIR$/codes/StarFire/css/customize.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/default.html" afterPath="$PROJECT_DIR$/codes/StarFire/default.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="E:\MyApp\Project\StarFire\codes\StarFire\default.html" afterPath="$PROJECT_DIR$/codes/StarFire/default_obsolete.html" />
     </list>
     <ignored path="StarFire.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -83,16 +40,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="default_test.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="default_test.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/default_test.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.026874" vertical-offset="833" max-vertical-offset="3388">
-              <caret line="103" column="27" selection-start-line="103" selection-start-column="27" selection-end-line="103" selection-end-column="27" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="1743" max-vertical-offset="3388">
+              <caret line="90" column="48" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -100,8 +53,38 @@
       <file leaf-file-name="default.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/default.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.387097" vertical-offset="3415" max-vertical-offset="4840">
-              <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="173" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1364" max-vertical-offset="2882">
+              <caret line="62" column="72" selection-start-line="62" selection-start-column="72" selection-end-line="62" selection-end-column="72" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="af.ui.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/codes/StarFire/framework/appframework-master/build/af.ui.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="47855" max-vertical-offset="98604">
+              <caret line="2170" column="17" selection-start-line="2170" selection-start-column="17" selection-end-line="2170" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="customize.css" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/codes/StarFire/css/customize.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.27375567" vertical-offset="0" max-vertical-offset="884">
+              <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default_obsolete.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/codes/StarFire/default_obsolete.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3432" max-vertical-offset="4840">
+              <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="208" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -110,8 +93,8 @@
       <file leaf-file-name="icons.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/framework/appframework-master/build/icons.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="4642">
-              <caret line="194" column="11" selection-start-line="194" selection-start-column="4" selection-end-line="194" selection-end-column="11" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2706" max-vertical-offset="4642">
+              <caret line="151" column="11" selection-start-line="151" selection-start-column="6" selection-end-line="151" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -162,7 +145,6 @@
         <option value="$PROJECT_DIR$/codes/BaiduAPI/map.html" />
         <option value="$PROJECT_DIR$/codes/StarFire/test/test.html" />
         <option value="$PROJECT_DIR$/codes/StarFire/test/testNodejs.html" />
-        <option value="$PROJECT_DIR$/codes/StarFire/default.html" />
         <option value="$PROJECT_DIR$/codes/BaiduAPI/js/maphelper.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/js/baidu/maphelper.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/js/common/md5.js" />
@@ -180,15 +162,18 @@
         <option value="$PROJECT_DIR$/codes/StarFire/test/testBaiduMapService.html" />
         <option value="$PROJECT_DIR$/codes/StarFire/js/baidu/lbscloud.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/test/partialview.html" />
+        <option value="$PROJECT_DIR$/default.html" />
         <option value="$PROJECT_DIR$/codes/StarFire/default_test.html" />
+        <option value="$PROJECT_DIR$/codes/StarFire/default.html" />
+        <option value="$PROJECT_DIR$/codes/StarFire/css/customize.css" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1296" />
-    <option name="height" value="1000" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -216,6 +201,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -247,6 +233,20 @@
               <option name="myItemId" value="codes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarFire" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarFire" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="codes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="StarFire" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
@@ -270,97 +270,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="codes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="framework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="appframework-master" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="codes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="framework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="appframework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="codes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarFire" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="codes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Database Script" />
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -520,14 +435,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934132" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24761146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24739583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36734694" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -592,6 +507,14 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/test/testBaiduMapService.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="1386">
+          <caret line="15" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/codes/StarFire/sample/Date Selection/SelectDate.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="423" max-vertical-offset="1232">
@@ -820,7 +743,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1192" max-vertical-offset="6006">
           <caret line="62" column="28" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -828,7 +750,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="8140" max-vertical-offset="22198">
           <caret line="370" column="17" selection-start-line="370" selection-start-column="17" selection-end-line="370" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -836,7 +757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3832" max-vertical-offset="5346">
           <caret line="179" column="0" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -844,7 +764,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1456" max-vertical-offset="9680">
           <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -852,7 +771,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="29612" max-vertical-offset="32252">
           <caret line="1346" column="5" selection-start-line="1346" selection-start-column="5" selection-end-line="1346" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -860,14 +778,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1980" max-vertical-offset="2288">
           <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/baidu/lbscloud.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3762" max-vertical-offset="6644">
-          <caret line="171" column="27" selection-start-line="171" selection-start-column="27" selection-end-line="171" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -884,7 +794,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20615797" vertical-offset="0" max-vertical-offset="747">
           <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -892,23 +801,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30790192" vertical-offset="3052" max-vertical-offset="5258">
           <caret line="149" column="8" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/framework/appframework-master/build/icons.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="4642">
-          <caret line="194" column="11" selection-start-line="194" selection-start-column="4" selection-end-line="194" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/default.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.387097" vertical-offset="3415" max-vertical-offset="4840">
-          <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="173" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -916,7 +808,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3906911" vertical-offset="34065" max-vertical-offset="50710">
           <caret line="1561" column="19" selection-start-line="1561" selection-start-column="19" selection-end-line="1561" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -924,29 +815,62 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2682927" vertical-offset="0" max-vertical-offset="26422">
           <caret line="9" column="14" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="14" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/framework/appframework-master/build/af.ui.css">
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/baidu/lbscloud.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35686275" vertical-offset="51053" max-vertical-offset="98604">
-          <caret line="2333" column="23" selection-start-line="2333" selection-start-column="23" selection-end-line="2333" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3762" max-vertical-offset="6644">
+          <caret line="171" column="27" selection-start-line="171" selection-start-column="27" selection-end-line="171" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/default_obsolete.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3432" max-vertical-offset="4840">
+          <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="208" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/codes/StarFire/default_test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.026874" vertical-offset="833" max-vertical-offset="3388">
-          <caret line="103" column="27" selection-start-line="103" selection-start-column="27" selection-end-line="103" selection-end-column="27" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="1743" max-vertical-offset="3388">
+          <caret line="90" column="48" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/framework/appframework-master/build/af.ui.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="47855" max-vertical-offset="98604">
+          <caret line="2170" column="17" selection-start-line="2170" selection-start-column="17" selection-end-line="2170" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/framework/appframework-master/build/icons.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2706" max-vertical-offset="4642">
+          <caret line="151" column="11" selection-start-line="151" selection-start-column="6" selection-end-line="151" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/default.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1364" max-vertical-offset="2882">
+          <caret line="62" column="72" selection-start-line="62" selection-start-column="72" selection-end-line="62" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/css/customize.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27375567" vertical-offset="0" max-vertical-offset="884">
+          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
