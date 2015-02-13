@@ -25,7 +25,7 @@ pool.getConnection(function(err, connection) {
 		var id = 1;
 		var code = '110101';
 	    var sql = 'SELECT * FROM china_location.area where id=' + connection.escape(id) + ' and code = ' +  connection.escape(code);
-		console.log(sql);
+
 		connection.query(sql, function(err, results, fields) {
 
 			if (err)
@@ -58,7 +58,7 @@ pool.getConnection(function(err, connection) {
 	{
 		var insertStatment = {state:"Shanghai",city:"sh",sz_code:"200021",Rome:"aaaaaadf",zm_code:"1234123"};
 	    var sql = 'insert test.china_location set '+ connection.escape(insertStatment);
-		console.log(sql);
+		//console.log(sql);
 		connection.query(sql, function(err, results, fields) {
 
 			if (err)
