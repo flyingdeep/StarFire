@@ -22,5 +22,4 @@ var LASTED_VERSION = "v1";
 var CONST_ZHAOTANTOU_API_URI  = REST_SERVER_DOMAIN + ":" + PORT + "/" + APP_URI + "/";
 var BAIDU_LBS_URI = "http://api.map.baidu.com/";
 
-var AUTH_USER = "flyingdeep";
-var AUTH_PASS = "25d55ad283aa400af464c76d713c07ad";
+

@@ -7,6 +7,75 @@
 }
 
 #mapHeader{
+    padding:10;
     height:50px;
     background-color:#befcbc ;
+    text-align: center;
+}
+
+.titleDiv {
+    line-height:50px;
+    text-align: center;
+    vertical-align: middle;
+    height:100%;
+    color:black;
+}
+
+#bottomBar {
+    z-index: 50;
+    position:absolute;
+    bottom:3px;
+    width:98%;
+    left:1%;
+    height:45px;
+    border:solid 1px #befcbc;
+    text-align: center;
+
+}
+
+#transparentShader {
+    z-index: -1;
+    background-color: white;
+    width:100%;
+    height:100%;
+    opacity:0.67;
+    position:absolute;
+
+}
+
+#searchBar {
+    z-index: 50;
+    position:absolute;
+    top:3px;
+    width:100%;
+    left:2px;
+
+}
+
+#searchDiv
+{
+    float:left;
+    width:70%;
+    padding:0;
+
+}
+
+#toggleDiv{
+    width:25%;
+    float:left;
+    padding:0;
+    text-align: left;
+}
+
+#createStandHeader1
+{
+    padding:10;
+    height:50px;
+    background-color:#befcbc ;
+    text-align: center;
+}
+
+.panelPadding {
+    padding:15px;
+
 }
