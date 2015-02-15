@@ -302,7 +302,6 @@ exports.getAuthCode = function(callback, encryptUsername, encryptPassword, hashM
 
             if (result.length && result.length == 1)
             {
-                console.log(result[0].area);
                 hashMapHelper.pushHash(function(exception,e)
                 {
                     var returnResult = {

@@ -12,9 +12,10 @@
 </head>
 <body>
 <script type="text/javascript">
-    var processOperation = new processFacadeClass();
-    processOperation.getStandTypes(function(e){alert(JSON.stringify(e))});
-
+//    var processOperation = new processFacadeClass();
+//  processOperation.getStandTypes(function(e){alert(e)});
+var commonHelper = new commonHelperClass();
+    commonHelper.constructStandTypeHTML(function(e){alert(e);});
 </script>
 </body>
 </html>
