@@ -72,6 +72,7 @@
                   <div id="toggleDiv"><input id="toggleTarget" type="checkbox" name="toggleTarget" value="1" class="toggle">
                   <label for="toggleTarget"  data-on="摊位" data-off="地址"><span></span>
                   </label><br style="clear:both"></div>
+                  <a  class="icon settings" style="margin-right:3px;clear:both;float:right; font-size: 24px;"  onclick="$.afui.drawer.show('#right_Filter','right')"></a>
               </div>
 
               <div id="bottomBar">
@@ -140,9 +141,56 @@
 
 </div>
 
+<!---------------------  右侧菜单  -------------------------------->
+<nav id="right_Filter" style="width:90%">
+<div class="view active">
+    <header>
+        <h1>筛选设置</h1>
+    </header>
+    <div class="pages">
 
+        <div class="panel active" id="filterPanel">
+            <div class="formGroupHead">显示距离</div>
+            <div  class="grid input-group">
+            <div class="gcol2"><input id="distantRadio200" type="radio"  name="distantRadio200" value="200"><label for="distantRadio200">200米</label></div>
+            <div class="gcol2"><input id="distantRadio500" type="radio"  name="distantRadio500" value="500" selected><label for="distantRadio500">500米</label></div>
+            <div class="gcol2"><input id="distantRadio1000" type="radio"  name="distantRadio1000" value="1000"><label for="distantRadio1000">1000米</label></div>
+            <div class="gcol2"><input id="distantRadio2000" type="radio"  name="distantRadio2000" value="2000"><label for="distantRadio2000">2000米</label></div>
+            </div><br />
+
+            <div  class="input-group">
+               <div id="toggleCustomCrStandDiv"> 显示非摊主创建摊位 <input id="toggleCustomCrStandInput" type="checkbox" name="toggleCustomCrStandInput" value="1" class="toggle">
+                    <label for="toggleCustomCrStandInput"  data-on="是" data-off="否"><span></span></label>
+                </div>
+            </div><br />
+
+            <div  class="input-group">
+                <div id="toggleFavoriteStandDiv">仅显示收藏摊位<input id="toggleFavoriteStandInput" type="checkbox" name="toggleFavoriteStandInput" value="1" class="toggle">
+                    <label for="toggleFavoriteStandInput"  data-on="是" data-off="否"><span></span></label>
+                </div>
+            </div><br />
+
+
+                 <div id="standDisplayModeDiv" class="grid" ><div class="gcol2" style="text-align: right;height: 50px;line-height: 50px">摊位显示方式</div><div class="gcol2" style="height: 50px;line-height: 50px;text-align: left;border:solid 1px black;"><input id="standDisplayModeInput" type="checkbox" name="standDisplayModeInput" value="1" class="toggle">
+                    <label for="standDisplayModeInput"  data-on="是" data-off="否"><span></span></label></div>
+                </div>
+
+            <a data-menu-close class="button">关闭</a>
+        </div>
+
+    </div>
+
+</div>
+</nav>
 
 <script type="text/javascript">
+
+
+    $("#filterPanel").on("swipeRight", function(){
+
+        $.afui.drawer.hide("#right_Filter","right");
+
+    });
 
     commonHelper.constructStandTypeHTML(function(e){
 
@@ -155,8 +203,6 @@
     var gc = new BMap.Geocoder();
 
     var mapCr = new BMap.Map("mapContainerCr");
-
-
     var map = new BMap.Map("mapContainer");
     var init_city = "上海";
     var Json_mapcenter; //map center val
