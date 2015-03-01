@@ -19,6 +19,70 @@ function formatDate(e, format)
     return format;
 }
 
+function searchLocalPosition(localName, mapObj,containerJObj) {
+    var options = {
+        onSearchComplete: function (results) {
+            var innerHtmlString = "";
+            innerHtmlString = innerHtmlString + "<ul class='list'>";
+            for (var i = 0; i < results.getCurrentNumPois(); i++) {
+                innerHtmlString = innerHtmlString + "<li>";
+                innerHtmlString = innerHtmlString + "<a>" + results.getPoi(i).title.replace(new RegExp(results.keyword, "g"), '<b>' + results.keyword + '</b>') + "</a>";
+                innerHtmlString = innerHtmlString + "</li>";
+            }
+            innerHtmlString = innerHtmlString + "</ul>";
+        }
+
+    }
+}
+
+// 添加信息窗口
+function addInfoWindow(marker,poi,index,mapObj){
+    var maxLen = 10;
+    var name = null;
+    if(poi.type == BMAP_POI_TYPE_NORMAL){
+        name = "地址：  "
+    }else if(poi.type == BMAP_POI_TYPE_BUSSTOP){
+        name = "公交：  "
+    }else if(poi.type == BMAP_POI_TYPE_SUBSTOP){
+        name = "地铁：  "
+    }
+    // infowindow的标题
+    var infoWindowTitle = '<div style="font-weight:bold;color:#CE5521;font-size:14px">'+poi.title+'</div>';
+    // infowindow的显示信息
+    var infoWindowHtml = [];
+    infoWindowHtml.push('<table cellspacing="0" style="table-layout:fixed;width:100%;font:12px arial,simsun,sans-serif"><tbody>');
+    infoWindowHtml.push('<tr>');
+    infoWindowHtml.push('<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">' + name + '</td>');
+    infoWindowHtml.push('<td style="vertical-align:top;line-height:16px">' + poi.address + ' </td>');
+    infoWindowHtml.push('</tr>');
+    infoWindowHtml.push('</tbody></table>');
+    var infoWindow = new mapObj.InfoWindow(infoWindowHtml.join(""),{title:infoWindowTitle,width:200});
+    var openInfoWinFun = function(){
+        marker.openInfoWindow(infoWindow);
+        for(var cnt = 0; cnt < maxLen; cnt++){
+            if(!document.getElementById("list" + cnt)){continue;}
+            if(cnt == index){
+                document.getElementById("list" + cnt).style.backgroundColor = "#f0f0f0";
+            }else{
+                document.getElementById("list" + cnt).style.backgroundColor = "#fff";
+            }
+        }
+    }
+    marker.addEventListener("click", openInfoWinFun);
+    return openInfoWinFun;
+}
+
+function addMarker(point, index, mapObj){
+    var myIcon = new mapObj.Icon("http://api.map.baidu.com/img/markers.png", new mapObj.Size(23, 25), {
+        offset: new mapObj.Size(10, 25),
+        imageOffset: new mapObj.Size(0, 0 - index * 25)
+    });
+    var marker = new mapObj.Marker(point, {icon: myIcon});
+    map.addOverlay(marker);
+    return marker;
+}
+
+
 
 
 // Get Center x,y of the current map
