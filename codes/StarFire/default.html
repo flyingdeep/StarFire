@@ -50,6 +50,8 @@
         var commonHelper = new commonHelperClass();
         $(document).ready(function(){
             $.afui.launch();
+
+
         });
 
     </script>
@@ -68,13 +70,14 @@
 
           <div class="panel zeroPadding"  id="mapPanel" data-selected="true">
               <div id="searchBar">
-                  <div id="searchDiv"><input  type="search" placeholder="搜索"></div>
+                  <div id="searchDiv"><form id="searchForm"><input id="searchInput" type="search" placeholder="搜索"></form></div>
                   <div id="toggleDiv"><input id="toggleTarget" type="checkbox" name="toggleTarget" value="1" class="toggle">
                   <label for="toggleTarget"  data-on="摊位" data-off="地址"><span></span>
                   </label><br style="clear:both"></div>
+
                   <a  class="icon settings" id="filterSettingIcon"  onclick="$.afui.drawer.show('#right_Filter','right')"></a>
               </div>
-
+              <div id="searchListContainer" tabindex="-1" onfocus="alert('123')" onblur="alert('111')"><input type="text" /></div>
               <div id="bottomBar">
               <div id="transparentShader"></div>
                   <div class="button-grouped">
@@ -203,7 +206,30 @@
 </nav>
 
 <script type="text/javascript">
+    $("#toggleTarget").on("change",function()
+    {
+        if ($("#toggleTarget").val() == 1)
+        {
+            $("#toggleInput").attr("placeholder","搜索摊位");
+        }
+        else
+        {
+            $("#toggleInput").attr("placeholder","搜索地址");
+        }
+    });
 
+    $("#searchListContainer").on("blur",function()
+    {
+        alert("aaa");
+        $("#searchListContainer").css("display","none");
+
+    });
+
+    $("#searchForm").on("submit",function()
+    {
+        $("#searchListContainer").css("display","block");
+        return false;
+    });
 
     $("#filterPanel").on("swipeRight", function(){
 
