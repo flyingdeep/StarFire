@@ -31,7 +31,6 @@ function searchLocalPosition(localName, mapObj,containerJObj) {
             }
             innerHtmlString = innerHtmlString + "</ul>";
         }
-
     }
 }
 
@@ -67,7 +66,7 @@ function addInfoWindow(marker,poi,index,mapObj){
                 document.getElementById("list" + cnt).style.backgroundColor = "#fff";
             }
         }
-    }
+    };
     marker.addEventListener("click", openInfoWinFun);
     return openInfoWinFun;
 }
@@ -92,11 +91,11 @@ function getMapCenter()
     {
         "point_x": map.getCenter().lng,
         "point_y": map.getCenter().lat
-    }
+    };
     return mapcenter;
 }
 
-// creat a blank Json output structure
+// Create a blank Json output structure
 function createOutputJsonInstance()
 {
     var output =
@@ -104,8 +103,7 @@ function createOutputJsonInstance()
         "status": null,
         "message": null,
         "data": null
-
-    }
+    };
 
     return output;
 
@@ -128,7 +126,7 @@ function createNewJsonStandPositionInfoInstance()
         "create_user" : null,
         "description" : null,
         "stand_image_tip" : null
-    }
+    };
 
     return resultJson;
 }
@@ -152,7 +150,7 @@ function createUpdateJsonStandPositionInfoInstance()
         "mark":null,
         "description" : null,
         "stand_image_tip" : null
-    }
+    };
 
     return resultJson;
 }
@@ -165,7 +163,7 @@ function createJsonStandQueryOne()
         "id":  null,
         "geotable_id": CONST_STAND_LOCATION_INFO_TABLEID,
         "ak": CONST_AK
-    }
+    };
     return resultJson;
 
 
@@ -187,9 +185,7 @@ function createJsonSearchConditionForPointSearch()
         "filter":null,
         "page_index":null,
         "page_size":null
-
-
-    }
+    };
     return resultJson;
 }
 
@@ -208,9 +204,7 @@ function createJsonSearchConditionForAreaSearch()
         "filter":null,
         "page_index":null,
         "page_size":null
-
-
-    }
+    };
     return resultJson;
 }
 
@@ -230,7 +224,7 @@ function createJsonStandInfo()
         "description":null,
         "mark":null,
         "realtime_location":null
-    }
+    };
 
 }
 
@@ -240,7 +234,7 @@ function deleteJsonStandInfo()
     var resultJson =
     {
         "id":null
-    }
+    };
 
 }
 

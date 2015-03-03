@@ -70,14 +70,13 @@
 
           <div class="panel zeroPadding"  id="mapPanel" data-selected="true">
               <div id="searchBar">
-                  <div id="searchDiv"><form id="searchForm"><input id="searchInput" type="search" placeholder="搜索"></form></div>
-                  <div id="toggleDiv"><input id="toggleTarget" type="checkbox" name="toggleTarget" value="1" class="toggle">
-                  <label for="toggleTarget"  data-on="摊位" data-off="地址"><span></span>
+                  <div id="searchDiv"><form id="searchForm"><input id="searchInput" type="search" placeholder="搜索摊位"></form></div>
+                  <div id="toggleDiv"><input id="toggleTarget" type="checkbox" checked=""  name="toggleTarget" value="1" class="toggle">
+                  <label for="toggleTarget"  data-on="摊位" data-off="地址" class="toggleLabel"><span></span>
                   </label><br style="clear:both"></div>
 
                   <a  class="icon settings" id="filterSettingIcon"  onclick="$.afui.drawer.show('#right_Filter','right')"></a>
               </div>
-              <div id="searchListContainer" tabindex="-1" onfocus="alert('123')" onblur="alert('111')"><input type="text" /></div>
               <div id="bottomBar">
               <div id="transparentShader"></div>
                   <div class="button-grouped">
@@ -90,6 +89,26 @@
            <div id="mapContainer" class="mapCss"></div>
           </div>
     </div>
+
+</div>
+
+
+<!----------------------  搜索结果 --------------------->
+<div class="view" id="searchResultListView">
+
+    <div class="pages">
+        <div class="panel"  id="searchResultListPanel">
+            <div>
+                <div id="searchDivResultInner"><input  type="search" placeholder="搜索"></div>
+                <div id="resultList">
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
 </div>
 
@@ -130,8 +149,8 @@
         <div class="titleDiv">新建摊位-选择位置</div>
     </header>
     <div class="pages">
-        <div class="panel zeroPadding"  id="createStandPanel2" data-selected="true">
-            <div id="searchBarInner">
+        <div id="panel zeroPadding"  id="createStandPanel2" data-selected="true">
+            <div>
                 <div id="searchDivInner"><input  type="search" placeholder="搜索"></div>
                 <div id="toggleDivInner"><input id="toggleTargetInner" type="checkbox" name="toggleTarget" value="1" class="toggle">
                     <label for="toggleTarget"  data-on="摊位" data-off="地址"><span></span>
@@ -208,13 +227,14 @@
 <script type="text/javascript">
     $("#toggleTarget").on("change",function()
     {
-        if ($("#toggleTarget").val() == 1)
+
+        if ($("#toggleTarget").prop("checked"))
         {
-            $("#toggleInput").attr("placeholder","搜索摊位");
+            $("#searchInput").prop("placeholder","搜索摊位");
         }
         else
         {
-            $("#toggleInput").attr("placeholder","搜索地址");
+            $("#searchInput").prop("placeholder","搜索地址");
         }
     });
 
