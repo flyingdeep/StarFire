@@ -95,17 +95,19 @@
 
 <!----------------------  搜索结果 --------------------->
 <div class="view" id="searchResultListView">
-
+    <header style="background-color: white;height:50px;">
+        <div style="padding: 5px;">
+            <form>
+                <div id="searchDivResultInner"><input  type="search" placeholder="搜索"></div>
+            </form>
+        </div>
+    </header>
     <div class="pages">
         <div class="panel"  id="searchResultListPanel">
-            <div>
-                <div id="searchDivResultInner"><input  type="search" placeholder="搜索"></div>
                 <div id="resultList">
 
 
                 </div>
-            </div>
-
         </div>
     </div>
 
@@ -238,16 +240,13 @@
         }
     });
 
-    $("#searchListContainer").on("blur",function()
-    {
-        alert("aaa");
-        $("#searchListContainer").css("display","none");
-
-    });
 
     $("#searchForm").on("submit",function()
     {
-        $("#searchListContainer").css("display","block");
+        $.afui.loadContent("#searchResultListPanel",false,false,"pop");
+        var searchString = $("#searchInput").val();
+        $("#searchDivResultInner").val(searchString);
+        searchLocalPosition(searchString,map,$("#resultList"));
         return false;
     });
 

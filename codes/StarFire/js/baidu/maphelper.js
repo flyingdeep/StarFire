@@ -19,23 +19,33 @@ function formatDate(e, format)
     return format;
 }
 
-function searchLocalPosition(localName, mapObj,containerJObj) {
+function searchLocalPosition(targetString, mapObj,containerJObj) {
     var options = {
         onSearchComplete: function (results) {
             var innerHtmlString = "";
+
             innerHtmlString = innerHtmlString + "<ul class='list'>";
             for (var i = 0; i < results.getCurrentNumPois(); i++) {
+                var locationId = "loc" + i;
                 innerHtmlString = innerHtmlString + "<li>";
-                innerHtmlString = innerHtmlString + "<a>" + results.getPoi(i).title.replace(new RegExp(results.keyword, "g"), '<b>' + results.keyword + '</b>') + "</a>";
+                innerHtmlString = innerHtmlString + "<a id='" + locationId +"' >" + results.getPoi(i).title.replace(new RegExp(results.keyword, "g"), '<b>' + results.keyword + '</b>') + "</a>";
                 innerHtmlString = innerHtmlString + "</li>";
+                $("#" + locationId).bind("tap",function(){
+                    var marker = addMarker(results.getPoi(i).point,i);
+                    var openInfoWinFun = addInfoWindow(marker,results.getPoi(i),i);
+                    openInfoWinFun();
+                })
             }
             innerHtmlString = innerHtmlString + "</ul>";
+            containerJObj.html(innerHtmlString);
         }
     }
+    var local = new BMap.LocalSearch(mapObj, options);
+    local.search(targetString);
 }
 
 // 添加信息窗口
-function addInfoWindow(marker,poi,index,mapObj){
+function addInfoWindow(marker,poi,index){
     var maxLen = 10;
     var name = null;
     if(poi.type == BMAP_POI_TYPE_NORMAL){
@@ -55,29 +65,21 @@ function addInfoWindow(marker,poi,index,mapObj){
     infoWindowHtml.push('<td style="vertical-align:top;line-height:16px">' + poi.address + ' </td>');
     infoWindowHtml.push('</tr>');
     infoWindowHtml.push('</tbody></table>');
-    var infoWindow = new mapObj.InfoWindow(infoWindowHtml.join(""),{title:infoWindowTitle,width:200});
+    var infoWindow = new BMap.InfoWindow(infoWindowHtml.join(""),{title:infoWindowTitle,width:200});
     var openInfoWinFun = function(){
         marker.openInfoWindow(infoWindow);
-        for(var cnt = 0; cnt < maxLen; cnt++){
-            if(!document.getElementById("list" + cnt)){continue;}
-            if(cnt == index){
-                document.getElementById("list" + cnt).style.backgroundColor = "#f0f0f0";
-            }else{
-                document.getElementById("list" + cnt).style.backgroundColor = "#fff";
-            }
-        }
     };
     marker.addEventListener("click", openInfoWinFun);
     return openInfoWinFun;
 }
 
 function addMarker(point, index, mapObj){
-    var myIcon = new mapObj.Icon("http://api.map.baidu.com/img/markers.png", new mapObj.Size(23, 25), {
-        offset: new mapObj.Size(10, 25),
-        imageOffset: new mapObj.Size(0, 0 - index * 25)
+    var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new mapObj.Size(23, 25), {
+        offset: new BMap.Size(10, 25),
+        imageOffset: new BMap.Size(0, 0 - index * 25)
     });
-    var marker = new mapObj.Marker(point, {icon: myIcon});
-    map.addOverlay(marker);
+    var marker = new BMap.Marker(point, {icon: myIcon});
+    mapObj.addOverlay(marker);
     return marker;
 }
 
