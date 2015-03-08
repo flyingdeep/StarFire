@@ -1,3 +1,5 @@
+var staticResults;
+var baiduLBS = new baiduLBSClass();
 
 function formatDate(e, format)
 {
@@ -19,69 +21,7 @@ function formatDate(e, format)
     return format;
 }
 
-function searchLocalPosition(targetString, mapObj,containerJObj) {
-    var options = {
-        onSearchComplete: function (results) {
-            var innerHtmlString = "";
 
-            innerHtmlString = innerHtmlString + "<ul class='list'>";
-            for (var i = 0; i < results.getCurrentNumPois(); i++) {
-                var locationId = "loc" + i;
-                innerHtmlString = innerHtmlString + "<li>";
-                innerHtmlString = innerHtmlString + "<a id='" + locationId +"' >" + results.getPoi(i).title.replace(new RegExp(results.keyword, "g"), '<b>' + results.keyword + '</b>') + "</a>";
-                innerHtmlString = innerHtmlString + "</li>";
-                $("#" + locationId).bind("tap",function(){
-                    var marker = addMarker(results.getPoi(i).point,i);
-                    var openInfoWinFun = addInfoWindow(marker,results.getPoi(i),i);
-                    openInfoWinFun();
-                })
-            }
-            innerHtmlString = innerHtmlString + "</ul>";
-            containerJObj.html(innerHtmlString);
-        }
-    }
-    var local = new BMap.LocalSearch(mapObj, options);
-    local.search(targetString);
-}
-
-// 添加信息窗口
-function addInfoWindow(marker,poi,index){
-    var maxLen = 10;
-    var name = null;
-    if(poi.type == BMAP_POI_TYPE_NORMAL){
-        name = "地址：  "
-    }else if(poi.type == BMAP_POI_TYPE_BUSSTOP){
-        name = "公交：  "
-    }else if(poi.type == BMAP_POI_TYPE_SUBSTOP){
-        name = "地铁：  "
-    }
-    // infowindow的标题
-    var infoWindowTitle = '<div style="font-weight:bold;color:#CE5521;font-size:14px">'+poi.title+'</div>';
-    // infowindow的显示信息
-    var infoWindowHtml = [];
-    infoWindowHtml.push('<table cellspacing="0" style="table-layout:fixed;width:100%;font:12px arial,simsun,sans-serif"><tbody>');
-    infoWindowHtml.push('<tr>');
-    infoWindowHtml.push('<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">' + name + '</td>');
-    infoWindowHtml.push('<td style="vertical-align:top;line-height:16px">' + poi.address + ' </td>');
-    infoWindowHtml.push('</tr>');
-    infoWindowHtml.push('</tbody></table>');
-    var infoWindow = new BMap.InfoWindow(infoWindowHtml.join(""),{title:infoWindowTitle,width:200});
-    var openInfoWinFun = function(){
-        marker.openInfoWindow(infoWindow);
-    };
-    marker.addEventListener("click", openInfoWinFun);
-    return openInfoWinFun;
-}
-
-function addMarker(point, index, mapObj){
-    var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new mapObj.Size(23, 25), {
-        offset: new BMap.Size(10, 25),
-        imageOffset: new BMap.Size(0, 0 - index * 25)
-    });
-    var marker = new BMap.Marker(point, {icon: myIcon});
-    mapObj.addOverlay(marker);
-    return marker;
-}
 
 
 
@@ -91,8 +31,8 @@ function getMapCenter()
 {
     var mapcenter =
     {
-        "point_x": map.getCenter().lng,
-        "point_y": map.getCenter().lat
+        "point_x": map.getCenter().lat,
+        "point_y": map.getCenter().lng
     };
     return mapcenter;
 }
@@ -173,20 +113,18 @@ function createJsonStandQueryOne()
 
 // link to lbs "searchStandPostionByPoint"
 
-function createJsonSearchConditionForPointSearch()
+function createJsonSearchConditionForLocalSearch()
 {
 
     var resultJson = {
         "ak": CONST_AK,
         "geotable_id": CONST_STAND_LOCATION_INFO_TABLEID,
         "location": null,
-        "coord_type": CONST_COORDS_TYPE,
-        "radius":null,
-        "tags":null,
-        "sortby":null,
-        "filter":null,
-        "page_index":null,
-        "page_size":null
+        "radius":config_AreaSearchDistance,
+        "q": null,
+        "sortby":"distance:1",
+        "page_index":0,
+        "page_size":RESULT_LIST_SIZE
     };
     return resultJson;
 }
@@ -276,8 +214,109 @@ function transferCoords(geo_x, geo_y, ak, coords_source, coords_target,output_js
 
 }
 
+function searchPoiLocalPosition(location, searchString)
+{
+    var search_condition = createJsonSearchConditionForLocalSearch();
+    search_condition.location=location;
+    search_condition.q = searchString;
+
+    baiduLBS.searchStandPositionLocal(function(e)
+    {
+        if (output_json_result.status == "success" &&  output_json_result.message == "true")
+        {
+            var result =output_json_result.data;
+            var items = result.contents;
+            staticResults = items;
+            for (var i=0;i<result.size; i++)
+            {
+                var locationId = "loc" + i;
+                innerHtmlString = innerHtmlString + "<li>";
+                innerHtmlString = innerHtmlString + "<a id='" + locationId +"' onclick='resultItemStandTapEvent("+ i + ",map)'>" + items[i].title.replace(new RegExp(searchString, "g"), '<b>' + searchString+ '</b>') + "</a>";
+                innerHtmlString = innerHtmlString + "</li>";
+
+            }
+
+        }
+    },search_condition);
 
 
+}
+
+function resultItemStandTapEvent(i,mapObj)
+{
+    $.afui.loadContent("#mapPanel",false,false,"pop");
+    var targetPosition = staticResults[i];
+    var point = new Point(targetPosition.location[0],targetPosition.location[1]);
+    var marker = addMarker(point,i,mapObj);
+    var openInfoWinFun = addInfoWindow(marker,targetPosition,i);
+    openInfoWinFun();
+}
+
+
+function searchLocalPosition(targetString, mapObj,containerJObj) {
+    var options = {
+        onSearchComplete: function (results) {
+            var innerHtmlString = "";
+            staticResults = results;
+            innerHtmlString = innerHtmlString + "<ul class='list'>";
+            var eventStack = [];
+            for (var i = 0; i < results.getCurrentNumPois(); i++) {
+                var locationId = "loc" + i;
+                innerHtmlString = innerHtmlString + "<li>";
+                innerHtmlString = innerHtmlString + "<a id='" + locationId +"' onclick='resultItemTapEvent("+ i + ",map)'>" + results.getPoi(i).title.replace(new RegExp(results.keyword, "g"), '<b>' + results.keyword + '</b>') + "</a>";
+                innerHtmlString = innerHtmlString + "</li>";
+
+
+            }
+            innerHtmlString = innerHtmlString + "</ul>";
+            containerJObj.html(innerHtmlString);
+
+        }
+    }
+
+
+    var local = new BMap.LocalSearch(mapObj, options);
+    local.search(targetString);
+}
+
+function resultItemTapEvent(i,mapObj)
+{
+    $.afui.loadContent("#mapPanel",false,false,"pop");
+    var marker = addMarker(staticResults.getPoi(i).point,i,mapObj);
+    var openInfoWinFun = addInfoWindow(marker,staticResults.getPoi(i),i);
+    openInfoWinFun();
+}
+
+
+// 添加信息窗口
+function addInfoWindow(marker,poi,index){
+    // infowindow的标题
+    var infoWindowTitle = '<div style="font-weight:bold;color:#CE5521;font-size:14px">'+poi.title+'</div>';
+    // infowindow的显示信息
+    var infoWindowHtml = [];
+    infoWindowHtml.push('<table cellspacing="0" style="table-layout:fixed;width:100%;font:12px arial,simsun,sans-serif"><tbody>');
+    infoWindowHtml.push('<tr>');
+    infoWindowHtml.push('<td style="vertical-align:top;line-height:16px">' + poi.address + ' </td>');
+    infoWindowHtml.push('</tr>');
+    infoWindowHtml.push('</tbody></table>');
+    var infoWindow = new BMap.InfoWindow(infoWindowHtml.join(""),{title:infoWindowTitle,width:200});
+    var openInfoWinFun = function(){
+        marker.openInfoWindow(infoWindow);
+    };
+    marker.addEventListener("click", openInfoWinFun);
+    return openInfoWinFun;
+}
+
+function addMarker(point, index, mapObj){
+    var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+        offset: new BMap.Size(10, 25),
+        imageOffset: new BMap.Size(0, 0 - index * 25)
+    });
+    var marker = new BMap.Marker(point, {icon: myIcon});
+    mapObj.addOverlay(marker);
+    // alert(point.lng + "   !!   " + point.lat);
+    return marker;
+}
 
 //Create user mark on map
 function createMakerWithInfoWindow(map, Json_stand_info)

@@ -95,10 +95,10 @@
 
 <!----------------------  搜索结果 --------------------->
 <div class="view" id="searchResultListView">
-    <header style="background-color: white;height:50px;">
-        <div style="padding: 5px;">
-            <form>
-                <div id="searchDivResultInner"><input  type="search" placeholder="搜索"></div>
+    <header id="searchResultHeader" >
+        <div style="padding:5px;">
+            <form id="searchResultListForm">
+                <div id="searchDivResultInner"><input  type="search" placeholder="搜索" style="color:black;"></div>
             </form>
         </div>
     </header>
@@ -118,7 +118,6 @@
 <div class="view" id="createStandView1">
     <header id="createStandHeader1">
         <div style="float:left"><a href="#mapPanel" data-transition="up" class="icon close green button previous">放弃</a></div>
-
         <div style="float:right"><a href="#createStandPanel2" data-transition="slide" class="icon right green button next">下一步</a></div>
         <div class="titleDiv">新建摊位-基本信息</div>
     </header>
@@ -145,22 +144,21 @@
 <!----------------------   创建摊位 - 2 --------------------->
 <div class="view" id="createStandView2">
     <header id="createStandHeader2">
-        <div style="float:left"><a href="#createStandPanel1" data-transition="invoke"  class="icon left green button previous">上一步</a></div>
-
-        <div style="float:right"><a href="#" data-transition="slide" class="icon right green button next">下一步</a></div>
-        <div class="titleDiv">新建摊位-选择位置</div>
-    </header>
-    <div class="pages">
-        <div id="panel zeroPadding"  id="createStandPanel2">
-            <div>
-                <div id="searchDivInner"><input  type="search" placeholder="搜索"></div>
-                <div id="toggleDivInner"><input id="toggleTargetInner" type="checkbox" name="toggleTarget" value="1" class="toggle">
-                    <label for="toggleTarget"  data-on="摊位" data-off="地址"><span></span>
-                    </label><br style="clear:both"></div>
-            </div>
-            <div id="mapContainerCr" class="mapCss"></div>
-        </div>
-    </div>
+       <div style="float:left"><a href="#createStandPanel1" data-transition="invoke"  class="icon left green button previous">上一步</a></div>
+      <div style="float:right"><a href="#" data-transition="slide" class="icon right green button next">下一步</a></div>
+      <div class="titleDiv">新建摊位-选择位置</div>
+  </header>
+  <div class="pages">
+      <div id="panel zeroPadding"  id="createStandPanel2">
+          <div>
+              <div id="searchDivInner"><input  type="search" placeholder="搜索"></div>
+              <div id="toggleDivInner"><input id="toggleTargetInner" type="checkbox" name="toggleTarget" value="1" class="toggle">
+                  <label for="toggleTarget"  data-on="摊位" data-off="地址"><span></span>
+                  </label><br style="clear:both"></div>
+          </div>
+          <div id="mapContainerCr" class="mapCss"></div>
+      </div>
+  </div>
 
 
 </div>
@@ -229,7 +227,6 @@
 <script type="text/javascript">
     $("#toggleTarget").on("change",function()
     {
-
         if ($("#toggleTarget").prop("checked"))
         {
             $("#searchInput").prop("placeholder","搜索摊位");
@@ -243,10 +240,14 @@
 
     $("#searchForm").on("submit",function()
     {
-        $.afui.loadContent("#searchResultListPanel",false,false,"pop");
-        var searchString = $("#searchInput").val();
-        $("#searchDivResultInner").val(searchString);
-        searchLocalPosition(searchString,map,$("#resultList"));
+        if ($("#toggleTarget").prop("checked"))
+        {
+            searchStand();
+        }
+        else
+        {
+            searchLocation();
+        }
         return false;
     });
 
@@ -260,6 +261,28 @@
 
      $("#standTypeDiv").html(e);
     });
+
+
+    function searchLocation()
+    {
+        $.afui.loadContent("#searchResultListPanel",false,false,"pop");
+        var searchString = $("#searchInput").val();
+        $("#searchDivResultInner input").val(searchString);
+        $("#searchResultListForm").on("submit",function()
+         {
+             var searchStringInner = $("#searchDivResultInner input").val();
+             $("#searchInput").val(searchStringInner);
+             searchLocalPosition(searchStringInner,map,$("#resultList"));
+             return false;
+         }
+        );
+        searchLocalPosition(searchString,map,$("#resultList"));
+    }
+
+    function searchStand()
+    {
+
+    }
 
 
 
@@ -284,8 +307,8 @@
         var pt = e.point;
         Json_tap_postion =
         {
-            "point_x": pt.lng,
-            "point_y":  pt.lat
+            "point_x":pt.lat ,
+            "point_y": pt.lng
         };
         alert(Json_tap_postion.point_x + "  " + Json_tap_postion.point_y);
         gc.getLocation(pt, function(rs){
@@ -306,7 +329,7 @@
 
     }
    // map.addEventListener("dragend", map_dragend_event);
-    //map.addEventListener("click", map_click_event);
+   // map.addEventListener("click", map_click_event);
     //map.addEventListener("zoomend", map_zoomend_event);
 </script>
 </body>
