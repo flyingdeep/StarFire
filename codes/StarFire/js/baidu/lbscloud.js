@@ -219,7 +219,7 @@ var baiduLBSClass = function(authClass) {
     // query one point by id
 
 
-    this.queryLbsPostionSingleDetail = function(Json_stand_querymultiple) {
+    this.queryLbsPositionSingleDetail = function(Json_stand_querymultiple) {
         var querystring = "id=" + Json_stand_querymultiple.id + "&geotable_id=" + Json_stand_querymultiple.geotable_id + "&ak=" + Json_stand_querymultiple.ak;
         var url = BAIDU_LBS_URI + "geodata/v3/poi/detail?callback=?&" + querystring;
         var output_json_result = {
@@ -254,17 +254,20 @@ var baiduLBSClass = function(authClass) {
 
 //search point based on target position
 
-    this.searchStandPostionByPoint = function(callback, search_condition) {
-        querystring = "ak=" + search_condition.ak + "&geotable_id=" + search_condition.geotable_id + "&location=" + search_condition.location + "&coord_type=" +
-            search_condition.coord_type + "&radius=" + search_condition.radius + "&tags=" + search_condition.tags + "&sortby=" + search_condition.sortby
-            + "&filter=" + search_condition.filter + "&page_index=" + search_condition.page_index + "&page_size=" + search_condition.page_size;
+    this.searchStandPositionNearby = function(callback, search_condition) {
+        querystring = "ak=" + search_condition.ak + "&geotable_id=" + search_condition.geotable_id + "&location=" + search_condition.location
+            + "&radius=" + search_condition.radius + "&sortby=" + search_condition.sortby
+            + "&page_index=" + search_condition.page_index + "&page_size=" + search_condition.page_size + "&q=" + search_condition.q;
         url = BAIDU_LBS_URI + "geosearch/v3/nearby?callback=?&" + querystring;
+        //url = "http://api.map.baidu.com/geosearch/v2/local?callback=jQuery1910054608748061582446_1425892645753&q=%E6%96%B0%E4%B8%9C%E6%96%B9&page_index=0&filter=&region=131&scope=2&geotable_id=30960&ak=A4749739227af1618f7b0d1b588c0e85&_=1425892645755";
+        console.log(url);
         var output_json_result = {
             "status": null,
             "message": null,
             "data": null
         };
-        jQuery.get(url,
+        //console.log(url);
+        jQuery.getJSON(url,
             function (data, status) {
                 if (status == "success" && data.status == 0) {
                     output_json_result.status = "success";
@@ -324,6 +327,43 @@ var baiduLBSClass = function(authClass) {
                 callback(output_json_result);
             }
         );
+
+    };
+
+    var transferCoords = function(callback, geo_x, geo_y, ak, coords_source, coords_target)
+    {
+        url = "http://api.map.baidu.com/geoconv/v1/?" + "coords=" + geo_x + ","+geo_y+"&ak="+ak + "&from=" + coords_source + "&to=" +coords_target;
+
+        var output_json_result =
+        {
+            "status": null,
+            "message": null,
+            "data": null
+        };
+        jQuery.getJSON(url,function(data,status){
+            if (status == "success" && data.status == 0 )
+            {
+                output_json_result.status = "success";
+                output_json_result.message = null;
+                output_json_result.data = {
+                    "position_x":data.result[0].x,
+                    "position_y":data.result[0].y}
+                callback(output_json_result);
+
+            }
+            else if (status != "success")
+            {
+                output_json_result.status = "failed";
+                output_json_result.message = "Post failed";
+                callback(output_json_result);
+            }
+            else
+            {
+                output_json_result.status = "failed";
+                output_json_result.message = "Api failed";
+                callback(output_json_result);
+            }
+        });
 
     };
 };

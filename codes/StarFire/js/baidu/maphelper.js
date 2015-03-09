@@ -113,7 +113,7 @@ function createJsonStandQueryOne()
 
 // link to lbs "searchStandPostionByPoint"
 
-function createJsonSearchConditionForLocalSearch()
+function createJsonSearchConditionForNearbySearch()
 {
 
     var resultJson = {
@@ -181,61 +181,29 @@ function deleteJsonStandInfo()
 
 
 
-
-function transferCoords(geo_x, geo_y, ak, coords_source, coords_target,output_json_result,  successAction, failedAction)
+function searchPoiNearbyPosition(location, searchString,containerJObj)
 {
-    url = "http://api.map.baidu.com/geoconv/v1/?" + "coords=" + geo_x + ","+geo_y+"&ak="+ak + "&from=" + coords_source + "&to=" +coords_target;
-
-
-    jQuery.get(url,function(data,status){
-        if (status == "success" && data.status == 0 )
-        {
-            output_json_result.status = "success";
-            output_json_result.message = null;
-            output_json_result.data = {
-                "position_x":data.result[0].x,
-                "position_y":data.result[0].y}
-            successAction();
-
-        }
-        else if (status != "success")
-        {
-            output_json_result.status = "failed";
-            output_json_result.message = "Post failed";
-            failedAction();
-        }
-        else
-        {
-            output_json_result.status = "failed";
-            output_json_result.message = "Api failed";
-            failedAction();
-        }
-    });
-
-}
-
-function searchPoiLocalPosition(location, searchString)
-{
-    var search_condition = createJsonSearchConditionForLocalSearch();
+    var search_condition = createJsonSearchConditionForNearbySearch();
     search_condition.location=location;
     search_condition.q = searchString;
-
-    baiduLBS.searchStandPositionLocal(function(e)
+    baiduLBS.searchStandPositionNearby(function(e)
     {
-        if (output_json_result.status == "success" &&  output_json_result.message == "true")
+        //alert(JSON.stringify(e));
+        if (e.status == "success" &&  e.message == "true")
         {
-            var result =output_json_result.data;
+            var result =e.data;
             var items = result.contents;
             staticResults = items;
+            var innerHtmlString = "";
             for (var i=0;i<result.size; i++)
             {
                 var locationId = "loc" + i;
                 innerHtmlString = innerHtmlString + "<li>";
                 innerHtmlString = innerHtmlString + "<a id='" + locationId +"' onclick='resultItemStandTapEvent("+ i + ",map)'>" + items[i].title.replace(new RegExp(searchString, "g"), '<b>' + searchString+ '</b>') + "</a>";
                 innerHtmlString = innerHtmlString + "</li>";
-
             }
-
+            innerHtmlString = innerHtmlString + "</ul>";
+            containerJObj.html(innerHtmlString);
         }
     },search_condition);
 

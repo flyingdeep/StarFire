@@ -50,9 +50,19 @@
         var commonHelper = new commonHelperClass();
         $(document).ready(function(){
             $.afui.launch();
-
+            initialAction();
 
         });
+
+        function initialAction()
+        {
+            if (!localStorage.position) {
+
+                localStorage.position = "121.50,31.25";
+            }
+            localStorage.position = "121.50,31.25";
+            currentPosition = localStorage.position;
+        }
 
     </script>
 
@@ -281,7 +291,18 @@
 
     function searchStand()
     {
-
+        $.afui.loadContent("#searchResultListPanel",false,false,"pop");
+        var searchString = $("#searchInput").val();
+        $("#searchDivResultInner input").val(searchString);
+        $("#searchResultListForm").on("submit",function()
+                {
+                    var searchStringInner = $("#searchDivResultInner input").val();
+                    $("#searchInput").val(searchStringInner);
+                    searchLocalPosition(searchStringInner,map,$("#resultList"));
+                    return false;
+                }
+        );
+        searchPoiNearbyPosition(currentPosition,searchString,$("#resultList"));
     }
 
 
@@ -329,7 +350,7 @@
 
     }
    // map.addEventListener("dragend", map_dragend_event);
-   // map.addEventListener("click", map_click_event);
+    //map.addEventListener("click", map_click_event);
     //map.addEventListener("zoomend", map_zoomend_event);
 </script>
 </body>
