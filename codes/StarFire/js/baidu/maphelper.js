@@ -188,13 +188,13 @@ function searchPoiNearbyPosition(location, searchString,containerJObj)
     search_condition.q = searchString;
     baiduLBS.searchStandPositionNearby(function(e)
     {
-        //alert(JSON.stringify(e));
         if (e.status == "success" &&  e.message == "true")
         {
             var result =e.data;
             var items = result.contents;
+
             staticResults = items;
-            var innerHtmlString = "";
+            var innerHtmlString = "<ul class='list'>";
             for (var i=0;i<result.size; i++)
             {
                 var locationId = "loc" + i;
@@ -214,10 +214,12 @@ function resultItemStandTapEvent(i,mapObj)
 {
     $.afui.loadContent("#mapPanel",false,false,"pop");
     var targetPosition = staticResults[i];
-    var point = new Point(targetPosition.location[0],targetPosition.location[1]);
+
+    var point = new BMap.Point(targetPosition.location[0],targetPosition.location[1]);
     var marker = addMarker(point,i,mapObj);
     var openInfoWinFun = addInfoWindow(marker,targetPosition,i);
-    openInfoWinFun();
+    //openInfoWinFun();
+    setTimeout(openInfoWinFun,LOAD_MAP_TIP_LAYER_DELAY);
 }
 
 
@@ -252,7 +254,8 @@ function resultItemTapEvent(i,mapObj)
     $.afui.loadContent("#mapPanel",false,false,"pop");
     var marker = addMarker(staticResults.getPoi(i).point,i,mapObj);
     var openInfoWinFun = addInfoWindow(marker,staticResults.getPoi(i),i);
-    openInfoWinFun();
+    //openInfoWinFun();
+    setTimeout(openInfoWinFun,LOAD_MAP_TIP_LAYER_DELAY);
 }
 
 
@@ -267,6 +270,7 @@ function addInfoWindow(marker,poi,index){
     infoWindowHtml.push('<td style="vertical-align:top;line-height:16px">' + poi.address + ' </td>');
     infoWindowHtml.push('</tr>');
     infoWindowHtml.push('</tbody></table>');
+    console.log(infoWindowHtml.join(""));//
     var infoWindow = new BMap.InfoWindow(infoWindowHtml.join(""),{title:infoWindowTitle,width:200});
     var openInfoWinFun = function(){
         marker.openInfoWindow(infoWindow);

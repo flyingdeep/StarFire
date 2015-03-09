@@ -298,7 +298,7 @@
                 {
                     var searchStringInner = $("#searchDivResultInner input").val();
                     $("#searchInput").val(searchStringInner);
-                    searchLocalPosition(searchStringInner,map,$("#resultList"));
+                    searchPoiNearbyPosition(currentPosition,searchStringInner,$("#resultList"));
                     return false;
                 }
         );
@@ -318,8 +318,8 @@
     var Json_decode_postion2address; //get address from position
     var current_map_level;
     //map.centerAndZoom(new BMap.Point(CONST_POINT_X, CONST_POINT_Y), CONST_DISPLAY_LEVEL);
-    map.centerAndZoom(init_city, CONST_DISPLAY_LEVEL);
-    mapCr.centerAndZoom(init_city, CONST_DISPLAY_LEVEL);
+    map.centerAndZoom(init_city);
+    mapCr.centerAndZoom(init_city);
     var map_dragend_event = function (){
         Json_mapcenter = getMapCenter();
     };
