@@ -275,6 +275,7 @@
 
     function searchLocation()
     {
+        $("#resultList").html("");
         $.afui.loadContent("#searchResultListPanel",false,false,"pop");
         var searchString = $("#searchInput").val();
         $("#searchDivResultInner input").val(searchString);
@@ -291,6 +292,7 @@
 
     function searchStand()
     {
+        $("#resultList").html("");
         $.afui.loadContent("#searchResultListPanel",false,false,"pop");
         var searchString = $("#searchInput").val();
         $("#searchDivResultInner input").val(searchString);
