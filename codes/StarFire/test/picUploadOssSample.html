@@ -3,14 +3,21 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <script type="text/javascript" src="../js/common/base64.js"></script>
 </head>
 <body>
+<script>
+   var policy =  '{"expiration":"2015-12-01T12:00:00.000Z","conditions":[[“content-length-range”, 1, 10]]}';
+  //  document.write(toBase64(policy));
+
+</script>
 <form method="post" action="http://flyingdeeptest.oss-cn-hangzhou.aliyuncs.com" enctype="multipart/form-data" >
-    OSSAccessKeyId <input name="OSSAccessKeyId" type="text"  value="glMswMHjOFGZRlhz" >
-    Policy <input name="policy" type="text"  value='{"expiration":"2015-12-01T12:00:00.000Z","conditions":[[“content-length-range”, 1, 10]]}' >
-    Signature <input name="Signature" type="text"  value="RzYJueEpE2jo3W7EadPfj0WsV/A=" >
+    Key <input name="key" type="text" > <br>
+    OSSAccessKeyId <input name="OSSAccessKeyId" type="text"  value="glMswMHjOFGZRlhz" ><br>
+    Policy <input name="policy" type="text"  value='eyJleHBpcmF0aW9uIjoiMjAxNS0xMi0wMVQxMjowMDowMC4wMDBaIiwiY29uZGl0aW9ucyI6W1siY29udGVudC1sZW5ndGgtcmFuZ2UiLDEsNTI0Mjg4MF1dfQ==' ><br>
+    Signature <input name="Signature" type="text"  value="X+SDfnmqlD0Jj4n7REbNEQ4QwUI=" ><br>
     File <input name="file" type="file" >
-    Key <input name="key" type="text" >
+
     <input type="submit"  value="Submit" >
 </form>
 
