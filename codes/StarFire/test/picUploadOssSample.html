@@ -5,11 +5,12 @@
     <title></title>
 </head>
 <body>
-<form method="post" action="flyingdeeptest.oss-cn-hangzhou.aliyuncs.com" enctype="multipart/form-data">
+<form method="post" action="http://flyingdeeptest.oss-cn-hangzhou.aliyuncs.com" enctype="multipart/form-data" >
     OSSAccessKeyId <input name="OSSAccessKeyId" type="text"  value="glMswMHjOFGZRlhz" >
-    Policy <input name="policy" type="text"  value='{"expiration":"","conditions":[]}' >
-    Signature <input name="Signature" type="text"  value="" >
-    File <input name="File" type="text" >
+    Policy <input name="policy" type="text"  value='{"expiration":"2015-12-01T12:00:00.000Z","conditions":[[“content-length-range”, 1, 10]]}' >
+    Signature <input name="Signature" type="text"  value="RzYJueEpE2jo3W7EadPfj0WsV/A=" >
+    File <input name="file" type="file" >
+    Key <input name="key" type="text" >
     <input type="submit"  value="Submit" >
 </form>
 

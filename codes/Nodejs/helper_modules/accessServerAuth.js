@@ -17,7 +17,7 @@ exports.authOSS = function(policy, key)
 
     var base64policy = (new Buffer(policy)).toString(BASE64);
 
-    var result = crypto.createHmac(SHA1, key.update(base64policy).digest().toString(BASE64));
+    var result = crypto.createHmac(SHA1, key).update(base64policy).digest().toString(BASE64);
     return result;
 };
 

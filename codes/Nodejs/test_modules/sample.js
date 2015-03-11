@@ -1,17 +1,7 @@
-///var sss = require("./../helper_modules/customize_Des.js");
-//console.log(sss.strEnc("flyingdeep","FifthSea"));
-var reformJsonObject = function (e)
-{
-    for (var item in e)
-    {
-        if (e[item] == null)
-        {
-            delete e[item]
-        }
-    }
-};
-var ssJson ="{ user_name: 'flyingdeep', password: 'K+2C13bP9ZwBopvJZwhu7g' }";
 
-JSON.parse(ssJson);
-
-
+var crypto=require("crypto");
+var policy ='{"expiration":"2015-12-01T12:00:00.000Z","conditions":[[“content-length-range”, 1, 4000]]}';
+var base64policy = (new Buffer(policy)).toString("base64");
+var key = "glMswMHjOFGZRlhz";
+var result = crypto.createHmac("sha1", key).update(base64policy).digest().toString("base64");
+console.log(result);
