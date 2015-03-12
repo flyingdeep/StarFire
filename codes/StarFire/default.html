@@ -68,7 +68,16 @@
         }
         var mapCenterString = null; //map center val
 
+
+
+        //************************************ main map related**************************************
+        var gc = new BMap.Geocoder();
+        var mapCr =null;
+        var map = null;
+
+
     </script>
+
 
 </head>
 <body>
@@ -142,7 +151,7 @@
                     <div>摊位名:</div><br>
                     <div><input id="standName" type="text" placeholder="不超过十个字"></div>
                     <div>类型:</div>
-                <div id="standTypeDiv" class="grid"> </div><br>
+                <div id="standTypeDiv" class="grid"></div><br>
                     <div>子分类:</div><br>
                 <div><input id="subStandType" type="text" placeholder="多子分类以逗号隔开。 如： 蛋饼，葱油饼，臭豆腐
 "></div>
@@ -163,18 +172,19 @@
       <div class="titleDiv">新建摊位-选择位置</div>
   </header>
   <div class="pages">
-      <div id="panel zeroPadding"  id="createStandPanel2">
-          <div> 点击地图任意处以设定摊位位置(可搜索地址确定大致范围) </div>
-              <div id="searchDivInner"><input  type="search" placeholder="搜索"></div>
-            <div><div>设置摊位为当前位置<a></a></div>
-                <br style="clear:both">
-                <div>
-                    附近摊位<input id="displayStandInput" type="checkbox" checked=""  name="displayStandInput" value="1" class="toggle">
-                    <label for="displayStandInput"  data-on="显示" data-off="隐藏" class="toggleLabel"><span></span>
-                    </label>
-                </div>
-            </div>
-
+      <div class="panel zeroPadding"  id="createStandPanel2">
+          <div style="position: absolute;top:3px;width:100%;left:2px;z-index: 50" >
+              <div id="searchDivInner" style="float:left;"><input  type="search" placeholder="搜索地址以定位区域"></div>
+              <br style="clear:both">
+              <div ><div style="float:right;">设置摊位为当前位置<a></a></div>
+                  <br style="clear:both">
+                  <div style="float:right;">
+                      附近摊位<input id="displayStandInput" type="checkbox" checked=""  name="displayStandInput" value="1" class="toggle">
+                      <label for="displayStandInput"  data-on="显示" data-off="隐藏" class="toggleLabel"><span></span>
+                      </label>
+                  </div>
+              </div>
+          </div>
           <div id="mapContainerCr" class="mapCss"></div>
       </div>
   </div>
@@ -261,10 +271,27 @@
         {
             if (window.location.hash=="#createStandPanel1")
             {
-                commonHelper.constructStandTypeHTML(function(e){
-                    $("#standTypeDiv").html(e);
-                });
+                if ( $("#standTypeDiv").html() == "") {
+                    commonHelper.constructStandTypeHTML(function (e) {
+                        $("#standTypeDiv").html(e);
+                    });
+                }
             }
+            if (window.location.hash=="#createStandPanel2")
+            {
+                if(!mapCr) {
+                    mapCr = new BMap.Map("mapContainerCr");
+                    mapCr.centerAndZoom(init_city);
+                }
+                $.afui.toast({
+                    message:"点击地图任意处以设定摊位位置",
+                    position:"bc",
+                    autoClose:false, //have to click the message to close
+                    type:"success"
+                });
+
+            }
+
 
         }
     );
@@ -302,10 +329,8 @@
         );
         searchPoiNearbyPosition(mapCenterString,searchString,$("#resultList"));
     }
-//************************************ main map related**************************************
-    var gc = new BMap.Geocoder();
-    var mapCr = new BMap.Map("mapContainerCr");
-    var map = new BMap.Map("mapContainer");
+// map related =====================================================
+    map = new BMap.Map("mapContainer");
     var init_city = "上海";
 
     var Json_tap_postion; //finger tap position return Json
@@ -313,7 +338,7 @@
     var current_map_level;
     //map.centerAndZoom(new BMap.Point(CONST_POINT_X, CONST_POINT_Y), CONST_DISPLAY_LEVEL);
     map.centerAndZoom(init_city);
-    mapCr.centerAndZoom(init_city);
+
     var map_dragend_event = function (){
 
     };
@@ -347,12 +372,11 @@
         mapCenterString = getMapCenter(map);
     };
 
-   // map.addEventListener("dragend", map_dragend_event);
+    // map.addEventListener("dragend", map_dragend_event);
     //map.addEventListener("click", map_click_event);
     //map.addEventListener("zoomend", map_zoomend_event);
     map.addEventListener("moveend", map_moveend_event);
     map.addEventListener("load", map_load_event);
-
 
 </script>
 </body>
