@@ -49,20 +49,24 @@
         $.afui.autoLaunch=false;
         var commonHelper = new commonHelperClass();
         $(document).ready(function(){
-            $.afui.launch();
+
+
             initialAction();
 
         });
 
         function initialAction()
         {
+            FastClick.attach( document.body );
             if (!localStorage.position) {
 
                 localStorage.position = "121.50,31.25";
             }
             localStorage.position = "121.50,31.25";
             currentPosition = localStorage.position;
+            $.afui.launch();
         }
+        var mapCenterString = null; //map center val
 
     </script>
 
@@ -160,12 +164,17 @@
   </header>
   <div class="pages">
       <div id="panel zeroPadding"  id="createStandPanel2">
-          <div>
+          <div> 点击地图任意处以设定摊位位置(可搜索地址确定大致范围) </div>
               <div id="searchDivInner"><input  type="search" placeholder="搜索"></div>
-              <div id="toggleDivInner"><input id="toggleTargetInner" type="checkbox" name="toggleTarget" value="1" class="toggle">
-                  <label for="toggleTarget"  data-on="摊位" data-off="地址"><span></span>
-                  </label><br style="clear:both"></div>
-          </div>
+            <div><div>设置摊位为当前位置<a></a></div>
+                <br style="clear:both">
+                <div>
+                    附近摊位<input id="displayStandInput" type="checkbox" checked=""  name="displayStandInput" value="1" class="toggle">
+                    <label for="displayStandInput"  data-on="显示" data-off="隐藏" class="toggleLabel"><span></span>
+                    </label>
+                </div>
+            </div>
+
           <div id="mapContainerCr" class="mapCss"></div>
       </div>
   </div>
@@ -180,13 +189,8 @@
         <h1>筛选设置</h1>
     </header>
     <div class="pages">
-
         <div class="panel active" id="filterPanel">
-
-
             <div  class="input-group">
-
-
                 <div  class="grid">
                     <div class="gcol2 filterLineCss">显示距离:</div><div class="gcol2 filterLineCss">&nbsp;</div>
                     <div class="gcol2"><input id="distantRadio200" type="radio"  name="distantRadio200" value="200"><label for="distantRadio200">200米</label></div>
@@ -195,8 +199,6 @@
                     <div class="gcol2"><input id="distantRadio2000" type="radio"  name="distantRadio2000" value="2000"><label for="distantRadio2000">2000米</label></div>
                     &nbsp;
                 </div><br />
-
-
                <div id="toggleCustomCrStandDiv" class="grid">
                    <div class="gcol2 filterLineCss">显示非摊主创建摊位:</div>
                    <div class="gcol2 filterLineCss">
@@ -204,18 +206,12 @@
                     <label for="toggleCustomCrStandInput"  data-on="是" data-off="否"><span></span></label>
                     </div>
                 </div>
-
-
-
                 <div id="toggleFavoriteStandDiv" class="grid">
                     <div class="gcol2 filterLineCss">仅显示收藏摊位:</div>
                     <div class="gcol2 filterLineCss"><input id="toggleFavoriteStandInput" type="checkbox" name="toggleFavoriteStandInput" value="1" class="toggle">
                     <label for="toggleFavoriteStandInput"  data-on="是" data-off="否"><span></span></label>
                     </div>
                 </div>
-
-
-
                  <div id="standDisplayModeDiv" class="grid" >
                      <div class="gcol2 filterLineCss">摊位显示方式:</div>
                      <div class="gcol2 filterLineCss" >
@@ -223,14 +219,10 @@
                     <label for="standDisplayModeInput"  data-on="是" data-off="否"><span></span></label>
                      </div>
                 </div>
-
-
             </div><br />
             <div style="text-align: center;"><a data-menu-close class="button" >关闭</a></div>
         </div>
-
     </div>
-
 </div>
 </nav>
 
@@ -246,8 +238,6 @@
             $("#searchInput").prop("placeholder","搜索地址");
         }
     });
-
-
     $("#searchForm").on("submit",function()
     {
         if ($("#toggleTarget").prop("checked"))
@@ -262,16 +252,22 @@
     });
 
     $("#filterPanel").on("swipeRight", function(){
-
         $.afui.drawer.hide("#right_Filter","right");
-
     });
 
-    commonHelper.constructStandTypeHTML(function(e){
 
-     $("#standTypeDiv").html(e);
-    });
 
+    $(window).on("hashchange",function()
+        {
+            if (window.location.hash=="#createStandPanel1")
+            {
+                commonHelper.constructStandTypeHTML(function(e){
+                    $("#standTypeDiv").html(e);
+                });
+            }
+
+        }
+    );
 
     function searchLocation()
     {
@@ -300,22 +296,18 @@
                 {
                     var searchStringInner = $("#searchDivResultInner input").val();
                     $("#searchInput").val(searchStringInner);
-                    searchPoiNearbyPosition(currentPosition,searchStringInner,$("#resultList"));
+                    searchPoiNearbyPosition(mapCenterString,searchStringInner,$("#resultList"));
                     return false;
                 }
         );
-        searchPoiNearbyPosition(currentPosition,searchString,$("#resultList"));
+        searchPoiNearbyPosition(mapCenterString,searchString,$("#resultList"));
     }
-
-
-
 //************************************ main map related**************************************
     var gc = new BMap.Geocoder();
-
     var mapCr = new BMap.Map("mapContainerCr");
     var map = new BMap.Map("mapContainer");
     var init_city = "上海";
-    var Json_mapcenter; //map center val
+
     var Json_tap_postion; //finger tap position return Json
     var Json_decode_postion2address; //get address from position
     var current_map_level;
@@ -323,9 +315,8 @@
     map.centerAndZoom(init_city);
     mapCr.centerAndZoom(init_city);
     var map_dragend_event = function (){
-        Json_mapcenter = getMapCenter();
-    };
 
+    };
     var map_click_event = function (e){
         var pt = e.point;
         Json_tap_postion =
@@ -344,16 +335,25 @@
                 "streetNumber": addComp.streetNumber
             };
         });
-
     };
     var map_zoomend_event = function (){
-
         current_map_level = map.getZoom();
+    };
 
-    }
+    var map_moveend_event = function (){
+        mapCenterString = getMapCenter(map);
+    };
+    var map_load_event = function(){
+        mapCenterString = getMapCenter(map);
+    };
+
    // map.addEventListener("dragend", map_dragend_event);
     //map.addEventListener("click", map_click_event);
     //map.addEventListener("zoomend", map_zoomend_event);
+    map.addEventListener("moveend", map_moveend_event);
+    map.addEventListener("load", map_load_event);
+
+
 </script>
 </body>
 </html>

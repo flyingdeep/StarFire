@@ -27,14 +27,10 @@ function formatDate(e, format)
 
 
 // Get Center x,y of the current map
-function getMapCenter()
+function getMapCenter(mapObj)
 {
-    var mapcenter =
-    {
-        "point_x": map.getCenter().lat,
-        "point_y": map.getCenter().lng
-    };
-    return mapcenter;
+    var mapCenter =mapObj.getCenter().lat+","+mapObj.getCenter().lng;
+    return mapCenter;
 }
 
 // Create a blank Json output structure
