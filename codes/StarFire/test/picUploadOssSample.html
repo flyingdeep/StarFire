@@ -3,15 +3,46 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../js/common/base64.js"></script>
 </head>
 <body>
 <script>
-   var policy =  '{"expiration":"2015-12-01T12:00:00.000Z","conditions":[[“content-length-range”, 1, 10]]}';
-  //  document.write(toBase64(policy));
+    Date.prototype.format = function(format){
+        var o = {
+            "M+" : this.getMonth()+1, //month
+            "d+" : this.getDate(), //day
+            "h+" : this.getHours(), //hour
+            "m+" : this.getMinutes(), //minute
+            "s+" : this.getSeconds(), //second
+            "q+" : Math.floor((this.getMonth()+3)/3), //quarter
+            "S" : this.getMilliseconds() //millisecond
+        }
 
+        if(/(y+)/.test(format)) {
+            format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+        }
+
+        for(var k in o) {
+            if(new RegExp("("+ k +")").test(format)) {
+                format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length));
+            }
+        }
+        return format;
+    }
+    var MAX_IMG_SIZE = 5242880;
+    var expiration = ((new Date())+ 172800000).formate("yyyy-MM-ddT12.00.000Z");
+
+    var policy =  '{"expiration":expiration,"conditions":[[“content-length-range”, 1, '+MAX_IMG_SIZE+']]}';
+  //  document.write(toBase64(policy));
+    var base64Policy = toBase64(policy);
+    var OSS_LOCATION = "shenzhen";
+    var OSS_BUCKET = "standapp";
+    var OSS_DOMAIN = "http://"+ OSS_BUCKET +".oss-cn-" + OSS_LOCATION + ".aliyuncs.com";
+    var OSS_ACCESS_KEY_ID = "glMswMHjOFGZRlhz";
+    var OSS_ACCESS_KEY_CODE
 </script>
-<form method="post" action="http://flyingdeeptest.oss-cn-hangzhou.aliyuncs.com" enctype="multipart/form-data" >
+<form  method="post" action="http://flyingdeeptest.oss-cn-hangzhou.aliyuncs.com" enctype="multipart/form-data" >
     Key <input name="key" type="text" > <br>
     OSSAccessKeyId <input name="OSSAccessKeyId" type="text"  value="glMswMHjOFGZRlhz" ><br>
     Policy <input name="policy" type="text"  value='eyJleHBpcmF0aW9uIjoiMjAxNS0xMi0wMVQxMjowMDowMC4wMDBaIiwiY29uZGl0aW9ucyI6W1siY29udGVudC1sZW5ndGgtcmFuZ2UiLDEsNTI0Mjg4MF1dfQ==' ><br>
@@ -21,5 +52,22 @@
     <input type="submit"  value="Submit" >
 </form>
 
+<form id="uploadStandImageForm" method="post" action="http://flyingdeeptest.oss-cn-hangzhou.aliyuncs.com" enctype="multipart/form-data" >
+     <input id="key" name="key" type="hidden"> <br>
+     <input id="OSSAccessKeyId" name="OSSAccessKeyId" type="hidden"><br>
+     <input id="policy" name="policy" type="text"><br>
+     <input id="Signature" name="Signature" type="hidden"><br>
+     <input id="file" name="file" type="file" >
+    <a href="#" onclick=uploadSingleStandImage >Submit</a>
+</form>
+<script>
+    function uploadSingleStandImage()
+    {
+        $("uploadStandImageForm").prop("method","post");
+        $("uploadStandImageForm").prop("action",OSS_DOMAIN);
+        $("uploadStandImageForm").prop("action",OSS_DOMAIN);
+
+    }
+</script>
 </body>
 </html>
