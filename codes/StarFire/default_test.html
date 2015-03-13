@@ -267,6 +267,14 @@ $("#leftview").on("swipeLeft", function(){
 
 });
 
+var obj  = $.afui.toast({
+    message:"点击地图任意处以设定摊位位置",
+    position:"bc",
+    autoClose:false, //have to click the message to close
+    type:"success"
+});
+    obj.hide();
+
 </script>
 </body>
 </html>

@@ -5,6 +5,7 @@
 (function ($) {
     "use strict";
     $.fn.toast = function (opts) {
+		
         return new Toast(this[0], opts);
     };
     var Toast = (function () {
@@ -99,7 +100,7 @@
 
 
     $.afui.toast=function(opts){
-        $(document.body).toast(opts);
+       return  $(document.body).toast(opts);
     };
 
     $.afui.registerDataDirective("[data-toast]",function(item){
