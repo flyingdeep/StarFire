@@ -7,7 +7,7 @@ var processFacadeClass = function()
             {
                 if (e.success == "true")
                 {
-                      callback(e.result) ;
+                      callback(e.result);
 
                 }
                 else
@@ -16,7 +16,22 @@ var processFacadeClass = function()
                 }
             }
         );
-    }
+    };
 
+    this.getImageUploadSecurityString = function(callback)
+    {
+        serverProxy.getImageUploadSecurityString(function(e)
+            {
+                if (e.success == "true")
+                {
+                    callback(e.result) ;
 
-}
+                }
+                else
+                {
+                    callback(null);
+                }
+            }
+        );
+    };
+};

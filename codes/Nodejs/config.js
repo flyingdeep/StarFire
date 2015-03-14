@@ -67,3 +67,11 @@ exports.baiduLBS = {
  realTime_location : "0",
  isactive : "1"
 };
+
+exports.Ali_OSS ={
+    OSS_Access_Key_Secret : "SLiVEsGzg57ASofurBc0P4RdA1IsjW",
+    OSS_Policy_Expire_Lag: 30,
+    OSS_Max_Image_Size:5242880
+
+
+};

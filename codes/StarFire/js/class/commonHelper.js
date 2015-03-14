@@ -1,8 +1,10 @@
 var commonHelperClass = function()
 {
+
+    var processOperation = new processFacadeClass();
     this.constructStandTypeHTML= function(callback)
     {
-        var processOperation = new processFacadeClass();
+
         var standTypesCallback = function(e)
         {
 
@@ -31,8 +33,29 @@ var commonHelperClass = function()
                 callback(null);
             }
 
-        }
+        };
         processOperation.getStandTypes(standTypesCallback);
-    }
+    };
 
-}
+
+    this.getOSSSignatureAndPolicy = function(callback)
+    {
+
+        processOperation.getImageUploadSecurityString(function(e)
+        {
+            if(e)
+            {
+                callback(e);
+
+            }
+            else
+            {
+                callback(null);
+            }
+
+
+        }
+        );
+    };
+
+};

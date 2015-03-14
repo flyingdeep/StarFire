@@ -945,11 +945,7 @@ var getStandTypesCallbackGet = function(req, res, next)
 var getImageUploadSecurityStringCallbackGet = function(req, res, next)
 {
     var paraToken = "token";
-    var paraPolicy = "policy";
-    var paraKey = "key";
     var requestToken = getCommonParameters(req,paraToken,METHOD_GET);
-    var requestPolicy = getCommonParameters(req,paraPolicy,METHOD_GET);
-    var requestKey = getCommonParameters(req,paraKey,METHOD_GET);
     var result = new commonResult();
     var callback = function(exception,e) {
         if (exception && exception.Name == BIZ_ERROR_WORDS)
@@ -989,7 +985,7 @@ var getImageUploadSecurityStringCallbackGet = function(req, res, next)
         res.json(HTTP_SUCCESS_CODE,result);
     }
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
-        serviceOperation.getImageUploadSecurityString,callback,requestPolicy,requestKey);
+        serviceOperation.getImageUploadSecurityString,callback);
 };
 var getAuthCodeCallbackGet = function(req, res, next)
 {

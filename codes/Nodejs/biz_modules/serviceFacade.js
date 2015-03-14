@@ -32,6 +32,32 @@ var CONST_AK = config.baiduLBS.ak;
 var CONST_COORDS_TYPE = config.baiduLBS.coords_type;
 var CONST_REALTIME_LOCATION = config.baiduLBS.realTime_location;
 var CONST_ISACTIVE = config.baiduLBS.isactive;
+var OSS_ACCESS_KEY_SECRET = config.Ali_OSS.OSS_Access_Key_Secret;
+var OSS_POLICY_EXPIRE_LAG = config.Ali_OSS.OSS_Policy_Expire_Lag;
+var OSS_MAX_IMAGE_SIZE = config.Ali_OSS.OSS_Max_Image_Size;
+
+var formatDate = function(date, format){
+    var o = {
+        "M+" : date.getMonth()+1, //month
+        "d+" : date.getDate(), //day
+        "h+" : date.getHours(), //hour
+        "m+" : date.getMinutes(), //minute
+        "s+" : date.getSeconds(), //second
+        "q+" : Math.floor((date.getMonth()+3)/3), //quarter
+        "S" : date.getMilliseconds() //millisecond
+    }
+
+    if(/(y+)/.test(format)) {
+        format = format.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));
+    }
+
+    for(var k in o) {
+        if(new RegExp("("+ k +")").test(format)) {
+            format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length));
+        }
+    }
+    return format;
+}
 
 exports.tryPassTokenToProceedAction = function()
 {
@@ -260,13 +286,17 @@ exports.getStandType = function(callback)
 
 
 
-exports.getImageUploadSecurityString = function(callback,policy,key)
+exports.getImageUploadSecurityString = function(callback)
 {
+    var currentDate = new Date();
+    currentDate.setMinutes(currentDate.getMinutes()+OSS_POLICY_EXPIRE_LAG);
+    var expiration = formatDate(currentDate,"yyyy-MM-ddThh.mm.000Z");
+    var policy =  '{"expiration":'+expiration+',"conditions":[[“content-length-range”, 1, '+OSS_MAX_IMAGE_SIZE+']]}';
     var exception = null;
 
-    var result = "";
+    var result = null;
     try {
-        result = authOperation.authOSS(policy, key);
+        result = authOperation.authOSS(policy,OSS_ACCESS_KEY_SECRET);
     }
     catch (e)
     {

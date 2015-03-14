@@ -8,6 +8,7 @@ var DES = "des";
 var FIXEDMD5KEY = config.securityAndAuth.fixedMD5Key;
 var FIXEDDESKEY = config.securityAndAuth.fixedDESKey;
 
+
 var COMMONENCRYPTCODE = BASE64;
 
 
@@ -17,7 +18,11 @@ exports.authOSS = function(policy, key)
 
     var base64policy = (new Buffer(policy)).toString(BASE64);
 
-    var result = crypto.createHmac(SHA1, key).update(base64policy).digest().toString(BASE64);
+    var signature = crypto.createHmac(SHA1, key).update(base64policy).digest().toString(BASE64);
+    var result = {
+        "base64policy":base64policy,
+        "signature":signature
+    };
     return result;
 };
 
