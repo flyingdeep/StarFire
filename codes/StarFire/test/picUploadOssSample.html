@@ -9,6 +9,7 @@
     <script type="text/javascript" src="../js/class/remoteProxy.js"></script>
     <script type="text/javascript" src="../js/class/processFacade.js"></script>
     <script type="text/javascript" src="../js/class/commonHelper.js"></script>
+    <script type="text/javascript" src="../js/common/imageUploadHelper.js"></script>
 </head>
 <body>
 <form  method="post" action="http://flyingdeeptest.oss-cn-hangzhou.aliyuncs.com" enctype="multipart/form-data" >
@@ -26,15 +27,16 @@
      <input id="OSSAccessKeyId" name="OSSAccessKeyId" type="hidden"><br>
      <input id="policy" name="policy" type="text"><br>
      <input id="Signature" name="Signature" type="hidden"><br>
-     <input id="file" name="file" type="file" >
+     <input id="file" name="file" type="file" accept="image/jpeg,image/png"  >
     <a href="#" onclick=uploadSingleStandImage >Submit</a>
+    <img src="" id="previewImg" style="display:none">
 </form>
 <script>
 
 
     function uploadSingleStandImage()
     {
-
+        var fileNameCode = generateOSSAutoFilenameCode(inputSeed);
         var commonHelper = new commonHelperClass();
         commonHelper.getOSSSignatureAndPolicy(function(e)
         {
@@ -52,6 +54,39 @@
         });
 
     }
+    var inputSeed = 0;
+    function handleFileSelect (evt) {
+        inputSeed = (new Date()).getTime();
+        var files = evt.target.files;
+        for (var i = 0, f; f = files[i]; i++) {
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+            alert(f.size);
+            var reader = new FileReader();
+            // Closure to capture the file information.
+            reader.onload = (function(theFile) {
+                return function(e) {
+                    // Render thumbnail.
+                    var i = document.getElementById("previewImg");
+                    i.src = event.target.result;
+                    var imgWidth = document.body.clientWidth*0.7;
+                    if ($(i).width()<imgWidth)
+                    {
+                        imgWidth = $(i).width;
+                    }
+                    $(i).css('width',imgWidth+'px');
+                    var quality =  50;
+                    i.src = jic.compress(i,quality).src;
+                    i.style.display = "block";
+                };
+            })(f);
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(f);
+        }
+    }
+    document.getElementById('file').addEventListener('change', handleFileSelect, false);
 </script>
 </body>
 </html>
