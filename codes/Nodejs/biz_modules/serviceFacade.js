@@ -290,8 +290,8 @@ exports.getImageUploadSecurityString = function(callback)
 {
     var currentDate = new Date();
     currentDate.setMinutes(currentDate.getMinutes()+OSS_POLICY_EXPIRE_LAG);
-    var expiration = formatDate(currentDate,"yyyy-MM-ddThh.mm.000Z");
-    var policy =  '{"expiration":'+expiration+',"conditions":[[“content-length-range”, 1, '+OSS_MAX_IMAGE_SIZE+']]}';
+    var expiration = formatDate(currentDate,"yyyy-MM-ddThh:mm:ss.000Z");
+    var policy =  '{"expiration":"'+expiration+'","conditions":[["content-length-range", 1, '+OSS_MAX_IMAGE_SIZE+']]}';
     var exception = null;
 
     var result = null;

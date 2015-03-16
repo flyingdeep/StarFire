@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../js/common/base64.js"></script>
     <script type="text/javascript" src="../js/config.js"></script>
     <script type="text/javascript" src="../js/class/remoteProxy.js"></script>
@@ -12,49 +12,46 @@
     <script type="text/javascript" src="../js/common/imageUploadHelper.js"></script>
 </head>
 <body>
-<form  method="post" action="http://flyingdeeptest.oss-cn-hangzhou.aliyuncs.com" enctype="multipart/form-data" >
-    Key <input name="key" type="text" > <br>
-    OSSAccessKeyId <input name="OSSAccessKeyId" type="text"  value="glMswMHjOFGZRlhz" ><br>
-    Policy <input name="policy" type="text"  value='eyJleHBpcmF0aW9uIjoiMjAxNS0xMi0wMVQxMjowMDowMC4wMDBaIiwiY29uZGl0aW9ucyI6W1siY29udGVudC1sZW5ndGgtcmFuZ2UiLDEsNTI0Mjg4MF1dfQ==' ><br>
-    Signature <input name="Signature" type="text"  value="X+SDfnmqlD0Jj4n7REbNEQ4QwUI=" ><br>
-    File <input name="file" type="file" >
 
-    <input type="submit"  value="Submit" >
-</form>
-
-<form id="uploadStandImageForm" >
-     <input id="key" name="key" type="hidden"> <br>
-     <input id="OSSAccessKeyId" name="OSSAccessKeyId" type="hidden"><br>
-     <input id="policy" name="policy" type="text"><br>
-     <input id="Signature" name="Signature" type="hidden"><br>
-     <input id="file" name="file" type="file" accept="image/jpeg,image/png"  >
-    <a href="#" onclick=uploadSingleStandImage >Submit</a>
+<form>
+     <input id="file" name="file" type="file" accept="image/jpeg,image/png" >
+   <!-- <input type="hidden" name="MAX_FILE_SIZE" value="4194304" />-->
+    <a href="#" onclick="uploadSingleStandImage();" >Submit</a>
     <img src="" id="previewImg" style="display:none">
 </form>
+
+
 <script>
 
 
     function uploadSingleStandImage()
     {
         var fileNameCode = generateOSSAutoFilenameCode(inputSeed);
+        var key = fileNameCode + fileExtension;
         var commonHelper = new commonHelperClass();
         commonHelper.getOSSSignatureAndPolicy(function(e)
         {
             var OSSBase64Policy = e.base64policy;
             var OSSSignature = e.signature;
-            var uploadStandFormVal = $("#uploadStandImageForm");
-            uploadStandFormVal.prop("method","post");
-            uploadStandFormVal.prop("action",OSS_DOMAIN);
-            uploadStandFormVal.prop("enctype",OSS_ENCTYPE);
-            $("#key").val("");
-            $("#OSSAccessKeyId").val(OSS_ACCESS_KEY_ID);
-            $("#policy").val(OSSBase64Policy);
-            $("#Signature").val(OSSSignature);
-            uploadStandFormVal.submit();
+            var fd = new FormData();
+            fd.append("key", key);
+            fd.append("OSSAccessKeyId", OSS_ACCESS_KEY_ID);
+            fd.append("policy", OSSBase64Policy);
+            fd.append("Signature", OSSSignature);
+            fd.append("file", document.getElementById('file').files[0]);
+            var xhr = new XMLHttpRequest();
+            // xhr.upload.addEventListener("progress", uploadProgress, false);
+            //xhr.addEventListener("load", uploadComplete, false);
+            //xhr.addEventListener("error", uploadFailed, false);
+            //xhr.addEventListener("abort", uploadCanceled, false);
+            xhr.open("POST", OSS_DOMAIN);//修改成自己的接口
+             xhr.send(fd);
+           // uploadStandFormVal.submit();
         });
 
     }
     var inputSeed = 0;
+    var fileExtension = "";
     function handleFileSelect (evt) {
         inputSeed = (new Date()).getTime();
         var files = evt.target.files;
@@ -63,7 +60,7 @@
             if (!f.type.match('image.*')) {
                 continue;
             }
-            alert(f.size);
+            fileExtension = f.name.substring(f.name.indexOf("."));
             var reader = new FileReader();
             // Closure to capture the file information.
             reader.onload = (function(theFile) {
@@ -87,6 +84,11 @@
         }
     }
     document.getElementById('file').addEventListener('change', handleFileSelect, false);
+
+
+
+
+
 </script>
 </body>
 </html>

@@ -315,12 +315,10 @@ var remoteClientClass = function()
         );
     };
 
-    this.getImageUploadSecurityStringBase = function(callback, token, policy, key)
+    this.getImageUploadSecurityStringBase = function(callback, token)
     {
         var paraString = "?";
         paraString =paraString + "token=" + encodeURIComponent(token);
-        paraString =paraString + "&policy=" + encodeURIComponent(policy);
-        paraString =paraString + "&key=" + encodeURIComponent(key);
         var targetUrl = ROUTER_GETIMAGEUPLOADSECURITYSTRING + BASE_VERSION + paraString;
         jQuery.get(targetUrl,
             function(data,status)
@@ -891,7 +889,7 @@ var serverProxyClass = function(username,password)
         );
 
     };
-    this.getImageUploadSecurityString = function(callback,policy,key)
+    this.getImageUploadSecurityString = function(callback)
     {
         var result = null;
         getAuth(function(token)
@@ -906,7 +904,7 @@ var serverProxyClass = function(username,password)
                         }
                         callback(result);
                     },
-                    token,policy,key);
+                    token);
                 }
                 else
                 {

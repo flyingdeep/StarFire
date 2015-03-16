@@ -28,6 +28,7 @@ var jic = {
 
 var generateOSSAutoFilenameCode = function(comingSeed)
 {
+   var preString = "Ma";
    var timeSeed = (new Date()).getTime();
-
+    return preString+timeSeed+"" + comingSeed;
 };
