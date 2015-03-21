@@ -17,13 +17,14 @@
      <input id="file" name="file" type="file" accept="image/jpeg,image/png" >
    <!-- <input type="hidden" name="MAX_FILE_SIZE" value="4194304" />-->
     <a href="#" onclick="uploadSingleStandImage();" >Submit</a>
+
     <img src="" id="previewImg" style="display:none">
 </form>
 
 
 <script>
 
-
+var xhr = null;
     function uploadSingleStandImage()
     {
         var fileNameCode = generateOSSAutoFilenameCode(inputSeed);
@@ -35,20 +36,61 @@
             var OSSSignature = e.signature;
             var fd = new FormData();
             fd.append("key", key);
+            //fd.append("success_action_redirect", "http://www.baidu.com");
+          fd.append("success_action_status", 201);
             fd.append("OSSAccessKeyId", OSS_ACCESS_KEY_ID);
             fd.append("policy", OSSBase64Policy);
             fd.append("Signature", OSSSignature);
             fd.append("file", document.getElementById('file').files[0]);
-            var xhr = new XMLHttpRequest();
-            // xhr.upload.addEventListener("progress", uploadProgress, false);
-            //xhr.addEventListener("load", uploadComplete, false);
-            //xhr.addEventListener("error", uploadFailed, false);
+            xhr = new XMLHttpRequest();
+            //xhr.upload.addEventListener("progress", uploadProgress, false);
+         //  xhr.addEventListener("load", uploadComplete, false);
+           // xhr.onload = uploadComplete;
+         //  xhr.addEventListener("error", uploadFailed, false);
+
+
             //xhr.addEventListener("abort", uploadCanceled, false);
             xhr.open("POST", OSS_DOMAIN);//修改成自己的接口
+            xhr.onreadystatechange = function(e){
+                //  alert("");
+                if (xhr.readyState == 4)
+                {
+                    alert("complete");
+                }
+
+
+            };
+            xhr.addEventListener("loaded", function(){
+
+                alert("");
+            }, false);
+
              xhr.send(fd);
-           // uploadStandFormVal.submit();
+
         });
 
+    }
+
+
+    var uploadProgress = function(evt)
+    {
+       // $("progress").prop("max", evt.total);
+        //$("progress").prop("value", evt.loaded);
+
+    }
+
+    var uploadComplete = function(evt) {
+        /* 服务器端返回响应时候触发event事件*/
+        alert("");
+    }
+    var uploadFailed = function(evt) {
+//        var Property;
+//        for(var i in evt){
+//            Property+="属性："+i+"<br/>";
+//
+//        }
+//        alert(Property);
+        //alert("There was an error attempting to upload the file.");
     }
     var inputSeed = 0;
     var fileExtension = "";
