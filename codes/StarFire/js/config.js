@@ -18,3 +18,6 @@ var currentPosition = null;
 var config_AreaSearchDistance = 50000;
 var config_DisplayVisitorCreatedStand = true;
 var config_DisplayType = 1;
+
+//-------------- global variable---------
+var currentPanel = null;

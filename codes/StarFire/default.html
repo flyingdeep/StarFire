@@ -65,6 +65,8 @@
             localStorage.position = "121.50,31.25";
             currentPosition = localStorage.position;
             $.afui.launch();
+            $.afui.manageHistory=false;
+            currentPanel = "#mapPanel";
         }
         var mapCenterString = null; //map center val
 
@@ -103,7 +105,7 @@
               <div id="bottomBar">
               <div id="transparentShader"></div>
                   <div class="button-grouped">
-                 <a href="#createStandPanel1" class="button  icon add" data-transition="pop">新增摊位</a>
+                 <a  onclick='transferToPanel("#createStandPanel1","pop");' class="button  icon add" >新增摊位</a>
                       <a href="#" class="button  icon folder">我的摊位</a>
                       <a href="#" class="button  icon heart">我的收藏</a>
                       </div>
@@ -140,8 +142,8 @@
 <!----------------------   创建摊位 - 1 --------------------->
 <div class="view" id="createStandView1">
     <header id="createStandHeader1">
-        <div style="float:left"><a href="#mapPanel" data-transition="up" class="icon close green button previous">放弃</a></div>
-        <div style="float:right"><a href="#createStandPanel2" data-transition="slide" class="icon right green button next">下一步</a></div>
+        <div style="float:left"><a onclick='transferToPanel("#mapPanel","up");'  class="icon close green button previous">放弃</a></div>
+        <div style="float:right"><a onclick='transferToPanel("#createStandPanel2","slide");' class="icon right green button next">下一步</a></div>
         <div class="titleDiv">新建摊位-基本信息</div>
     </header>
     <div class="pages">
@@ -167,7 +169,7 @@
 <!----------------------   创建摊位 - 2 --------------------->
 <div class="view" id="createStandView2">
     <header id="createStandHeader2">
-       <div style="float:left"><a href="#createStandPanel1" data-transition="invoke"  class="icon left green button previous">上一步</a></div>
+       <div style="float:left"><a onclick='transferToPanel("#createStandPanel1","slide");' data-transition="invoke"  class="icon left green button previous">上一步</a></div>
       <div style="float:right"><a href="#" data-transition="slide" class="icon right green button next">下一步</a></div>
       <div class="titleDiv">新建摊位-选择位置</div>
   </header>
@@ -267,41 +269,40 @@
 
 
     var toastObj = null;
-    $(window).on("hashchange",function()
-        {
-            if (window.location.hash=="#createStandPanel1")
-            {
-                if ( $("#standTypeDiv").html() == "") {
-                    commonHelper.constructStandTypeHTML(function (e) {
-                        $("#standTypeDiv").html(e);
-                    });
-                }
-            }
-            if (window.location.hash=="#createStandPanel2")
-            {
-
-                if(!mapCr) {
-                    mapCr = new BMap.Map("mapContainerCr");
-                    mapCr.centerAndZoom(init_city);
-                }
-                    toastObj  = $.afui.toast({
-                    message:"点击地图任意处以设定摊位位置",
-                    position:"bc",
-                    autoClose:false, //have to click the message to close
-                    type:"success"
-                });
-            }
-            else
-            {
-                if (toastObj)
-                {
-                    toastObj.hide();
-                }
-            }
-
-
+    $("#createStandPanel1").on("panelbeforeload",function(){
+        if ( $("#standTypeDiv").html() == "") {
+            commonHelper.constructStandTypeHTML(function (e) {
+                $("#standTypeDiv").html(e);
+            });
         }
-    );
+
+    });
+
+    $("#createStandPanel2").on("panelload",function(){
+
+        if(!mapCr) {
+            mapCr = new BMap.Map("mapContainerCr");
+            mapCr.centerAndZoom(init_city);
+        }
+        toastObj  = $.afui.toast({
+            message:"点击地图任意处以设定摊位位置",
+            position:"bc",
+            autoClose:false, //have to click the message to close
+            type:"success"
+        });
+    });
+
+    $(".panel").on("panelload",function(){
+        if (currentPanel != "#createStandPanel2") {
+            if (toastObj) {
+                toastObj.hide();
+                toastObj = null;
+            }
+        }
+    });
+
+
+
 
     function searchLocation()
     {
@@ -323,7 +324,7 @@
     function searchStand()
     {
         $("#resultList").html("");
-        $.afui.loadContent("#searchResultListPanel",false,false,"pop");
+        transferToPanel("#searchResultListPanel","pop");
         var searchString = $("#searchInput").val();
         $("#searchDivResultInner input").val(searchString);
         $("#searchResultListForm").on("submit",function()
@@ -336,6 +337,14 @@
         );
         searchPoiNearbyPosition(mapCenterString,searchString,$("#resultList"));
     }
+
+    function transferToPanel(targetPanel , transitionStyle)
+    {
+        $.afui.loadContent(targetPanel,false,false,transitionStyle);
+        currentPanel = targetPanel;
+
+    }
+
 // map related =====================================================
     map = new BMap.Map("mapContainer");
     var init_city = "上海";
