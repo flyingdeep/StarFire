@@ -9,6 +9,13 @@
     text-align: center;
 }
 
+#standListHeader {
+    padding:10;
+    height:50px;
+    background-color:#befcbc ;
+    text-align: center;
+}
+
 .titleDiv {
     line-height:50px;
     text-align: center;

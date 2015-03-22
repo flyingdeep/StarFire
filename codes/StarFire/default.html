@@ -86,9 +86,9 @@
 <!----------------------   Main Map View --------------------->
 <div class="view" id="mainView">
     <header id="mapHeader">
-        <div style="float:left"><a href="#" class="icon info green button previous">个人信息</a></div>
+        <div style="float:left"><a onclick="" class="icon info green button previous">个人信息</a></div>
 
-        <div style="float:right"><a href="#" class="icon right green button next">摊位列表</a></div>
+        <div style="float:right"><a onclick='transferToPanel("#standListPanel","slide");' class="icon right green button next">摊位列表</a></div>
        <div class="titleDiv">摊位地图</div>
     </header>
     <div class="pages">
@@ -116,7 +116,23 @@
     </div>
 
 </div>
+<!----------------------  附近摊位列表 --------------------->
+<div class="view" id="nearbyStandListView">
+    <header id="standListHeader" >
+        <div style="float:left"><a href="#" class="icon info green button previous">返回地图</a></div>
+        <div class="titleDiv">摊位列表</div>
+    </header>
+    <div class="pages">
+        <div class="panel"  id="standListPanel">
+            <div id="standList">
 
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
 
 <!----------------------  搜索结果 --------------------->
 <div class="view" id="searchResultListView">
@@ -176,7 +192,9 @@
   <div class="pages">
       <div class="panel zeroPadding"  id="createStandPanel2">
           <div style="position: absolute;top:3px;width:100%;left:2px;z-index: 50" >
+              <form id="map2SearchForm">
               <div id="searchDivInner" style="float:left; width:95%"><input  type="search" placeholder="搜索地址以定位区域"></div>
+              </form>
               <br style="clear:both">
               <div ><div style="float:right;">设置为当前&nbsp;&nbsp;<a class="icon target" style="font-size: 24px;color: blue; padding-right: 10px"></a></div>
                   <br style="clear:both">
@@ -265,6 +283,14 @@
         return false;
     });
 
+    $("#map2SearchForm").on("submit",function()
+    {
+            searchSecLocation();
+
+        return false;
+    });
+
+
     $("#filterPanel").on("swipeRight", function(){
         $.afui.drawer.hide("#right_Filter","right");
     });
@@ -305,7 +331,6 @@
 
 
 
-
     function searchLocation()
     {
         $("#resultList").html("");
@@ -340,12 +365,7 @@
         searchPoiNearbyPosition(mapCenterString,searchString,$("#resultList"));
     }
 
-    function transferToPanel(targetPanel , transitionStyle)
-    {
-        $.afui.loadContent(targetPanel,false,false,transitionStyle);
-        currentPanel = targetPanel;
 
-    }
 
 // map related =====================================================
     map = new BMap.Map("mapContainer");
@@ -385,11 +405,15 @@
 
     var map_moveend_event = function (){
         mapCenterString = getMapCenter(map);
+        staticResults = [];
+        staticOpenInfoWinFunEvents = [];
+        map.clearOverlays();
+        searchPoiNearbyPositionDisplay(mapCenterString,"",map,"#standList");
     };
     var map_load_event = function(){
         mapCenterString = getMapCenter(map);
 
-        searchPoiNearbyPositionDisplay(mapCenterString,"",map);
+        searchPoiNearbyPositionDisplay(mapCenterString,"",map,"#standList");
     };
 
     // map.addEventListener("dragend", map_dragend_event);

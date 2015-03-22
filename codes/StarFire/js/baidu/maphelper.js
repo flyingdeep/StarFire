@@ -1,4 +1,4 @@
-var staticResults;
+
 var baiduLBS = new baiduLBSClass();
 
 function formatDate(e, format)
@@ -174,7 +174,8 @@ function deleteJsonStandInfo()
 
 }
 
-function searchPoiNearbyPositionDisplay(location,searchString, mapObj)
+
+function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listContainerId)
 {
     var search_condition = createJsonSearchConditionForNearbySearch();
     search_condition.location=location;
@@ -185,6 +186,7 @@ function searchPoiNearbyPositionDisplay(location,searchString, mapObj)
         {
             var result =e.data;
             var items = result.contents;
+            var innerHtmlString = "<ul class='list'>";
             for (var i=0;i<result.size; i++)
             {
 
@@ -193,13 +195,16 @@ function searchPoiNearbyPositionDisplay(location,searchString, mapObj)
                 var point = new BMap.Point(targetPosition.location[0],targetPosition.location[1]);
                 var marker = addMarker(point,i,mapObj);
                 var openInfoWinFun = addInfoWindow(marker,targetPosition,i);
-                //openInfoWinFun();
-                //setTimeout(openInfoWinFun,LOAD_MAP_TIP_LAYER_DELAY);
+                staticOpenInfoWinFunEvents.push(openInfoWinFun);
+                var locationId = "loc" + i;
+                innerHtmlString = innerHtmlString + "<li>";
+                innerHtmlString = innerHtmlString + "<a id='" + locationId +"' onclick='standListTapEvent("+ i + ")'>" + targetPosition.title.replace(new RegExp(searchString, "g"), '<b>' + searchString+ '</b>') + "</a>";
+                innerHtmlString = innerHtmlString + "</li>";
             }
+            innerHtmlString = innerHtmlString + "</ul>";
+            $(listContainerId).html(innerHtmlString);
         }
     },search_condition);
-
-
 }
 
 
@@ -232,9 +237,15 @@ function searchPoiNearbyPosition(location, searchString,containerJObj)
 
 }
 
+function standListTapEvent(i)
+{
+    transferToPanel("#mapPanel","pop");
+    setTimeout(staticOpenInfoWinFunEvents[i],LOAD_MAP_TIP_LAYER_DELAY);
+}
+
 function resultItemStandTapEvent(i,mapObj)
 {
-    $.afui.loadContent("#mapPanel",false,false,"pop");
+    transferToPanel("#mapPanel","pop");
     var targetPosition = staticResults[i];
 
     var point = new BMap.Point(targetPosition.location[0],targetPosition.location[1]);
@@ -273,7 +284,7 @@ function searchLocalPosition(targetString, mapObj,containerJObj) {
 
 function resultItemTapEvent(i,mapObj)
 {
-    $.afui.loadContent("#mapPanel",false,false,"pop");
+    transferToPanel("#mapPanel","pop");
     var marker = addMarker(staticResults.getPoi(i).point,i,mapObj);
     var openInfoWinFun = addInfoWindow(marker,staticResults.getPoi(i),i);
     //openInfoWinFun();
@@ -346,6 +357,13 @@ function createInfoWindow(Json_stand_info)
 
 }
 
+
+function transferToPanel(targetPanel , transitionStyle)
+{
+    $.afui.loadContent(targetPanel,false,false,transitionStyle);
+    currentPanel = targetPanel;
+
+}
 //generate 
 
 

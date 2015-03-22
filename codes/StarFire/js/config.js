@@ -21,3 +21,5 @@ var config_DisplayType = 1;
 
 //-------------- global variable---------
 var currentPanel = null;
+var staticResults = [];
+var staticOpenInfoWinFunEvents = [];
