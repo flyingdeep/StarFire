@@ -176,15 +176,17 @@
   <div class="pages">
       <div class="panel zeroPadding"  id="createStandPanel2">
           <div style="position: absolute;top:3px;width:100%;left:2px;z-index: 50" >
-              <div id="searchDivInner" style="float:left;"><input  type="search" placeholder="搜索地址以定位区域"></div>
+              <div id="searchDivInner" style="float:left; width:95%"><input  type="search" placeholder="搜索地址以定位区域"></div>
               <br style="clear:both">
-              <div ><div style="float:right;">设置摊位为当前位置<a></a></div>
+              <div ><div style="float:right;">设置为当前&nbsp;&nbsp;<a class="icon target" style="font-size: 24px;color: blue; padding-right: 10px"></a></div>
                   <br style="clear:both">
-                  <div style="float:right;">
-                      附近摊位<input id="displayStandInput" type="checkbox" checked=""  name="displayStandInput" value="1" class="toggle">
+                  <div  style="float:right;height: 40px;line-height: 40px;">摊位</div>
+                      <div style="float:right; padding-right: 30px;"><input id="displayStandInput" type="checkbox" checked=""  name="displayStandInput" value="1" class="toggle">
                       <label for="displayStandInput"  data-on="显示" data-off="隐藏" class="toggleLabel"><span></span>
                       </label>
                   </div>
+
+
               </div>
           </div>
           <div id="mapContainerCr" class="mapCss"></div>
@@ -386,6 +388,8 @@
     };
     var map_load_event = function(){
         mapCenterString = getMapCenter(map);
+
+        searchPoiNearbyPositionDisplay(mapCenterString,"",map);
     };
 
     // map.addEventListener("dragend", map_dragend_event);

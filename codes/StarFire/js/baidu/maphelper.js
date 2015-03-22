@@ -29,7 +29,7 @@ function formatDate(e, format)
 // Get Center x,y of the current map
 function getMapCenter(mapObj)
 {
-    var mapCenter =mapObj.getCenter().lat+","+mapObj.getCenter().lng;
+    var mapCenter =mapObj.getCenter().lng +","+ mapObj.getCenter().lat;
     return mapCenter;
 }
 
@@ -174,7 +174,33 @@ function deleteJsonStandInfo()
 
 }
 
+function searchPoiNearbyPositionDisplay(location,searchString, mapObj)
+{
+    var search_condition = createJsonSearchConditionForNearbySearch();
+    search_condition.location=location;
+    search_condition.q = searchString;
+    baiduLBS.searchStandPositionNearby(function(e)
+    {
+        if (e.status == "success" &&  e.message == "true")
+        {
+            var result =e.data;
+            var items = result.contents;
+            for (var i=0;i<result.size; i++)
+            {
 
+                var targetPosition = items[i];
+
+                var point = new BMap.Point(targetPosition.location[0],targetPosition.location[1]);
+                var marker = addMarker(point,i,mapObj);
+                var openInfoWinFun = addInfoWindow(marker,targetPosition,i);
+                //openInfoWinFun();
+                //setTimeout(openInfoWinFun,LOAD_MAP_TIP_LAYER_DELAY);
+            }
+        }
+    },search_condition);
+
+
+}
 
 
 function searchPoiNearbyPosition(location, searchString,containerJObj)
