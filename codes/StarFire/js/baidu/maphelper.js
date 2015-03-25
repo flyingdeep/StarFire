@@ -112,13 +112,20 @@ function createJsonStandQueryOne()
 function createJsonSearchConditionForNearbySearch()
 {
 
+    var filterString = "";
+    if (config_CreatorType != "")
+    {
+        filterString = "creator_type:[1]";
+    }
     var resultJson = {
         "ak": CONST_AK,
         "geotable_id": CONST_STAND_LOCATION_INFO_TABLEID,
-        "location": null,
+        "location": "",
         "radius":config_AreaSearchDistance,
-        "q": null,
+        "q": "",
+        "tags": config_Tags,
         "sortby":"distance:1",
+        "filter":filterString,
         "page_index":0,
         "page_size":RESULT_LIST_SIZE
     };
@@ -303,7 +310,7 @@ function addInfoWindow(marker,poi,index){
     infoWindowHtml.push('<td style="vertical-align:top;line-height:16px">' + poi.address + ' </td>');
     infoWindowHtml.push('</tr>');
     infoWindowHtml.push('</tbody></table>');
-    console.log(infoWindowHtml.join(""));//
+    //console.log(infoWindowHtml.join(""));//
     var infoWindow = new BMap.InfoWindow(infoWindowHtml.join(""),{title:infoWindowTitle,width:200});
     var openInfoWinFun = function(){
         marker.openInfoWindow(infoWindow);

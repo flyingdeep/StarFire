@@ -256,7 +256,7 @@ var baiduLBSClass = function(authClass) {
 
     this.searchStandPositionNearby = function(callback, search_condition) {
         querystring = "ak=" + search_condition.ak + "&geotable_id=" + search_condition.geotable_id + "&location=" + search_condition.location
-            + "&radius=" + search_condition.radius + "&sortby=" + search_condition.sortby
+            + "&radius=" + search_condition.radius + "&sortby=" + search_condition.sortby + "&tags=" + search_condition.tags + "&filter=" + search_condition.filter
             + "&page_index=" + search_condition.page_index + "&page_size=" + search_condition.page_size + "&q=" + search_condition.q;
         url = BAIDU_LBS_URI + "geosearch/v3/nearby?callback=?&" + querystring;
         //url = "http://api.map.baidu.com/geosearch/v2/local?callback=jQuery1910054608748061582446_1425892645753&q=%E6%96%B0%E4%B8%9C%E6%96%B9&page_index=0&filter=&region=131&scope=2&geotable_id=30960&ak=A4749739227af1618f7b0d1b588c0e85&_=1425892645755";

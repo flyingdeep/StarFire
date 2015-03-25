@@ -14,12 +14,16 @@ var OSS_BASE64_POLICY =  "";
 var OSS_SIGNATURE = "";
 
 // ----------- configurable variable area
-var currentPosition = null;
+
 var config_AreaSearchDistance = 50000;
 var config_DisplayVisitorCreatedStand = true;
 var config_DisplayType = 1;
+var config_Tags = ""; // null means no filter
+var config_CreatorType = ""; // "" is no filter, 1 means display owner stand only.
 
 //-------------- global variable---------
+var currentPosition = null;
 var currentPanel = null;
 var staticResults = [];
 var staticOpenInfoWinFunEvents = [];
+var staticStandTypeHtmlString = null;

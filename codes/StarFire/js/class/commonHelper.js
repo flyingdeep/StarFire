@@ -2,9 +2,9 @@ var commonHelperClass = function()
 {
 
     var processOperation = new processFacadeClass();
-    this.constructStandTypeHTML= function(callback)
+    this.constructStandTypeHTML= function(callback, baseIdName)
     {
-
+        //console.log(baseIdName);
         var standTypesCallback = function(e)
         {
 
@@ -13,16 +13,17 @@ var commonHelperClass = function()
                 var radioText;
                 var radioValue;
                 var itemString = "";
-                var standTypeRadioIdBase = "standType_";
-                var idName;
+                var standTypeRadioIdBase = baseIdName;
+                var idString;
+                var nameString = baseIdName+"Radio";
 
                for (var item in e)
                {
                    radioText = e[item].type_name;
                    radioValue = e[item].stand_type_id;
-                   idName = standTypeRadioIdBase + item;
-                   itemString = itemString + '<div class="gcol2"><input id="'+ idName +'" type="radio"  name="standTypeRadio" value="'+ radioValue
-                       +'"><label for="'+idName+'">'+ radioText +'</label></div>';
+                   idString = standTypeRadioIdBase + item;
+                   itemString = itemString + '<div class="gcol2"><input id="'+ idString +'" type="radio"  name="'+nameString+'" value="'+ radioValue
+                       +'"><label for="'+idString+'">'+ radioText +'</label></div>';
                }
                 itemString = itemString + "&nbsp;";
                 callback(itemString);

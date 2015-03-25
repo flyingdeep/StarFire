@@ -100,7 +100,7 @@
                   <label for="toggleTarget"  data-on="摊位" data-off="地址" class="toggleLabel"><span></span>
                   </label><br style="clear:both"></div>
 
-                  <a  class="icon settings" id="filterSettingIcon"  onclick="$.afui.drawer.show('#right_Filter','right')"></a>
+                  <a  class="icon settings" id="filterSettingIcon"></a>
               </div>
               <div id="bottomBar">
               <div id="transparentShader"></div>
@@ -225,12 +225,19 @@
             <div  class="input-group">
                 <div  class="grid">
                     <div class="gcol2 filterLineCss">显示距离:</div><div class="gcol2 filterLineCss">&nbsp;</div>
-                    <div class="gcol2"><input id="distantRadio200" type="radio"  name="distantRadio200" value="200"><label for="distantRadio200">200米</label></div>
-                    <div class="gcol2"><input id="distantRadio500" type="radio"  name="distantRadio500" value="500" selected><label for="distantRadio500">500米</label></div>
-                    <div class="gcol2"><input id="distantRadio1000" type="radio"  name="distantRadio1000" value="1000"><label for="distantRadio1000">1000米</label></div>
-                    <div class="gcol2"><input id="distantRadio2000" type="radio"  name="distantRadio2000" value="2000"><label for="distantRadio2000">2000米</label></div>
+                    <div class="gcol2"><input id="distantRadio200" type="radio"  name="distantRadio" value="200"><label for="distantRadio200">200米</label></div>
+                    <div class="gcol2"><input id="distantRadio500" type="radio"  name="distantRadio" value="500" selected><label for="distantRadio500">500米</label></div>
+                    <div class="gcol2"><input id="distantRadio1000" type="radio"  name="distantRadio" value="1000"><label for="distantRadio1000">1000米</label></div>
+                    <div class="gcol2"><input id="distantRadio2000" type="radio"  name="distantRadio" value="2000"><label for="distantRadio2000">2000米</label></div>
                     &nbsp;
                 </div><br />
+
+                <div  class="grid">
+                    <div class="gcol2 filterLineCss">摊位类型过滤:</div><div class="gcol2 filterLineCss">&nbsp;</div>
+                   <div id="standTypeFilterContainer"></div>
+                </div><br />
+
+
                <div id="toggleCustomCrStandDiv" class="grid">
                    <div class="gcol2 filterLineCss">显示非摊主创建摊位:</div>
                    <div class="gcol2 filterLineCss">
@@ -245,7 +252,7 @@
                     </div>
                 </div>
                  <div id="standDisplayModeDiv" class="grid" >
-                     <div class="gcol2 filterLineCss">摊位显示方式:</div>
+                     <div class="gcol2 filterLineCss">自动显示周边摊位:</div>
                      <div class="gcol2 filterLineCss" >
                      <input id="standDisplayModeInput" type="checkbox" name="standDisplayModeInput" value="1" class="toggle">
                     <label for="standDisplayModeInput"  data-on="是" data-off="否"><span></span></label>
@@ -298,16 +305,41 @@
 
     var toastObj = null;
     $("#createStandPanel1").on("panelbeforeload",function(){
+
         if ( $("#standTypeDiv").html() == "") {
-            commonHelper.constructStandTypeHTML(function (e) {
-                $("#standTypeDiv").html(e);
-            });
+            if (!staticStandTypeHtmlString) {
+                commonHelper.constructStandTypeHTML(function (e) {
+
+                    $("#standTypeDiv").html(e);
+                    staticStandTypeHtmlString = e;
+                }, "crStandType_");
+            }
+            else {
+                $("#standTypeDiv").html(staticStandTypeHtmlString);
+
+            }
         }
 
     });
 
-    $("#createStandPanel2").on("panelload",function(){
+    $("#filterSettingIcon").on("click",function(){
 
+                if ( $("#standTypeFilterContainer").html() == "") {
+                    if (!staticStandTypeHtmlString) {
+                        commonHelper.constructStandTypeHTML(function (e) {
+                            $("#standTypeFilterContainer").html(e);
+                            staticStandTypeHtmlString = e;
+                        }, "filterStandType_");
+                    }
+                    else {
+                        $("#standTypeFilterContainer").html(staticStandTypeHtmlString);
+                    }
+                }
+                $.afui.drawer.show('#right_Filter','right');
+       }
+    );
+
+    $("#createStandPanel2").on("panelload",function(){
         if(!mapCr) {
             mapCr = new BMap.Map("mapContainerCr");
             mapCr.centerAndZoom(init_city);
