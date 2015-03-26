@@ -19,6 +19,7 @@ var commonHelperClass = function()
 
                for (var item in e)
                {
+
                    radioText = e[item].type_name;
                    radioValue = e[item].stand_type_id;
                    idString = standTypeRadioIdBase + item;

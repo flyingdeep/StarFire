@@ -100,7 +100,8 @@
                   <label for="toggleTarget"  data-on="摊位" data-off="地址" class="toggleLabel"><span></span>
                   </label><br style="clear:both"></div>
 
-                  <a  class="icon settings" id="filterSettingIcon"></a>
+                  <a  class="button" id="filterSettingIcon">筛选条件</a><br style="clear:both">
+                  <a  class="button" id="closeSearchResult">清除搜索</a>
               </div>
               <div id="bottomBar">
               <div id="transparentShader"></div>
@@ -119,7 +120,10 @@
 <!----------------------  附近摊位列表 --------------------->
 <div class="view" id="nearbyStandListView">
     <header id="standListHeader" >
-        <div style="float:left"><a href="#" class="icon info green button previous">返回地图</a></div>
+        <div style="float:left"><a onclick='transferToPanel("#mapPanel","up");' class="icon info green button previous">返回地图</a></div>
+
+        <div style="float:right;margin-right: 10px"><a class="button" id="filterSettingIcon_nearbyStandListView">筛选条件</a>
+            </div>
         <div class="titleDiv">摊位列表</div>
     </header>
     <div class="pages">
@@ -235,6 +239,7 @@
                 <div  class="grid">
                     <div class="gcol2 filterLineCss">摊位类型过滤:</div><div class="gcol2 filterLineCss">&nbsp;</div>
                    <div id="standTypeFilterContainer"></div>
+                    <br /> &nbsp;
                 </div><br />
 
 
@@ -325,14 +330,15 @@
     $("#filterSettingIcon").on("click",function(){
 
                 if ( $("#standTypeFilterContainer").html() == "") {
+                    var innerHtmlStr = '<div class="gcol2"><input id="filterStandType_all" type="radio"  name="filterStandType_Radio" value="0"><label for="filterStandType_all">所有类型</label></div>';
                     if (!staticStandTypeHtmlString) {
                         commonHelper.constructStandTypeHTML(function (e) {
-                            $("#standTypeFilterContainer").html(e);
+                            $("#standTypeFilterContainer").html(innerHtmlStr+e);
                             staticStandTypeHtmlString = e;
                         }, "filterStandType_");
                     }
                     else {
-                        $("#standTypeFilterContainer").html(staticStandTypeHtmlString);
+                        $("#standTypeFilterContainer").html(innerHtmlStr+staticStandTypeHtmlString);
                     }
                 }
                 $.afui.drawer.show('#right_Filter','right');

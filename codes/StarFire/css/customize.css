@@ -118,7 +118,8 @@
     background-color:white;
 }
 
-#filterSettingIcon {margin-right:3px;clear:both;float:right; font-size: 24px;color:green;}
+#filterSettingIcon {margin-right:3px;clear:both;float:right; font-size: 10px;color:green;}
+#closeSearchResult {margin-right:3px;clear:both;float:right; font-size: 10px;color:green;}
 
 .mapCss {width: 100%;height: 100%;overflow: hidden;margin:0;z-index: 40;}
 
