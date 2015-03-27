@@ -371,7 +371,29 @@ function transferToPanel(targetPanel , transitionStyle)
     currentPanel = targetPanel;
 
 }
-//generate 
+//generate
+
+function fetchCurrentGPSPosition()
+{
+    return "31.25,121.55";
+}
+
+function transStringToPoint(positionString)
+{
+    var positions = positionString.split(",");
+     var result =new  map.point(positions[0],positions[1]);
+    return result;
+}
+
+function transPointToString(point)
+{
+   return point.lng + "," + point.lat;
+
+}
+
+
+
+
 
 
 

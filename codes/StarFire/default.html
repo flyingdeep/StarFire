@@ -409,8 +409,8 @@
     map = new BMap.Map("mapContainer");
     var init_city = "上海";
 
-    var Json_tap_postion; //finger tap position return Json
-    var Json_decode_postion2address; //get address from position
+    var Json_tap_position; //finger tap position return Json
+    var Json_decode_position2address; //get address from position
     var current_map_level;
     //map.centerAndZoom(new BMap.Point(CONST_POINT_X, CONST_POINT_Y), CONST_DISPLAY_LEVEL);
     map.centerAndZoom(init_city);
@@ -420,15 +420,15 @@
     };
     var map_click_event = function (e){
         var pt = e.point;
-        Json_tap_postion =
+        Json_tap_position =
         {
             "point_x":pt.lat ,
             "point_y": pt.lng
         };
-        alert(Json_tap_postion.point_x + "  " + Json_tap_postion.point_y);
+        alert(Json_tap_position.point_x + "  " + Json_tap_position.point_y);
         gc.getLocation(pt, function(rs){
             var addComp = rs.addressComponents;
-            Json_decode_postion2address = {
+            Json_decode_position2address = {
                 "province": addComp.province,
                 "city": addComp.city,
                 "district": addComp.district,
@@ -442,6 +442,7 @@
     };
 
     var map_moveend_event = function (){
+
         mapCenterString = getMapCenter(map);
         staticResults = [];
         staticOpenInfoWinFunEvents = [];
@@ -450,15 +451,31 @@
     };
     var map_load_event = function(){
         mapCenterString = getMapCenter(map);
-
         searchPoiNearbyPositionDisplay(mapCenterString,"",map,"#standList");
     };
 
     // map.addEventListener("dragend", map_dragend_event);
-    //map.addEventListener("click", map_click_event);
+   // map.addEventListener("click", map_click_event);
     //map.addEventListener("zoomend", map_zoomend_event);
     map.addEventListener("moveend", map_moveend_event);
     map.addEventListener("load", map_load_event);
+
+    var initMapLocation = function()
+    {
+        var gpsPosition = fetchCurrentGPSPosition();
+        if (gpsPosition)
+        {
+            currentGPSPosition = gpsPosition;
+        }
+        else if (currentGPSPosition)
+        {
+
+
+        }
+        //commonHelper.getUserBelongedLocation();
+
+
+    };
 
 </script>
 </body>

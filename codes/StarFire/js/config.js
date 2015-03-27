@@ -24,6 +24,7 @@ var config_CreatorType = ""; // "" is no filter, 1 means display owner stand onl
 //-------------- global variable---------
 var currentPosition = null;
 var currentPanel = null;
+var currentGPSPosition = null;
 var staticResults = [];
 var staticOpenInfoWinFunEvents = [];
 var staticStandTypeHtmlString = null;

@@ -60,4 +60,10 @@ var commonHelperClass = function()
         );
     };
 
+    this.getUserBelongedLocation = function()
+    {
+        return "上海";
+
+    };
+
 };
