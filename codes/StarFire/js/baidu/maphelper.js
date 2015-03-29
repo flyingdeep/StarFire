@@ -193,14 +193,19 @@ function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listConta
         {
             var result =e.data;
             var items = result.contents;
+            currentDisplayStandsStrPoints = [];
             var innerHtmlString = "<ul class='list'>";
             for (var i=0;i<result.size; i++)
             {
 
                 var targetPosition = items[i];
+                var standType = targetPosition.tags;
 
+                var myIcon = fetchIconByStandType(standType);
+                currentDisplayStandsStrPoints.push(targetPosition.location[0] + "," + targetPosition.location[1]);
                 var point = new BMap.Point(targetPosition.location[0],targetPosition.location[1]);
-                var marker = addMarker(point,i,mapObj);
+                var marker = addMarker(point,i,mapObj,myIcon);
+                currentDisplayStandsMarks.push(marker);
                 var openInfoWinFun = addInfoWindow(marker,targetPosition,i);
                 staticOpenInfoWinFunEvents.push(openInfoWinFun);
                 var locationId = "loc" + i;
@@ -226,8 +231,7 @@ function searchPoiNearbyPosition(location, searchString,containerJObj)
         {
             var result =e.data;
             var items = result.contents;
-
-            staticResults = items;
+            staticSearchResults = items;
             var innerHtmlString = "<ul class='list'>";
             for (var i=0;i<result.size; i++)
             {
@@ -253,10 +257,11 @@ function standListTapEvent(i)
 function resultItemStandTapEvent(i,mapObj)
 {
     transferToPanel("#mapPanel","pop");
-    var targetPosition = staticResults[i];
-
+    var targetPosition = staticSearchResults[i];
+    currentSingleDisplaySearchStrPoint  =  targetPosition.location[0] + "," + targetPosition.location[1];
     var point = new BMap.Point(targetPosition.location[0],targetPosition.location[1]);
     var marker = addMarker(point,i,mapObj);
+    setCurrentSingleSearchMark(marker);
     var openInfoWinFun = addInfoWindow(marker,targetPosition,i);
     //openInfoWinFun();
     setTimeout(openInfoWinFun,LOAD_MAP_TIP_LAYER_DELAY);
@@ -267,7 +272,7 @@ function searchLocalPosition(targetString, mapObj,containerJObj) {
     var options = {
         onSearchComplete: function (results) {
             var innerHtmlString = "";
-            staticResults = results;
+            staticSearchResults = results;
             innerHtmlString = innerHtmlString + "<ul class='list'>";
             var eventStack = [];
             for (var i = 0; i < results.getCurrentNumPois(); i++) {
@@ -292,8 +297,9 @@ function searchLocalPosition(targetString, mapObj,containerJObj) {
 function resultItemTapEvent(i,mapObj)
 {
     transferToPanel("#mapPanel","pop");
-    var marker = addMarker(staticResults.getPoi(i).point,i,mapObj);
-    var openInfoWinFun = addInfoWindow(marker,staticResults.getPoi(i),i);
+    var marker = addMarker(staticSearchResults.getPoi(i).point,i,mapObj,null);
+    setCurrentSingleSearchMark(marker);
+    var openInfoWinFun = addInfoWindow(marker,staticSearchResults.getPoi(i),i);
     //openInfoWinFun();
     setTimeout(openInfoWinFun,LOAD_MAP_TIP_LAYER_DELAY);
 }
@@ -319,15 +325,32 @@ function addInfoWindow(marker,poi,index){
     return openInfoWinFun;
 }
 
-function addMarker(point, index, mapObj){
-    var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
-        offset: new BMap.Size(10, 25),
-        imageOffset: new BMap.Size(0, 0 - index * 25)
-    });
-    var marker = new BMap.Marker(point, {icon: myIcon});
+function addMarker(point, index, mapObj, icon) {
+    var marker = null;
+    if (!icon) {
+        var defaultIcon = new BMap.Icon("./images/target.png", new BMap.Size(21, 41), {
+            offset: new BMap.Size(10, 41)
+        });
+        marker = new BMap.Marker(point, {icon: defaultIcon});
+    }
+    else {
+        marker = new BMap.Marker(point, {icon: icon});
+    }
     mapObj.addOverlay(marker);
     // alert(point.lng + "   !!   " + point.lat);
     return marker;
+}
+
+function addMarkersByPoints (points, icon)
+{
+    for (var point in points) {
+        addMarker(point,-1,map,icon);
+    }
+}
+
+function removeMarkersByMarkers (markers)
+{
+
 }
 
 //Create user mark on map
@@ -363,7 +386,31 @@ function createInfoWindow(Json_stand_info)
     content = content+"<article>";
 
 }
+function fetchIconByStandType(standType) {
+    var myIcon = null;
+    if (standType == "1") {
+        myIcon = iconFood
+    }
+    else if (standType == "2") {
+        myIcon = iconCloth
+    }
+    else if (standType == "3") {
+        myIcon = iconToy
+    }
+    else if (standType == "4") {
+        myIcon = iconDigital
+    }
+    return myIcon;
+}
 
+function setCurrentSingleSearchMark(mark, mapObject)
+{
+    if (currentSingleDisplaySearchMark)
+    {
+        mapObject.removeOverlay(currentSingleDisplaySearchMark);
+    }
+    currentSingleDisplaySearchMark = mark;
+}
 
 function transferToPanel(targetPanel , transitionStyle)
 {
@@ -375,13 +422,13 @@ function transferToPanel(targetPanel , transitionStyle)
 
 function fetchCurrentGPSPosition()
 {
-    return "31.25,121.55";
+    return "121.55,31.25";
 }
 
 function transStringToPoint(positionString)
 {
     var positions = positionString.split(",");
-     var result =new  map.point(positions[0],positions[1]);
+     var result =new BMap.Point(parseFloat(positions[0]),parseFloat(positions[1]));
     return result;
 }
 

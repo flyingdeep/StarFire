@@ -58,12 +58,6 @@
         function initialAction()
         {
             FastClick.attach( document.body );
-            if (!localStorage.position) {
-
-                localStorage.position = "121.50,31.25";
-            }
-            localStorage.position = "121.50,31.25";
-            currentPosition = localStorage.position;
             $.afui.launch();
             $.afui.manageHistory=false;
             currentPanel = "#mapPanel";
@@ -407,14 +401,15 @@
 
 // map related =====================================================
     map = new BMap.Map("mapContainer");
-    var init_city = "上海";
+
 
     var Json_tap_position; //finger tap position return Json
     var Json_decode_position2address; //get address from position
     var current_map_level;
+    initialMapParameter();
     //map.centerAndZoom(new BMap.Point(CONST_POINT_X, CONST_POINT_Y), CONST_DISPLAY_LEVEL);
-    map.centerAndZoom(init_city);
-
+   // initMapLocation();
+    map.centerAndZoom("上海");
     var map_dragend_event = function (){
 
     };
@@ -422,8 +417,8 @@
         var pt = e.point;
         Json_tap_position =
         {
-            "point_x":pt.lat ,
-            "point_y": pt.lng
+            "point_x":pt.lng ,
+            "point_y": pt.lat
         };
         alert(Json_tap_position.point_x + "  " + Json_tap_position.point_y);
         gc.getLocation(pt, function(rs){
@@ -446,7 +441,7 @@
         mapCenterString = getMapCenter(map);
         staticResults = [];
         staticOpenInfoWinFunEvents = [];
-        map.clearOverlays();
+        //map.clearOverlays();
         searchPoiNearbyPositionDisplay(mapCenterString,"",map,"#standList");
     };
     var map_load_event = function(){
@@ -460,22 +455,59 @@
     map.addEventListener("moveend", map_moveend_event);
     map.addEventListener("load", map_load_event);
 
-    var initMapLocation = function()
+    function initMapLocation()
     {
+
+        var init_city = commonHelper.getUserBelongedLocation();
         var gpsPosition = fetchCurrentGPSPosition();
+        if (localStorage.position) {
+
+            currentGPSPosition = localStorage.position;
+        }
+
         if (gpsPosition)
         {
             currentGPSPosition = gpsPosition;
+            localStorage.position = currentGPSPosition;
+            map.centerAndZoom(transStringToPoint(currentGPSPosition), CONST_DISPLAY_LEVEL);
         }
         else if (currentGPSPosition)
         {
-
-
+            map.centerAndZoom(transStringToPoint(currentGPSPosition), CONST_DISPLAY_LEVEL);
         }
-        //commonHelper.getUserBelongedLocation();
-
-
+        else
+        {
+            map.centerAndZoom(init_city);
+        }
     };
+    function initialMapParameter()
+    {
+        iconFood  = new BMap.Icon("./images/food.png", new BMap.Size(24, 35), {
+            offset: new BMap.Size(12, 35)
+        });
+        iconFoodFa  = new BMap.Icon("./images/food_fa.png", new BMap.Size(24, 35), {
+            offset: new BMap.Size(12, 35)
+        });
+        iconToy = new BMap.Icon("./images/toy.png", new BMap.Size(24, 35), {
+            offset: new BMap.Size(12, 35)
+        });
+        iconToyFa = new BMap.Icon("./images/toy_fa.png", new BMap.Size(24, 35), {
+            offset: new BMap.Size(12, 35)
+        });
+        iconCloth= new BMap.Icon("./images/cloth.png", new BMap.Size(24, 35), {
+            offset: new BMap.Size(12, 35)
+        });
+        iconClothFa= new BMap.Icon("./images/cloth_fa.png", new BMap.Size(24, 35), {
+            offset: new BMap.Size(12, 35)
+        });
+        iconDigital= new BMap.Icon("./images/digital.png", new BMap.Size(24, 35), {
+            offset: new BMap.Size(12, 35)
+        });
+        iconDigitalFa= new BMap.Icon("./images/digital_fa.png", new BMap.Size(24, 35), {
+            offset: new BMap.Size(12, 35)
+        });
+
+    }
 
 </script>
 </body>
