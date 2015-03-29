@@ -442,11 +442,13 @@
         staticResults = [];
         staticOpenInfoWinFunEvents = [];
         //map.clearOverlays();
-        searchPoiNearbyPositionDisplay(mapCenterString,"",map,"#standList");
+
+       removeMarkersByMarkers(currentDisplayStandsMarks,map);
+       searchPoiNearbyPositionDisplay(mapCenterString,"",map,"#standList");
     };
     var map_load_event = function(){
         mapCenterString = getMapCenter(map);
-        searchPoiNearbyPositionDisplay(mapCenterString,"",map,"#standList");
+        //searchPoiNearbyPositionDisplay(mapCenterString,"",map,"#standList");
     };
 
     // map.addEventListener("dragend", map_dragend_event);

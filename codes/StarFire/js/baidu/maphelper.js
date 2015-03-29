@@ -195,6 +195,7 @@ function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listConta
             var items = result.contents;
             currentDisplayStandsStrPoints = [];
             var innerHtmlString = "<ul class='list'>";
+
             for (var i=0;i<result.size; i++)
             {
 
@@ -202,17 +203,20 @@ function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listConta
                 var standType = targetPosition.tags;
 
                 var myIcon = fetchIconByStandType(standType);
+
                 currentDisplayStandsStrPoints.push(targetPosition.location[0] + "," + targetPosition.location[1]);
                 var point = new BMap.Point(targetPosition.location[0],targetPosition.location[1]);
                 var marker = addMarker(point,i,mapObj,myIcon);
                 currentDisplayStandsMarks.push(marker);
                 var openInfoWinFun = addInfoWindow(marker,targetPosition,i);
                 staticOpenInfoWinFunEvents.push(openInfoWinFun);
+
                 var locationId = "loc" + i;
                 innerHtmlString = innerHtmlString + "<li>";
                 innerHtmlString = innerHtmlString + "<a id='" + locationId +"' onclick='standListTapEvent("+ i + ")'>" + targetPosition.title.replace(new RegExp(searchString, "g"), '<b>' + searchString+ '</b>') + "</a>";
                 innerHtmlString = innerHtmlString + "</li>";
             }
+
             innerHtmlString = innerHtmlString + "</ul>";
             $(listContainerId).html(innerHtmlString);
         }
@@ -254,18 +258,7 @@ function standListTapEvent(i)
     setTimeout(staticOpenInfoWinFunEvents[i],LOAD_MAP_TIP_LAYER_DELAY);
 }
 
-function resultItemStandTapEvent(i,mapObj)
-{
-    transferToPanel("#mapPanel","pop");
-    var targetPosition = staticSearchResults[i];
-    currentSingleDisplaySearchStrPoint  =  targetPosition.location[0] + "," + targetPosition.location[1];
-    var point = new BMap.Point(targetPosition.location[0],targetPosition.location[1]);
-    var marker = addMarker(point,i,mapObj);
-    setCurrentSingleSearchMark(marker);
-    var openInfoWinFun = addInfoWindow(marker,targetPosition,i);
-    //openInfoWinFun();
-    setTimeout(openInfoWinFun,LOAD_MAP_TIP_LAYER_DELAY);
-}
+
 
 
 function searchLocalPosition(targetString, mapObj,containerJObj) {
@@ -294,13 +287,24 @@ function searchLocalPosition(targetString, mapObj,containerJObj) {
     local.search(targetString);
 }
 
+function resultItemStandTapEvent(i,mapObj)
+{
+    transferToPanel("#mapPanel","pop");
+    var targetPosition = staticSearchResults[i];
+    var point = new BMap.Point(targetPosition.location[0],targetPosition.location[1]);
+    var marker = addMarker(point,i,mapObj);
+    setCurrentSingleSearchMark(marker, mapObj);
+    var openInfoWinFun = addInfoWindow(marker,targetPosition,i);
+    setTimeout(openInfoWinFun,LOAD_MAP_TIP_LAYER_DELAY);
+
+}
+
 function resultItemTapEvent(i,mapObj)
 {
     transferToPanel("#mapPanel","pop");
     var marker = addMarker(staticSearchResults.getPoi(i).point,i,mapObj,null);
-    setCurrentSingleSearchMark(marker);
+    setCurrentSingleSearchMark(marker, mapObj);
     var openInfoWinFun = addInfoWindow(marker,staticSearchResults.getPoi(i),i);
-    //openInfoWinFun();
     setTimeout(openInfoWinFun,LOAD_MAP_TIP_LAYER_DELAY);
 }
 
@@ -343,15 +347,25 @@ function addMarker(point, index, mapObj, icon) {
 
 function addMarkersByPoints (points, icon)
 {
+    var markers = [];
+    var marker = null;
     for (var point in points) {
-        addMarker(point,-1,map,icon);
+        marker = addMarker(point,-1,map,icon);
+        markers.push(marker);
+    }
+    return markers;
+}
+
+function removeMarkersByMarkers (markers, mapObject)
+{
+    var marker = null;
+    while(marker=markers.pop() )
+    {
+        mapObject.removeOverlay(marker);
     }
 }
 
-function removeMarkersByMarkers (markers)
-{
 
-}
 
 //Create user mark on map
 function createMakerWithInfoWindow(map, Json_stand_info)
