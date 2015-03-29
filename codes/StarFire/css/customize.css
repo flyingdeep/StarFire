@@ -126,3 +126,9 @@
 .filterLineCss{height: 50px;line-height: 50px;text-align: right;}
 
 #searchResultHeader{background-color: white; height:50px;}
+
+.smallButton
+{
+    padding: 4px;
+    margin: 2px 0;
+}

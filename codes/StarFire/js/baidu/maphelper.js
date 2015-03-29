@@ -184,6 +184,15 @@ function deleteJsonStandInfo()
 
 function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listContainerId)
 {
+    var mapObjStr = "";
+    if (mapObj == map)
+    {
+        mapObjStr = "map";
+    }
+    else (mapObj == mapCr)
+    {
+        mapObjStr = "mapCr";
+    }
     var search_condition = createJsonSearchConditionForNearbySearch();
     search_condition.location=location;
     search_condition.q = searchString;
@@ -191,6 +200,7 @@ function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listConta
     {
         if (e.status == "success" &&  e.message == "true")
         {
+            staticOpenInfoWinFunEvents = [];
             var result =e.data;
             var items = result.contents;
             currentDisplayStandsStrPoints = [];
@@ -206,14 +216,14 @@ function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listConta
 
                 currentDisplayStandsStrPoints.push(targetPosition.location[0] + "," + targetPosition.location[1]);
                 var point = new BMap.Point(targetPosition.location[0],targetPosition.location[1]);
-                var marker = addMarker(point,i,mapObj,myIcon);
+                var marker = addMarker(point,i,mapObj,myIcon,null);
                 currentDisplayStandsMarks.push(marker);
                 var openInfoWinFun = addInfoWindow(marker,targetPosition,i);
                 staticOpenInfoWinFunEvents.push(openInfoWinFun);
 
                 var locationId = "loc" + i;
                 innerHtmlString = innerHtmlString + "<li>";
-                innerHtmlString = innerHtmlString + "<a id='" + locationId +"' onclick='standListTapEvent("+ i + ")'>" + targetPosition.title.replace(new RegExp(searchString, "g"), '<b>' + searchString+ '</b>') + "</a>";
+                innerHtmlString = innerHtmlString + "<a id='" + locationId +"' onclick='standListTapEvent("+ i + "," + mapObjStr + ")'>" + targetPosition.title.replace(new RegExp(searchString, "g"), '<b>' + searchString+ '</b>') + "</a>";
                 innerHtmlString = innerHtmlString + "</li>";
             }
 
@@ -252,9 +262,15 @@ function searchPoiNearbyPosition(location, searchString,containerJObj)
 
 }
 
-function standListTapEvent(i)
+function standListTapEvent(i,mapObj)
 {
-    transferToPanel("#mapPanel","pop");
+    if (mapObj == map) {
+        transferToPanel("#mapPanel", "pop");
+    }
+    else if (mapObj = mapCr)
+    {
+        transferToPanel("#createStandPanel2","pop");
+    }
     setTimeout(staticOpenInfoWinFunEvents[i],LOAD_MAP_TIP_LAYER_DELAY);
 }
 
@@ -273,8 +289,6 @@ function searchLocalPosition(targetString, mapObj,containerJObj) {
                 innerHtmlString = innerHtmlString + "<li>";
                 innerHtmlString = innerHtmlString + "<a id='" + locationId +"' onclick='resultItemTapEvent("+ i + ",map)'>" + results.getPoi(i).title.replace(new RegExp(results.keyword, "g"), '<b>' + results.keyword + '</b>') + "</a>";
                 innerHtmlString = innerHtmlString + "</li>";
-
-
             }
             innerHtmlString = innerHtmlString + "</ul>";
             containerJObj.html(innerHtmlString);
@@ -289,10 +303,16 @@ function searchLocalPosition(targetString, mapObj,containerJObj) {
 
 function resultItemStandTapEvent(i,mapObj)
 {
-    transferToPanel("#mapPanel","pop");
+    if (mapObj == map) {
+        transferToPanel("#mapPanel", "pop");
+    }
+    else if (mapObj = mapCr)
+    {
+        transferToPanel("#createStandPanel2","pop");
+    }
     var targetPosition = staticSearchResults[i];
     var point = new BMap.Point(targetPosition.location[0],targetPosition.location[1]);
-    var marker = addMarker(point,i,mapObj);
+    var marker = addMarker(point,i,mapObj,null);
     setCurrentSingleSearchMark(marker, mapObj);
     var openInfoWinFun = addInfoWindow(marker,targetPosition,i);
     setTimeout(openInfoWinFun,LOAD_MAP_TIP_LAYER_DELAY);
@@ -301,7 +321,13 @@ function resultItemStandTapEvent(i,mapObj)
 
 function resultItemTapEvent(i,mapObj)
 {
-    transferToPanel("#mapPanel","pop");
+    if (mapObj == map) {
+        transferToPanel("#mapPanel", "pop");
+    }
+    else if (mapObj = mapCr)
+    {
+        transferToPanel("#createStandPanel2","pop");
+    }
     var marker = addMarker(staticSearchResults.getPoi(i).point,i,mapObj,null);
     setCurrentSingleSearchMark(marker, mapObj);
     var openInfoWinFun = addInfoWindow(marker,staticSearchResults.getPoi(i),i);
@@ -340,17 +366,19 @@ function addMarker(point, index, mapObj, icon) {
     else {
         marker = new BMap.Marker(point, {icon: icon});
     }
-    mapObj.addOverlay(marker);
+    if (mapObj) {
+        mapObj.addOverlay(marker);
+    }
     // alert(point.lng + "   !!   " + point.lat);
     return marker;
 }
 
-function addMarkersByPoints (points, icon)
+function addMarkersByPoints (points, icon, mapObject)
 {
     var markers = [];
     var marker = null;
     for (var point in points) {
-        marker = addMarker(point,-1,map,icon);
+        marker = addMarker(point,-1,mapObject,icon,null);
         markers.push(marker);
     }
     return markers;
@@ -430,7 +458,6 @@ function transferToPanel(targetPanel , transitionStyle)
 {
     $.afui.loadContent(targetPanel,false,false,transitionStyle);
     currentPanel = targetPanel;
-
 }
 //generate
 
@@ -442,7 +469,7 @@ function fetchCurrentGPSPosition()
 function transStringToPoint(positionString)
 {
     var positions = positionString.split(",");
-     var result =new BMap.Point(parseFloat(positions[0]),parseFloat(positions[1]));
+     var result = new BMap.Point(parseFloat(positions[0]),parseFloat(positions[1]));
     return result;
 }
 

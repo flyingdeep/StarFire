@@ -94,8 +94,8 @@
                   <label for="toggleTarget"  data-on="摊位" data-off="地址" class="toggleLabel"><span></span>
                   </label><br style="clear:both"></div>
 
-                  <a  class="button" id="filterSettingIcon">筛选条件</a><br style="clear:both">
-                  <a  class="button" id="closeSearchResult">清除搜索</a>
+                  <a  class="button smallButton" id="filterSettingIcon">筛选</a><br style="clear:both">
+                  <a  class="button smallButton" id="closeSearchResult">完成</a>
               </div>
               <div id="bottomBar">
               <div id="transparentShader"></div>
@@ -116,7 +116,7 @@
     <header id="standListHeader" >
         <div style="float:left"><a onclick='transferToPanel("#mapPanel","up");' class="icon info green button previous">返回地图</a></div>
 
-        <div style="float:right;margin-right: 10px"><a class="button" id="filterSettingIcon_nearbyStandListView">筛选条件</a>
+        <div style="float:right;margin-right: 10px"><a class="button" id="filterSettingIcon_nearbyStandListView">筛选</a>
             </div>
         <div class="titleDiv">摊位列表</div>
     </header>
@@ -216,11 +216,12 @@
 <nav id="right_Filter" style="width:90%">
 <div class="view active">
     <header>
+        <a data-menu-close class="button previous" style="float:left;">关闭</a>
         <h1>筛选设置</h1>
     </header>
     <div class="pages">
         <div class="panel active" id="filterPanel">
-            <div  class="input-group">
+
                 <div  class="grid">
                     <div class="gcol2 filterLineCss">显示距离:</div><div class="gcol2 filterLineCss">&nbsp;</div>
                     <div class="gcol2"><input id="distantRadio200" type="radio"  name="distantRadio" value="200"><label for="distantRadio200">200米</label></div>
@@ -235,8 +236,6 @@
                    <div id="standTypeFilterContainer"></div>
                     <br /> &nbsp;
                 </div><br />
-
-
                <div id="toggleCustomCrStandDiv" class="grid">
                    <div class="gcol2 filterLineCss">显示非摊主创建摊位:</div>
                    <div class="gcol2 filterLineCss">
@@ -257,8 +256,7 @@
                     <label for="standDisplayModeInput"  data-on="是" data-off="否"><span></span></label>
                      </div>
                 </div>
-            </div><br />
-            <div style="text-align: center;"><a data-menu-close class="button" >关闭</a></div>
+
         </div>
     </div>
 </div>
@@ -284,7 +282,7 @@
         }
         else
         {
-            searchLocation();
+            searchLocation(map);
         }
         return false;
     });
@@ -341,8 +339,10 @@
 
     $("#createStandPanel2").on("panelload",function(){
         if(!mapCr) {
+            var init_city = commonHelper.getUserBelongedLocation();
             mapCr = new BMap.Map("mapContainerCr");
             mapCr.centerAndZoom(init_city);
+            initMapLocation(mapCr);
         }
         toastObj  = $.afui.toast({
             message:"点击地图任意处以设定摊位位置",
@@ -361,9 +361,12 @@
         }
     });
 
+    function searchSecLocation()
+    {
 
+    }
 
-    function searchLocation()
+    function searchLocation(mapObject)
     {
         $("#resultList").html("");
         $.afui.loadContent("#searchResultListPanel",false,false,"pop");
@@ -373,11 +376,12 @@
          {
              var searchStringInner = $("#searchDivResultInner input").val();
              $("#searchInput").val(searchStringInner);
-             searchLocalPosition(searchStringInner,map,$("#resultList"));
+
+             searchLocalPosition(searchStringInner,mapObject,$("#resultList"));
              return false;
          }
         );
-        searchLocalPosition(searchString,map,$("#resultList"));
+        searchLocalPosition(searchString,mapObject,$("#resultList"));
     }
 
     function searchStand()
@@ -397,18 +401,14 @@
         searchPoiNearbyPosition(mapCenterString,searchString,$("#resultList"));
     }
 
-
-
 // map related =====================================================
     map = new BMap.Map("mapContainer");
-
-
     var Json_tap_position; //finger tap position return Json
     var Json_decode_position2address; //get address from position
     var current_map_level;
     initialMapParameter();
     //map.centerAndZoom(new BMap.Point(CONST_POINT_X, CONST_POINT_Y), CONST_DISPLAY_LEVEL);
-   // initMapLocation();
+   // initMapLocation(map);
     map.centerAndZoom("上海");
     var map_dragend_event = function (){
 
@@ -437,12 +437,9 @@
     };
 
     var map_moveend_event = function (){
-
         mapCenterString = getMapCenter(map);
-        staticResults = [];
-        staticOpenInfoWinFunEvents = [];
-        //map.clearOverlays();
 
+        //map.clearOverlays();
        removeMarkersByMarkers(currentDisplayStandsMarks,map);
        searchPoiNearbyPositionDisplay(mapCenterString,"",map,"#standList");
     };
@@ -451,13 +448,21 @@
         //searchPoiNearbyPositionDisplay(mapCenterString,"",map,"#standList");
     };
 
+    var mapCr_moveend_event = function(){
+        mapCenterString = getMapCenter(map);
+        //map.clearOverlays();
+        removeMarkersByMarkers(currentDisplayStandsMarks,mapCr);
+        searchPoiNearbyPositionDisplay(mapCenterString,"",mapCr,"#standList");
+    };
+
     // map.addEventListener("dragend", map_dragend_event);
    // map.addEventListener("click", map_click_event);
     //map.addEventListener("zoomend", map_zoomend_event);
     map.addEventListener("moveend", map_moveend_event);
     map.addEventListener("load", map_load_event);
+    mapCr.addEventListener("moveend", mapCr_moveend_event);
 
-    function initMapLocation()
+    function initMapLocation(mapObject)
     {
 
         var init_city = commonHelper.getUserBelongedLocation();
@@ -471,17 +476,17 @@
         {
             currentGPSPosition = gpsPosition;
             localStorage.position = currentGPSPosition;
-            map.centerAndZoom(transStringToPoint(currentGPSPosition), CONST_DISPLAY_LEVEL);
+            mapObject.centerAndZoom(transStringToPoint(currentGPSPosition), CONST_DISPLAY_LEVEL);
         }
         else if (currentGPSPosition)
         {
-            map.centerAndZoom(transStringToPoint(currentGPSPosition), CONST_DISPLAY_LEVEL);
+            mapObject.centerAndZoom(transStringToPoint(currentGPSPosition), CONST_DISPLAY_LEVEL);
         }
         else
         {
-            map.centerAndZoom(init_city);
+            mapObject.centerAndZoom(init_city);
         }
-    };
+    }
     function initialMapParameter()
     {
         iconFood  = new BMap.Icon("./images/food.png", new BMap.Size(24, 35), {
@@ -508,7 +513,6 @@
         iconDigitalFa= new BMap.Icon("./images/digital_fa.png", new BMap.Size(24, 35), {
             offset: new BMap.Size(12, 35)
         });
-
     }
 
 </script>
