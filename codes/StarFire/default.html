@@ -453,7 +453,7 @@
     };
 
     var mapCr_moveend_event = function(){
-        mapCenterString = getMapCenter(map);
+        mapCenterString = getMapCenter(mapCr);
         //map.clearOverlays();
         removeMarkersByMarkers(currentDisplayStandsMarks,mapCr);
         searchPoiNearbyPositionDisplay(mapCenterString,"",mapCr,"#standList");
@@ -466,17 +466,8 @@
             "point_x":pt.lng ,
             "point_y": pt.lat
         };
-        alert(Json_tap_position.point_x + "  " + Json_tap_position.point_y);
-        gc.getLocation(pt, function(rs){
-            var addComp = rs.addressComponents;
-            Json_decode_position2address = {
-                "province": addComp.province,
-                "city": addComp.city,
-                "district": addComp.district,
-                "street": addComp.street,
-                "streetNumber": addComp.streetNumber
-            };
-        });
+        popupCreateStandPointWindow(pt);
+
 
     };
 
@@ -538,6 +529,43 @@
         iconDigitalFa= new BMap.Icon("./images/digital_fa.png", new BMap.Size(24, 35), {
             offset: new BMap.Size(12, 35)
         });
+        iconLocate= new BMap.Icon("./images/locate.png", new BMap.Size(32, 32), {
+            offset: new BMap.Size(16, 32)
+        });
+    }
+
+    function popupCreateStandPointWindow(e)
+    {
+        gc.getLocation(e, function(rs){
+            var addComp = rs.addressComponents;
+            Json_decode_position2address = {
+                "province": addComp.province,
+                "city": addComp.city,
+                "district": addComp.district,
+                "street": addComp.street,
+                "streetNumber": addComp.streetNumber
+            };
+            var popupMessage = "";
+            popupMessage = popupMessage + "省市区： " +  addComp.province + " " + addComp.city + " " + addComp.district + "<br/>";
+            popupMessage = popupMessage + "街道： " +  addComp.street + "<br/>";
+            popupMessage = popupMessage + "门牌： " +  addComp.streetNumber + "  附近";
+
+            $.afui.popup({
+                title: "是否设定摊位位置？",
+                message: popupMessage,
+                cancelText: "取消",
+                cancelCallback: function () {
+
+                },
+                doneText: "确定",
+                doneCallback: function () {
+                addMarker(e,0,mapCr,iconLocate);
+                },
+                cancelOnly: false
+            });
+
+        });
+
     }
 
 </script>

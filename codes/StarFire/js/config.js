@@ -54,3 +54,4 @@ var iconCloth = null;
 var iconClothFa = null;
 var iconDigital = null;
 var iconDigitalFa = null;
+var iconLocate = null;
