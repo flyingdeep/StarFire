@@ -234,8 +234,17 @@ function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listConta
 }
 
 
-function searchPoiNearbyPosition(location, searchString,containerJObj)
+function searchPoiNearbyPosition(location,mapObj, searchString,containerJObj)
 {
+    var mapObjStr = null;
+    if (mapObj == map)
+    {
+        mapObjStr = "map";
+    }
+    else (mapObj == mapCr)
+    {
+        mapObjStr = "mapCr";
+    }
     var search_condition = createJsonSearchConditionForNearbySearch();
     search_condition.location=location;
     search_condition.q = searchString;
@@ -251,7 +260,7 @@ function searchPoiNearbyPosition(location, searchString,containerJObj)
             {
                 var locationId = "loc" + i;
                 innerHtmlString = innerHtmlString + "<li>";
-                innerHtmlString = innerHtmlString + "<a id='" + locationId +"' onclick='resultItemStandTapEvent("+ i + ",map)'>" + items[i].title.replace(new RegExp(searchString, "g"), '<b>' + searchString+ '</b>') + "</a>";
+                innerHtmlString = innerHtmlString + "<a id='" + locationId +"' onclick='resultItemStandTapEvent("+ i + "," + + ")'>" + items[i].title.replace(new RegExp(searchString, "g"), '<b>' + searchString+ '</b>') + "</a>";
                 innerHtmlString = innerHtmlString + "</li>";
             }
             innerHtmlString = innerHtmlString + "</ul>";
@@ -278,6 +287,17 @@ function standListTapEvent(i,mapObj)
 
 
 function searchLocalPosition(targetString, mapObj,containerJObj) {
+
+    var mapObjStr = "";
+    if (mapObj == map)
+    {
+        mapObjStr = "map";
+    }
+    else (mapObj == mapCr)
+    {
+        mapObjStr = "mapCr";
+    }
+
     var options = {
         onSearchComplete: function (results) {
             var innerHtmlString = "";
@@ -287,7 +307,7 @@ function searchLocalPosition(targetString, mapObj,containerJObj) {
             for (var i = 0; i < results.getCurrentNumPois(); i++) {
                 var locationId = "loc" + i;
                 innerHtmlString = innerHtmlString + "<li>";
-                innerHtmlString = innerHtmlString + "<a id='" + locationId +"' onclick='resultItemTapEvent("+ i + ",map)'>" + results.getPoi(i).title.replace(new RegExp(results.keyword, "g"), '<b>' + results.keyword + '</b>') + "</a>";
+                innerHtmlString = innerHtmlString + "<a id='" + locationId +"' onclick='resultItemTapEvent("+ i + "," + mapObjStr + ")'>" + results.getPoi(i).title.replace(new RegExp(results.keyword, "g"), '<b>' + results.keyword + '</b>') + "</a>";
                 innerHtmlString = innerHtmlString + "</li>";
             }
             innerHtmlString = innerHtmlString + "</ul>";

@@ -93,9 +93,8 @@
                   <div id="toggleDiv"><input id="toggleTarget" type="checkbox" checked=""  name="toggleTarget" value="1" class="toggle">
                   <label for="toggleTarget"  data-on="摊位" data-off="地址" class="toggleLabel"><span></span>
                   </label><br style="clear:both"></div>
-
-                  <a  class="button smallButton" id="filterSettingIcon">筛选</a><br style="clear:both">
-                  <a  class="button smallButton" id="closeSearchResult">完成</a>
+                  <a  class="button smallButton mapHintButton" id="filterSettingIcon">筛选</a><br style="clear:both">
+                  <a  class="button smallButton mapHintButton" id="closeSearchResult">完成</a>
               </div>
               <div id="bottomBar">
               <div id="transparentShader"></div>
@@ -194,16 +193,7 @@
               <div id="searchDivInner" style="float:left; width:95%"><input  type="search" placeholder="搜索地址以定位区域"></div>
               </form>
               <br style="clear:both">
-              <div ><div style="float:right;">设置为当前&nbsp;&nbsp;<a class="icon target" style="font-size: 24px;color: blue; padding-right: 10px"></a></div>
-                  <br style="clear:both">
-                  <div  style="float:right;height: 40px;line-height: 40px;">摊位</div>
-                      <div style="float:right; padding-right: 30px;"><input id="displayStandInput" type="checkbox" checked=""  name="displayStandInput" value="1" class="toggle">
-                      <label for="displayStandInput"  data-on="显示" data-off="隐藏" class="toggleLabel"><span></span>
-                      </label>
-                  </div>
-
-
-              </div>
+              <a  class="button smallButton mapHintButton" id="setCurrentPosition">设置为当前位置</a>
           </div>
           <div id="mapContainerCr" class="mapCss"></div>
       </div>
@@ -249,13 +239,13 @@
                     <label for="toggleFavoriteStandInput"  data-on="是" data-off="否"><span></span></label>
                     </div>
                 </div>
-                 <div id="standDisplayModeDiv" class="grid" >
+              <!--   <div id="standDisplayModeDiv" class="grid" >
                      <div class="gcol2 filterLineCss">自动显示周边摊位:</div>
                      <div class="gcol2 filterLineCss" >
                      <input id="standDisplayModeInput" type="checkbox" name="standDisplayModeInput" value="1" class="toggle">
                     <label for="standDisplayModeInput"  data-on="是" data-off="否"><span></span></label>
                      </div>
-                </div>
+                </div> -->
 
         </div>
     </div>
@@ -278,7 +268,7 @@
     {
         if ($("#toggleTarget").prop("checked"))
         {
-            searchStand();
+            searchStand(map);
         }
         else
         {
@@ -289,11 +279,10 @@
 
     $("#map2SearchForm").on("submit",function()
     {
-            searchSecLocation();
+            searchSecLocation(mapCr);
 
         return false;
     });
-
 
     $("#filterPanel").on("swipeRight", function(){
         $.afui.drawer.hide("#right_Filter","right");
@@ -341,8 +330,10 @@
         if(!mapCr) {
             var init_city = commonHelper.getUserBelongedLocation();
             mapCr = new BMap.Map("mapContainerCr");
+            mapCr.addEventListener("moveend", mapCr_moveend_event);
+            mapCr.addEventListener("click", mapCr_click_event);
             mapCr.centerAndZoom(init_city);
-            initMapLocation(mapCr);
+            //initMapLocation(mapCr);
         }
         toastObj  = $.afui.toast({
             message:"点击地图任意处以设定摊位位置",
@@ -361,9 +352,22 @@
         }
     });
 
-    function searchSecLocation()
+    function searchSecLocation(mapObject)
     {
+        $("#resultList").html("");
+        $.afui.loadContent("#searchResultListPanel",false,false,"pop");
+        var searchString = $("#searchDivInner input").val();
+        $("#searchDivResultInner input").val(searchString);
+        $("#searchResultListForm").on("submit",function()
+                {
+                    var searchStringInner = $("#searchDivResultInner input").val();
+                    $("#searchInput").val(searchStringInner);
 
+                    searchLocalPosition(searchStringInner,mapObject,$("#resultList"));
+                    return false;
+                }
+        );
+        searchLocalPosition(searchString,mapObject,$("#resultList"));
     }
 
     function searchLocation(mapObject)
@@ -384,7 +388,7 @@
         searchLocalPosition(searchString,mapObject,$("#resultList"));
     }
 
-    function searchStand()
+    function searchStand(mapObject)
     {
         $("#resultList").html("");
         transferToPanel("#searchResultListPanel","pop");
@@ -394,11 +398,11 @@
                 {
                     var searchStringInner = $("#searchDivResultInner input").val();
                     $("#searchInput").val(searchStringInner);
-                    searchPoiNearbyPosition(mapCenterString,searchStringInner,$("#resultList"));
+                    searchPoiNearbyPosition(mapCenterString,mapObject,searchStringInner,$("#resultList"));
                     return false;
                 }
         );
-        searchPoiNearbyPosition(mapCenterString,searchString,$("#resultList"));
+        searchPoiNearbyPosition(mapCenterString,mapObject,searchString,$("#resultList"));
     }
 
 // map related =====================================================
@@ -455,12 +459,33 @@
         searchPoiNearbyPositionDisplay(mapCenterString,"",mapCr,"#standList");
     };
 
+    var mapCr_click_event = function(e){
+        var pt = e.point;
+        Json_tap_position =
+        {
+            "point_x":pt.lng ,
+            "point_y": pt.lat
+        };
+        alert(Json_tap_position.point_x + "  " + Json_tap_position.point_y);
+        gc.getLocation(pt, function(rs){
+            var addComp = rs.addressComponents;
+            Json_decode_position2address = {
+                "province": addComp.province,
+                "city": addComp.city,
+                "district": addComp.district,
+                "street": addComp.street,
+                "streetNumber": addComp.streetNumber
+            };
+        });
+
+    };
+
     // map.addEventListener("dragend", map_dragend_event);
    // map.addEventListener("click", map_click_event);
     //map.addEventListener("zoomend", map_zoomend_event);
     map.addEventListener("moveend", map_moveend_event);
     map.addEventListener("load", map_load_event);
-    mapCr.addEventListener("moveend", mapCr_moveend_event);
+
 
     function initMapLocation(mapObject)
     {
