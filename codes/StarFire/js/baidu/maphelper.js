@@ -287,7 +287,6 @@ function standListTapEvent(i,mapObj)
 
 
 function searchLocalPosition(targetString, mapObj,containerJObj) {
-
     var mapObjStr = "";
     if (mapObj == map)
     {
@@ -297,7 +296,6 @@ function searchLocalPosition(targetString, mapObj,containerJObj) {
     {
         mapObjStr = "mapCr";
     }
-
     var options = {
         onSearchComplete: function (results) {
             var innerHtmlString = "";
