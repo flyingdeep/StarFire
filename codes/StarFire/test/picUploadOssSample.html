@@ -14,9 +14,10 @@
 <body>
 
 <form>
-     <input id="file" name="file" type="file" accept="image/jpeg,image/png" >
+    <a href="#" onclick="document.getElementById('file').click();" >选择并上传图片</a>
+     <input style="visibility: hidden;" id="file" name="file" type="file" accept="image/jpeg,image/png"  >
    <!-- <input type="hidden" name="MAX_FILE_SIZE" value="4194304" />-->
-    <a href="#" onclick="uploadSingleStandImage();" >Submit</a>
+
 
     <img src="" id="previewImg" style="display:none">
 </form>
@@ -35,18 +36,19 @@ var xhr = null;
             var OSSBase64Policy = e.base64policy;
             var OSSSignature = e.signature;
             var fd = new FormData();
-            fd.append("key", key);
-            //fd.append("success_action_redirect", "http://www.baidu.com");
-          fd.append("success_action_status", 201);
+
+           // fd.append("success_action_redirect", "Javascript:alert('good')");
             fd.append("OSSAccessKeyId", OSS_ACCESS_KEY_ID);
             fd.append("policy", OSSBase64Policy);
             fd.append("Signature", OSSSignature);
+            fd.append("success_action_status", 201);
+            fd.append("key", key);
             fd.append("file", document.getElementById('file').files[0]);
             xhr = new XMLHttpRequest();
-            //xhr.upload.addEventListener("progress", uploadProgress, false);
-         //  xhr.addEventListener("load", uploadComplete, false);
+            xhr.upload.addEventListener("progress", uploadProgress, false);
+           xhr.addEventListener("load", uploadComplete, false);
            // xhr.onload = uploadComplete;
-         //  xhr.addEventListener("error", uploadFailed, false);
+           xhr.addEventListener("error", uploadFailed, false);
 
 
             //xhr.addEventListener("abort", uploadCanceled, false);
@@ -55,15 +57,16 @@ var xhr = null;
                 //  alert("");
                 if (xhr.readyState == 4)
                 {
-                    alert("complete");
+                    alert(xhr.status);
+                    //alert("complete");
                 }
 
 
             };
-            xhr.addEventListener("loaded", function(){
-
-                alert("");
-            }, false);
+//            xhr.addEventListener("loaded", function(){
+//
+//                alert("");
+//            }, false);
 
              xhr.send(fd);
 
@@ -83,13 +86,10 @@ var xhr = null;
         /* 服务器端返回响应时候触发event事件*/
         alert("");
     }
-    var uploadFailed = function(evt) {
-//        var Property;
-//        for(var i in evt){
-//            Property+="属性："+i+"<br/>";
-//
-//        }
-//        alert(Property);
+    var uploadFailed = function(evt, e, exp) {
+
+
+        alert(e);
         //alert("There was an error attempting to upload the file.");
     }
     var inputSeed = 0;
@@ -110,6 +110,7 @@ var xhr = null;
                     // Render thumbnail.
                     var i = document.getElementById("previewImg");
                     i.src = event.target.result;
+                    alert(event.target.result);
                     var imgWidth = document.body.clientWidth*0.7;
                     if ($(i).width()<imgWidth)
                     {
@@ -119,6 +120,7 @@ var xhr = null;
                     var quality =  50;
                     i.src = jic.compress(i,quality).src;
                     i.style.display = "block";
+                    uploadSingleStandImage();
                 };
             })(f);
             // Read in the image file as a data URL.

@@ -24,6 +24,7 @@
     <script type="text/javascript" src="./js/class/commonHelper.js"></script>
     <script type="text/javascript" src="./js/baidu/lbscloud.js"></script>
     <script type="text/javascript" src="./js/baidu/maphelper.js"></script>
+    <script type="text/javascript" src="./js/common/imageUploadHelper.js"></script>
 
 
 
@@ -182,22 +183,49 @@
 <!----------------------   创建摊位 - 2 --------------------->
 <div class="view" id="createStandView2">
     <header id="createStandHeader2">
-       <div style="float:left"><a onclick='transferToPanel("#createStandPanel1","slide");' data-transition="invoke"  class="icon left green button previous">上一步</a></div>
-      <div style="float:right"><a href="#" data-transition="slide" class="icon right green button next">下一步</a></div>
-      <div class="titleDiv">新建摊位-选择位置</div>
-  </header>
-  <div class="pages">
-      <div class="panel zeroPadding"  id="createStandPanel2">
-          <div style="position: absolute;top:3px;width:100%;left:2px;z-index: 50" >
-              <form id="map2SearchForm">
-              <div id="searchDivInner" style="float:left; width:95%"><input  type="search" placeholder="搜索地址以定位区域"></div>
-              </form>
-              <br style="clear:both">
-              <a  class="button smallButton mapHintButton" id="setCurrentPosition">设置为当前位置</a>
-          </div>
-          <div id="mapContainerCr" class="mapCss"></div>
-      </div>
-  </div>
+        <div style="float:left"><a onclick='transferToPanel("#createStandPanel1","slide");' data-transition="invoke"  class="icon left green button previous">上一步</a></div>
+        <div style="float:right"><a href="#" data-transition="slide" class="icon right green button next">下一步</a></div>
+        <div class="titleDiv">新建摊位-选择位置</div>
+    </header>
+    <div class="pages">
+        <div class="panel zeroPadding"  id="createStandPanel2">
+            <div style="position: absolute;top:3px;width:100%;left:2px;z-index: 50" >
+                <form id="map2SearchForm">
+                    <div id="searchDivInner" style="float:left; width:95%"><input  type="search" placeholder="搜索地址以定位区域"></div>
+                </form>
+                <br style="clear:both">
+                <a  class="button smallButton mapHintButton" id="setCurrentPosition">设置为当前位置</a>
+            </div>
+            <div id="mapContainerCr" class="mapCss"></div>
+        </div>
+    </div>
+
+
+</div>
+
+<!----------------------   创建摊位 - 3 --------------------->
+<div class="view" id="createStandView3">
+    <header id="createStandHeader3">
+        <div style="float:left"><a onclick='transferToPanel("#createStandPanel1","slide");' data-transition="invoke"  class="icon left green button previous">上一步</a></div>
+        <div style="float:right"><a href="#" data-transition="slide" class="icon right green button next">完成</a></div>
+        <div class="titleDiv">新建摊位-摊位图片</div>
+    </header>
+    <div class="pages">
+        <div class="panel zeroPadding"  id="createStandPanel3">
+            <div>
+                <form>
+                    <a class="button smallButton" onclick="" >选择并上传图片</a>
+                    <input style="visibility: hidden;" id="file" name="file" type="file" accept="image/jpeg,image/png" >
+
+                </form>
+            </div>
+            <div id="standImageContainer">
+
+            </div>
+
+
+        </div>
+    </div>
 
 
 </div>
@@ -338,9 +366,10 @@
         toastObj  = $.afui.toast({
             message:"点击地图任意处以设定摊位位置",
             position:"bc",
-            autoClose:false, //have to click the message to close
+            autoClose:true, //have to click the message to close
             type:"success"
         });
+
     });
 
     $(".panel").on("panelload",function(){
@@ -350,7 +379,54 @@
                 toastObj = null;
             }
         }
+        if (currentPanel != "#createStandPanel1" && currentPanel != "#createStandPanel2" && currentPanel != "#createStandPanel3" ) {
+            var currentCreatedPoiMarker = null;
+            var currentCreatedPoint = null;
+            if (mapCr)
+            {
+                mapCr.clearOverlays();
+            }
+        }
+
     });
+
+    $("#file").on("change", function(evt){
+        inputSeed = (new Date()).getTime();
+        var files = evt.target.files;
+        for (var i = 0, f; f = files[i]; i++) {
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            fileExtension = f.name.substring(f.name.indexOf("."));
+
+            uploadSingleStandImage(function(e)
+            {
+                if (e) {
+                    var reader = new FileReader();
+                    // Closure to capture the file information.
+                    reader.onload = (function (theFile) {
+                        return function (e) {
+                            // Render thumbnail.
+                            var imageContentString = generateImagePreviewBox(e, event.target.result);
+
+
+                        };
+                    })(f);
+                    reader.readAsDataURL(f);
+                }
+                else
+                {
+                    //上传失败提示
+                }
+            });
+            // Read in the image file as a data URL.
+
+        }
+    });
+
+
 
     function searchSecLocation(mapObject)
     {
@@ -555,11 +631,14 @@
                 message: popupMessage,
                 cancelText: "取消",
                 cancelCallback: function () {
-
                 },
                 doneText: "确定",
                 doneCallback: function () {
-                addMarker(e,0,mapCr,iconLocate);
+                    if (currentCreatedPoiMarker) {
+                        mapCr.removeOverlay(currentCreatedPoiMarker);
+                    }
+                    currentCreatedPoiMarker = addMarker(e, 0, mapCr, iconLocate);
+                    currentCreatedPoint = e.lng + "," + e.lat;
                 },
                 cancelOnly: false
             });

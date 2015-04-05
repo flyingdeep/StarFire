@@ -35,7 +35,7 @@ var generateOSSAutoFilenameCode = function(comingSeed)
 
 
 
-function uploadSingleStandImage()
+function uploadSingleStandImage(callback)
 {
     var xhr = null;
     var fileNameCode = generateOSSAutoFilenameCode(inputSeed);
@@ -54,30 +54,32 @@ function uploadSingleStandImage()
         fd.append("Signature", OSSSignature);
         fd.append("file", document.getElementById('file').files[0]);
         xhr = new XMLHttpRequest();
-        //xhr.upload.addEventListener("progress", uploadProgress, false);
-        //  xhr.addEventListener("load", uploadComplete, false);
-        // xhr.onload = uploadComplete;
-        //  xhr.addEventListener("error", uploadFailed, false);
-
-
-        //xhr.addEventListener("abort", uploadCanceled, false);
         xhr.open("POST", OSS_DOMAIN);//修改成自己的接口
         xhr.onreadystatechange = function(e){
             //  alert("");
             if (xhr.readyState == 4)
             {
-                alert("complete");
+                if (xhr.status == 201) {
+                    callback(key);
+                }
+                else
+                {
+                    callback(null);
+                }
+                //alert("complete");
             }
 
 
         };
-        xhr.addEventListener("loaded", function(){
-
-            alert("");
-        }, false);
-
         xhr.send(fd);
 
     });
+
+    function generateImagePreviewBox(imgId, imgsrc)
+    {
+        var resultString = "<div style='float: left;position:relative;' id='"+ imgId +"'>";
+        resultString = resultString + "<img src='" + imgsrc + "' onload='' >";
+
+    }
 
 }

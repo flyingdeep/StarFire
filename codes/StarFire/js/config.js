@@ -46,6 +46,8 @@ var staticSearchResults = [];
 var staticOpenInfoWinFunEvents = [];
 var staticStandTypeHtmlString = null;
 var staticUserPreference = null;
+var currentCreatedPoiMarker = null;
+var currentCreatedPoint = null;
 var iconFood = null;
 var iconFoodFa = null;
 var iconToy = null;
@@ -55,3 +57,6 @@ var iconClothFa = null;
 var iconDigital = null;
 var iconDigitalFa = null;
 var iconLocate = null;
+
+var inputSeed = 0; //File name criterion seed for upload
+var fileExtension = "";  // for upload
