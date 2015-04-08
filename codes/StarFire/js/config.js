@@ -13,6 +13,8 @@ var OSS_ENCTYPE = "multipart/form-data";
 var OSS_BASE64_POLICY =  "";
 var OSS_SIGNATURE = "";
 
+var CR_DEFAULT_IMG_WIDTH = 320;
+var CR_DEFAULT_IMG_HEIGHT = 320;
 
 var ICON_FOOD  = new BMap.Icon("./images/target.png", new BMap.Size(21, 41), {
     offset: new BMap.Size(10, 41)
@@ -60,3 +62,4 @@ var iconLocate = null;
 
 var inputSeed = 0; //File name criterion seed for upload
 var fileExtension = "";  // for upload
+var toCreateImageCollection = [];//

@@ -74,12 +74,33 @@ function uploadSingleStandImage(callback)
         xhr.send(fd);
 
     });
-
-    function generateImagePreviewBox(imgId, imgsrc)
-    {
-        var resultString = "<div style='float: left;position:relative;' id='"+ imgId +"'>";
-        resultString = resultString + "<img src='" + imgsrc + "' onload='' >";
-
-    }
-
 }
+
+function generateImagePreviewBox(imgId, imgsrc)
+{
+    var resultString = "<div style='float: left;position:relative;' id='"+ imgId +"'>";
+    var tempImg = new Image();
+    tempImg.src = imgsrc;
+    // var quality =  50;
+    // var compressedSrc =  jic.compress(tempImg,quality).src;
+
+    if (tempImg.width * CR_DEFAULT_IMG_HEIGHT > tempImg.height * CR_DEFAULT_IMG_WIDTH)
+    {
+        if (tempImg.width> CR_DEFAULT_IMG_WIDTH)
+        {
+            tempImg.width = CR_DEFAULT_IMG_WIDTH
+        }
+    }
+    else
+    {
+        if (tempImg.height> CR_DEFAULT_IMG_HEIGHT)
+        {
+            tempImg.height = CR_DEFAULT_IMG_HEIGHT
+        }
+    }
+    resultString = resultString + "<img src='" + imgsrc + "' width='" + tempImg.width + "' height='" + tempImg.height + "' style='position:relative; left:0px; top:0px;'>";
+    resultString = resultString + "<img src='./images/target.png'  style='width:30px; position:absolute; right:0px; top:0px;' onclick='toCreateImageCollection[\"" +imgId;
+    resultString = resultString+ "\"]=1; $(\"#" + imgId +  "\").remove();' >";
+    resultString = resultString + "</div>";
+}
+

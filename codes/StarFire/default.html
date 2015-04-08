@@ -409,6 +409,7 @@
                     reader.onload = (function (theFile) {
                         return function (e) {
                             // Render thumbnail.
+                            toCreateImageCollection[e] = 0;
                             var imageContentString = generateImagePreviewBox(e, event.target.result);
 
 
