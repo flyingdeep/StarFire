@@ -183,8 +183,8 @@
 <!----------------------   创建摊位 - 2 --------------------->
 <div class="view" id="createStandView2">
     <header id="createStandHeader2">
-        <div style="float:left"><a onclick='transferToPanel("#createStandPanel1","slide");' data-transition="invoke"  class="icon left green button previous">上一步</a></div>
-        <div style="float:right"><a href="#" data-transition="slide" class="icon right green button next">下一步</a></div>
+        <div style="float:left"><a onclick='transferToPanel("#createStandPanel1","invoke");'   class="icon left green button previous">上一步</a></div>
+        <div style="float:right"><a onclick='transferToPanel("#createStandPanel3","slide");' class="icon right green button next">下一步</a></div>
         <div class="titleDiv">新建摊位-选择位置</div>
     </header>
     <div class="pages">
@@ -206,7 +206,7 @@
 <!----------------------   创建摊位 - 3 --------------------->
 <div class="view" id="createStandView3">
     <header id="createStandHeader3">
-        <div style="float:left"><a onclick='transferToPanel("#createStandPanel1","slide");' data-transition="invoke"  class="icon left green button previous">上一步</a></div>
+        <div style="float:left"><a onclick='transferToPanel("#createStandPanel2","invoke");' data-transition="invoke"  class="icon left green button previous">上一步</a></div>
         <div style="float:right"><a href="#" data-transition="slide" class="icon right green button next">完成</a></div>
         <div class="titleDiv">新建摊位-摊位图片</div>
     </header>
@@ -214,8 +214,8 @@
         <div class="panel zeroPadding"  id="createStandPanel3">
             <div>
                 <form>
-                    <a class="button smallButton" onclick="" >选择并上传图片</a>
-                    <input style="visibility: hidden;" id="file" name="file" type="file" accept="image/jpeg,image/png" >
+                    <a class="button smallButton" onclick="$('#file').click();" >选择并上传图片</a>
+                    <input style="visibility: visible;" id="file" name="file" type="file" accept="image/jpeg,image/png" >
 
                 </form>
             </div>
@@ -403,15 +403,18 @@
 
             uploadSingleStandImage(function(e)
             {
+
                 if (e) {
                     var reader = new FileReader();
+
                     // Closure to capture the file information.
                     reader.onload = (function (theFile) {
-                        return function (e) {
+                        return function (inputE) {
                             // Render thumbnail.
+                            alert("aaa");
                             toCreateImageCollection[e] = 0;
                             var imageContentString = generateImagePreviewBox(e, event.target.result);
-
+                            $("#standImageContainer").append(imageContentString);
 
                         };
                     })(f);
