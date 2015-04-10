@@ -102,5 +102,6 @@ function generateImagePreviewBox(imgId, imgsrc)
     resultString = resultString + "<img src='./images/target.png'  style='width:30px; position:absolute; right:0px; top:0px;' onclick='toCreateImageCollection[\"" +imgId;
     resultString = resultString+ "\"]=1; $(\"#" + imgId +  "\").remove();' >";
     resultString = resultString + "</div>";
+    return resultString;
 }
 

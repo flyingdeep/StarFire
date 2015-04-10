@@ -1,6 +1,7 @@
 var hint_Message =
 {
-   STAND_CREATION_SET_POINT_HINT : "点击地图任意处以设定摊位位置"
+   STAND_CREATION_SET_POINT_HINT : "点击地图任意处以设定摊位位置",
+    STAND_IMAGE_UPLOAD_SIZE_EXCEED : "所选图片大于2M，请重新选择。"
 
 };
 
