@@ -16,6 +16,8 @@ var OSS_SIGNATURE = "";
 var CR_DEFAULT_IMG_WIDTH = 320;
 var CR_DEFAULT_IMG_HEIGHT = 320;
 
+var UPLOAD_IMAGE_MAXSIZE = 2097152;
+
 var ICON_FOOD  = new BMap.Icon("./images/target.png", new BMap.Size(21, 41), {
     offset: new BMap.Size(10, 41)
 });
