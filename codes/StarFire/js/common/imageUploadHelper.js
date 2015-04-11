@@ -43,6 +43,7 @@ function uploadSingleStandImage(callback)
     var commonHelper = new commonHelperClass();
     commonHelper.getOSSSignatureAndPolicy(function(e)
     {
+
         var OSSBase64Policy = e.base64policy;
         var OSSSignature = e.signature;
         var fd = new FormData();
@@ -56,11 +57,11 @@ function uploadSingleStandImage(callback)
         xhr = new XMLHttpRequest();
         xhr.open("POST", OSS_DOMAIN);//修改成自己的接口
         xhr.onreadystatechange = function(e){
-            //  alert("");
+
             if (xhr.readyState == 4)
             {
                 if (xhr.status == 201) {
-                    callback(key);
+                    callback(fileNameCode);
                 }
                 else
                 {
@@ -76,30 +77,42 @@ function uploadSingleStandImage(callback)
     });
 }
 
-function generateImagePreviewBox(imgId, imgsrc)
+function generateImagePreviewBox(imgId, imgsrc, containerWidth)
 {
-    var resultString = "<div style='float: left;position:relative;' id='"+ imgId +"'>";
+
     var tempImg = new Image();
     tempImg.src = imgsrc;
     // var quality =  50;
     // var compressedSrc =  jic.compress(tempImg,quality).src;
-
-    if (tempImg.width * CR_DEFAULT_IMG_HEIGHT > tempImg.height * CR_DEFAULT_IMG_WIDTH)
+    var crDefaultHeight = CR_DEFAULT_IMG_HEIGHT_MAX;
+    var crDefaultWidth = CR_DEFAULT_IMG_WIDTH_MAX;
+    var defaultCanvasRatio = crDefaultHeight/crDefaultWidth;
+    if (crDefaultWidth>containerWidth/2)
     {
-        if (tempImg.width> CR_DEFAULT_IMG_WIDTH)
+        crDefaultWidth = containerWidth/2;
+        crDefaultHeight = crDefaultWidth * defaultCanvasRatio;
+    }
+
+    var imageRatio = tempImg.height/tempImg.width;
+    if (tempImg.width * crDefaultHeight > tempImg.height * crDefaultWidth)
+    {
+        if (tempImg.width> crDefaultWidth)
         {
-            tempImg.width = CR_DEFAULT_IMG_WIDTH
+            tempImg.width = crDefaultWidth;
+            tempImg.height = tempImg.width*imageRatio;
         }
     }
     else
     {
-        if (tempImg.height> CR_DEFAULT_IMG_HEIGHT)
+        if (tempImg.height> CR_DEFAULT_IMG_HEIGHT_MAX)
         {
-            tempImg.height = CR_DEFAULT_IMG_HEIGHT
+            tempImg.height = CR_DEFAULT_IMG_HEIGHT_MAX;
+            tempImg.width = tempImg.height/imageRatio;
         }
     }
-    resultString = resultString + "<img src='" + imgsrc + "' width='" + tempImg.width + "' height='" + tempImg.height + "' style='position:relative; left:0px; top:0px;'>";
-    resultString = resultString + "<img src='./images/target.png'  style='width:30px; position:absolute; right:0px; top:0px;' onclick='toCreateImageCollection[\"" +imgId;
+    var resultString = "<div style='float: left;text-align:center;line-height:" + crDefaultHeight + "px;position:relative;background-color:#ddffff;width:"+ crDefaultWidth +"px;height:" + crDefaultHeight + "px;' id='"+ imgId +"'>";
+    resultString = resultString + "<img src='" + imgsrc + "' width='" + tempImg.width + "' height='" + tempImg.height + "' style='position:relative; left:0px; top:0px;vertical-align:middle;'>";
+    resultString = resultString + "<img src='./images/cross_small.png'  style='width:30px; position:absolute; right:0px; top:0px;' onclick='toCreateImageCollection[\"" +imgId;
     resultString = resultString+ "\"]=1; $(\"#" + imgId +  "\").remove();' >";
     resultString = resultString + "</div>";
     return resultString;

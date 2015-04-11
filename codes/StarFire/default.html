@@ -215,9 +215,9 @@
         <div class="panel zeroPadding"  id="createStandPanel3">
             <div>
                 <form>
-                    <a class="button smallButton" onclick="$('#file').click();" >选择并上传图片</a>
-                    <input style="visibility: visible;" id="file" name="file" type="file" accept="image/jpeg,image/png" >
 
+                    <input style="visibility: visible;" id="file" name="file" type="file" accept="image/jpeg,image/png" >
+                    <a class="button smallButton" onclick="$('#file').click();" >选择并上传图片</a>
                 </form>
             </div>
             <div id="standImageContainer">
@@ -282,6 +282,7 @@
 </nav>
 
 <script type="text/javascript">
+
     $("#toggleTarget").on("change",function()
     {
         if ($("#toggleTarget").prop("checked"))
@@ -401,17 +402,18 @@
             }
 
             fileExtension = f.name.substring(f.name.indexOf("."));
-            if (f.size > UPLOAD_IMAGE_MAXSIZE)
-            {
-                $.afui.toast({
-                    message: hint_Message.STAND_IMAGE_UPLOAD_SIZE_EXCEED,
-                    position:"bc",
-                    autoClose:true, //have to click the message to close
-                    type:"success"
-                });
-                continue;
-            }
+//            if (f.size > UPLOAD_IMAGE_MAXSIZE)
+//            {
+//                $.afui.toast({
+//                    message: hint_Message.STAND_IMAGE_UPLOAD_SIZE_EXCEED,
+//                    position:"bc",
+//                    autoClose:true, //have to click the message to close
+//                    type:"success"
+//                });
+//                continue;
+//            }
             var tFile = f;
+
             uploadSingleStandImage(function(e)
             {
 
@@ -420,8 +422,10 @@
                     // Closure to capture the file information.
                     reader.onload = function () {
                             // Render thumbnail.
+
                             toCreateImageCollection[e] = 0;
-                            var imageContentString = generateImagePreviewBox(e, event.target.result);
+
+                            var imageContentString = generateImagePreviewBox(e, event.target.result,$("#standImageContainer").width());
 
                             $("#standImageContainer").append(imageContentString);
 
