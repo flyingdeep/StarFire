@@ -65,3 +65,42 @@ var iconLocate = null;
 var inputSeed = 0; //File name criterion seed for upload
 var fileExtension = "";  // for upload
 var toCreateImageCollection = [];//
+
+var createStandEntity = {
+  "standId":null,
+  "creatorType": null,
+  "creatorId":null,
+  "standName": null,
+  "standType" : null,
+  "standSubContent": null,
+  "description": null,
+  "position":null,
+  "images":[]
+};
+
+var userBasicInfoEntity = {
+    "userId": null,
+    "userName": null,
+    "displayName": null,
+    "userImage": null,
+    "userPreference": null,
+    "userType": null,
+    "email": null,
+    "cellNumber": null,
+    "webChat": null,
+    "qqNumber": null,
+    "provinceCityArea": null,
+    "createDate": null
+};
+
+var userPreference =
+{
+    "displayDistance": null,
+    "standType":null,
+    "displayClientCreatedStand":null,
+    "displayLinkedStandOnly": null
+};
+
+
+
+

@@ -66,6 +66,11 @@ var commonHelperClass = function()
 
     };
 
+    this.initialStandEntity = function()
+    {
+        createStandEntity
+    };
+
 
 
 
