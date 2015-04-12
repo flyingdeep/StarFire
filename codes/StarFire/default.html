@@ -402,21 +402,44 @@
             }
 
             fileExtension = f.name.substring(f.name.indexOf("."));
-//            if (f.size > UPLOAD_IMAGE_MAXSIZE)
-//            {
-//                $.afui.toast({
-//                    message: hint_Message.STAND_IMAGE_UPLOAD_SIZE_EXCEED,
-//                    position:"bc",
-//                    autoClose:true, //have to click the message to close
-//                    type:"success"
-//                });
-//                continue;
-//            }
+            if (f.size > UPLOAD_IMAGE_MAXSIZE)
+            {
+                $.afui.toast({
+                    message: hint_Message.STAND_IMAGE_UPLOAD_SIZE_EXCEED,
+                    position:"bc",
+                    autoClose:true, //have to click the message to close
+                    type:"success"
+                });
+                continue;
+            }
             var tFile = f;
+            var cancelUploadTag = false;
+            var innerContent = "<image src='./images/waiting.gif'>"
+            var uploadPopup = $.afui.popup({
+                title: normal_Text.STAND_UPLOADING,
+                message: innerContent,
+                cancelText: normal_Text.NO,
+                cancelCallback: function () {
+                    cancelUploadTag = true;
+                    this.hide();
+                    $.afui.toast({
+                        message: hint_Message.STAND_IMAGE_UPLOAD_CANCEL,
+                        position:"bc",
+                        autoClose:true, //have to click the message to close
+                        type:"warning"
+                    });
+                },
+                cancelOnly: true
+            });
+
 
             uploadSingleStandImage(function(e)
             {
-
+                uploadPopup.hide();
+                if (cancelUploadTag)
+                {
+                    return;
+                }
                 if (e) {
                     var reader = new FileReader();
                     // Closure to capture the file information.
@@ -435,7 +458,12 @@
                 }
                 else
                 {
-                    //上传失败提示
+                    $.afui.toast({
+                        message: hint_Message.STAND_IMAGE_UPLOAD_FAIL,
+                        position:"bc",
+                        autoClose:true, //have to click the message to close
+                        type:"error"
+                    });
                 }
             });
             // Read in the image file as a data URL.
