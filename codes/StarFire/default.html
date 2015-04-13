@@ -291,32 +291,15 @@
 <script type="text/javascript">
 
     $("#toggleTarget").on("change",eventHandlerManager.toggleTarget_Sharp_Change);
-    $("#searchForm").on("submit",function()
-    {
-        if ($("#toggleTarget").prop("checked"))
-        {
-            searchStand(map);
-        }
-        else
-        {
-            searchLocation(map);
-        }
-        return false;
-    });
-
-    $("#map2SearchForm").on("submit",function()
-    {
-            searchSecLocation(mapCr);
-
-        return false;
-    });
+    $("#searchForm").on("submit",eventHandlerManager.searchForm_Sharp_Submit);
+    $("#map2SearchForm").on("submit",eventHandlerManager.map2SearchForm_Sharp_Submit);
 
     $("#filterPanel").on("swipeRight", function(){
         $.afui.drawer.hide("#right_Filter","right");
     });
 
 
-    var toastObj = null;
+
     $("#createStandPanel1").on("panelbeforeload",function(){
         commonHelper.initialStandEntity();
         if ( $("#standTypeDiv").html() == "") {
@@ -473,7 +456,7 @@
     function searchSecLocation(mapObject)
     {
         $("#resultList").html("");
-        $.afui.loadContent("#searchResultListPanel",false,false,"pop");
+        transferToPanel("#searchResultListPanel","pop");
         var searchString = $("#searchDivInner input").val();
         $("#searchDivResultInner input").val(searchString);
         $("#searchResultListForm").on("submit",function()
@@ -491,7 +474,7 @@
     function searchLocation(mapObject)
     {
         $("#resultList").html("");
-        $.afui.loadContent("#searchResultListPanel",false,false,"pop");
+        transferToPanel("#searchResultListPanel","pop");
         var searchString = $("#searchInput").val();
         $("#searchDivResultInner input").val(searchString);
         $("#searchResultListForm").on("submit",function()

@@ -24,4 +24,12 @@ var eventHandlerManagerClass = function()
         return false;
     };
 
+    this.map2SearchForm_Sharp_Submit = function()
+    {
+        searchSecLocation(mapCr);
+        return false;
+
+
+    };
+
 };

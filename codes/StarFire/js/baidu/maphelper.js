@@ -189,7 +189,7 @@ function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listConta
     {
         mapObjStr = "map";
     }
-    else (mapObj == mapCr)
+    else if (mapObj == mapCr)
     {
         mapObjStr = "mapCr";
     }
@@ -241,7 +241,7 @@ function searchPoiNearbyPosition(location,mapObj, searchString,containerJObj)
     {
         mapObjStr = "map";
     }
-    else (mapObj == mapCr)
+    else if (mapObj == mapCr)
     {
         mapObjStr = "mapCr";
     }
@@ -277,7 +277,7 @@ function standListTapEvent(i,mapObj)
     if (mapObj == map) {
         transferToPanel("#mapPanel", "pop");
     }
-    else if (mapObj = mapCr)
+    else if (mapObj == mapCr)
     {
         transferToPanel("#createStandPanel2","pop");
     }
@@ -293,7 +293,7 @@ function searchLocalPosition(targetString, mapObj,containerJObj) {
     {
         mapObjStr = "map";
     }
-    else (mapObj == mapCr)
+    else if (mapObj == mapCr)
     {
         mapObjStr = "mapCr";
     }
@@ -322,10 +322,11 @@ function searchLocalPosition(targetString, mapObj,containerJObj) {
 
 function resultItemStandTapEvent(i,mapObj)
 {
+
     if (mapObj == map) {
         transferToPanel("#mapPanel", "pop");
     }
-    else if (mapObj = mapCr)
+    else if (mapObj == mapCr)
     {
         transferToPanel("#createStandPanel2","pop");
     }
@@ -343,7 +344,7 @@ function resultItemTapEvent(i,mapObj)
     if (mapObj == map) {
         transferToPanel("#mapPanel", "pop");
     }
-    else if (mapObj = mapCr)
+    else if (mapObj == mapCr)
     {
         transferToPanel("#createStandPanel2","pop");
     }
