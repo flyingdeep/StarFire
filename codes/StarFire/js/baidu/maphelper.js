@@ -252,6 +252,7 @@ function searchPoiNearbyPosition(location,mapObj, searchString,containerJObj)
     {
         if (e.status == "success" &&  e.message == "true")
         {
+
             var result =e.data;
             var items = result.contents;
             staticSearchResults = items;
@@ -260,7 +261,7 @@ function searchPoiNearbyPosition(location,mapObj, searchString,containerJObj)
             {
                 var locationId = "loc" + i;
                 innerHtmlString = innerHtmlString + "<li>";
-                innerHtmlString = innerHtmlString + "<a id='" + locationId +"' onclick='resultItemStandTapEvent("+ i + "," + + ")'>" + items[i].title.replace(new RegExp(searchString, "g"), '<b>' + searchString+ '</b>') + "</a>";
+                innerHtmlString = innerHtmlString + "<a id='" + locationId +"' onclick='resultItemStandTapEvent("+ i + "," + mapObjStr + ")'>" + items[i].title.replace(new RegExp(searchString, "g"), '<b>' + searchString+ '</b>') + "</a>";
                 innerHtmlString = innerHtmlString + "</li>";
             }
             innerHtmlString = innerHtmlString + "</ul>";

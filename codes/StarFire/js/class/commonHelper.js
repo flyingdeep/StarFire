@@ -68,7 +68,16 @@ var commonHelperClass = function()
 
     this.initialStandEntity = function()
     {
-        createStandEntity
+        createStandEntity.standId = null;
+        createStandEntity.creatorType = null;
+        createStandEntity.creatorId = null;
+        createStandEntity.standName = null;
+        createStandEntity.standType = null;
+        createStandEntity.standSubContent = null;
+        createStandEntity.description = null;
+        createStandEntity.position = null;
+        createStandEntity.images = [];
+
     };
 
 

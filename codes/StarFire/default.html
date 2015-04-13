@@ -19,10 +19,15 @@
 
     <script type="text/javascript" src="./js/baidu/initial.js"></script>
     <script type="text/javascript" src="./js/config.js"></script>
+    <script type="text/javascript" src="./js/globalVariables.js"></script>
     <script type="text/javascript" src="./js/messages.js"></script>
+
     <script type="text/javascript" src="./js/class/remoteProxy.js"></script>
     <script type="text/javascript" src="./js/class/processFacade.js"></script>
     <script type="text/javascript" src="./js/class/commonHelper.js"></script>
+    <script type="text/javascript" src="./js/class/localStorageHelper.js"></script>
+    <script type="text/javascript" src="./js/class/eventHandlerManager.js"></script>
+    <script type="text/javascript" src="./js/class/phoneGapHelper.js"></script>
     <script type="text/javascript" src="./js/baidu/lbscloud.js"></script>
     <script type="text/javascript" src="./js/baidu/maphelper.js"></script>
     <script type="text/javascript" src="./js/common/imageUploadHelper.js"></script>
@@ -50,6 +55,8 @@
         $.afui.loadDefaultHash=true;
         $.afui.autoLaunch=false;
         var commonHelper = new commonHelperClass();
+        var localStorageHelper = new localStorageHelperClass();
+        var eventHandlerManager = new eventHandlerManagerClass();
         $(document).ready(function(){
 
 
@@ -101,7 +108,7 @@
               <div id="bottomBar">
               <div id="transparentShader"></div>
                   <div class="button-grouped">
-                 <a  onclick='initialStandEntity();transferToPanel("#createStandPanel1","pop");' class="button  icon add" >新增摊位</a>
+                 <a  onclick='commonHelper.initialStandEntity();transferToPanel("#createStandPanel1","pop");' class="button  icon add" >新增摊位</a>
                       <a href="#" class="button  icon folder">我的摊位</a>
                       <a href="#" class="button  icon heart">我的收藏</a>
                       </div>
@@ -283,17 +290,7 @@
 
 <script type="text/javascript">
 
-    $("#toggleTarget").on("change",function()
-    {
-        if ($("#toggleTarget").prop("checked"))
-        {
-            $("#searchInput").prop("placeholder","搜索摊位");
-        }
-        else
-        {
-            $("#searchInput").prop("placeholder","搜索地址");
-        }
-    });
+    $("#toggleTarget").on("change",eventHandlerManager.toggleTarget_Sharp_Change);
     $("#searchForm").on("submit",function()
     {
         if ($("#toggleTarget").prop("checked"))
@@ -321,7 +318,7 @@
 
     var toastObj = null;
     $("#createStandPanel1").on("panelbeforeload",function(){
-
+        commonHelper.initialStandEntity();
         if ( $("#standTypeDiv").html() == "") {
             if (!staticStandTypeHtmlString) {
                 commonHelper.constructStandTypeHTML(function (e) {
@@ -604,15 +601,19 @@
 
         var init_city = commonHelper.getUserBelongedLocation();
         var gpsPosition = fetchCurrentGPSPosition();
-        if (localStorage.position) {
-
-            currentGPSPosition = localStorage.position;
+//        if (localStorage.position) {
+//
+//            currentGPSPosition = localStorage.position;
+//        }
+        if (localStorageHelper.commonVariables.majorMapCurrentPosition())
+        {
+            currentGPSPosition = localStorageHelper.commonVariables.majorMapCurrentPosition();
         }
-
         if (gpsPosition)
         {
             currentGPSPosition = gpsPosition;
-            localStorage.position = currentGPSPosition;
+            //localStorage.position = currentGPSPosition;
+            localStorageHelper.commonVariables.majorMapCurrentPosition(currentGPSPosition);
             mapObject.centerAndZoom(transStringToPoint(currentGPSPosition), CONST_DISPLAY_LEVEL);
         }
         else if (currentGPSPosition)

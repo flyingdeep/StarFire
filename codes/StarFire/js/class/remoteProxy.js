@@ -1,6 +1,7 @@
 var remoteClientClass = function()
 {
-    var REST_SERVER_DOMAIN = "http://192.168.31.139";
+//    var REST_SERVER_DOMAIN = "http://192.168.31.139";
+    var REST_SERVER_DOMAIN = "http://localhost";
     var APP_URI = "zhaotantou";
     var PORT = "8080";
     var BASE_ROUTER = REST_SERVER_DOMAIN + ":" + PORT + "/" + APP_URI + "/";
