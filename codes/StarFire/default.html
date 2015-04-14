@@ -302,13 +302,14 @@
 
     function initialCreateStandFieldEvent()
     {
-        $("#standName").val();
+        $("#standName").val("");
 
-        $("input[name='crStandType_Radio']:checked").val();
+       // $("input[name='crStandType_Radio']:checked").val();
+        $("#standTypeDiv").children(":radio").prop("checked",false);
 
-        $("#subStandType").val();
+        $("#subStandType").val("");
 
-        $("#standDescription").val();
+        $("#standDescription").val("");
 
     }
 
