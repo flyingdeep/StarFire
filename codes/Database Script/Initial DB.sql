@@ -48,8 +48,8 @@ CREATE TABLE `stand_info` (
   `stand_id` int(11) NOT NULL,
   `creator_type` char(1) NOT NULL,
   `stand_type` int(11) NOT NULL,
-  `stand_name` varchar(50) DEFAULT NULL,
-  `type_detail_description` varchar(50) DEFAULT NULL,
+  `stand_name` varchar(20) DEFAULT NULL,
+  `type_detail_description` varchar(100) DEFAULT NULL,
   `description` varchar(2000) DEFAULT NULL,
   `create_user_id` int(11) NOT NULL,
   `create_date` datetime NOT NULL,
@@ -64,6 +64,7 @@ CREATE TABLE `stand_info` (
   KEY `ISDELETEDINDEX` (`isdeleted`),
   KEY `STANDIDINDEX` (`isdeleted`,`stand_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `stand_owner_message` (
   `stand_owner_message_id` int(11) NOT NULL AUTO_INCREMENT,

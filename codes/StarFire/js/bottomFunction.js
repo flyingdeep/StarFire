@@ -16,24 +16,45 @@ function initialCreateStandFieldEvent()
 
 function fieldValidationCreateStand()
 {
-    var standNameValue = $("#standName").val();
+
     var result = true;
     var messageContent = "";
-    if (!standNameValue || commonHelper.trim(standNameValue).length==0 ||commonHelper.trim(standNameValue).length>20)
+    if (!createStandEntity.standName || commonHelper.trim(createStandEntity.standName).length==0)
     {
-
+        messageContent = messageContent + hint_Message.CREATE_STAND_STAND_NAME_LENGTH_ERROR + "<br />";
+        result = false;
+    }
+    if (!REG_EXPRESSION_STAND_NAME.test(createStandEntity.standName))
+    {
+        messageContent = messageContent + hint_Message.CREATE_STAND_STAND_NAME_CHARACTER_ERROR + "<br />";
+        result = false;
+    }
+    if (!createStandEntity.standType)
+    {
+        messageContent = messageContent + hint_Message.CREATE_STAND_STAND_TYPE_NO_SELECTED_ERROR + "<br />";
+        result = false;
+    }
+    if (!createStandEntity.standSubContent || commonHelper.trim(createStandEntity.standSubContent))
+    {
+        messageContent = messageContent + hint_Message.CREATE_STAND_SUB_STAND_TYPE_NO_FILLED_ERROR + "<br />";
+        result = false;
+    }
+    if (!REG_EXPRESSION_STAND_SUB_TYPE_NAME.test(createStandEntity.standSubContent))
+    {
+        messageContent = messageContent + hint_Message.CREATE_STAND_SUB_STAND_TYPE_CHARACTER_ERROR + "<br />";
         result = false;
     }
 
 
     if (!result)
     {
-        $.afui.toast({
+        var tempToast  = $.afui.toast({
             message: messageContent,
             position:"bc",
             autoClose:true, //have to click the message to close
             type:"error"
         });
+        globalToasts.push(tempToast);
     }
     return result;
 }

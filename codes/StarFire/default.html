@@ -165,7 +165,7 @@
 <div class="view" id="createStandView1">
     <header id="createStandHeader1">
         <div style="float:left"><a onclick='transferToPanel("#mapPanel","up");'  class="icon close green button previous">放弃</a></div>
-        <div style="float:right"><a onclick='transferToPanel("#createStandPanel2","slide");' class="icon right green button next">下一步</a></div>
+        <div style="float:right"><a onclick='if(!fieldValidationCreateStand()){return;}transferToPanel("#createStandPanel2","slide");' class="icon right green button next">下一步</a></div>
         <div class="titleDiv">新建摊位-基本信息</div>
     </header>
     <div class="pages">
@@ -173,14 +173,14 @@
 
             <form>
                     <div>摊位名:</div><br>
-                    <div><input id="standName" type="text" placeholder="不超过十个字"></div>
+                    <div><input id="standName" type="text" placeholder="不超过十个字" maxlength=10 ></div>
                     <div>类型:</div>
                 <div id="standTypeDiv" class="grid"></div><br>
                     <div>子分类:</div><br>
-                <div><input id="subStandType" type="text" placeholder="多子分类以逗号隔开。 如： 蛋饼，葱油饼，臭豆腐
+                <div><input id="subStandType" type="text" maxlength=50 placeholder="多子分类以逗号隔开。 如： 蛋饼，葱油饼，臭豆腐
 "></div>
                     <div>描述:</div><br>
-                <div><textarea id="standDescription" rows="6" placeholder="描述摊位特色，来由或任何细节信息，不超过200字
+                <div><textarea id="standDescription" rows="6" maxlength=200 placeholder="描述摊位特色，来由或任何细节信息，不超过200字
 "></textarea></div>
             </form>
         </div>
@@ -287,7 +287,7 @@
     </div>
 </div>
 </nav>
-
+<script type="text/javascript" src="./js/bottomFunction.js"></script>
 <script type="text/javascript">
 
     $("#toggleTarget").on("change",eventHandlerManager.toggleTarget_Sharp_Change);
@@ -307,7 +307,7 @@
     var Json_tap_position; //finger tap position return Json
     var Json_decode_position2address; //get address from position
     var current_map_level;
-    initialMapParameter();
+    initialMapParameter();;
     //map.centerAndZoom(new BMap.Point(CONST_POINT_X, CONST_POINT_Y), CONST_DISPLAY_LEVEL);
    // initMapLocation(map);
     map.centerAndZoom("上海");
@@ -321,6 +321,5 @@
 
 </script>
 
-<script type="text/javascript" src="./js/bottomFunction.js"></script>
 </body>
 </html>
