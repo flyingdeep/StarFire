@@ -38,6 +38,7 @@ var eventHandlerManagerClass = function()
 
     this.createStandPanel1_Sharp_PanelBeforeLoad = function(){
         commonHelper.initialStandEntity();
+        initialCreateStandFieldEvent();
         if ( $("#standTypeDiv").html() == "") {
             if (!staticStandTypeHtmlString) {
                 commonHelper.constructStandTypeHTML(function (e) {
@@ -80,22 +81,23 @@ var eventHandlerManagerClass = function()
             mapCr.centerAndZoom(init_city);
             //initMapLocation(mapCr);
         }
-        toastObj  = $.afui.toast({
+        var tempToast  = $.afui.toast({
             message: hint_Message.STAND_CREATION_SET_POINT_HINT,
             position:"bc",
             autoClose:true, //have to click the message to close
             type:"success"
         });
+        globalToasts.push(tempToast);
 
     };
 
     this.panel_Dot_PanelLoad = function(){
-        if (currentPanel != "#createStandPanel2") {
-            if (toastObj) {
-                toastObj.hide();
-                toastObj = null;
-            }
+
+        while(globalToasts.length!= 0)
+        {
+            globalToasts.pop().hide();
         }
+
         if (currentPanel != "#createStandPanel1" && currentPanel != "#createStandPanel2" && currentPanel != "#createStandPanel3" ) {
             var currentCreatedPoiMarker = null;
             var currentCreatedPoint = null;
@@ -119,12 +121,13 @@ var eventHandlerManagerClass = function()
             fileExtension = f.name.substring(f.name.indexOf("."));
             if (f.size > UPLOAD_IMAGE_MAXSIZE)
             {
-                $.afui.toast({
+                var tempToast = $.afui.toast({
                     message: hint_Message.STAND_IMAGE_UPLOAD_SIZE_EXCEED,
                     position:"bc",
                     autoClose:true, //have to click the message to close
                     type:"success"
                 });
+                globalToasts.push(tempToast);
                 continue;
             }
             var tFile = f;
@@ -137,12 +140,13 @@ var eventHandlerManagerClass = function()
                 cancelCallback: function () {
                     cancelUploadTag = true;
                     this.hide();
-                    $.afui.toast({
+                    var tempToast = $.afui.toast({
                         message: hint_Message.STAND_IMAGE_UPLOAD_CANCEL,
                         position:"bc",
                         autoClose:true, //have to click the message to close
                         type:"warning"
                     });
+                    globalToasts.push(tempToast);
                 },
                 cancelOnly: true
             });
@@ -173,12 +177,13 @@ var eventHandlerManagerClass = function()
                 }
                 else
                 {
-                    $.afui.toast({
+                    var tempToast = $.afui.toast({
                         message: hint_Message.STAND_IMAGE_UPLOAD_FAIL,
                         position:"bc",
                         autoClose:true, //have to click the message to close
                         type:"error"
                     });
+                    globalToasts.push(tempToast);
                 }
             });
             // Read in the image file as a data URL.
@@ -242,6 +247,26 @@ var eventHandlerManagerClass = function()
         popupCreateStandPointWindow(pt);
 
 
+    };
+
+    this.standName_Sharp_Change = function()
+    {
+        createStandEntity.standName = $("#standName").val();
+    };
+
+    this.standTypeDiv_Sharp_Change = function()
+    {
+        createStandEntity.standType = $("input[name='crStandType_Radio']:checked").val();
+    };
+
+    this.subStandType_Sharp_Change = function()
+    {
+        createStandEntity.standSubContent = $("#subStandType").val();
+    };
+
+    this.standDescription_Sharp_Change = function()
+    {
+        createStandEntity.description = $("#standDescription").val();
     };
 
 

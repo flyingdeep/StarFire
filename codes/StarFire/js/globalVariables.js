@@ -29,7 +29,8 @@ var iconDigital = null;
 var iconDigitalFa = null;
 var iconLocate = null;
 
-var toastObj = null;
+var globalToasts = [];
+
 var inputSeed = 0; //File name criterion seed for upload
 var fileExtension = "";  // for upload
 var toCreateImageCollection = [];//
