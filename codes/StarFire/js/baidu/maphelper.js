@@ -156,17 +156,12 @@ function createJsonStandInfo()
 {
     var resultJson =
     {
-        "id":null,
-        "stand_id":null,
         "title":null,
         "address":null,
         "postion_x":null,
         "postion_y":null,
         "stand_image_tip":null,
-        "update_date":null,
-        "description":null,
-        "mark":null,
-        "realtime_location":null
+        "description":null
     };
 
 }

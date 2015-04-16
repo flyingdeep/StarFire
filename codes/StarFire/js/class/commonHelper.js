@@ -83,4 +83,29 @@ var commonHelperClass = function()
     this.trim = function(str){
          return str.replace(/(^\s*)|(\s*$)/g, "");
      };
+
+    this.createStandPoiDb = function(callback, address, creatorType, standType, standName, typeDetailDescription, description, createUserId, position, majorPic)
+    {
+
+/*        "title":standName,
+        "address":address,
+        "postion_x":null,
+        "postion_y":null,
+        "stand_image_tip":null,
+        "description":null*/
+
+        var baiduLBS = new baiduLBSClass(serverProxyClass);
+        var standInfo = createJsonStandInfo();
+        standInfo.title = standName;
+        standInfo.address = address;
+        standInfo.stand_image_tip = majorPic;
+
+       // baiduLBS.createLbsPosition(callback,)
+
+
+    };
+
+
+
+
 };

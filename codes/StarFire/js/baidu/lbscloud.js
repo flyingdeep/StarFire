@@ -164,8 +164,6 @@ var baiduLBSClass = function(authClass) {
             baseAuth.getAuthExternal(
                 function (token) {
                     if (token) {
-
-                        baseAuth.reformJsonObjectExternal(Json_stand_position_info);
                         deleteLbsPositionBase(callback, token, id);
                     }
                     else {
