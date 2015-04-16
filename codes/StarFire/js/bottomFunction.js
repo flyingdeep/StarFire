@@ -14,6 +14,38 @@ function initialCreateStandFieldEvent()
     $("#standDescription").on("change",eventHandlerManager.standDescription_Sharp_Change);
 }
 
+function createUserStand()
+{
+    var images = [];
+    for (var imageItem in createStandEntity.images)
+    {
+        if (createStandEntity.images[imageItem] != 0)
+        {
+            images.push(imageItem);
+        }
+    }
+
+
+
+}
+
+function standLocationNoneSetCheck()
+{
+    //
+    if (!createStandEntity.position)
+    {
+        var tempToast  = $.afui.toast({
+            message: hint_Message.CREATE_STAND_SET_MAP_POINT_NONE_ERROR,
+            position:"bc",
+            autoClose:true, //have to click the message to close
+            type:"error"
+        });
+        globalToasts.push(tempToast);
+        return false;
+    }
+    return true;
+}
+
 function fieldValidationCreateStand()
 {
 
@@ -24,7 +56,7 @@ function fieldValidationCreateStand()
         messageContent = messageContent + hint_Message.CREATE_STAND_STAND_NAME_LENGTH_ERROR + "<br />";
         result = false;
     }
-    if (!REG_EXPRESSION_STAND_NAME.test(createStandEntity.standName))
+    else if (!REG_EXPRESSION_STAND_NAME.test(createStandEntity.standName))
     {
         messageContent = messageContent + hint_Message.CREATE_STAND_STAND_NAME_CHARACTER_ERROR + "<br />";
         result = false;
@@ -39,11 +71,12 @@ function fieldValidationCreateStand()
         messageContent = messageContent + hint_Message.CREATE_STAND_SUB_STAND_TYPE_NO_FILLED_ERROR + "<br />";
         result = false;
     }
-    if (!REG_EXPRESSION_STAND_SUB_TYPE_NAME.test(createStandEntity.standSubContent))
+    else if (!REG_EXPRESSION_STAND_SUB_TYPE_NAME.test(createStandEntity.standSubContent))
     {
         messageContent = messageContent + hint_Message.CREATE_STAND_SUB_STAND_TYPE_CHARACTER_ERROR + "<br />";
         result = false;
     }
+
 
 
     if (!result)
@@ -202,7 +235,7 @@ function popupCreateStandPointWindow(e)
                     mapCr.removeOverlay(currentCreatedPoiMarker);
                 }
                 currentCreatedPoiMarker = addMarker(e, 0, mapCr, iconLocate);
-                currentCreatedPoint = e.lng + "," + e.lat;
+                createStandEntity.position = e.lng + "," + e.lat;
             },
             cancelOnly: false
         });

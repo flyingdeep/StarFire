@@ -165,7 +165,7 @@ var eventHandlerManagerClass = function()
                     reader.onload = function () {
                         // Render thumbnail.
 
-                        toCreateImageCollection[e] = 0;
+                        createStandEntity.images[e] = 1;
 
                         var imageContentString = generateImagePreviewBox(e, event.target.result,$("#standImageContainer").width());
 

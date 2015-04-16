@@ -18,7 +18,6 @@ var staticOpenInfoWinFunEvents = [];
 var staticStandTypeHtmlString = null;
 var staticUserPreference = null;
 var currentCreatedPoiMarker = null;
-var currentCreatedPoint = null;
 var iconFood = null;
 var iconFoodFa = null;
 var iconToy = null;

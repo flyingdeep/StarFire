@@ -214,6 +214,85 @@ exports.changeRealTimeLocationStatus = function(callback, standInfo)
     }
 };
 
+exports.addStandImages = function(callback, standImages)
+{
+    var iterateProcessAllImages = function(callback, images, standId){
+        if (images.length>0)
+        {
+            var singleImage = images.pop();
+            standInfoOperation.standAddPic(function(err,imageId)
+            {
+                if (!err)
+                {
+                    iterateProcessAllImages(callback,images, standId);
+
+                }
+                else
+                {
+                    callback(err,false);
+                }
+
+            },singleImage);
+        }
+        else
+        {
+            callback(null, standId);
+
+        }
+
+    };
+
+    if (standImages && standImages.length > 0)
+    {
+
+        iterateProcessAllImages(callback,standImages,standImages[0].stand_id);
+
+    }
+    else
+    {
+        callback(new Error(INPUT_PARA_ERROR),false);
+
+    }
+
+};
+
+exports.removeStandImages = function(callback, standImages)
+{
+    var iterateProcessAllImages = function(callback, images, standId){
+        if (images.length>0)
+        {
+            var singleImage = images.pop();
+            standInfoOperation.standRemovePicLogic(function(err,imageId)
+            {
+                if (!err)
+                {
+                    iterateProcessAllImages(callback,images, standId);
+
+                }
+                else
+                {
+                    callback(err,false);
+                }
+
+            },singleImage);
+        }
+        else
+        {
+            callback(null, standId);
+        }
+
+    };
+    if (standImages && standImages.length > 0)
+    {
+        iterateProcessAllImages(callback,standImages,standImages[0].stand_id);
+    }
+    else
+    {
+        callback(new Error(INPUT_PARA_ERROR),false);
+    }
+
+};
+
 exports.getStandMarkCommentsExist = function(callback, standId, username)
 {
     standCustomerMarkOperation.checkMarkExistByStandUser(callback, standId, username);

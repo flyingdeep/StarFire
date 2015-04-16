@@ -11,6 +11,8 @@ var remoteClientClass = function()
     var ROUTER_UPDATEUSERPREFERENCE = BASE_ROUTER + "UpdateUserPreference";
     var ROUTER_CREATESTAND = BASE_ROUTER + "CreateStand";
     var ROUTER_UPDATESTAND = BASE_ROUTER + "UpdateStand";
+    var ROUTER_ADDSTANDIMAGES = BASE_ROUTER + "AddStandImages";
+    var ROUTER_REMOVESTANDIMAGES = BASE_ROUTER + "RemoveStandImages";
     var ROUTER_CHANGEREALTIMELOCATIONSTATUS = BASE_ROUTER + "ChangeRealTimeLocationStatus";
     var ROUTER_GETSTANDCUSTOMERMARKCOMMENTS = BASE_ROUTER + "GetStandCustomerMarkComments";
     var ROUTER_CREATESTANDMARKCOMMENTS = BASE_ROUTER + "CreateStandMarkComments";
@@ -143,6 +145,50 @@ var remoteClientClass = function()
             "inputParameter": JSON.stringify(standInfoJson)
         };
         var targetUrl = ROUTER_UPDATESTAND + BASE_VERSION;
+        jQuery.post(targetUrl, inputJson,
+            function(data,status)
+            {
+                if (status == "success")
+                {
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
+                }
+            }
+        );
+    };
+
+    this.addStandImagesBase = function(callback, token, standImagesJson)
+    {
+        var inputJson = {
+            "token":token,
+            "inputParameter": JSON.stringify(standImagesJson)
+        };
+        var targetUrl = ROUTER_ADDSTANDIMAGES + BASE_VERSION;
+        jQuery.post(targetUrl, inputJson,
+            function(data,status)
+            {
+                if (status == "success")
+                {
+                    callback(data);
+                }
+                else
+                {
+                    callback(null);
+                }
+            }
+        );
+    };
+
+    this.removeStandImagesBase = function(callback, token, standImagesJson)
+    {
+        var inputJson = {
+            "token":token,
+            "inputParameter": JSON.stringify(standImagesJson)
+        };
+        var targetUrl = ROUTER_REMOVESTANDIMAGES + BASE_VERSION;
         jQuery.post(targetUrl, inputJson,
             function(data,status)
             {
@@ -695,6 +741,60 @@ var serverProxyClass = function(username,password)
         );
 
     };
+
+    this.addStandImages = function(callback, standImages)
+    {
+        var result = null;
+        getAuth(function(token)
+            {
+                if (token)
+                {
+                    remoteClient.addStandImagesBase(function(resultJson)
+                        {
+                            if (resultJson && resultJson.status == "true")
+                            {
+                                result = resultJson.detail;
+                            }
+                            callback(result);
+                        },
+                        token,standImages);
+                }
+                else
+                {
+                    callback(null);
+                }
+            }
+        );
+
+    };
+
+    this.removeStandImages = function(callback, standImages)
+    {
+        var result = null;
+        getAuth(function(token)
+            {
+                if (token)
+                {
+                    remoteClient.removeStandImagesBase(function(resultJson)
+                        {
+                            if (resultJson && resultJson.status == "true")
+                            {
+                                result = resultJson.detail;
+                            }
+                            callback(result);
+                        },
+                        token,standImages);
+                }
+                else
+                {
+                    callback(null);
+                }
+            }
+        );
+
+    };
+
+
     this.changeRealTimeLocationStatus = function(callback,standId,realTimeLocationActive)
     {
         var result = null;

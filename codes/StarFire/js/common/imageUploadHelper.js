@@ -112,8 +112,8 @@ function generateImagePreviewBox(imgId, imgsrc, containerWidth)
     }
     var resultString = "<div style='float: left;text-align:center;line-height:" + crDefaultHeight + "px;position:relative;background-color:#ddffff;width:"+ crDefaultWidth +"px;height:" + crDefaultHeight + "px;' id='"+ imgId +"'>";
     resultString = resultString + "<img src='" + imgsrc + "' width='" + tempImg.width + "' height='" + tempImg.height + "' style='position:relative; left:0px; top:0px;vertical-align:middle;'>";
-    resultString = resultString + "<img src='./images/cross_small.png'  style='width:30px; position:absolute; right:0px; top:0px;' onclick='toCreateImageCollection[\"" +imgId;
-    resultString = resultString+ "\"]=1; $(\"#" + imgId +  "\").remove();' >";
+    resultString = resultString + "<img src='./images/cross_small.png'  style='width:30px; position:absolute; right:0px; top:0px;' onclick='createStandEntity.images[\"" +imgId;
+    resultString = resultString+ "\"]=0; $(\"#" + imgId +  "\").remove();' >";
     resultString = resultString + "</div>";
     return resultString;
 }

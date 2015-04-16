@@ -23,6 +23,8 @@ var ROUTER_UPDATEUSER = BASE_ROUTER + "UpdateUser";
 var ROUTER_UPDATEUSERPREFERENCE = BASE_ROUTER + "UpdateUserPreference";
 var ROUTER_CREATESTAND = BASE_ROUTER + "CreateStand";
 var ROUTER_UPDATESTAND = BASE_ROUTER + "UpdateStand";
+var ROUTER_ADDSTANDIMAGES = BASE_ROUTER + "AddStandImages";
+var ROUTER_REMOVESTANDIMAGES = BASE_ROUTER + "RemoveStandImages";
 var ROUTER_CHANGEREALTIMELOCATIONSTATUS = BASE_ROUTER + "ChangeRealTimeLocationStatus";
 var ROUTER_GETSTANDCUSTOMERMARKCOMMENTS = BASE_ROUTER + "GetStandCustomerMarkComments";
 var ROUTER_CREATESTANDMARKCOMMENTS = BASE_ROUTER + "CreateStandMarkComments";
@@ -470,6 +472,123 @@ var updateStandCallbackPost = function(req, res, next)
     serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
         serviceOperation.updateStand,callback,requestInputParameter );
 };
+
+var addStandImagesCallbackPost = function(req, res, next)
+{
+    var paraToken = "token";
+    var paraInputParameter = "inputParameter";
+    var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
+    var result = new commonResult();
+    var callback = function(exception, e)
+    {
+
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+        if (e && e!= -1)
+        {
+            result.status = "true";
+            result.detail = {
+                "success" : "true",
+                "result":
+                {
+                    "stand_id":e
+                }
+            };
+        }
+        else
+        {
+            result.status = "false";
+            result.detail = {"message":"Internal Error!"};
+        }
+        res.json(HTTP_SUCCESS_CODE,result);
+        next();
+
+    };
+    serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
+        serviceOperation.addStandImages,callback,requestInputParameter );
+
+};
+
+var removeStandImagesCallbackPost = function(req, res, next)
+{
+    var paraToken = "token";
+    var paraInputParameter = "inputParameter";
+    var requestToken = getCommonParameters(req,paraToken,METHOD_POST);
+    var requestInputParameter = tryParseJsonString(getCommonParameters(req,paraInputParameter,METHOD_POST));
+    var result = new commonResult();
+    var callback = function(exception, e)
+    {
+
+        if (exception && exception.Name == BIZ_ERROR_WORDS)
+        {
+
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result":exception.message
+            };
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+
+        if (exception && DEBUG_FLAG )
+        {
+            result.status = "false";
+            result.detail = {"success" : "false","message":exception.message, "detail":exception.stack};
+            console.log(exception.message);
+            console.log(exception.stack);
+            res.json(HTTP_SUCCESS_CODE,result);
+            next();
+            return;
+        }
+        if (e && e!= -1)
+        {
+            result.status = "true";
+            result.detail = {
+                "success" : "true",
+                "result":
+                {
+                    "stand_id":e
+                }
+            };
+        }
+        else
+        {
+            result.status = "false";
+            result.detail = {"message":"Internal Error!"};
+        }
+        res.json(HTTP_SUCCESS_CODE,result);
+        next();
+
+    };
+    serviceOperation.tryPassTokenToProceedAction(requestToken,hashMap,
+        serviceOperation.removeStandImages,callback,requestInputParameter );
+
+};
+
 var changeRealTimeLocationStatusCallbackPost = function(req, res, next)
 {
     var paraToken = "token";
@@ -1398,6 +1517,8 @@ var startRestifyServer = function() {
     server.post(ROUTER_UPDATEUSERPREFERENCE + CURRENT_VERSION, cors(), updateUserPreferenceCallbackPost);
     server.post(ROUTER_CREATESTAND + CURRENT_VERSION, cors(), createStandCallbackPost);
     server.post(ROUTER_UPDATESTAND + CURRENT_VERSION, cors(), updateStandCallbackPost);
+    server.post(ROUTER_ADDSTANDIMAGES + CURRENT_VERSION, cors(),addStandImagesCallbackPost);
+    server.post(ROUTER_REMOVESTANDIMAGES + CURRENT_VERSION, cors(),removeStandImagesCallbackPost);
     server.post(ROUTER_CHANGEREALTIMELOCATIONSTATUS + CURRENT_VERSION, cors(), changeRealTimeLocationStatusCallbackPost);
     server.get(ROUTER_GETSTANDCUSTOMERMARKCOMMENTS + CURRENT_VERSION, cors(), getStandCustomerMarkCommentsCallbackGet);
     server.post(ROUTER_CREATESTANDMARKCOMMENTS + CURRENT_VERSION, cors(), createStandMarkCommentsCallbackPost);
@@ -1413,6 +1534,7 @@ var startRestifyServer = function() {
     server.post(ROUTER_BAIDU_LBS_CREATEPOI + CURRENT_VERSION, cors(), createBaiduLBSGeoDataPoiCallbackPost);
     server.post(ROUTER_BAIDU_LBS_UPDATEPOI + CURRENT_VERSION, cors(), updateBaiduLBSGeoDataPoiCallbackPost);
     server.post(ROUTER_BAIDU_LBS_DELETEPOI + CURRENT_VERSION, cors(), deleteBaiduLBSGeoDataPoiCallbackPost);
+
 
 
 
