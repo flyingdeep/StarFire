@@ -18,7 +18,9 @@ var baiduLBSClass = function(authClass) {
                 "creater_id": Json_stand_position_info.creater_id,
                 "create_user": Json_stand_position_info.create_user,
                 "description": Json_stand_position_info.description,
-                "stand_image_tip": Json_stand_position_info.stand_image_tip
+                "stand_image_tip": Json_stand_position_info.stand_image_tip,
+                "creator_type":Json_stand_position_info.creator_type,
+                "type_detail": Json_stand_position_info.type_detail
             };
             var inputString = JSON.stringify(jsonInput);
             var inputJson = {
@@ -35,7 +37,9 @@ var baiduLBSClass = function(authClass) {
                 , function (data, status) {
                     if (status == "success")
                     {
-                        output_json_result = data;
+                        //output_json_result = data;
+                        output_json_result.status = "success";
+                        output_json_result.data = data;
                     }
                     else {
                         output_json_result.status = "failed";
@@ -81,7 +85,9 @@ var baiduLBSClass = function(authClass) {
                 , function (data, status) {
                     if (status == "success")
                     {
-                        output_json_result = data;
+                        //output_json_result = data;
+                        output_json_result.status = "success";
+                        output_json_result.data = data;
                     }
                     else {
                         output_json_result.status = "failed";
@@ -112,7 +118,9 @@ var baiduLBSClass = function(authClass) {
                 function (data, status) {
                     if (status == "success")
                     {
-                        output_json_result = data;
+                        //output_json_result = data;
+                        output_json_result.status = "success";
+                        output_json_result.data = data;
                     }
                     else {
                         output_json_result.status = "failed";

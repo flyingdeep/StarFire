@@ -43,6 +43,7 @@ var createStandEntity = {
     "standSubContent": null,
     "description": null,
     "position":null,
+    "address":null,
     "images":[]
 };
 

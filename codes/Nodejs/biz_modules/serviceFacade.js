@@ -496,7 +496,10 @@ exports.createBaiduLBSGeoDataPoi = function(callback, standInfo)
         "mark" : mark,
         "description":standInfo.description,
         "create_user":standInfo.create_user,
-        "creater_id" : standInfo.creater_id
+        "creater_id" : standInfo.creater_id,
+        "creator_type":standInfo.creator_type,
+        "type_detail": standInfo.type_detail
+
     };
     baiduLBSOperation.createBaiduLBSGeoDataPoi(callback,PoiInfoJson);
 

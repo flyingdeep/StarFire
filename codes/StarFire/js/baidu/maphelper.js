@@ -74,22 +74,20 @@ function createNewJsonStandPositionInfoInstance()
 // link to lbs "creatLbsPostion"
 function createUpdateJsonStandPositionInfoInstance()
 {
-    var datetime_string = formatDate(new Date(),"yyyy-MM-dd hh:mm:ss");
+    //var datetime_string = formatDate(new Date(),"yyyy-MM-dd hh:mm:ss");
     var resultJson = {
-        "id": null,
         "title":  null,
         "address": null,
         "tags": null,
-        "latitude": null,
         "longitude": null,
-
-        "realtime_location":null,
-        "isactive":null,
-        "mark":null,
+        "latitude": null,
+        "creater_id":null,
+        "create_user":null,
         "description" : null,
-        "stand_image_tip" : null
+        "stand_image_tip" : null,
+        "creator_type": null,
+        "type_detail": null
     };
-
     return resultJson;
 }
 
@@ -156,12 +154,17 @@ function createJsonStandInfo()
 {
     var resultJson =
     {
+        "id":null,
+        "stand_id":null,
         "title":null,
         "address":null,
         "postion_x":null,
         "postion_y":null,
         "stand_image_tip":null,
-        "description":null
+        "update_date":null,
+        "description":null,
+        "mark":null,
+        "realtime_location":null
     };
 
 }

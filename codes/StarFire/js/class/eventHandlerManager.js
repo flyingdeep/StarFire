@@ -81,14 +81,7 @@ var eventHandlerManagerClass = function()
             mapCr.centerAndZoom(init_city);
             //initMapLocation(mapCr);
         }
-        var tempToast  = $.afui.toast({
-            message: hint_Message.STAND_CREATION_SET_POINT_HINT,
-            position:"bc",
-            autoClose:true, //have to click the message to close
-            type:"success"
-        });
-        globalToasts.push(tempToast);
-
+        commonHelper.showToast(hint_Message.STAND_CREATION_SET_POINT_HINT,"bc",true,"success");
     };
 
     this.panel_Dot_PanelLoad = function(){
@@ -121,13 +114,8 @@ var eventHandlerManagerClass = function()
             fileExtension = f.name.substring(f.name.indexOf("."));
             if (f.size > UPLOAD_IMAGE_MAXSIZE)
             {
-                var tempToast = $.afui.toast({
-                    message: hint_Message.STAND_IMAGE_UPLOAD_SIZE_EXCEED,
-                    position:"bc",
-                    autoClose:true, //have to click the message to close
-                    type:"success"
-                });
-                globalToasts.push(tempToast);
+
+                commonHelper.showToast(hint_Message.STAND_IMAGE_UPLOAD_SIZE_EXCEED,"bc",true,"error");
                 continue;
             }
             var tFile = f;
@@ -140,13 +128,7 @@ var eventHandlerManagerClass = function()
                 cancelCallback: function () {
                     cancelUploadTag = true;
                     this.hide();
-                    var tempToast = $.afui.toast({
-                        message: hint_Message.STAND_IMAGE_UPLOAD_CANCEL,
-                        position:"bc",
-                        autoClose:true, //have to click the message to close
-                        type:"warning"
-                    });
-                    globalToasts.push(tempToast);
+                    commonHelper.showToast(hint_Message.STAND_IMAGE_UPLOAD_CANCEL,"bc",true,"warning");
                 },
                 cancelOnly: true
             });
@@ -177,13 +159,7 @@ var eventHandlerManagerClass = function()
                 }
                 else
                 {
-                    var tempToast = $.afui.toast({
-                        message: hint_Message.STAND_IMAGE_UPLOAD_FAIL,
-                        position:"bc",
-                        autoClose:true, //have to click the message to close
-                        type:"error"
-                    });
-                    globalToasts.push(tempToast);
+                    commonHelper.showToast(hint_Message.STAND_IMAGE_UPLOAD_FAIL,"bc",true,"error");
                 }
             });
             // Read in the image file as a data URL.

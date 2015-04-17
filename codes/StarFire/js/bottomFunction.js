@@ -16,17 +16,40 @@ function initialCreateStandFieldEvent()
 
 function createUserStand()
 {
+    //*********** for test only ****************
+    userBasicInfoEntity.userId = 5;
+    userBasicInfoEntity.userName = "flyingdeep";
+    userBasicInfoEntity.userType = 1;
+    //*****************************
+    var standImageTip = null;
     var images = [];
     for (var imageItem in createStandEntity.images)
     {
         if (createStandEntity.images[imageItem] != 0)
         {
             images.push(imageItem);
+            if (createStandEntity.images[imageItem] == 2)
+            {
+                standImageTip = imageItem;
+            }
         }
     }
+    $.afui.showMask(hint_Message.CREATE_STAND_CREATING_HINT);
+    commonHelper.createStandPoiDb(function(e)
+    {
+           if(e && e.status == "success" )
+           {
 
-
-
+           }
+            else
+           {
+               commonHelper.showToast(hint_Message.CREATE_STAND_CREATING_ERROR,"bc",true,"error");
+               $.afui.hideMask();
+           }
+    },
+    createStandEntity.address,userBasicInfoEntity.userType,createStandEntity.standType,
+    createStandEntity.standName,createStandEntity.standSubContent,createStandEntity.description,
+    userBasicInfoEntity.userId,userBasicInfoEntity.userName,createStandEntity.position,standImageTip,images);
 }
 
 function standLocationNoneSetCheck()
@@ -34,13 +57,7 @@ function standLocationNoneSetCheck()
     //
     if (!createStandEntity.position)
     {
-        var tempToast  = $.afui.toast({
-            message: hint_Message.CREATE_STAND_SET_MAP_POINT_NONE_ERROR,
-            position:"bc",
-            autoClose:true, //have to click the message to close
-            type:"error"
-        });
-        globalToasts.push(tempToast);
+        commonHelper.showToast(hint_Message.CREATE_STAND_SET_MAP_POINT_NONE_ERROR,"bc",true,"error");
         return false;
     }
     return true;
@@ -81,13 +98,7 @@ function fieldValidationCreateStand()
 
     if (!result)
     {
-        var tempToast  = $.afui.toast({
-            message: messageContent,
-            position:"bc",
-            autoClose:true, //have to click the message to close
-            type:"error"
-        });
-        globalToasts.push(tempToast);
+        commonHelper.showToast(messageContent,"bc",true,"error");
     }
     return result;
 }
@@ -223,6 +234,8 @@ function popupCreateStandPointWindow(e)
         popupMessage = popupMessage + "街道： " +  addComp.street + "<br/>";
         popupMessage = popupMessage + "门牌： " +  addComp.streetNumber + "  附近";
 
+        var standAddress =  addComp.province + " " + addComp.city + " " + addComp.district + " " + addComp.street + " " + addComp.streetNumber + "附近";
+
         $.afui.popup({
             title: normal_Text.STAND_CONFIRM_POINT,
             message: popupMessage,
@@ -236,6 +249,8 @@ function popupCreateStandPointWindow(e)
                 }
                 currentCreatedPoiMarker = addMarker(e, 0, mapCr, iconLocate);
                 createStandEntity.position = e.lng + "," + e.lat;
+                createStandEntity.address = standAddress;
+
             },
             cancelOnly: false
         });

@@ -84,28 +84,83 @@ var commonHelperClass = function()
          return str.replace(/(^\s*)|(\s*$)/g, "");
      };
 
-    this.createStandPoiDb = function(callback, address, creatorType, standType, standName, typeDetailDescription, description, createUserId, position, majorPic)
+    this.createStandPoiDb = function(callback, address, creatorType, standType, standName, typeDetailDescription, description, createUserId,creatorName, position, majorPic,images)
     {
+        var createStandJson = createUpdateJsonStandPositionInfoInstance();
+        var positionArr = position.split(",");
+        createStandJson.title = standName;
+        createStandJson.address = address;
+        createStandJson.longtitude = positionArr[0];
+        createStandJson.latitude = positionArr[1];
+        createStandJson.creater_id = createUserId;
+        createStandJson.create_user = creatorName;
+        createStandJson.creator_type = creatorType;
+        createStandJson.tags = standType;
+        createStandJson.type_detail = typeDetailDescription;
+        createStandJson.description = description;
 
-/*        "title":standName,
-        "address":address,
-        "postion_x":null,
-        "postion_y":null,
-        "stand_image_tip":null,
-        "description":null*/
+
 
         var baiduLBS = new baiduLBSClass(serverProxyClass);
-        var standInfo = createJsonStandInfo();
-        standInfo.title = standName;
-        standInfo.address = address;
-        standInfo.stand_image_tip = majorPic;
+        baiduLBS.createLbsPosition(function(e)
+            {
+                if (e && e.status == "success") {
+                    if (e.data.status == "success" && e.data.detail.success == "true") {
+                        var standId = e.data.detail.result.stand_id;
 
-       // baiduLBS.createLbsPosition(callback,)
+                        (new processFacadeClass()).createNewStand(function (ex) {
+                                if (ex && e.status == "success") {
+                                    if (ex.data.status == "success" && ex.data.detail.success == "true") {
+                                       // this.addSelectedStandImages = function(callback, images)
+                                        var imagesJson = formImagesToJsonArray(images);
+                                        (new processFacadeClass()).addSelectedStandImages(function(exx)
+                                        {
 
+                                        },imagesJson);
+                                    }
+                                    else
+                                    {
+                                        callback(null);
+                                    }
+                                }
+                                else
+                                {
+                                    callback(null);
+                                }
 
+                            },standId,creatorType,standType,standName,typeDetailDescription, description, createUserId, position
+                        );
+
+                    }
+                    else
+                    {
+
+                        callback(null);
+                    }
+
+                }
+                else
+                {
+                    callback(null);
+                }
+            }
+            ,createStandJson);
     };
 
+    this.showToast = function(message,position,autoClose,type)
+    {
+        var tempToast  = $.afui.toast({
+            message: message,
+            position:position,
+            autoClose:autoClose, //have to click the message to close
+            type:type
+        });
+        globalToasts.push(tempToast);
+    };
 
-
+    this.formImagesToJsonArray  = function(images)
+    {
+      //TODO
+    };
 
 };
