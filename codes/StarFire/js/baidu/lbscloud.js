@@ -22,7 +22,9 @@ var baiduLBSClass = function(authClass) {
                 "creator_type":Json_stand_position_info.creator_type,
                 "type_detail": Json_stand_position_info.type_detail
             };
+
             var inputString = JSON.stringify(jsonInput);
+           // alert(JSON.stringify(Json_stand_position_info));
             var inputJson = {
                 "token": token,
                 "inputParameter": inputString

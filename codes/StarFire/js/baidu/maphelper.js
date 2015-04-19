@@ -30,6 +30,7 @@ function formatDate(e, format)
 function getMapCenter(mapObj)
 {
     var mapCenter =mapObj.getCenter().lng +","+ mapObj.getCenter().lat;
+
     return mapCenter;
 }
 

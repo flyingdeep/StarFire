@@ -7,6 +7,7 @@ var config_Tags = ""; // null means no filter
 var config_CreatorType = ""; // "" is no filter, 1 means display owner stand only.
 
 //-------------- global variable---------
+var mapCenterString = null; //map center val
 var currentPanel = null;
 var currentGPSPosition = null;
 var currentDisplayStandsStrPoints = [];

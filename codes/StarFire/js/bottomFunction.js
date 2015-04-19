@@ -1,9 +1,24 @@
 function initialCreateStandFieldEvent()
 {
-    $("#standName").val("");
-    $("#standTypeDiv").children(":radio").prop("checked",false);
-    $("#subStandType").val("");
-    $("#standDescription").val("");
+    if (!createStandEntity.standName)
+    {
+        $("#standName").val("");
+    }
+
+    if (!createStandEntity.standType)
+    {
+        $("#standTypeDiv").children(":radio").prop("checked", false);
+    }
+
+    if (!createStandEntity.standSubContent)
+    {
+        $("#subStandType").val("");
+    }
+
+    if (!createStandEntity.description)
+    {
+        $("#standDescription").val("");
+    }
 
     $("#standName").on("change",eventHandlerManager.standName_Sharp_Change);
 
@@ -37,9 +52,11 @@ function createUserStand()
     $.afui.showMask(hint_Message.CREATE_STAND_CREATING_HINT);
     commonHelper.createStandPoiDb(function(e)
     {
-           if(e && e.status == "success" )
+           if(e)
            {
-
+               transferToPanel("#mapPanel","pop");
+               commonHelper.showToast(hint_Message.CREATE_STAND_CREATING_SUCCESS,"bc",true,"success");
+               $.afui.hideMask();
            }
             else
            {
@@ -83,7 +100,7 @@ function fieldValidationCreateStand()
         messageContent = messageContent + hint_Message.CREATE_STAND_STAND_TYPE_NO_SELECTED_ERROR + "<br />";
         result = false;
     }
-    if (!createStandEntity.standSubContent || commonHelper.trim(createStandEntity.standSubContent))
+    if (!createStandEntity.standSubContent || commonHelper.trim(createStandEntity.standSubContent).length == 0)
     {
         messageContent = messageContent + hint_Message.CREATE_STAND_SUB_STAND_TYPE_NO_FILLED_ERROR + "<br />";
         result = false;

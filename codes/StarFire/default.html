@@ -71,7 +71,7 @@
             $.afui.manageHistory=false;
             currentPanel = "#mapPanel";
         }
-        var mapCenterString = null; //map center val
+
 
 
 
@@ -318,6 +318,10 @@
     //map.addEventListener("zoomend", eventHandlerManager.map_zoomend_event);
     map.addEventListener("moveend", eventHandlerManager.map_moveend_event);
     map.addEventListener("load", eventHandlerManager.map_load_event);
+
+    mapCr = new BMap.Map("mapContainerCr");
+    mapCr.addEventListener("moveend", eventHandlerManager.mapCr_moveend_event);
+    mapCr.addEventListener("click", eventHandlerManager.mapCr_click_event);
 
 </script>
 

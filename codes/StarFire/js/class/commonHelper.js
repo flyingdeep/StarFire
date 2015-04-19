@@ -1,37 +1,31 @@
-var commonHelperClass = function()
-{
+var commonHelperClass = function() {
 
     var processOperation = new processFacadeClass();
-    this.constructStandTypeHTML= function(callback, baseIdName)
-    {
+    this.constructStandTypeHTML = function (callback, baseIdName) {
         //console.log(baseIdName);
-        var standTypesCallback = function(e)
-        {
+        var standTypesCallback = function (e) {
 
-            if(e)
-            {
+            if (e) {
                 var radioText;
                 var radioValue;
                 var itemString = "";
                 var standTypeRadioIdBase = baseIdName;
                 var idString;
-                var nameString = baseIdName+"Radio";
+                var nameString = baseIdName + "Radio";
 
-               for (var item in e)
-               {
+                for (var item in e) {
 
-                   radioText = e[item].type_name;
-                   radioValue = e[item].stand_type_id;
-                   idString = standTypeRadioIdBase + item;
-                   itemString = itemString + '<div class="gcol2"><input id="'+ idString +'" type="radio"  name="'+nameString+'" value="'+ radioValue
-                       +'"><label for="'+idString+'">'+ radioText +'</label></div>';
-               }
+                    radioText = e[item].type_name;
+                    radioValue = e[item].stand_type_id;
+                    idString = standTypeRadioIdBase + item;
+                    itemString = itemString + '<div class="gcol2"><input id="' + idString + '" type="radio"  name="' + nameString + '" value="' + radioValue
+                        + '"><label for="' + idString + '">' + radioText + '</label></div>';
+                }
                 itemString = itemString + "&nbsp;";
                 callback(itemString);
 
             }
-            else
-            {
+            else {
                 callback(null);
             }
 
@@ -40,34 +34,28 @@ var commonHelperClass = function()
     };
 
 
-    this.getOSSSignatureAndPolicy = function(callback)
-    {
+    this.getOSSSignatureAndPolicy = function (callback) {
 
-        processOperation.getImageUploadSecurityString(function(e)
-        {
-            if(e)
-            {
-                callback(e);
+        processOperation.getImageUploadSecurityString(function (e) {
+                if (e) {
+                    callback(e);
+
+                }
+                else {
+                    callback(null);
+                }
+
 
             }
-            else
-            {
-                callback(null);
-            }
-
-
-        }
         );
     };
 
-    this.getUserBelongedLocation = function()
-    {
+    this.getUserBelongedLocation = function () {
         return "上海";
 
     };
 
-    this.initialStandEntity = function()
-    {
+    this.initialStandEntity = function () {
         createStandEntity.standId = null;
         createStandEntity.creatorType = null;
         createStandEntity.creatorId = null;
@@ -80,17 +68,16 @@ var commonHelperClass = function()
 
     };
 
-    this.trim = function(str){
-         return str.replace(/(^\s*)|(\s*$)/g, "");
-     };
+    this.trim = function (str) {
+        return str.replace(/(^\s*)|(\s*$)/g, "");
+    };
 
-    this.createStandPoiDb = function(callback, address, creatorType, standType, standName, typeDetailDescription, description, createUserId,creatorName, position, majorPic,images)
-    {
+    this.createStandPoiDb = function (callback, address, creatorType, standType, standName, typeDetailDescription, description, createUserId, creatorName, position, majorPic, images) {
         var createStandJson = createUpdateJsonStandPositionInfoInstance();
         var positionArr = position.split(",");
         createStandJson.title = standName;
         createStandJson.address = address;
-        createStandJson.longtitude = positionArr[0];
+        createStandJson.longitude = positionArr[0];
         createStandJson.latitude = positionArr[1];
         createStandJson.creater_id = createUserId;
         createStandJson.create_user = creatorName;
@@ -100,67 +87,82 @@ var commonHelperClass = function()
         createStandJson.description = description;
 
 
-
         var baiduLBS = new baiduLBSClass(serverProxyClass);
-        baiduLBS.createLbsPosition(function(e)
-            {
+        baiduLBS.createLbsPosition(function (e) {
+
                 if (e && e.status == "success") {
-                    if (e.data.status == "success" && e.data.detail.success == "true") {
+                    if (e.data.status == "true" && e.data.detail.success == "true") {
                         var standId = e.data.detail.result.stand_id;
 
                         (new processFacadeClass()).createNewStand(function (ex) {
-                                if (ex && e.status == "success") {
-                                    if (ex.data.status == "success" && ex.data.detail.success == "true") {
-                                       // this.addSelectedStandImages = function(callback, images)
-                                        var imagesJson = formImagesToJsonArray(images);
-                                        (new processFacadeClass()).addSelectedStandImages(function(exx)
-                                        {
 
-                                        },imagesJson);
-                                    }
-                                    else
-                                    {
-                                        callback(null);
-                                    }
+                                if (ex) {
+
+                                        // this.addSelectedStandImages = function(callback, images)
+                                        var imagesJson = formImagesToJsonArray(images, standId, majorPic);
+                                        (new processFacadeClass()).addSelectedStandImages(function (exx) {
+                                            alert(JSON.stringify(exx));
+                                            if (exx && exx.status == "success") {
+                                                if (exx.data.status == "true" && exx.data.detail.success == "true") {
+                                                        callback(standId);
+                                                }
+                                                else {
+                                                    callback(null);
+                                                }
+                                            }
+                                            else {
+                                                callback(null);
+                                            }
+                                        }, imagesJson);
+
                                 }
-                                else
-                                {
+                                else {
                                     callback(null);
                                 }
 
-                            },standId,creatorType,standType,standName,typeDetailDescription, description, createUserId, position
+                            }, standId, creatorType, standType, standName, typeDetailDescription, description, createUserId, position
                         );
 
                     }
-                    else
-                    {
+                    else {
 
                         callback(null);
                     }
-
                 }
-                else
-                {
+                else {
                     callback(null);
                 }
             }
-            ,createStandJson);
+            , createStandJson);
     };
 
-    this.showToast = function(message,position,autoClose,type)
-    {
-        var tempToast  = $.afui.toast({
+    this.showToast = function (message, position, autoClose, type) {
+        var tempToast = $.afui.toast({
             message: message,
-            position:position,
-            autoClose:autoClose, //have to click the message to close
-            type:type
+            position: position,
+            autoClose: autoClose, //have to click the message to close
+            type: type
         });
         globalToasts.push(tempToast);
     };
 
-    this.formImagesToJsonArray  = function(images)
-    {
-      //TODO
+    var formImagesToJsonArray = function (images, standId, tipImageId) {
+
+        var stand_image = null;
+        var result = [];
+        for (var i = 0; i < images.length; i++) {
+            var commentsStr = "0";
+            if (images[i] == tipImageId) {
+                commentsStr = "1";
+            }
+            stand_image = {
+                stand_Id: standId,
+                image_Id: images[i],
+                comments: commentsStr
+            };
+            result.push(stand_image);
+        }
+        return result;
     };
 
 };

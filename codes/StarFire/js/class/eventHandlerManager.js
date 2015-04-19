@@ -37,7 +37,6 @@ var eventHandlerManagerClass = function()
     };
 
     this.createStandPanel1_Sharp_PanelBeforeLoad = function(){
-        commonHelper.initialStandEntity();
         initialCreateStandFieldEvent();
         if ( $("#standTypeDiv").html() == "") {
             if (!staticStandTypeHtmlString) {
@@ -73,15 +72,11 @@ var eventHandlerManagerClass = function()
     };
 
     this.createStandPanel2_Sharp_PanelLoad = function(){
-        if(!mapCr) {
             var init_city = commonHelper.getUserBelongedLocation();
-            mapCr = new BMap.Map("mapContainerCr");
-            mapCr.addEventListener("moveend", mapCr_moveend_event);
-            mapCr.addEventListener("click", mapCr_click_event);
+
             mapCr.centerAndZoom(init_city);
             //initMapLocation(mapCr);
-        }
-        commonHelper.showToast(hint_Message.STAND_CREATION_SET_POINT_HINT,"bc",true,"success");
+
     };
 
     this.panel_Dot_PanelLoad = function(){
@@ -90,6 +85,12 @@ var eventHandlerManagerClass = function()
         {
             globalToasts.pop().hide();
         }
+
+        if (currentPanel == "#createStandPanel2")
+        {
+            commonHelper.showToast(hint_Message.STAND_CREATION_SET_POINT_HINT,"bc",true,"success");
+        }
+
 
         if (currentPanel != "#createStandPanel1" && currentPanel != "#createStandPanel2" && currentPanel != "#createStandPanel3" ) {
             var currentCreatedPoiMarker = null;
@@ -207,6 +208,7 @@ var eventHandlerManagerClass = function()
     };
 
     this.mapCr_moveend_event = function(){
+
         mapCenterString = getMapCenter(mapCr);
         //map.clearOverlays();
         removeMarkersByMarkers(currentDisplayStandsMarks,mapCr);
@@ -214,6 +216,7 @@ var eventHandlerManagerClass = function()
     };
 
     this.mapCr_click_event = function(e){
+
         var pt = e.point;
         Json_tap_position =
         {
