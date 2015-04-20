@@ -80,7 +80,6 @@ var eventHandlerManagerClass = function()
     };
 
     this.panel_Dot_PanelLoad = function(){
-
         while(globalToasts.length!= 0)
         {
             globalToasts.pop().hide();

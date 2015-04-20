@@ -33,7 +33,7 @@ CREATE TABLE `stand_customer_mark` (
 
 CREATE TABLE `stand_images` (
   `stand_id` int(11) NOT NULL,
-  `image_id` varchar(20) NOT NULL,
+  `image_id` varchar(40) NOT NULL,
   `create_date` datetime NOT NULL,
   `comments` varchar(200) DEFAULT NULL,
   `isdeleted` bit(1) NOT NULL DEFAULT b'0',
@@ -43,6 +43,7 @@ CREATE TABLE `stand_images` (
   KEY `STANDIDINDEX` (`isdeleted`,`stand_id`),
   KEY `ISDELETEDINDEX` (`isdeleted`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `stand_info` (
   `stand_id` int(11) NOT NULL,

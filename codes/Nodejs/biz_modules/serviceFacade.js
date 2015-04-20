@@ -230,7 +230,6 @@ exports.addStandImages = function(callback, standImages)
                 else
                 {
                     callback(err,false);
-                    return;
                 }
 
             },singleImage);
@@ -246,15 +245,13 @@ exports.addStandImages = function(callback, standImages)
     if (standImages && standImages.length > 0)
     {
 
-        iterateProcessAllImages(callback,standImages,standImages[0].stand_id);
+        iterateProcessAllImages(callback,standImages,standImages[0].stand_Id);
 
     }
     else
     {
-        callback(new Error(INPUT_PARA_ERROR),false);
-
+        callback(null, "000");
     }
-
 };
 
 exports.removeStandImages = function(callback, standImages)

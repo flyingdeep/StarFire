@@ -93,27 +93,20 @@ var commonHelperClass = function() {
                 if (e && e.status == "success") {
                     if (e.data.status == "true" && e.data.detail.success == "true") {
                         var standId = e.data.detail.result.stand_id;
-
                         (new processFacadeClass()).createNewStand(function (ex) {
-                                alert(JSON.stringify(ex));
                                 if (ex) {
 
-                                        // this.addSelectedStandImages = function(callback, images)
-                                        var imagesJson = formImagesToJsonArray(images, standId, majorPic);
-                                        (new processFacadeClass()).addSelectedStandImages(function (exx) {
-                                            alert(JSON.stringify(exx));
-                                            if (exx && exx.status == "success") {
-                                                if (exx.data.status == "true" && exx.data.detail.success == "true") {
-                                                        callback(standId);
-                                                }
-                                                else {
-                                                    callback(null);
-                                                }
-                                            }
-                                            else {
-                                                callback(null);
-                                            }
-                                        }, imagesJson);
+                                    // this.addSelectedStandImages = function(callback, images)
+                                    var imagesJson = formImagesToJsonArray(images, standId, majorPic);
+                                    alert(JSON.stringify(imagesJson));
+                                    (new processFacadeClass()).addSelectedStandImages(function (exx) {
+                                        if (exx) {
+                                            callback(standId);
+                                        }
+                                        else {
+                                            callback(null);
+                                        }
+                                    }, imagesJson);
 
                                 }
                                 else {

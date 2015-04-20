@@ -479,7 +479,7 @@ function transferToPanel(targetPanel , transitionStyle, direction)
     {
         direction = false;
     }
-    $.afui.loadContent(targetPanel,false,direction,transitionStyle);
+    $.afui.loadContent(targetPanel,true,direction,transitionStyle);
     previousPanel = currentPanel;
     currentPanel = targetPanel;
 
