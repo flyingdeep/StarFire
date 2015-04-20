@@ -60,7 +60,8 @@
         $(document).ready(function(){
 
 
-            initialAction();
+            //initialAction();
+            setTimeout(initialAction,5000);
 
         });
 
@@ -86,6 +87,14 @@
 
 </head>
 <body>
+
+<div id="splashscreen" class="ui-loader heavy">
+    App Framework
+    <br>
+    <br>
+    <span class="ui-icon ui-icon-loading spin"></span>
+    <h1>Starting app</h1>
+</div>
 <!----------------------   Main Map View --------------------->
 <div class="view" id="mainView">
     <header id="mapHeader">
@@ -122,7 +131,7 @@
 <!----------------------  附近摊位列表 --------------------->
 <div class="view" id="nearbyStandListView">
     <header id="standListHeader" >
-        <div style="float:left"><a onclick='transferToPanel("#mapPanel","up");' class="icon info green button previous">返回地图</a></div>
+        <div style="float:left"><a onclick='transferToPanel("#mapPanel","slide",true);' class="icon info green button previous">返回地图</a></div>
 
         <div style="float:right;margin-right: 10px"><a class="button" id="filterSettingIcon_nearbyStandListView">筛选</a>
             </div>
@@ -164,7 +173,7 @@
 <!----------------------   创建摊位 - 1 --------------------->
 <div class="view" id="createStandView1">
     <header id="createStandHeader1">
-        <div style="float:left"><a onclick='transferToPanel("#mapPanel","up");'  class="icon close green button previous">放弃</a></div>
+        <div style="float:left"><a onclick='transferToPanel("#mapPanel","slide",true);'  class="icon close green button previous">放弃</a></div>
         <div style="float:right"><a onclick='if(!fieldValidationCreateStand()){return;}transferToPanel("#createStandPanel2","slide");' class="icon right green button next">下一步</a></div>
         <div class="titleDiv">新建摊位-基本信息</div>
     </header>
@@ -191,7 +200,7 @@
 <!----------------------   创建摊位 - 2 --------------------->
 <div class="view" id="createStandView2">
     <header id="createStandHeader2">
-        <div style="float:left"><a onclick='transferToPanel("#createStandPanel1","invoke");'   class="icon left green button previous">上一步</a></div>
+        <div style="float:left"><a onclick='transferToPanel("#createStandPanel1","slide",true);'   class="icon left green button previous">上一步</a></div>
         <div style="float:right"><a onclick='if(!standLocationNoneSetCheck()){return;}transferToPanel("#createStandPanel3","slide");' class="icon right green button next">下一步</a></div>
         <div class="titleDiv">新建摊位-选择位置</div>
     </header>
@@ -214,7 +223,7 @@
 <!----------------------   创建摊位 - 3 --------------------->
 <div class="view" id="createStandView3">
     <header id="createStandHeader3">
-        <div style="float:left"><a onclick='transferToPanel("#createStandPanel2","invoke");' data-transition="invoke"  class="icon left green button previous">上一步</a></div>
+        <div style="float:left"><a onclick='transferToPanel("#createStandPanel2","slide",true);' data-transition="invoke"  class="icon left green button previous">上一步</a></div>
         <div style="float:right"><a onclick="createUserStand();" data-transition="slide" class="icon right green button next">完成</a></div>
         <div class="titleDiv">新建摊位-摊位图片</div>
     </header>

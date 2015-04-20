@@ -54,7 +54,7 @@ function createUserStand()
     {
            if(e)
            {
-               transferToPanel("#mapPanel","pop");
+               transferToPanel("#mapPanel","invoke");
                commonHelper.showToast(hint_Message.CREATE_STAND_CREATING_SUCCESS,"bc",true,"success");
                $.afui.hideMask();
            }
@@ -90,7 +90,7 @@ function fieldValidationCreateStand()
         messageContent = messageContent + hint_Message.CREATE_STAND_STAND_NAME_LENGTH_ERROR + "<br />";
         result = false;
     }
-    else if (!REG_EXPRESSION_STAND_NAME.test(createStandEntity.standName))
+    else if (!REG_EXPRESSION_STAND_NAME.test(commonHelper.trim(createStandEntity.standName)))
     {
         messageContent = messageContent + hint_Message.CREATE_STAND_STAND_NAME_CHARACTER_ERROR + "<br />";
         result = false;
@@ -105,7 +105,7 @@ function fieldValidationCreateStand()
         messageContent = messageContent + hint_Message.CREATE_STAND_SUB_STAND_TYPE_NO_FILLED_ERROR + "<br />";
         result = false;
     }
-    else if (!REG_EXPRESSION_STAND_SUB_TYPE_NAME.test(createStandEntity.standSubContent))
+    else if (!REG_EXPRESSION_STAND_SUB_TYPE_NAME.test(commonHelper.trim(createStandEntity.standSubContent)))
     {
         messageContent = messageContent + hint_Message.CREATE_STAND_SUB_STAND_TYPE_CHARACTER_ERROR + "<br />";
         result = false;

@@ -274,11 +274,11 @@ function searchPoiNearbyPosition(location,mapObj, searchString,containerJObj)
 function standListTapEvent(i,mapObj)
 {
     if (mapObj == map) {
-        transferToPanel("#mapPanel", "pop");
+        transferToPanel("#mapPanel", "pop",true);
     }
     else if (mapObj == mapCr)
     {
-        transferToPanel("#createStandPanel2","pop");
+        transferToPanel("#createStandPanel2","pop",true);
     }
     setTimeout(staticOpenInfoWinFunEvents[i],LOAD_MAP_TIP_LAYER_DELAY);
 }
@@ -323,11 +323,11 @@ function resultItemStandTapEvent(i,mapObj)
 {
 
     if (mapObj == map) {
-        transferToPanel("#mapPanel", "pop");
+        transferToPanel("#mapPanel", "pop",true);
     }
     else if (mapObj == mapCr)
     {
-        transferToPanel("#createStandPanel2","pop");
+        transferToPanel("#createStandPanel2","pop",true);
     }
     var targetPosition = staticSearchResults[i];
     var point = new BMap.Point(targetPosition.location[0],targetPosition.location[1]);
@@ -341,11 +341,11 @@ function resultItemStandTapEvent(i,mapObj)
 function resultItemTapEvent(i,mapObj)
 {
     if (mapObj == map) {
-        transferToPanel("#mapPanel", "pop");
+        transferToPanel("#mapPanel", "pop",true);
     }
     else if (mapObj == mapCr)
     {
-        transferToPanel("#createStandPanel2","pop");
+        transferToPanel("#createStandPanel2","pop",true);
     }
     var marker = addMarker(staticSearchResults.getPoi(i).point,i,mapObj,null);
     setCurrentSingleSearchMark(marker, mapObj);
@@ -473,10 +473,16 @@ function setCurrentSingleSearchMark(mark, mapObject)
     currentSingleDisplaySearchMark = mark;
 }
 
-function transferToPanel(targetPanel , transitionStyle)
+function transferToPanel(targetPanel , transitionStyle, direction)
 {
-    $.afui.loadContent(targetPanel,false,false,transitionStyle);
+    if (!direction)
+    {
+        direction = false;
+    }
+    $.afui.loadContent(targetPanel,false,direction,transitionStyle);
+    previousPanel = currentPanel;
     currentPanel = targetPanel;
+
 }
 //generate
 

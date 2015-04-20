@@ -230,6 +230,7 @@ exports.addStandImages = function(callback, standImages)
                 else
                 {
                     callback(err,false);
+                    return;
                 }
 
             },singleImage);

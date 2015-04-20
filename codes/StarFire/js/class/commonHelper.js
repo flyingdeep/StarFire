@@ -95,7 +95,7 @@ var commonHelperClass = function() {
                         var standId = e.data.detail.result.stand_id;
 
                         (new processFacadeClass()).createNewStand(function (ex) {
-
+                                alert(JSON.stringify(ex));
                                 if (ex) {
 
                                         // this.addSelectedStandImages = function(callback, images)

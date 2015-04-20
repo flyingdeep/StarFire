@@ -9,6 +9,7 @@ var config_CreatorType = ""; // "" is no filter, 1 means display owner stand onl
 //-------------- global variable---------
 var mapCenterString = null; //map center val
 var currentPanel = null;
+var previousPanel = null;
 var currentGPSPosition = null;
 var currentDisplayStandsStrPoints = [];
 var currentDisplayStandsMarks = [];

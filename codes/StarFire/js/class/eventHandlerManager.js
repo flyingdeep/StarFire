@@ -248,5 +248,25 @@ var eventHandlerManagerClass = function()
         createStandEntity.description = $("#standDescription").val();
     };
 
+    this.onDeviceReadPhoneGap = function()
+    {
+
+    };
+
+    this.onBackKeyDownPhoneGap = function()
+    {
+
+    };
+
+    this.onMenuKeyDownPhoneGap = function()
+    {
+
+    };
+
+    this.onSearchKeyDownPhoneGap = function()
+    {
+
+    };
+
 
 };
