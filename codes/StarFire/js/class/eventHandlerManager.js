@@ -74,7 +74,7 @@ var eventHandlerManagerClass = function()
     this.createStandPanel2_Sharp_PanelLoad = function(){
             var init_city = commonHelper.getUserBelongedLocation();
 
-            mapCr.centerAndZoom(init_city);
+            mapCr.centerAndZoom("上海");
             //initMapLocation(mapCr);
 
     };

@@ -43,10 +43,14 @@ function createUserStand()
         if (createStandEntity.images[imageItem] != 0)
         {
             images.push(imageItem);
-            if (createStandEntity.images[imageItem] == 2)
+            if (images.length == 1)
             {
-                standImageTip = imageItem;
+                standImageTip =imageItem;
             }
+//            if (createStandEntity.images[imageItem] == 2)
+//            {
+//                standImageTip = imageItem;
+//            }
         }
     }
     $.afui.showMask(hint_Message.CREATE_STAND_CREATING_HINT);
@@ -54,6 +58,7 @@ function createUserStand()
     {
            if(e)
            {
+
                transferToPanel("#mapPanel","invoke");
                commonHelper.showToast(hint_Message.CREATE_STAND_CREATING_SUCCESS,"bc",true,"success");
                $.afui.hideMask();

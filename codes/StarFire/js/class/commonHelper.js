@@ -86,7 +86,6 @@ var commonHelperClass = function() {
         createStandJson.type_detail = typeDetailDescription;
         createStandJson.description = description;
 
-
         var baiduLBS = new baiduLBSClass(serverProxyClass);
         baiduLBS.createLbsPosition(function (e) {
 
@@ -98,7 +97,6 @@ var commonHelperClass = function() {
 
                                     // this.addSelectedStandImages = function(callback, images)
                                     var imagesJson = formImagesToJsonArray(images, standId, majorPic);
-                                    alert(JSON.stringify(imagesJson));
                                     (new processFacadeClass()).addSelectedStandImages(function (exx) {
                                         if (exx) {
                                             callback(standId);
