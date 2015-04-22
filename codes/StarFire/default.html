@@ -51,35 +51,82 @@
 
 
     <script type="text/javascript">
+
         $.afui.useOSThemes=false;
         $.afui.loadDefaultHash=true;
         $.afui.autoLaunch=false;
+
+        $.afui.manageHistory=false;
+        currentPanel = "#mapPanel";
         var commonHelper = new commonHelperClass();
         var localStorageHelper = new localStorageHelperClass();
         var eventHandlerManager = new eventHandlerManagerClass();
+        var gc = null;
+        var mapCr =null;
+        var map = null;
+        var Json_tap_position; //finger tap position return Json
+        var Json_decode_position2address; //get address from position
+        var current_map_level;
+
         $(document).ready(function(){
 
 
             initialAction();
+            $.afui.launch();
 //            setTimeout(initialAction,5000);
 
         });
 
+        $.afui.ready(
+                function() {
+
+                    $("#toggleTarget").on("change", eventHandlerManager.toggleTarget_Sharp_Change);
+                    $("#searchForm").on("submit", eventHandlerManager.searchForm_Sharp_Submit);
+                    $("#map2SearchForm").on("submit", eventHandlerManager.map2SearchForm_Sharp_Submit);
+                    $("#filterPanel").on("swipeRight", eventHandlerManager.filterPanel_Sharp_SwipeRight);
+                    $("#createStandPanel1").on("panelbeforeload", eventHandlerManager.createStandPanel1_Sharp_PanelBeforeLoad);
+                    $("#filterSettingIcon").on("click", eventHandlerManager.filterSettingIcon_Sharp_Click);
+                    $("#createStandPanel2").on("panelload", eventHandlerManager.createStandPanel2_Sharp_PanelLoad);
+                    $(".panel").on("panelload", eventHandlerManager.panel_Dot_PanelLoad);
+                    $("#file").on("change", eventHandlerManager.file_Sharp_Change);
+                    $("#mapPanel").on("panelload", eventHandlerManager.mapPanel_Sharp_PanelLoad);
+
+
+                    // map related =====================================================
+                    gc = new BMap.Geocoder();
+                    map = new BMap.Map("mapContainer");
+
+                    initialMapParameter();
+
+                    //map.centerAndZoom(new BMap.Point(CONST_POINT_X, CONST_POINT_Y), CONST_DISPLAY_LEVEL);
+                    // initMapLocation(map);
+
+
+
+                    // map.addEventListener("dragend", eventHandlerManager.map_dragend_event);
+                    // map.addEventListener("click", eventHandlerManager.map_click_event);
+                    //map.addEventListener("zoomend", eventHandlerManager.map_zoomend_event);
+                    map.addEventListener("moveend", eventHandlerManager.map_moveend_event);
+                    map.addEventListener("load", eventHandlerManager.map_load_event);
+
+                    mapCr = new BMap.Map("mapContainerCr");
+                    mapCr.addEventListener("moveend", eventHandlerManager.mapCr_moveend_event);
+                    mapCr.addEventListener("click", eventHandlerManager.mapCr_click_event);
+
+
+                }
+        );
+
         function initialAction()
         {
             FastClick.attach( document.body );
-            $.afui.launch();
-            $.afui.manageHistory=false;
-            currentPanel = "#mapPanel";
         }
 
 
 
 
         //************************************ main map related**************************************
-        var gc = new BMap.Geocoder();
-        var mapCr =null;
-        var map = null;
+
 
 
     </script>
@@ -96,7 +143,8 @@
     <h1>Starting app</h1>
 </div>
 
-<!--<div class="view" id="loginView">
+<!----------- login View --------------->
+<div class="view" id="loginView">
     <div class="pages">
         <div class="panel" id="loginPanel">
             <br>
@@ -108,12 +156,12 @@
 
                     <input type="text" placeholder="password">
                 </div>
-                <a class='button' href='#main' data-transition='up-reveal:dismiss'>Cancel</a>
-                <a class='button' href='#main' data-transition='up-reveal:dismiss'>Login</a>
+                <a class='button' onclick='transferToPanel("#mapPanel","up-reveal:dismiss");' >Cancel</a>
+                <a class='button' onclick='transferToPanel("#mapPanel","up-reveal:dismiss");' >Login</a>
             </div>
         </div>
     </div>
-</div>-->
+</div>
 
 <!----------------------   Main Map View --------------------->
 <div class="view" id="mainView">
@@ -319,38 +367,7 @@
 <script type="text/javascript" src="./js/bottomFunction.js"></script>
 <script type="text/javascript">
 
-    $("#toggleTarget").on("change",eventHandlerManager.toggleTarget_Sharp_Change);
-    $("#searchForm").on("submit",eventHandlerManager.searchForm_Sharp_Submit);
-    $("#map2SearchForm").on("submit",eventHandlerManager.map2SearchForm_Sharp_Submit);
-    $("#filterPanel").on("swipeRight", eventHandlerManager.filterPanel_Sharp_SwipeRight);
-    $("#createStandPanel1").on("panelbeforeload",eventHandlerManager.createStandPanel1_Sharp_PanelBeforeLoad);
-    $("#filterSettingIcon").on("click",eventHandlerManager.filterSettingIcon_Sharp_Click);
-    $("#createStandPanel2").on("panelload",eventHandlerManager.createStandPanel2_Sharp_PanelLoad);
-    $(".panel").on("panelload",eventHandlerManager.panel_Dot_PanelLoad);
-    $("#file").on("change", eventHandlerManager.file_Sharp_Change);
 
-
-
-// map related =====================================================
-    map = new BMap.Map("mapContainer");
-    var Json_tap_position; //finger tap position return Json
-    var Json_decode_position2address; //get address from position
-    var current_map_level;
-    initialMapParameter();;
-    //map.centerAndZoom(new BMap.Point(CONST_POINT_X, CONST_POINT_Y), CONST_DISPLAY_LEVEL);
-   // initMapLocation(map);
-    map.centerAndZoom("上海");
-
-
-    // map.addEventListener("dragend", eventHandlerManager.map_dragend_event);
-   // map.addEventListener("click", eventHandlerManager.map_click_event);
-    //map.addEventListener("zoomend", eventHandlerManager.map_zoomend_event);
-    map.addEventListener("moveend", eventHandlerManager.map_moveend_event);
-    map.addEventListener("load", eventHandlerManager.map_load_event);
-
-    mapCr = new BMap.Map("mapContainerCr");
-    mapCr.addEventListener("moveend", eventHandlerManager.mapCr_moveend_event);
-    mapCr.addEventListener("click", eventHandlerManager.mapCr_click_event);
 
 </script>
 

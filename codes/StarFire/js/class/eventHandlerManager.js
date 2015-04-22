@@ -79,6 +79,14 @@ var eventHandlerManagerClass = function()
 
     };
 
+    this.mapPanel_Sharp_PanelLoad = function()
+    {
+        if (isLogon) {
+            map.centerAndZoom("上海");
+            isLogon = null;
+        }
+    };
+
     this.panel_Dot_PanelLoad = function(){
         while(globalToasts.length!= 0)
         {
@@ -203,6 +211,7 @@ var eventHandlerManagerClass = function()
     };
     this.map_load_event = function(){
         mapCenterString = getMapCenter(map);
+
         //searchPoiNearbyPositionDisplay(mapCenterString,"",map,"#standList");
     };
 

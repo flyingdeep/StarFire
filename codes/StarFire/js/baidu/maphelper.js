@@ -183,6 +183,7 @@ function deleteJsonStandInfo()
 
 function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listContainerId, standId)
 {
+
     var mapObjStr = "";
     if (mapObj == map)
     {
@@ -205,10 +206,12 @@ function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listConta
             currentDisplayStandsStrPoints = [];
             var innerHtmlString = "<ul class='list'>";
             var responseStandAction = -1;
+
             for (var i=0;i<result.size; i++)
             {
 
                 var targetPosition = items[i];
+
                 if (standId && standId == targetPosition.uid)
                 {
                     responseStandAction = i;
@@ -233,6 +236,7 @@ function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listConta
 
             innerHtmlString = innerHtmlString + "</ul>";
             $(listContainerId).html(innerHtmlString);
+
             if (responseStandAction != -1)
             {
                 standListTapEvent(responseStandAction,mapObj);
