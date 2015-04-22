@@ -7,7 +7,7 @@ function initialCreateStandFieldEvent()
 
     if (!createStandEntity.standType)
     {
-        $("#standTypeDiv").children(":radio").prop("checked", false);
+        $("#standTypeDiv").children("div").children(":radio").prop("checked", false);
     }
 
     if (!createStandEntity.standSubContent)
@@ -59,7 +59,8 @@ function createUserStand()
            if(e)
            {
 
-               transferToPanel("#mapPanel","invoke");
+               //transferToPanel("#mapPanel","invoke");
+               searchPoiNearbyPositionDisplay(mapCenterString,"",map,"#standList",e);
                commonHelper.showToast(hint_Message.CREATE_STAND_CREATING_SUCCESS,"bc",true,"success");
                $.afui.hideMask();
            }

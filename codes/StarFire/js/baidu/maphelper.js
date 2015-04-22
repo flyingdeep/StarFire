@@ -181,7 +181,7 @@ function deleteJsonStandInfo()
 }
 
 
-function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listContainerId)
+function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listContainerId, standId)
 {
     var mapObjStr = "";
     if (mapObj == map)
@@ -204,11 +204,16 @@ function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listConta
             var items = result.contents;
             currentDisplayStandsStrPoints = [];
             var innerHtmlString = "<ul class='list'>";
-
+            var responseStandAction = -1;
             for (var i=0;i<result.size; i++)
             {
 
                 var targetPosition = items[i];
+                if (standId && standId == targetPosition.uid)
+                {
+                    responseStandAction = i;
+                }
+
                 var standType = targetPosition.tags;
 
                 var myIcon = fetchIconByStandType(standType);
@@ -228,6 +233,10 @@ function searchPoiNearbyPositionDisplay(location,searchString, mapObj, listConta
 
             innerHtmlString = innerHtmlString + "</ul>";
             $(listContainerId).html(innerHtmlString);
+            if (responseStandAction != -1)
+            {
+                standListTapEvent(responseStandAction,mapObj);
+            }
         }
     },search_condition);
 }
