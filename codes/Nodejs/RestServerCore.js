@@ -144,7 +144,6 @@ var authenticateUserCallbackPost = function(req, res, next)
 
         if (e && e!= -1)
         {
-
             if (e.length >0) {
                 result.status = "true";
                 result.detail = {
@@ -159,6 +158,7 @@ var authenticateUserCallbackPost = function(req, res, next)
                         "user_type": e[0].user_type,
                         "cell_number": e[0].cell_number,
                         "web_chat": e[0].web_chat,
+                        "email": e[0].email,
                         "qq_number": e[0].qq_number,
                         "province_city_area": e[0].province_city_area,
                         "createdate": e[0].createdate,

@@ -137,6 +137,41 @@ var commonHelperClass = function() {
         globalToasts.push(tempToast);
     };
 
+    this.loginUser = function(callback,username,password)
+    {
+        password =b64_md5(password);
+        (new processFacadeClass()).authenticateUser(function(e)
+        {
+
+            if (e)
+            {
+                var userInfoLocalContainer = {
+                    "userId": e.user_id,
+                    "userName": e.user_name,
+                    "displayName": e.display_name,
+                    "userImage": e.image_id,
+                    "userPreference": JSON.stringify(e.user_preference),
+                    "userType": e.user_type,
+                    "email": e.email,
+                    "cellNumber": e.cell_number,
+                    "webChat": e.web_chat,
+                    "qqNumber": e.qq_number,
+                    "provinceCityArea": JSON.stringify(e.province_city_area),
+                    "createDate": e.createdate,
+                    "updateDate":e.updatedate
+                };
+
+                callback(userInfoLocalContainer);
+
+            }
+            else{
+              callback(null);
+            }
+
+        },username,password);
+
+    };
+
     var formImagesToJsonArray = function (images, standId, tipImageId) {
 
         var stand_image = null;

@@ -62,7 +62,8 @@ var userBasicInfoEntity = {
     "webChat": null,
     "qqNumber": null,
     "provinceCityArea": null,
-    "createDate": null
+    "createDate": null,
+    "updateDate":null
 };
 
 var userPreference =

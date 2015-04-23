@@ -88,6 +88,23 @@ var processFacadeClass = function()
             }, standId, creatorType, standType, standName, typeDetailDescription, description, createUserId, positionLng, positionLat);
     };
 
+    this.authenticateUser = function(callback,username,password)
+    {
+
+        serverProxy.authenticateUser(function(e)
+        {
+            if (e.success == "true")
+            {
+                callback(e.result) ;
+
+            }
+            else
+            {
+                callback(null);
+            }
+        },username,password);
+    };
+
 
 
 

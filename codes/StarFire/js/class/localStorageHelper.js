@@ -10,7 +10,22 @@ var localStorageHelperClass = function()
     this.localUserInfo ={
         loadLocal: function()
         {
-
+            var resultJson = {
+                "userId": localStorageActual.localUserInfo_userId,
+                "userName": localStorageActual.localUserInfo_userName,
+                "displayName": localStorageActual.localUserInfo_displayName,
+                "userImage": localStorageActual.localUserInfo_userImage,
+                "userPreference": localStorageActual.localUserInfo_userPreference?JSON.parse(localStorageActual.localUserInfo_userPreference):null,
+                "userType": localStorageActual.localUserInfo_userType,
+                "email": localStorageActual.localUserInfo_email,
+                "cellNumber": localStorageActual.localUserInfo_cellNumber,
+                "webChat": localStorageActual.localUserInfo_webChat,
+                "qqNumber": localStorageActual.localUserInfo_qqNumber,
+                "provinceCityArea": localStorageActual.localUserInfo_provinceCityArea?JSON.parse(localStorageActual.localUserInfo_provinceCityArea):null,
+                "createDate": localStorageActual.localUserInfo_createDate,
+                "updateDate":localStorageActual.localUserInfo_updateDate
+            };
+            return resultJson;
         },
         refreshFromServer:function()
         {

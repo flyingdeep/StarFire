@@ -12,7 +12,8 @@ var hint_Message =
     CREATE_STAND_SET_MAP_POINT_NONE_ERROR : "请先设置摊位地点",
     CREATE_STAND_CREATING_HINT : "正在创建摊位...",
     CREATE_STAND_CREATING_ERROR:"创建摊位失败，请检查网络连接状态并重试",
-    CREATE_STAND_CREATING_SUCCESS:"创建摊位成功！"
+    CREATE_STAND_CREATING_SUCCESS:"创建摊位成功！",
+    USER_LOGIN_FAIL:"登录失败，请检查用户名和密码，并保持网络畅通"
 
 
 };

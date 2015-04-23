@@ -87,6 +87,41 @@ var eventHandlerManagerClass = function()
         }
     };
 
+    this.signUpButton_Sharp_Click = function()
+    {
+        transferToPanel("#signUpUserPanel1", "up-reveal:dismiss");
+    };
+
+    this.loginButton_Sharp_Click = function() {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        commonHelper.loginUser(function (e) {
+            if (e) {
+
+                localStorageHelper.localUserInfo.userId(e.userId);
+                localStorageHelper.localUserInfo.userName(e.userName);
+                localStorageHelper.localUserInfo.displayName(e.displayName);
+                localStorageHelper.localUserInfo.userImage(e.userImage);
+                localStorageHelper.localUserInfo.userType(e.userType);
+                localStorageHelper.localUserInfo.email(e.email);
+                localStorageHelper.localUserInfo.cellNumber(e.cellNumber);
+                localStorageHelper.localUserInfo.webChat(e.webChat);
+                localStorageHelper.localUserInfo.qqNumber(e.qqNumber);
+                localStorageHelper.localUserInfo.provinceCityArea(e.provinceCityArea);
+                localStorageHelper.localUserInfo.createDate(e.createDate);
+                localStorageHelper.localUserInfo.updateDate(e.updateDate);
+                localStorageHelper.localUserInfo.userPreference(e.userPreference);
+
+                userBasicInfoEntity = e;
+                userPreference = userBasicInfoEntity.userPreference;
+                transferToPanel("#mapPanel", "up-reveal:dismiss");
+            }
+            else {
+                commonHelper.showToast(hint_Message.USER_LOGIN_FAIL,"bc",true,"error");
+            }
+        }, username, password);
+    };
+
     this.panel_Dot_PanelLoad = function(){
         while(globalToasts.length!= 0)
         {
