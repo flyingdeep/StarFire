@@ -93,6 +93,10 @@ var eventHandlerManagerClass = function()
     };
 
     this.loginButton_Sharp_Click = function() {
+        if (!fieldValidationLogin())
+        {
+            return;
+        }
         var username = $("#username").val();
         var password = $("#password").val();
         commonHelper.loginUser(function (e) {
@@ -117,6 +121,7 @@ var eventHandlerManagerClass = function()
                 transferToPanel("#mapPanel", "up-reveal:dismiss");
             }
             else {
+
                 commonHelper.showToast(hint_Message.USER_LOGIN_FAIL,"bc",true,"error");
             }
         }, username, password);

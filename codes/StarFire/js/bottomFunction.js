@@ -86,6 +86,20 @@ function standLocationNoneSetCheck()
     return true;
 }
 
+function fieldValidationLogin()
+{
+    var result = true;
+    if (commonHelper.trim($("#username").val()) == "" || commonHelper.trim($("#password").val()) == "")
+    {
+        result = false;
+    }
+    if (!result)
+    {
+        commonHelper.showToast(hint_Message.USER_LOGIN_NO_BLANK_USER_PASS,"bc",true,"error");
+    }
+    return result;
+}
+
 function fieldValidationCreateStand()
 {
 

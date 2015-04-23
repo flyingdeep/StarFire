@@ -93,7 +93,8 @@ var processFacadeClass = function()
 
         serverProxy.authenticateUser(function(e)
         {
-            if (e.success == "true")
+
+            if (e && e.success && e.success == "true")
             {
                 callback(e.result) ;
 
