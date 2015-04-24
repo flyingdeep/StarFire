@@ -92,6 +92,35 @@ var eventHandlerManagerClass = function()
         transferToPanel("#signUpUserPanel1", "up-reveal:dismiss");
     };
 
+    this.cancelSignUpButton_Sharp_Click = function()
+    {
+        var uploadPopup = $.afui.popup({
+            title: normal_Text.USER_CREATE_CANCEL,
+            message: innerContent,
+            cancelText: normal_Text.NO,
+            cancelCallback: function () {
+                this.hide();
+            },
+            doneCallback:function()
+            {
+                transferToPanel("#loginPanel", "up-reveal:dismiss");
+                this.hide();
+            },
+            cancelOnly: false
+        });
+
+    };
+
+    this.signUpUserPanel1_Sharp_SwipeRight = function()
+    {
+
+    };
+
+    this.signUpUserPanel1_Sharp_swipeLeft = function()
+    {
+
+    };
+
     this.loginButton_Sharp_Click = function() {
         if (!fieldValidationLogin())
         {

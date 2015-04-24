@@ -93,8 +93,10 @@
                     $("#mapPanel").on("panelload", eventHandlerManager.mapPanel_Sharp_PanelLoad);
                     $("#loginButton").on("click", eventHandlerManager.loginButton_Sharp_Click);
                     $("#signUpButton").on("click", eventHandlerManager.signUpButton_Sharp_Click);
+                    $("#cancelSignUpButton").on("click", eventHandlerManager.cancelSignUpButton_Sharp_Click);
 
-
+                    $("#signUpUserPanel1").on("swipeRight", eventHandlerManager.signUpUserPanel1_Sharp_SwipeRight);
+                    $("#signUpUserPanel1").on("swipeLeft", eventHandlerManager.signUpUserPanel1_Sharp_swipeLeft);
                     // map related =====================================================
                     gc = new BMap.Geocoder();
                     map = new BMap.Map("mapContainer");
@@ -171,10 +173,26 @@
     <div class="pages">
         <div class="panel"  id="signUpUserPanel1">
             <div style="height:100%;width:100%" class="center">
+                <div>
+                    <div style = "margin:20px;width:85%;">
+                        <div style="float:left;width:110px;"><input id="ut1" value="1" type="radio" name="userTypeRadio" checked ><label for="ut1">我爱逛摊</label></div>
+                        <div style="height:15px;clear:both;"></div>
+                        <div style="float:left">我爱小吃，我爱精致小服饰，我爱买便宜又好用的耳塞……。 这就是我，爱生活，爱实惠，爱逛摊。         
+                    </div>
+                        </div>
+                    <div style="height:30px"></div>
+                    <div style = "margin:20px;width:85%;">
 
-                <div style = "width:70%;background-color: aliceblue; height: 30%">aaa</div>
-                <div style = "width:70%;background-color:lightgoldenrodyellow; height: 30%">bbb</div>
+                        <div style="float:left; width:110px;"><input id="ut2" value="2" type="radio" name="userTypeRadio" ><label for="ut2">我是摊主</label></div>
+                        <div style="height:15px;clear:both;"></div>
+                        <div style="float:left">或早出晚归，或按心情随遇而安。美食，服饰，贴膜，你要啥我有啥。 你满意，我快乐。我就是摊主，就这么简单。
+                        </div>
 
+                    </div>
+                    <div style="height:60px"></div>
+                    <div style="text-align: center;"><a class="button" id="cancelSignUpButton" onclick='transferToPanel("#loginPanel","slide");' >放弃注册</a></div>
+
+                </div>
 
             </div>
 
@@ -227,7 +245,7 @@
 <!----------------------  附近摊位列表 --------------------->
 <div class="view" id="nearbyStandListView">
     <header id="standListHeader" >
-        <div style="float:left"><a onclick='transferToPanel("#mapPanel","slide",true);' class="icon info green button previous">返回地图</a></div>
+        <div style="float:left"><a onclick='transferToPanel("#mapPanel","slide");' class="icon info green button previous">返回地图</a></div>
 
         <div style="float:right;margin-right: 10px"><a class="button" id="filterSettingIcon_nearbyStandListView">筛选</a>
             </div>

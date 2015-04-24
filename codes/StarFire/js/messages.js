@@ -22,6 +22,7 @@ var hint_Message =
 var normal_Text =
 {
     STAND_CONFIRM_POINT : "是否设定摊位位置？",
+    USER_CREATE_CANCEL:"放弃创建用户？（已填数据将丢失）",
     STAND_UPLOADING: "照片上传中...",
     YES:"确定",
     NO:"取消"
