@@ -5,6 +5,7 @@
 -6-22 16.36
 */
 
+
 function Dsy() {
     this.Items = {};
 }
@@ -475,8 +476,10 @@ var opt0 = ["选择省份/直辖市..", "选择市..", "选择区县.."];
 (function setup() {
     for (i = 0; i < s.length - 1; i++)
         document.getElementById(s[i]).onchange = new Function("change(" + (i + 1) + ")");
-    change(0);
+ change(0);
 })();
+
+
 
 //  sample
 //   <div>

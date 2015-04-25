@@ -50,6 +50,22 @@ var createStandEntity = {
     "images":[]
 };
 
+var createUserEntity = {
+    "userId": null,
+    "userName": null,
+    "displayName": null,
+    "userImage": null,
+    "userPreference": null,
+    "userType": null,
+    "email": null,
+    "cellNumber": null,
+    "webChat": null,
+    "qqNumber": null,
+    "provinceCityArea": null,
+    "createDate": null,
+    "updateDate":null
+};
+
 var userBasicInfoEntity = {
     "userId": null,
     "userName": null,
@@ -73,3 +89,4 @@ var userPreference =
     "displayClientCreatedStand":null,
     "displayLinkedStandOnly": null
 };
+

@@ -89,7 +89,7 @@ CREATE TABLE `stand_type` (
 
 CREATE TABLE `user_info` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `display_name` varchar(10) DEFAULT NULL,
+  `display_name` varchar(30) DEFAULT NULL,
   `user_name` varchar(30) NOT NULL,
   `image_id` varchar(20) NOT NULL,
   `user_preference` varchar(500) NOT NULL,
@@ -109,6 +109,7 @@ CREATE TABLE `user_info` (
   KEY `USERNAMEINDEX` (`isdeleted`,`user_name`),
   KEY `ISDELETEDINDEX` (`isdeleted`)
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `user_link_stand` (
   `user_link_id` int(11) NOT NULL AUTO_INCREMENT,

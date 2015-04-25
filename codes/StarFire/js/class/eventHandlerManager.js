@@ -113,12 +113,13 @@ var eventHandlerManagerClass = function()
 
     this.signUpUserPanel1_Sharp_SwipeRight = function()
     {
-
+        createUserEntity.userType = parseInt($("input[name='userTypeRadio']:checked").val());
+        transferToPanel("#signUpUserPanel2", "slide");
     };
 
     this.signUpUserPanel1_Sharp_swipeLeft = function()
     {
-
+        this.cancelSignUpButton_Sharp_Click();
     };
 
     this.loginButton_Sharp_Click = function() {
