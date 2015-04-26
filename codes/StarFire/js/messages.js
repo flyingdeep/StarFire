@@ -14,8 +14,11 @@ var hint_Message =
     CREATE_STAND_CREATING_ERROR:"创建摊位失败，请检查网络连接状态并重试",
     CREATE_STAND_CREATING_SUCCESS:"创建摊位成功！",
     USER_LOGIN_FAIL:"登录失败，请检查用户名和密码，并保持网络畅通",
-    USER_LOGIN_NO_BLANK_USER_PASS:"用户名和密码不能为空"
-
+    USER_LOGIN_NO_BLANK_USER_PASS:"用户名和密码不能为空",
+    CREATE_USER_USERNAME_LENGTH_ERROR: "请输入20位字符以内的用户名，由大小写字母和数字组成",
+    CREATE_USER_DISPLAY_NAME_LENGTH_ERROR: "请输入15位字符以内的昵称，由中英文和数字组成",
+    CREATE_USER_PASSWORD_LENGTH_ERROR: "请输入20位以内由大小写字母，数字以及_ . * + -组成的密码",
+    CREATE_USER_EMAIL_FORMAT_ERROR : "请输入正确的Email格式"
 
 };
 

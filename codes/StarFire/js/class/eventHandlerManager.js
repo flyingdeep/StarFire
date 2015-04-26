@@ -89,6 +89,7 @@ var eventHandlerManagerClass = function()
 
     this.signUpButton_Sharp_Click = function()
     {
+        initialCreateUserField();
         transferToPanel("#signUpUserPanel1", "up-reveal:dismiss");
     };
 
@@ -118,6 +119,19 @@ var eventHandlerManagerClass = function()
     };
 
     this.signUpUserPanel1_Sharp_swipeLeft = function()
+    {
+        this.cancelSignUpButton_Sharp_Click();
+    };
+
+    this.signUpUserPanel2_Sharp_SwipeRight = function()
+    {
+        if (fieldValidationCreateUserRequired()) {
+            fieldValueAssignmentCreateUserRequired();
+            transferToPanel("#signUpUserPanel2", "slide");
+        }
+    };
+
+    this.signUpUserPanel2_Sharp_swipeLeft = function()
     {
         this.cancelSignUpButton_Sharp_Click();
     };

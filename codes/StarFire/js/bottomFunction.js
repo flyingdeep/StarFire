@@ -29,6 +29,34 @@ function initialCreateStandFieldEvent()
     $("#standDescription").on("change",eventHandlerManager.standDescription_Sharp_Change);
 }
 
+function initialCreateUserField()
+{
+    createUserEntity = {
+        "userId": null,
+        "userName": null,
+        "displayName": null,
+        "userImage": null,
+        "userPreference": null,
+        "userType": null,
+        "email": null,
+        "cellNumber": null,
+        "webChat": null,
+        "qqNumber": null,
+        "provinceCityArea": null,
+        "createDate": null,
+        "updateDate":null
+    };
+    $("[name='userTypeRadio']:first").prop("checked",true);
+    $("#usernameCr").val("");
+    $("#passwordCr").val("");
+    $("#nickname").val("");
+    $("#mailBox").val("");
+    $("#province option").eq(0).attr('selected', 'true');
+    $("#province").trigger("change");
+
+
+}
+
 function createUserStand()
 {
     //*********** for test only ****************
@@ -75,6 +103,15 @@ function createUserStand()
     userBasicInfoEntity.userId,userBasicInfoEntity.userName,createStandEntity.position,standImageTip,images);
 }
 
+function fieldValueAssignmentCreateUserRequired()
+{
+    createUserEntity.userName = $("#usernameCr").val();
+    createUserEntity.password = $("#passwordCr").val();
+    createUserEntity.displayName = $("#nickname").val();
+    createUserEntity.mail = $("#mailBox").val();
+    createUserEntity.location = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
+}
+
 function standLocationNoneSetCheck()
 {
     //
@@ -96,6 +133,55 @@ function fieldValidationLogin()
     if (!result)
     {
         commonHelper.showToast(hint_Message.USER_LOGIN_NO_BLANK_USER_PASS,"bc",true,"error");
+    }
+    return result;
+}
+
+function fieldValidationCreateUserRequired()
+{
+    var result = true;
+    var messageContent = "";
+    if (!createUserEntity.userName || commonHelper.trim(createUserEntity.userName).length==0)
+    {
+        messageContent = messageContent + hint_Message.CREATE_USER_USERNAME_LENGTH_ERROR + "<br />";
+        result = false;
+    }
+    else if (!REG_EXPRESSION_USER_NAME.test(commonHelper.trim(createUserEntity.userName)))
+    {
+        messageContent = messageContent + hint_Message.CREATE_USER_USERNAME_LENGTH_ERROR + "<br />";
+        result = false;
+    }
+
+    if (!createUserEntity.displayName || commonHelper.trim(createUserEntity.displayName).length==0)
+    {
+        messageContent = messageContent + hint_Message.CREATE_USER_DISPLAY_NAME_LENGTH_ERROR + "<br />";
+        result = false;
+    }
+    else if (!REG_EXPRESSION_USER_DISPLAY_NAME.test(commonHelper.trim(createUserEntity.displayName)))
+    {
+        messageContent = messageContent + hint_Message.CREATE_USER_DISPLAY_NAME_LENGTH_ERROR + "<br />";
+        result = false;
+    }
+
+    if (!createUserEntity.password || commonHelper.trim(createUserEntity.password).length==0)
+    {
+        messageContent = messageContent + hint_Message.CREATE_USER_PASSWORD_LENGTH_ERROR + "<br />";
+        result = false;
+    }
+    else if (!REG_EXPRESSION_USER_PASSWORD.test(commonHelper.trim(createUserEntity.password)))
+    {
+        messageContent = messageContent + hint_Message.CREATE_USER_PASSWORD_LENGTH_ERROR + "<br />";
+        result = false;
+    }
+
+    if (!createUserEntity.email || !REG_EXPRESSION_EMAIL_FORMAT.test(commonHelper.trim(createUserEntity.email)))
+    {
+        messageContent = messageContent + hint_Message.CREATE_USER_EMAIL_FORMAT_ERROR + "<br />";
+        result = false;
+    }
+    if (!result)
+    {
+        commonHelper.showToast(messageContent,"bc",true,"error");
     }
     return result;
 }

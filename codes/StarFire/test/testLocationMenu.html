@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
 
     <title></title>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
 
 </head>
 <body>
@@ -15,6 +16,15 @@
                   <select name="county" id="county">
                     </select>
            </div>
+   <input type="button" onclick="setFirst();" value="test">
    <script type="text/javascript" src="../js/common/locationMenu.js" ></script>
+    <script>
+        function setFirst() {
+            $("#province option").eq(0).attr('selected', 'true');
+            $("#province").trigger("change");
+
+        }
+
+    </script>
 </body>
 </html>

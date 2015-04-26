@@ -93,10 +93,13 @@
                     $("#mapPanel").on("panelload", eventHandlerManager.mapPanel_Sharp_PanelLoad);
                     $("#loginButton").on("click", eventHandlerManager.loginButton_Sharp_Click);
                     $("#signUpButton").on("click", eventHandlerManager.signUpButton_Sharp_Click);
-                    $("#cancelSignUpButton").on("click", eventHandlerManager.cancelSignUpButton_Sharp_Click);
-
+                    $("#cancelSignUpButton1").on("click", eventHandlerManager.cancelSignUpButton_Sharp_Click);
+                    $("#cancelSignUpButton2").on("click", eventHandlerManager.cancelSignUpButton_Sharp_Click);
+                    $("#cancelSignUpButton3").on("click", eventHandlerManager.cancelSignUpButton_Sharp_Click);
                     $("#signUpUserPanel1").on("swipeRight", eventHandlerManager.signUpUserPanel1_Sharp_SwipeRight);
                     $("#signUpUserPanel1").on("swipeLeft", eventHandlerManager.signUpUserPanel1_Sharp_swipeLeft);
+                    $("#signUpUserPanel2").on("swipeRight", eventHandlerManager.signUpUserPanel2_Sharp_SwipeRight);
+                    $("#signUpUserPanel2").on("swipeLeft", eventHandlerManager.signUpUserPanel2_Sharp_swipeLeft);
                     // map related =====================================================
                     gc = new BMap.Geocoder();
                     map = new BMap.Map("mapContainer");
@@ -190,7 +193,7 @@
 
                     </div>
                     <div style="height:60px"></div>
-                    <div style="text-align: center;"><a class="button" id="cancelSignUpButton" onclick='transferToPanel("#loginPanel","slide");' >放弃注册</a></div>
+                    <div style="text-align: center;"><a class="button" id="cancelSignUpButton1" onclick='transferToPanel("#loginPanel","slide");' >放弃注册</a></div>
 
                 </div>
 
@@ -200,14 +203,17 @@
 
         </div>
         <div class="panel"  id="signUpUserPanel2" selected="true">
-            <input id="usernameCr" type="text" placeholder="大小写字母，不超过20个字符" >
-            <input id="passwordCr" type="password" placeholder="由大小写字母，数字以及_ . * + -组成,不超过20位" >
+            <input id="usernameCr" type="text" placeholder="大小写字母和数字，不超过20个字符" >
+            <input id="passwordCr" type="password" placeholder="由大小写字母，数字以及_ . + -组成,不超过20位" >
             <input id="nickname" type="text" placeholder="由中英文，数字组成,不超过15位" >
-            <select id="province">
-                </select>
             <input id="mailBox" type="text" placeholder="输入正确的邮箱地址" >
-
-
+            <select name="province" id="province">
+            </select>
+            <select name="city" id="city">
+            </select>
+            <select name="county" id="county">
+            </select>
+            <div style="text-align: center;"><a class="button" id="cancelSignUpButton2" onclick='transferToPanel("#loginPanel","slide");' >放弃注册</a></div>
         </div>
         <div class="panel"  id="signUpUserPanel3" selected="true">
 
@@ -418,6 +424,7 @@
 </div>
 </nav>
 <script type="text/javascript" src="./js/bottomFunction.js"></script>
+<script type="text/javascript" src="./js/common/locationMenu.js" ></script>
 <script type="text/javascript">
 
 
