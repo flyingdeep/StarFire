@@ -72,6 +72,31 @@ var commonHelperClass = function() {
         return str.replace(/(^\s*)|(\s*$)/g, "");
     };
 
+    var initCustomerDefaultUserPreference = function()
+    {
+
+    };
+    var initOwnerDefaultUserPreference = function()
+    {
+
+    };
+    this.createUserRequired = function(callback, username, userType, provinceCityArea,password)
+    {
+        var userPreference;
+        if (userType == 1)
+        {
+            userPreference = initCustomerDefaultUserPreference();
+        }
+        else
+        {
+            userPreference = initOwnerDefaultUserPreference();
+        }
+        (new processFacadeClass()).createNewUser(function(e)
+        {
+
+        }, null, username, null, userPreference, userType, null,null, null,provinceCityArea,password)
+    };
+
     this.createStandPoiDb = function (callback, address, creatorType, standType, standName, typeDetailDescription, description, createUserId, creatorName, position, majorPic, images) {
         var createStandJson = createUpdateJsonStandPositionInfoInstance();
         var positionArr = position.split(",");

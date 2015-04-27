@@ -106,6 +106,41 @@ var processFacadeClass = function()
         },username,password);
     };
 
+    this.createNewUser = function(callback, displayName, username, imageId, userPreference, userType, email, cellNumber,webChat, qqNumber,provinceCityArea,password)
+    {
+        serverProxy.registerUser(function(e)
+            {
+                if (e && e.success && e.success == "true")
+                {
+                    callback(e.result) ;
+
+                }
+                else
+                {
+                    callback(null);
+                }
+            }
+            , displayName, username, imageId, userPreference, userType, email, cellNumber,webChat, qqNumber,provinceCityArea,password);
+
+    };
+
+    this.updateExistUser = function(callback, displayName, username, imageId, userPreference, userType, cellNumber,webChat, qqNumber,provinceCityArea,password)
+    {
+        serverProxy.updateUser(function(e)
+        {
+            if (e && e.success && e.success == "true")
+            {
+                callback(e.result) ;
+
+            }
+            else
+            {
+                callback(null);
+            }
+        }, displayName, username, imageId, userPreference, userType, cellNumber,webChat, qqNumber,provinceCityArea,password);
+
+    };
+
 
 
 

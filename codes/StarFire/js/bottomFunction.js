@@ -107,9 +107,12 @@ function fieldValueAssignmentCreateUserRequired()
 {
     createUserEntity.userName = $("#usernameCr").val();
     createUserEntity.password = $("#passwordCr").val();
+    createUserEntity.location = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
+}
+
+function fieldValueAssignmentCreateUserOptional() {
     createUserEntity.displayName = $("#nickname").val();
     createUserEntity.mail = $("#mailBox").val();
-    createUserEntity.location = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
 }
 
 function standLocationNoneSetCheck()
@@ -137,6 +140,28 @@ function fieldValidationLogin()
     return result;
 }
 
+function fieldValidationCreateOptional()
+{
+    var result = true;
+    var messageContent = "";
+    if (createUserEntity.displayName && !REG_EXPRESSION_USER_DISPLAY_NAME.test(commonHelper.trim(createUserEntity.displayName)))
+    {
+        messageContent = messageContent + hint_Message.CREATE_USER_DISPLAY_NAME_LENGTH_ERROR + "<br />";
+        result = false;
+    }
+
+    if (createUserEntity.email && !REG_EXPRESSION_EMAIL_FORMAT.test(commonHelper.trim(createUserEntity.email)))
+    {
+        messageContent = messageContent + hint_Message.CREATE_USER_EMAIL_FORMAT_ERROR + "<br />";
+        result = false;
+    }
+    if (!result)
+    {
+        commonHelper.showToast(messageContent,"bc",true,"error");
+    }
+    return result;
+}
+
 function fieldValidationCreateUserRequired()
 {
     var result = true;
@@ -152,16 +177,7 @@ function fieldValidationCreateUserRequired()
         result = false;
     }
 
-    if (!createUserEntity.displayName || commonHelper.trim(createUserEntity.displayName).length==0)
-    {
-        messageContent = messageContent + hint_Message.CREATE_USER_DISPLAY_NAME_LENGTH_ERROR + "<br />";
-        result = false;
-    }
-    else if (!REG_EXPRESSION_USER_DISPLAY_NAME.test(commonHelper.trim(createUserEntity.displayName)))
-    {
-        messageContent = messageContent + hint_Message.CREATE_USER_DISPLAY_NAME_LENGTH_ERROR + "<br />";
-        result = false;
-    }
+
 
     if (!createUserEntity.password || commonHelper.trim(createUserEntity.password).length==0)
     {
@@ -174,11 +190,7 @@ function fieldValidationCreateUserRequired()
         result = false;
     }
 
-    if (!createUserEntity.email || !REG_EXPRESSION_EMAIL_FORMAT.test(commonHelper.trim(createUserEntity.email)))
-    {
-        messageContent = messageContent + hint_Message.CREATE_USER_EMAIL_FORMAT_ERROR + "<br />";
-        result = false;
-    }
+
     if (!result)
     {
         commonHelper.showToast(messageContent,"bc",true,"error");

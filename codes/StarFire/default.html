@@ -203,19 +203,30 @@
 
         </div>
         <div class="panel"  id="signUpUserPanel2" selected="true">
-            <input id="usernameCr" type="text" placeholder="大小写字母和数字，不超过20个字符" >
-            <input id="passwordCr" type="password" placeholder="由大小写字母，数字以及_ . + -组成,不超过20位" >
-            <input id="nickname" type="text" placeholder="由中英文，数字组成,不超过15位" >
-            <input id="mailBox" type="text" placeholder="输入正确的邮箱地址" >
-            <select name="province" id="province">
+            <label for="usernameCr">用户名</label><input id="usernameCr" type="text" placeholder="大小写字母和数字，不超过20个字符" >
+            <label for="passwordCr">密码</label><input id="passwordCr" type="password" placeholder="由大小写字母，数字以及_ . + -组成,不超过20位" >
+
+            <label for="province">省份</label> <select name="province" id="province">
             </select>
-            <select name="city" id="city">
+            <label for="province">城市</label> <select name="city" id="city">
             </select>
-            <select name="county" id="county">
+            <label for="province">区县</label> <select name="county" id="county">
             </select>
             <div style="text-align: center;"><a class="button" id="cancelSignUpButton2" onclick='transferToPanel("#loginPanel","slide");' >放弃注册</a></div>
         </div>
+
         <div class="panel"  id="signUpUserPanel3" selected="true">
+            <div>
+                <form>
+                    <input style="visibility: visible;" id="userPic" name="file" type="file" accept="image/jpeg,image/png" >
+                    <a class="button smallButton" onclick="$('#userPic').click();" >选择并上传您的头像</a>
+                </form>
+            </div>
+            <div id="userImageContainer">
+
+            </div>
+            <label for="nickname">昵称</label><input id="nickname" type="text" placeholder="由中英文，数字组成,不超过15位" >
+            <label for="mailBox">邮箱</label><input id="mailBox" type="text" placeholder="输入正确的邮箱地址" >
 
         </div>
     </div>
