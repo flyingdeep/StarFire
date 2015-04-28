@@ -103,17 +103,20 @@ function createUserStand()
     userBasicInfoEntity.userId,userBasicInfoEntity.userName,createStandEntity.position,standImageTip,images);
 }
 
-function fieldValueAssignmentCreateUserRequired()
+function initialSignUpUserFieldEvent()
 {
-    createUserEntity.userName = $("#usernameCr").val();
-    createUserEntity.password = $("#passwordCr").val();
-    createUserEntity.location = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
+    $("#usernameCr").on("change",eventHandlerManager.usernameCr_Sharp_Change);
+
+    $("#passwordCr").on("change",eventHandlerManager.passwordCr_Sharp_Change);
+
+    $("#province").on("change",eventHandlerManager.province_Sharp_Change);
+
+    $("#city").on("change",eventHandlerManager.city_Sharp_Change);
+
+    $("#county").on("change",eventHandlerManager.county_Sharp_Change);
+
 }
 
-function fieldValueAssignmentCreateUserOptional() {
-    createUserEntity.displayName = $("#nickname").val();
-    createUserEntity.mail = $("#mailBox").val();
-}
 
 function standLocationNoneSetCheck()
 {

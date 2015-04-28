@@ -36,6 +36,7 @@ var eventHandlerManagerClass = function()
         $.afui.drawer.hide("#right_Filter","right");
     };
 
+
     this.createStandPanel1_Sharp_PanelBeforeLoad = function(){
         initialCreateStandFieldEvent();
         if ( $("#standTypeDiv").html() == "") {
@@ -90,22 +91,25 @@ var eventHandlerManagerClass = function()
     this.signUpButton_Sharp_Click = function()
     {
         initialCreateUserField();
-        transferToPanel("#signUpUserPanel1", "up-reveal:dismiss");
+        initialSignUpUserFieldEvent();
+        transferToPanel("#signUpUserPanel1", "slide");
     };
 
     this.cancelSignUpButton_Sharp_Click = function()
     {
+        var innerContent="";
         var uploadPopup = $.afui.popup({
             title: normal_Text.USER_CREATE_CANCEL,
             message: innerContent,
+            doneText:normal_Text.YES,
             cancelText: normal_Text.NO,
             cancelCallback: function () {
-                this.hide();
+                uploadPopup.hide();
             },
             doneCallback:function()
             {
-                transferToPanel("#loginPanel", "up-reveal:dismiss");
-                this.hide();
+                transferToPanel("#loginPanel", "slide",true);
+                uploadPopup.hide();
             },
             cancelOnly: false
         });
@@ -114,27 +118,31 @@ var eventHandlerManagerClass = function()
 
     this.signUpUserPanel1_Sharp_SwipeRight = function()
     {
-        createUserEntity.userType = parseInt($("input[name='userTypeRadio']:checked").val());
-        transferToPanel("#signUpUserPanel2", "slide");
+        this.cancelSignUpButton_Sharp_Click();
     };
 
     this.signUpUserPanel1_Sharp_swipeLeft = function()
     {
-        this.cancelSignUpButton_Sharp_Click();
+
+
+        createUserEntity.userType = parseInt($("input[name='userTypeRadio']:checked").val());
+        transferToPanel("#signUpUserPanel2", "slide");
     };
 
     this.signUpUserPanel2_Sharp_SwipeRight = function()
     {
-        if (fieldValidationCreateUserRequired()) {
-            fieldValueAssignmentCreateUserRequired();
-
-            transferToPanel("#signUpUserPanel2", "slide");
-        }
+        transferToPanel("#signUpUserPanel1", "invoke");
     };
 
     this.signUpUserPanel2_Sharp_swipeLeft = function()
     {
-        transferToPanel("#signUpUserPanel1", "slide",true);
+        if (fieldValidationCreateUserRequired()) {
+            commonHelper.createUserRequired(function(e){
+                alert(JSON.stringify(e));
+            },createUserEntity.username,createUserEntity.userType,createUserEntity.provinceCityArea,createUserEntity.password);
+            transferToPanel("#signUpUserPanel3", "slide");
+        }
+
     };
 
     this.loginButton_Sharp_Click = function() {
@@ -339,6 +347,31 @@ var eventHandlerManagerClass = function()
     this.standDescription_Sharp_Change = function()
     {
         createStandEntity.description = $("#standDescription").val();
+    };
+
+    this.usernameCr_Sharp_Change = function()
+    {
+        createUserEntity.userName = $("#usernameCr").val();
+    };
+
+    this.passwordCr_Sharp_Change = function()
+    {
+        createUserEntity.password = $("#passwordCr").val();
+    };
+
+    this.province_Sharp_Change = function()
+    {
+        createUserEntity.location = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
+    };
+
+    this.city_Sharp_Change = function()
+    {
+        createUserEntity.location = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
+    };
+
+    this.county_Sharp_Change = function()
+    {
+        createUserEntity.location = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
     };
 
     this.onDeviceReadPhoneGap = function()

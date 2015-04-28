@@ -93,8 +93,19 @@ var commonHelperClass = function() {
         }
         (new processFacadeClass()).createNewUser(function(e)
         {
+            callback(e);
+        }, null, username, null, userPreference, userType, null,null, null,provinceCityArea,password);
+    };
 
-        }, null, username, null, userPreference, userType, null,null, null,provinceCityArea,password)
+    this.updateUserOptional = function(callback, displayName,imageId,cellNumber,webChat, qqNumber)
+    {
+        (new processFacadeClass()).updateExistUser(
+            function(e)
+            {
+                callback(e);
+            }, displayName, null, imageId, null, null, cellNumber,webChat, qqNumber,null,null
+        );
+
     };
 
     this.createStandPoiDb = function (callback, address, creatorType, standType, standName, typeDetailDescription, description, createUserId, creatorName, position, majorPic, images) {

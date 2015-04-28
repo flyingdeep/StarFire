@@ -172,7 +172,7 @@
 </div>
 
 <!----------------------   用户注册 - 用户类型选择 --------------------->
-<div class="view" id="signUpUserView">
+<div class="view" id="signUpUserView1">
     <div class="pages">
         <div class="panel"  id="signUpUserPanel1">
             <div style="height:100%;width:100%" class="center">
@@ -185,24 +185,24 @@
                         </div>
                     <div style="height:30px"></div>
                     <div style = "margin:20px;width:85%;">
-
                         <div style="float:left; width:110px;"><input id="ut2" value="2" type="radio" name="userTypeRadio" ><label for="ut2">我是摊主</label></div>
                         <div style="height:15px;clear:both;"></div>
                         <div style="float:left">或早出晚归，或按心情随遇而安。美食，服饰，贴膜，你要啥我有啥。 你满意，我快乐。我就是摊主，就这么简单。
                         </div>
-
                     </div>
                     <div style="height:60px"></div>
-                    <div style="text-align: center;"><a class="button" id="cancelSignUpButton1" onclick='transferToPanel("#loginPanel","slide");' >放弃注册</a></div>
-
+                    <div style="text-align: center;"><a class="button" id="cancelSignUpButton1"  >放弃注册</a></div>
                 </div>
-
             </div>
-
-
-
         </div>
-        <div class="panel"  id="signUpUserPanel2" selected="true">
+    </div>
+
+</div>
+<div class="view" id="signUpUserView2">
+    <div class="pages">
+        <div class="panel"  id="signUpUserPanel2" >
+            <div style="height:50px"></div>
+            <div style="text-align: center;">
             <label for="usernameCr">用户名</label><input id="usernameCr" type="text" placeholder="大小写字母和数字，不超过20个字符" >
             <label for="passwordCr">密码</label><input id="passwordCr" type="password" placeholder="由大小写字母，数字以及_ . + -组成,不超过20位" >
 
@@ -212,10 +212,15 @@
             </select>
             <label for="province">区县</label> <select name="county" id="county">
             </select>
-            <div style="text-align: center;"><a class="button" id="cancelSignUpButton2" onclick='transferToPanel("#loginPanel","slide");' >放弃注册</a></div>
+            <div style="text-align: center;"><a class="button" id="cancelSignUpButton2"  >放弃注册</a></div>
+            </div>
         </div>
+    </div>
 
-        <div class="panel"  id="signUpUserPanel3" selected="true">
+</div>
+<div class="view" id="signUpUserView3">
+    <div class="pages">
+        <div class="panel"  id="signUpUserPanel3" >
             <div>
                 <form>
                     <input style="visibility: visible;" id="userPic" name="file" type="file" accept="image/jpeg,image/png" >
