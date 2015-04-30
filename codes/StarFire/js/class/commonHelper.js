@@ -74,11 +74,11 @@ var commonHelperClass = function() {
 
     var initCustomerDefaultUserPreference = function()
     {
-
+        return {"test":"testCustomer"};
     };
     var initOwnerDefaultUserPreference = function()
     {
-
+        return {"test":"testOwner"};
     };
     this.createUserRequired = function(callback, username, userType, provinceCityArea,password)
     {
@@ -94,7 +94,7 @@ var commonHelperClass = function() {
         (new processFacadeClass()).createNewUser(function(e)
         {
             callback(e);
-        }, null, username, null, userPreference, userType, null,null, null,provinceCityArea,password);
+        }, null, username, null, userPreference, userType, null,null, null,null,provinceCityArea,password);
     };
 
     this.updateUserOptional = function(callback, displayName,imageId,cellNumber,webChat, qqNumber)

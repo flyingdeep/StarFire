@@ -91,10 +91,10 @@ CREATE TABLE `user_info` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `display_name` varchar(30) DEFAULT NULL,
   `user_name` varchar(30) NOT NULL,
-  `image_id` varchar(20) NOT NULL,
+  `image_id` varchar(20) DEFAULT NULL,
   `user_preference` varchar(500) NOT NULL,
   `user_type` char(1) NOT NULL,
-  `email` varchar(50) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
   `cell_number` varchar(20) DEFAULT NULL,
   `web_chat` varchar(50) DEFAULT NULL,
   `qq_number` varchar(50) DEFAULT NULL,
@@ -109,6 +109,7 @@ CREATE TABLE `user_info` (
   KEY `USERNAMEINDEX` (`isdeleted`,`user_name`),
   KEY `ISDELETEDINDEX` (`isdeleted`)
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
 
 
 CREATE TABLE `user_link_stand` (

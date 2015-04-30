@@ -53,6 +53,7 @@ var createStandEntity = {
 var createUserEntity = {
     "userId": null,
     "userName": null,
+    "password":null,
     "displayName": null,
     "userImage": null,
     "userPreference": null,

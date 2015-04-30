@@ -11,6 +11,7 @@ var hint_Message =
     CREATE_STAND_SUB_STAND_TYPE_CHARACTER_ERROR:"子分类必须为中文，并且以逗号隔开",
     CREATE_STAND_SET_MAP_POINT_NONE_ERROR : "请先设置摊位地点",
     CREATE_STAND_CREATING_HINT : "正在创建摊位...",
+    CREATE_USER_CREATING_HINT : "正在创建用户...",
     CREATE_STAND_CREATING_ERROR:"创建摊位失败，请检查网络连接状态并重试",
     CREATE_STAND_CREATING_SUCCESS:"创建摊位成功！",
     USER_LOGIN_FAIL:"登录失败，请检查用户名和密码，并保持网络畅通",
@@ -28,6 +29,7 @@ var normal_Text =
 {
     STAND_CONFIRM_POINT : "是否设定摊位位置？",
     USER_CREATE_CANCEL:"放弃创建用户？（已填数据将丢失）",
+    USER_CREATE_CONFIRM:"请确认以下信息并创建用户:",
     STAND_UPLOADING: "照片上传中...",
     YES:"确定",
     NO:"取消"

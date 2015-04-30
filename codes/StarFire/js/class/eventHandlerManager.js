@@ -136,11 +136,56 @@ var eventHandlerManagerClass = function()
 
     this.signUpUserPanel2_Sharp_swipeLeft = function()
     {
+
         if (fieldValidationCreateUserRequired()) {
-            commonHelper.createUserRequired(function(e){
-                alert(JSON.stringify(e));
-            },createUserEntity.username,createUserEntity.userType,createUserEntity.provinceCityArea,createUserEntity.password);
-            transferToPanel("#signUpUserPanel3", "slide");
+            var userTypeName = "";
+            if (createUserEntity.userType ==1)
+            {
+                userTypeName = "消费者";
+            }
+            else
+            {
+                userTypeName = "摊主";
+            }
+            var locationCombined = createUserEntity.provinceCityArea.province + " " + createUserEntity.provinceCityArea.city;
+            if (createUserEntity.provinceCityArea.area && createUserEntity.provinceCityArea.area != "选择区县..")
+            {
+                locationCombined = locationCombined + " " + createUserEntity.provinceCityArea.area;
+            }
+
+            var innerContent ="";
+            innerContent = innerContent + "用户名：" + createUserEntity.userName + "<BR />";
+            innerContent = innerContent + "用户类型：" + userTypeName + "<BR />";
+            innerContent = innerContent + "用户所在地：" + locationCombined + "<BR />";
+            var uploadPopup = $.afui.popup({
+                title: normal_Text.USER_CREATE_CONFIRM,
+                message: innerContent,
+                doneText:normal_Text.YES,
+                cancelText: normal_Text.NO,
+                cancelCallback: function () {
+                    uploadPopup.hide();
+                },
+                doneCallback:function()
+                {
+                    $.afui.showMask(hint_Message.CREATE_USER_CREATING_HINT);
+                    commonHelper.createUserRequired(function(e){
+                        if(e)
+                        {
+                            //commonHelper.showToast()
+                            $.afui.hideMask();
+                      //      commonHelper.showToast()
+                        }
+                        else
+                        {
+                            $.afui.hideMask();
+                        }
+                    },createUserEntity.userName,createUserEntity.userType,createUserEntity.provinceCityArea,createUserEntity.password);
+                    transferToPanel("#signUpUserPanel3", "slide");
+                    uploadPopup.hide();
+                },
+                cancelOnly: false
+            });
+
         }
 
     };
@@ -361,17 +406,17 @@ var eventHandlerManagerClass = function()
 
     this.province_Sharp_Change = function()
     {
-        createUserEntity.location = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
+        createUserEntity.provinceCityArea = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
     };
 
     this.city_Sharp_Change = function()
     {
-        createUserEntity.location = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
+        createUserEntity.provinceCityArea = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
     };
 
     this.county_Sharp_Change = function()
     {
-        createUserEntity.location = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
+        createUserEntity.provinceCityArea = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
     };
 
     this.onDeviceReadPhoneGap = function()
