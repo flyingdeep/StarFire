@@ -570,7 +570,9 @@ var serverProxyClass = function(username,password)
                         "qq_number" :qqNumber,
                         "province_city_area" : provinceCityArea
                     };
+                    alert(JSON.stringify(userAuthJson));
                     reformJsonObject(userAuthJson);
+                    alert(JSON.stringify(userAuthJson));
                     remoteClient.registerUserBase(function(resultJson)
                         {
                             if (resultJson && resultJson.status == "true")

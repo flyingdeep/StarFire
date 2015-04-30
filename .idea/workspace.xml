@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a7ad25bf-38ad-43db-8397-e87c816d9f56" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/js/bottomFunction.js" afterPath="$PROJECT_DIR$/codes/StarFire/js/bottomFunction.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/js/class/commonHelper.js" afterPath="$PROJECT_DIR$/codes/StarFire/js/class/commonHelper.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/default.html" afterPath="$PROJECT_DIR$/codes/StarFire/default.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/js/class/eventHandlerManager.js" afterPath="$PROJECT_DIR$/codes/StarFire/js/class/eventHandlerManager.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/js/class/remoteProxy.js" afterPath="$PROJECT_DIR$/codes/StarFire/js/class/remoteProxy.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="StarFire.iws" />
@@ -35,8 +33,8 @@
       <file leaf-file-name="default.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/default.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1235" max-vertical-offset="10032">
-              <caret line="63" column="48" selection-start-line="63" selection-start-column="48" selection-end-line="63" selection-end-column="48" />
+            <state vertical-scroll-proportion="-3.451613" vertical-offset="1961" max-vertical-offset="10032">
+              <caret line="94" column="83" selection-start-line="94" selection-start-column="83" selection-end-line="94" selection-end-column="83" />
               <folding />
             </state>
           </provider>
@@ -45,8 +43,8 @@
       <file leaf-file-name="commonHelper.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/commonHelper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1804" max-vertical-offset="5192">
-              <caret line="82" column="9" selection-start-line="82" selection-start-column="9" selection-end-line="82" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1809" max-vertical-offset="5192">
+              <caret line="93" column="40" selection-start-line="93" selection-start-column="40" selection-end-line="93" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -55,8 +53,8 @@
       <file leaf-file-name="processFacade.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/processFacade.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2772" max-vertical-offset="3366">
-              <caret line="126" column="158" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="158" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2315" max-vertical-offset="3366">
+              <caret line="110" column="26" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -65,8 +63,8 @@
       <file leaf-file-name="remoteProxy.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/remoteProxy.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="12371" max-vertical-offset="24376">
-              <caret line="551" column="9" selection-start-line="551" selection-start-column="9" selection-end-line="551" selection-end-column="9" />
+            <state vertical-scroll-proportion="-11.518518" vertical-offset="12317" max-vertical-offset="24420">
+              <caret line="574" column="56" selection-start-line="574" selection-start-column="56" selection-end-line="574" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -75,28 +73,28 @@
       <file leaf-file-name="eventHandlerManager.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/eventHandlerManager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2884" max-vertical-offset="8866">
-              <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="7595" max-vertical-offset="8866">
+              <caret line="353" column="59" selection-start-line="353" selection-start-column="59" selection-end-line="353" selection-end-column="59" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RestServerCore.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="RestServerCore.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/Nodejs/RestServerCore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3685015" vertical-offset="4203" max-vertical-offset="34848">
-              <caret line="202" column="36" selection-start-line="202" selection-start-column="36" selection-end-line="202" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="4049" max-vertical-offset="34848">
+              <caret line="190" column="0" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bottomFunction.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="bottomFunction.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/js/bottomFunction.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2442" max-vertical-offset="8888">
-              <caret line="111" column="74" selection-start-line="111" selection-start-column="74" selection-end-line="111" selection-end-column="74" />
+            <state vertical-scroll-proportion="0.27594936" vertical-offset="2245" max-vertical-offset="8888">
+              <caret line="107" column="59" selection-start-line="107" selection-start-column="59" selection-end-line="107" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -180,7 +178,6 @@
         <option value="$PROJECT_DIR$/codes/StarFire/css/customize.css" />
         <option value="$PROJECT_DIR$/codes/StarFire/js/common/imageUploadHelper.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/js/class/phoneGapHelper.js" />
-        <option value="$PROJECT_DIR$/codes/StarFire/js/class/remoteProxy.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/js/baidu/lbscloud.js" />
         <option value="$PROJECT_DIR$/codes/Nodejs/biz_modules/serviceFacade.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/framework/appframework-master/src/af.ui.js" />
@@ -197,6 +194,7 @@
         <option value="$PROJECT_DIR$/codes/StarFire/js/class/commonHelper.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/default.html" />
         <option value="$PROJECT_DIR$/codes/StarFire/js/class/eventHandlerManager.js" />
+        <option value="$PROJECT_DIR$/codes/StarFire/js/class/remoteProxy.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/js/bottomFunction.js" />
       </list>
     </option>
@@ -233,6 +231,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -447,7 +446,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -518,6 +516,14 @@
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
       <method />
     </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -528,12 +534,14 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
       <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -541,16 +549,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
-      <option name="cucumberJsArguments" />
-      <option name="executablePath" />
-      <option name="filePath" />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -714,7 +712,11 @@
       <created>1430129335426</created>
       <updated>1430129335426</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="UI developing">
+      <created>1430215929304</created>
+      <updated>1430215929304</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -746,19 +748,19 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24238579" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36427566" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36427566" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37598205" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21940929" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32770744" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32489452" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -791,7 +793,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="75" />
+      <option name="time" value="76" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -1044,6 +1046,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="590" max-vertical-offset="5874">
           <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1075,26 +1078,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/processFacade.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2461" max-vertical-offset="3366">
-          <caret line="126" column="158" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="158" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/codes/StarFire/test/testLocationMenu.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.540931" vertical-offset="147" max-vertical-offset="770">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="23" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/remoteProxy.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="12371" max-vertical-offset="24376">
-          <caret line="551" column="9" selection-start-line="551" selection-start-column="9" selection-end-line="551" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -1123,42 +1110,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/default.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1235" max-vertical-offset="10032">
-          <caret line="63" column="48" selection-start-line="63" selection-start-column="48" selection-end-line="63" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/commonHelper.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1591" max-vertical-offset="5192">
-          <caret line="82" column="9" selection-start-line="82" selection-start-column="9" selection-end-line="82" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1809" max-vertical-offset="5192">
+          <caret line="93" column="40" selection-start-line="93" selection-start-column="40" selection-end-line="93" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/bottomFunction.js">
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/processFacade.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2288" max-vertical-offset="8888">
-          <caret line="111" column="74" selection-start-line="111" selection-start-column="74" selection-end-line="111" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/eventHandlerManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2884" max-vertical-offset="8866">
-          <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2315" max-vertical-offset="3366">
+          <caret line="110" column="26" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/codes/Nodejs/RestServerCore.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3685015" vertical-offset="4203" max-vertical-offset="34848">
-          <caret line="202" column="36" selection-start-line="202" selection-start-column="36" selection-end-line="202" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4049" max-vertical-offset="34848">
+          <caret line="190" column="0" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/default.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.451613" vertical-offset="1961" max-vertical-offset="10032">
+          <caret line="94" column="83" selection-start-line="94" selection-start-column="83" selection-end-line="94" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/eventHandlerManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="7595" max-vertical-offset="8866">
+          <caret line="353" column="59" selection-start-line="353" selection-start-column="59" selection-end-line="353" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/remoteProxy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.518518" vertical-offset="12317" max-vertical-offset="24420">
+          <caret line="574" column="56" selection-start-line="574" selection-start-column="56" selection-end-line="574" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/bottomFunction.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27594936" vertical-offset="2245" max-vertical-offset="8888">
+          <caret line="107" column="59" selection-start-line="107" selection-start-column="59" selection-end-line="107" selection-end-column="59" />
           <folding />
         </state>
       </provider>

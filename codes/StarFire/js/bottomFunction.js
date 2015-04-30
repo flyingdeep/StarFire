@@ -37,7 +37,7 @@ function initialCreateUserField()
         "displayName": null,
         "userImage": null,
         "userPreference": null,
-        "userType": null,
+        "userType": 1,
         "email": null,
         "cellNumber": null,
         "webChat": null,
