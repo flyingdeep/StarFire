@@ -18,7 +18,9 @@ var hint_Message =
     CREATE_USER_USERNAME_LENGTH_ERROR: "请输入20位字符以内的用户名，由大小写字母和数字组成",
     CREATE_USER_DISPLAY_NAME_LENGTH_ERROR: "请输入15位字符以内的昵称，由中英文和数字组成",
     CREATE_USER_PASSWORD_LENGTH_ERROR: "请输入20位以内由大小写字母，数字以及_ . * + -组成的密码",
-    CREATE_USER_EMAIL_FORMAT_ERROR : "请输入正确的Email格式"
+    CREATE_USER_EMAIL_FORMAT_ERROR : "请输入正确的Email格式",
+    CREATE_USER_PROVINCE_SELECT_ERROR: "请选择省份",
+    CREATE_USER_CITY_SELECT_ERROR: "请选择城市"
 
 };
 

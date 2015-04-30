@@ -19,9 +19,13 @@
    <input type="button" onclick="setFirst();" value="test">
    <script type="text/javascript" src="../js/common/locationMenu.js" ></script>
     <script>
+        $("#province").on("change",function(){
+            alert($("#province").val());
+
+        });
         function setFirst() {
             $("#province option").eq(0).attr('selected', 'true');
-            $("#province").trigger("change");
+
 
         }
 

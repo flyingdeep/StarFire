@@ -193,6 +193,15 @@ function fieldValidationCreateUserRequired()
         result = false;
     }
 
+    if (!createUserEntity || createUserEntity.provinceCityArea.province == "选择省份/直辖市..")
+    {
+        messageContent = messageContent + hint_Message.CREATE_USER_PROVINCE_SELECT_ERROR + "<br />";
+    }
+    else if(createUserEntity.provinceCityArea.city == "选择市..")
+    {
+        messageContent = messageContent + hint_Message.CREATE_USER_CITY_SELECT_ERROR + "<br />";
+    }
+
 
     if (!result)
     {
