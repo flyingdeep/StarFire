@@ -185,6 +185,7 @@ var commonHelperClass = function() {
                     "userId": e.user_id,
                     "userName": e.user_name,
                     "displayName": e.display_name,
+                    "password": e.password,
                     "userImage": e.image_id,
                     "userPreference": JSON.stringify(e.user_preference),
                     "userType": e.user_type,

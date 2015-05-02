@@ -31,11 +31,11 @@ var ICON_DIGITAL= new BMap.Icon("./images/target.png", new BMap.Size(21, 41), {
     offset: new BMap.Size(10, 41)
 });
 
-var REG_EXPRESSION_STAND_NAME = /^[0-9a-zA-Z\u4e00-\u9fa5]+$/; //Chinese alphabet number
-var REG_EXPRESSION_STAND_SUB_TYPE_NAME = /^[\u4e00-\u9fa5,，]+$/; //Chinese alphabet number
-var REG_EXPRESSION_USER_NAME =  /^[0-9a-zA-Z]+$/;
-var REG_EXPRESSION_USER_DISPLAY_NAME = /^[0-9a-zA-Z\u4e00-\u9fa5]+$/;
-var REG_EXPRESSION_USER_PASSWORD = /^[0-9a-zA-Z_.\+\-]+$/;
+var REG_EXPRESSION_STAND_NAME = /^[0-9a-zA-Z\u4e00-\u9fa5]{1,10}$/; //Chinese alphabet number
+var REG_EXPRESSION_STAND_SUB_TYPE_NAME = /^[\u4e00-\u9fa5,，]{1,50}$/; //Chinese alphabet number
+var REG_EXPRESSION_USER_NAME =  /^[0-9a-zA-Z]{3,20}$/;
+var REG_EXPRESSION_USER_DISPLAY_NAME = /^[0-9a-zA-Z\u4e00-\u9fa5]{1,15}$/;
+var REG_EXPRESSION_USER_PASSWORD = /^[0-9a-zA-Z_.\+\-]{8,20}$/;
 var REG_EXPRESSION_EMAIL_FORMAT = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/;
 
 

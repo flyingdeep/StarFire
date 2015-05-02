@@ -13,6 +13,7 @@ var localStorageHelperClass = function()
             var resultJson = {
                 "userId": localStorageActual.localUserInfo_userId,
                 "userName": localStorageActual.localUserInfo_userName,
+                "password":localStorageActual.localUserInfo_password,
                 "displayName": localStorageActual.localUserInfo_displayName,
                 "userImage": localStorageActual.localUserInfo_userImage,
                 "userPreference": localStorageActual.localUserInfo_userPreference?JSON.parse(localStorageActual.localUserInfo_userPreference):null,
@@ -25,6 +26,24 @@ var localStorageHelperClass = function()
                 "createDate": localStorageActual.localUserInfo_createDate,
                 "updateDate":localStorageActual.localUserInfo_updateDate
             };
+
+            var createUserEntity = {
+                "userId": null,
+                "userName": null,
+                "password":null,
+                "displayName": null,
+                "userImage": null,
+                "userPreference": null,
+                "userType": null,
+                "email": null,
+                "cellNumber": null,
+                "webChat": null,
+                "qqNumber": null,
+                "provinceCityArea": null,
+                "createDate": null,
+                "updateDate":null
+            };
+
             return resultJson;
         },
         refreshFromServer:function()
@@ -55,6 +74,19 @@ var localStorageHelperClass = function()
                 return localStorageActual.localUserInfo_userName;
             }
         },
+        password : function(e)
+        {
+            if (e)
+            {
+                localStorageActual.localUserInfo_password = e;
+                return e;
+            }
+            else
+            {
+                return localStorageActual.localUserInfo_password;
+            }
+        },
+
         displayName : function(e)
         {
             if (e)

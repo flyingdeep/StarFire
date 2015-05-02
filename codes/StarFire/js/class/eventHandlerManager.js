@@ -172,21 +172,48 @@ var eventHandlerManagerClass = function()
                         if(e)
                         {
                             //commonHelper.showToast()
+//                            localStorageHelper.localUserInfo.userId(e.userId);
+                            localStorageHelper.localUserInfo.userName(createUserEntity.userName);
+                            localStorageHelper.localUserInfo.password(createUserEntity.password);
+//                            localStorageHelper.localUserInfo.displayName(e.displayName);
+//                            localStorageHelper.localUserInfo.userImage(e.userImage);
+                            localStorageHelper.localUserInfo.userType(createUserEntity.userType);
+//                            localStorageHelper.localUserInfo.email(e.email);
+//                            localStorageHelper.localUserInfo.cellNumber(e.cellNumber);
+//                            localStorageHelper.localUserInfo.webChat(e.webChat);
+//                            localStorageHelper.localUserInfo.qqNumber(e.qqNumber);
+                            localStorageHelper.localUserInfo.provinceCityArea(createUserEntity.provinceCityArea);
+//                            localStorageHelper.localUserInfo.createDate(e.createDate);
+//                            localStorageHelper.localUserInfo.updateDate(e.updateDate);
+//                            localStorageHelper.localUserInfo.userPreference(e.userPreference);
+
+                            userBasicInfoEntity.userName = createUserEntity.userName;
+                            userBasicInfoEntity.password = createUserEntity.password;
+                            userBasicInfoEntity.userType = createUserEntity.userType;
+                            userBasicInfoEntity.provinceCityArea = createUserEntity.provinceCityArea;
+                            transferToPanel("#signUpUserPanel3", "slide");
                             $.afui.hideMask();
-                      //      commonHelper.showToast()
+
                         }
                         else
                         {
                             $.afui.hideMask();
+                            commonHelper.showToast(hint_Message.CREATE_USER_FAIL,"bc",true,"error");
                         }
                     },createUserEntity.userName,createUserEntity.userType,createUserEntity.provinceCityArea,createUserEntity.password);
-                    transferToPanel("#signUpUserPanel3", "slide");
+
                     uploadPopup.hide();
                 },
                 cancelOnly: false
             });
 
         }
+
+    };
+
+    this.signUpUserPanel3_Sharp_PanelLoad = function()
+    {
+        commonHelper.showToast(hint_Message.CREATE_USER_SUCCESS,"bc",true,"success");
 
     };
 
@@ -202,6 +229,7 @@ var eventHandlerManagerClass = function()
 
                 localStorageHelper.localUserInfo.userId(e.userId);
                 localStorageHelper.localUserInfo.userName(e.userName);
+                localStorageHelper.localUserInfo.password(e.password);
                 localStorageHelper.localUserInfo.displayName(e.displayName);
                 localStorageHelper.localUserInfo.userImage(e.userImage);
                 localStorageHelper.localUserInfo.userType(e.userType);
@@ -245,6 +273,11 @@ var eventHandlerManagerClass = function()
                 mapCr.clearOverlays();
             }
         }
+
+    };
+
+    this.userPic_Sharp_Change = function()
+    {
 
     };
 

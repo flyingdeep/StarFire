@@ -4,11 +4,9 @@ var hint_Message =
     STAND_IMAGE_UPLOAD_SIZE_EXCEED : "所选图片大于2M，请重新选择。",
     STAND_IMAGE_UPLOAD_CANCEL : "图片上传已经取消",
     STAND_IMAGE_UPLOAD_FAIL: "上传失败，请检查网络连接状态并重试",
-   CREATE_STAND_STAND_NAME_LENGTH_ERROR: "请输入正确的摊位名（1-10个字之间）",
-    CREATE_STAND_STAND_NAME_CHARACTER_ERROR : "摊位名只有能由汉字，英文或数字组成",
+    CREATE_STAND_STAND_NAME_CHARACTER_ERROR : "请输入由汉字，英文或数字组成的摊位名（1-10个字之间）",
     CREATE_STAND_STAND_TYPE_NO_SELECTED_ERROR:"摊位类型未选择",
-    CREATE_STAND_SUB_STAND_TYPE_NO_FILLED_ERROR:"请输入子分类（总共1-50个字之间）",
-    CREATE_STAND_SUB_STAND_TYPE_CHARACTER_ERROR:"子分类必须为中文，并且以逗号隔开",
+    CREATE_STAND_SUB_STAND_TYPE_CHARACTER_ERROR:"请输入中文子分类，并且以逗号隔开（总共1-50个字之间，含逗号）",
     CREATE_STAND_SET_MAP_POINT_NONE_ERROR : "请先设置摊位地点",
     CREATE_STAND_CREATING_HINT : "正在创建摊位...",
     CREATE_USER_CREATING_HINT : "正在创建用户...",
@@ -16,12 +14,14 @@ var hint_Message =
     CREATE_STAND_CREATING_SUCCESS:"创建摊位成功！",
     USER_LOGIN_FAIL:"登录失败，请检查用户名和密码，并保持网络畅通",
     USER_LOGIN_NO_BLANK_USER_PASS:"用户名和密码不能为空",
-    CREATE_USER_USERNAME_LENGTH_ERROR: "请输入20位字符以内的用户名，由大小写字母和数字组成",
+    CREATE_USER_USERNAME_LENGTH_ERROR: "请输入3-20位字符以内的用户名，由大小写字母和数字组成",
     CREATE_USER_DISPLAY_NAME_LENGTH_ERROR: "请输入15位字符以内的昵称，由中英文和数字组成",
-    CREATE_USER_PASSWORD_LENGTH_ERROR: "请输入20位以内由大小写字母，数字以及_ . * + -组成的密码",
-    CREATE_USER_EMAIL_FORMAT_ERROR : "请输入正确的Email格式",
+    CREATE_USER_PASSWORD_LENGTH_ERROR: "请输入8-20位以内由大小写字母，数字以及_ . * + -组成的密码",
+    CREATE_USER_EMAIL_FORMAT_ERROR : "请输入50位以内正确的Email格式",
     CREATE_USER_PROVINCE_SELECT_ERROR: "请选择省份",
-    CREATE_USER_CITY_SELECT_ERROR: "请选择城市"
+    CREATE_USER_CITY_SELECT_ERROR: "请选择城市",
+    CREATE_USER_FAIL:"创建用户失败，请检查网络连接状况",
+    CREATE_USER_SUCCESS :"创建用户成功！请继续完成用户资料填写"
 
 };
 

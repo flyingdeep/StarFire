@@ -221,7 +221,7 @@ function fieldValidationCreateStand()
     var messageContent = "";
     if (!createStandEntity.standName || commonHelper.trim(createStandEntity.standName).length==0)
     {
-        messageContent = messageContent + hint_Message.CREATE_STAND_STAND_NAME_LENGTH_ERROR + "<br />";
+        messageContent = messageContent + hint_Message.CREATE_STAND_STAND_NAME_CHARACTER_ERROR + "<br />";
         result = false;
     }
     else if (!REG_EXPRESSION_STAND_NAME.test(commonHelper.trim(createStandEntity.standName)))
@@ -236,7 +236,7 @@ function fieldValidationCreateStand()
     }
     if (!createStandEntity.standSubContent || commonHelper.trim(createStandEntity.standSubContent).length == 0)
     {
-        messageContent = messageContent + hint_Message.CREATE_STAND_SUB_STAND_TYPE_NO_FILLED_ERROR + "<br />";
+        messageContent = messageContent + hint_Message.CREATE_STAND_SUB_STAND_TYPE_CHARACTER_ERROR + "<br />";
         result = false;
     }
     else if (!REG_EXPRESSION_STAND_SUB_TYPE_NAME.test(commonHelper.trim(createStandEntity.standSubContent)))
