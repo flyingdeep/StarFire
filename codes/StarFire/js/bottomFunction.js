@@ -158,6 +158,22 @@ function fieldValidationCreateOptional()
         messageContent = messageContent + hint_Message.CREATE_USER_EMAIL_FORMAT_ERROR + "<br />";
         result = false;
     }
+    if (createUserEntity.qqNumber && !REG_EXPRESSION_QQ_FORMAT.test(commonHelper.trim(createUserEntity.qqNumber)))
+    {
+        messageContent = messageContent + hint_Message.CREATE_USER_QQ_FORMAT_ERROR + "<br />";
+        result = false;
+    }
+    if (createUserEntity.webChat && !REG_EXPRESSION_WEBCHAT_FORMAT.test(commonHelper.trim(createUserEntity.webChat)))
+    {
+        messageContent = messageContent + hint_Message.CREATE_USER_WEBCHAT_FORMAT_ERROR + "<br />";
+        result = false;
+    }
+    if (createUserEntity.cellNumber && !REG_EXPRESSION_CELL_FORMAT.test(commonHelper.trim(createUserEntity.cellNumber)))
+    {
+        messageContent = messageContent + hint_Message.CREATE_USER_CELL_FORMAT_ERROR + "<br />";
+        result = false;
+    }
+
     if (!result)
     {
         commonHelper.showToast(messageContent,"bc",true,"error");

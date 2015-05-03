@@ -102,6 +102,9 @@
                     $("#signUpUserPanel1").on("swipeLeft", eventHandlerManager.signUpUserPanel1_Sharp_swipeLeft);
                     $("#signUpUserPanel2").on("swipeRight", eventHandlerManager.signUpUserPanel2_Sharp_SwipeRight);
                     $("#signUpUserPanel2").on("swipeLeft", eventHandlerManager.signUpUserPanel2_Sharp_swipeLeft);
+                    $("#signUpUserPanel3").on("swipeRight", eventHandlerManager.signUpUserPanel3_Sharp_SwipeRight);
+                    $("#signUpUserPanel3").on("swipeLeft", eventHandlerManager.signUpUserPanel3_Sharp_swipeLeft);
+
                     // map related =====================================================
                     gc = new BMap.Geocoder();
                     map = new BMap.Map("mapContainer");
@@ -231,11 +234,14 @@
                     <a class="button smallButton" onclick="$('#userPic').click();" >选择并上传您的头像</a>
                 </form>
             </div>
-            <div id="userImageContainer">
+            <div id="userImageContainer" class="center">
 
             </div>
             <label for="nickname">昵称</label><input id="nickname" type="text" placeholder="由中英文，数字组成,不超过15位" >
             <label for="mailBox">邮箱</label><input id="mailBox" type="text" placeholder="输入正确的邮箱地址" >
+            <label for="cell">手机号</label><input id="cell" type="text" placeholder="请输入13位手机号码" >
+            <label for="qq">QQ</label><input id="qq" type="text" placeholder="输入qq号码" >
+            <label for="webChat">微信</label><input id="webChat" type="text" placeholder="输入微信号" >
             </div>
         </div>
     </div>

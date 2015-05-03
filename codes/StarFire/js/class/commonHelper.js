@@ -72,38 +72,30 @@ var commonHelperClass = function() {
         return str.replace(/(^\s*)|(\s*$)/g, "");
     };
 
-    var initCustomerDefaultUserPreference = function()
+    this.initCustomerDefaultUserPreference = function()
     {
         return {"test":"testCustomer"};
     };
-    var initOwnerDefaultUserPreference = function()
+    this.initOwnerDefaultUserPreference = function()
     {
         return {"test":"testOwner"};
     };
-    this.createUserRequired = function(callback, username, userType, provinceCityArea,password)
+    this.createUserRequired = function(callback, username, userType, userPreference, provinceCityArea,password)
     {
-        var userPreference;
-        if (userType == 1)
-        {
-            userPreference = initCustomerDefaultUserPreference();
-        }
-        else
-        {
-            userPreference = initOwnerDefaultUserPreference();
-        }
+
         (new processFacadeClass()).createNewUser(function(e)
         {
             callback(e);
         }, null, username, null, userPreference, userType, null,null, null,null,provinceCityArea,password);
     };
 
-    this.updateUserOptional = function(callback, displayName,imageId,cellNumber,webChat, qqNumber)
+    this.updateUserOptional = function(callback,username, displayName,imageId,cellNumber,webChat, qqNumber)
     {
         (new processFacadeClass()).updateExistUser(
             function(e)
             {
                 callback(e);
-            }, displayName, null, imageId, null, null, cellNumber,webChat, qqNumber,null,null
+            }, displayName, username, imageId, null, null, cellNumber,webChat, qqNumber,null,null
         );
 
     };

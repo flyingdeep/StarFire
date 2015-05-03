@@ -10,6 +10,7 @@ var hint_Message =
     CREATE_STAND_SET_MAP_POINT_NONE_ERROR : "请先设置摊位地点",
     CREATE_STAND_CREATING_HINT : "正在创建摊位...",
     CREATE_USER_CREATING_HINT : "正在创建用户...",
+    CREATE_USER_CREATING_EXTRA_HINT : "正在建立用户详细信息...",
     CREATE_STAND_CREATING_ERROR:"创建摊位失败，请检查网络连接状态并重试",
     CREATE_STAND_CREATING_SUCCESS:"创建摊位成功！",
     USER_LOGIN_FAIL:"登录失败，请检查用户名和密码，并保持网络畅通",
@@ -20,8 +21,13 @@ var hint_Message =
     CREATE_USER_EMAIL_FORMAT_ERROR : "请输入50位以内正确的Email格式",
     CREATE_USER_PROVINCE_SELECT_ERROR: "请选择省份",
     CREATE_USER_CITY_SELECT_ERROR: "请选择城市",
+    CREATE_USER_QQ_FORMAT_ERROR : "请输入正确的QQ号码",
+    CREATE_USER_WEBCHAT_FORMAT_ERROR : "请输入正确的微信号",
+    CREATE_USER_CELL_FORMAT_ERROR : "请输入正确的手机号码",
     CREATE_USER_FAIL:"创建用户失败，请检查网络连接状况",
-    CREATE_USER_SUCCESS :"创建用户成功！请继续完成用户资料填写"
+    CREATE_USER_SUCCESS :"创建用户成功！请继续完成用户资料填写",
+    USER_UPLOAD_SIZE_EXCEED : "所选图片大于2M，请重新选择。",
+    USER_IMAGE_UPLOAD_CANCEL : "图片上传已经取消"
 
 };
 
@@ -30,7 +36,8 @@ var normal_Text =
     STAND_CONFIRM_POINT : "是否设定摊位位置？",
     USER_CREATE_CANCEL:"放弃创建用户？（已填数据将丢失）",
     USER_CREATE_CONFIRM:"请确认以下信息并创建用户:",
-    STAND_UPLOADING: "照片上传中...",
+    STAND_UPLOADING: "图片上传中...",
+    USER_IMG_UPLOADING:"头像上传中",
     YES:"确定",
     NO:"取消"
 

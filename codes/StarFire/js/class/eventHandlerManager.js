@@ -139,19 +139,26 @@ var eventHandlerManagerClass = function()
 
         if (fieldValidationCreateUserRequired()) {
             var userTypeName = "";
+            var userPreference;
             if (createUserEntity.userType ==1)
             {
                 userTypeName = "消费者";
+                userPreference = commonHelper.initCustomerDefaultUserPreference();
             }
             else
             {
                 userTypeName = "摊主";
+                userPreference = commonHelper.initOwnerDefaultUserPreference();
             }
+            createUserEntity.userPreference = userPreference;
+
             var locationCombined = createUserEntity.provinceCityArea.province + " " + createUserEntity.provinceCityArea.city;
             if (createUserEntity.provinceCityArea.area && createUserEntity.provinceCityArea.area != "选择区县..")
             {
                 locationCombined = locationCombined + " " + createUserEntity.provinceCityArea.area;
             }
+
+
 
             var innerContent ="";
             innerContent = innerContent + "用户名：" + createUserEntity.userName + "<BR />";
@@ -185,6 +192,71 @@ var eventHandlerManagerClass = function()
                             localStorageHelper.localUserInfo.provinceCityArea(createUserEntity.provinceCityArea);
 //                            localStorageHelper.localUserInfo.createDate(e.createDate);
 //                            localStorageHelper.localUserInfo.updateDate(e.updateDate);
+                            localStorageHelper.localUserInfo.userPreference(createUserEntity.userPreference);
+
+                            userBasicInfoEntity.userName = createUserEntity.userName;
+                            userBasicInfoEntity.password = createUserEntity.password;
+                            userBasicInfoEntity.userType = createUserEntity.userType;
+                            userBasicInfoEntity.provinceCityArea = createUserEntity.provinceCityArea;
+                            userBasicInfoEntity.userPreference = createUserEntity.userPreference;
+                            transferToPanel("#signUpUserPanel3", "slide");
+                            $.afui.hideMask();
+
+                        }
+                        else
+                        {
+                            $.afui.hideMask();
+                            commonHelper.showToast(hint_Message.CREATE_USER_FAIL,"bc",true,"error");
+                        }
+                    },createUserEntity.userName,createUserEntity.userType,createUserEntity.userPreference,createUserEntity.provinceCityArea,createUserEntity.password);
+
+                    uploadPopup.hide();
+                },
+                cancelOnly: false
+            });
+
+        }
+
+    };
+
+    this.signUpUserPanel3_Sharp_SwipeRight = function()
+    {
+
+    };
+
+    this.signUpUserPanel3_Sharp_swipeLeft = function()
+    {
+        if (fieldValidationCreateOptional())
+        {
+            var innerContent ="";
+            innerContent = innerContent + "用户名：" + createUserEntity.userName + "<BR />";
+            innerContent = innerContent + "昵称：" + createUserEntity.displayName + "<BR />";
+            innerContent = innerContent + "手机：" + createUserEntity.cellNumber + "<BR />";
+            innerContent = innerContent + "Email：" + createUserEntity.email + "<BR />";
+            innerContent = innerContent + "QQ：" + createUserEntity.qqNumber + "<BR />";
+            innerContent = innerContent + "微信：" + createUserEntity.webChat + "<BR />";
+            var uploadPopup = $.afui.popup({
+                title: normal_Text.USER_CREATE_CONFIRM,
+                message: innerContent,
+                doneText:normal_Text.YES,
+                cancelText: normal_Text.NO,
+                cancelCallback: function () {
+                    uploadPopup.hide();
+                },
+                doneCallback:function()
+                {
+                    $.afui.showMask(hint_Message.CREATE_USER_CREATING_EXTRA_HINT);
+                    commonHelper.updateUserOptional(function(e){
+                        if(e)
+                        {
+                            //commonHelper.showToast()
+//                            localStorageHelper.localUserInfo.userId(e.userId);
+//                            localStorageHelper.localUserInfo.displayName(e.displayName);
+//                            localStorageHelper.localUserInfo.userImage(e.userImage);
+//                            localStorageHelper.localUserInfo.email(e.email);
+//                            localStorageHelper.localUserInfo.cellNumber(e.cellNumber);
+//                            localStorageHelper.localUserInfo.webChat(e.webChat);
+//                            localStorageHelper.localUserInfo.qqNumber(e.qqNumber);
 //                            localStorageHelper.localUserInfo.userPreference(e.userPreference);
 
                             userBasicInfoEntity.userName = createUserEntity.userName;
@@ -200,16 +272,15 @@ var eventHandlerManagerClass = function()
                             $.afui.hideMask();
                             commonHelper.showToast(hint_Message.CREATE_USER_FAIL,"bc",true,"error");
                         }
-                    },createUserEntity.userName,createUserEntity.userType,createUserEntity.provinceCityArea,createUserEntity.password);
-
+                    },createUserEntity.userName,createUserEntity.displayName,createUserEntity.userImage,createUserEntity.cellNumber,createUserEntity.webChat,createUserEntity.qqNumber);
                     uploadPopup.hide();
                 },
                 cancelOnly: false
             });
-
         }
-
     };
+
+
 
     this.signUpUserPanel3_Sharp_PanelLoad = function()
     {
@@ -278,7 +349,65 @@ var eventHandlerManagerClass = function()
 
     this.userPic_Sharp_Change = function()
     {
+        inputSeed = (new Date()).getTime();
+        var files = evt.target.files;
+        for (var i = 0, f; f = files[i]; i++) {
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
 
+            fileExtension = f.name.substring(f.name.indexOf("."));
+            if (f.size > UPLOAD_IMAGE_MAXSIZE)
+            {
+
+                commonHelper.showToast(hint_Message.USER_UPLOAD_SIZE_EXCEED,"bc",true,"error");
+                continue;
+            }
+            var tFile = f;
+            var cancelUploadTag = false;
+            var innerContent = "<image src='./images/waiting.gif'>"
+            var uploadPopup = $.afui.popup({
+                title: normal_Text.USER_IMG_UPLOADING,
+                message: innerContent,
+                cancelText: normal_Text.NO,
+                cancelCallback: function () {
+                    cancelUploadTag = true;
+                    this.hide();
+                    commonHelper.showToast(hint_Message.USER_IMAGE_UPLOAD_CANCEL,"bc",true,"warning");
+                },
+                cancelOnly: true
+            });
+
+
+            uploadSingleUserImage(function(e)
+            {
+                uploadPopup.hide();
+                if (cancelUploadTag)
+                {
+                    return;
+                }
+                if (e) {
+                    var reader = new FileReader();
+                    // Closure to capture the file information.
+                    reader.onload = function () {
+                        // Render thumbnail.
+                        var imageContentString = generateUserImagePreview(e, event.target.result,$("#userImageContainer").width());
+
+                        $("#userImageContainer").append(imageContentString);
+
+                    };
+
+                    reader.readAsDataURL(tFile);
+                }
+                else
+                {
+                    commonHelper.showToast(hint_Message.STAND_IMAGE_UPLOAD_FAIL,"bc",true,"error");
+                }
+            });
+            // Read in the image file as a data URL.
+
+        }
     };
 
     this.file_Sharp_Change = function(evt){
