@@ -115,6 +115,16 @@ function initialSignUpUserFieldEvent()
 
     $("#county").on("change",eventHandlerManager.county_Sharp_Change);
 
+    $("#nickname").on("change",eventHandlerManager.nickname_Sharp_Change);
+
+    $("#mailBox").on("change",eventHandlerManager.mailBox_Sharp_Change);
+
+    $("#cell").on("change",eventHandlerManager.cell_Sharp_Change);
+
+    $("#qq").on("change",eventHandlerManager.qq_Sharp_Change);
+
+    $("#webChat").on("change",eventHandlerManager.webChat_Sharp_Change);
+
 }
 
 

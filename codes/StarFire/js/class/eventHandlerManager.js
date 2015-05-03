@@ -178,20 +178,10 @@ var eventHandlerManagerClass = function()
                     commonHelper.createUserRequired(function(e){
                         if(e)
                         {
-                            //commonHelper.showToast()
-//                            localStorageHelper.localUserInfo.userId(e.userId);
                             localStorageHelper.localUserInfo.userName(createUserEntity.userName);
                             localStorageHelper.localUserInfo.password(createUserEntity.password);
-//                            localStorageHelper.localUserInfo.displayName(e.displayName);
-//                            localStorageHelper.localUserInfo.userImage(e.userImage);
                             localStorageHelper.localUserInfo.userType(createUserEntity.userType);
-//                            localStorageHelper.localUserInfo.email(e.email);
-//                            localStorageHelper.localUserInfo.cellNumber(e.cellNumber);
-//                            localStorageHelper.localUserInfo.webChat(e.webChat);
-//                            localStorageHelper.localUserInfo.qqNumber(e.qqNumber);
                             localStorageHelper.localUserInfo.provinceCityArea(createUserEntity.provinceCityArea);
-//                            localStorageHelper.localUserInfo.createDate(e.createDate);
-//                            localStorageHelper.localUserInfo.updateDate(e.updateDate);
                             localStorageHelper.localUserInfo.userPreference(createUserEntity.userPreference);
 
                             userBasicInfoEntity.userName = createUserEntity.userName;
@@ -250,19 +240,20 @@ var eventHandlerManagerClass = function()
                         if(e)
                         {
                             //commonHelper.showToast()
-//                            localStorageHelper.localUserInfo.userId(e.userId);
-//                            localStorageHelper.localUserInfo.displayName(e.displayName);
-//                            localStorageHelper.localUserInfo.userImage(e.userImage);
-//                            localStorageHelper.localUserInfo.email(e.email);
-//                            localStorageHelper.localUserInfo.cellNumber(e.cellNumber);
-//                            localStorageHelper.localUserInfo.webChat(e.webChat);
-//                            localStorageHelper.localUserInfo.qqNumber(e.qqNumber);
-//                            localStorageHelper.localUserInfo.userPreference(e.userPreference);
+                            localStorageHelper.localUserInfo.displayName(e.displayName);
+                            localStorageHelper.localUserInfo.userImage(e.userImage);
+                            localStorageHelper.localUserInfo.email(e.email);
+                            localStorageHelper.localUserInfo.cellNumber(e.cellNumber);
+                            localStorageHelper.localUserInfo.webChat(e.webChat);
+                            localStorageHelper.localUserInfo.qqNumber(e.qqNumber);
 
-                            userBasicInfoEntity.userName = createUserEntity.userName;
-                            userBasicInfoEntity.password = createUserEntity.password;
-                            userBasicInfoEntity.userType = createUserEntity.userType;
-                            userBasicInfoEntity.provinceCityArea = createUserEntity.provinceCityArea;
+
+                            userBasicInfoEntity.displayName = createUserEntity.displayName;
+                            userBasicInfoEntity.userImage = createUserEntity.userImage;
+                            userBasicInfoEntity.email = createUserEntity.email;
+                            userBasicInfoEntity.cellNumber = createUserEntity.cellNumber;
+                            userBasicInfoEntity.webChat = createUserEntity.webChat;
+                            userBasicInfoEntity.qqNumber = createUserEntity.qqNumber;
                             transferToPanel("#signUpUserPanel3", "slide");
                             $.afui.hideMask();
 
@@ -397,7 +388,7 @@ var eventHandlerManagerClass = function()
                         $("#userImageContainer").append(imageContentString);
 
                     };
-
+                    createUserEntity.userImage = event.target.result;
                     reader.readAsDataURL(tFile);
                 }
                 else
@@ -579,6 +570,30 @@ var eventHandlerManagerClass = function()
     this.county_Sharp_Change = function()
     {
         createUserEntity.provinceCityArea = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
+    };
+
+    this.nickname_Sharp_Change = function()
+    {
+        createUserEntity.displayName = $("#nickname").val();
+    };
+
+    this.mailBox_Sharp_Change = function()
+    {
+        createUserEntity.email = $("#mailBox").val();
+    };
+
+    this.cell_Sharp_Change = function()
+    {
+        createUserEntity.cellNumber = $("#cell").val();
+    };
+    this.qq_Sharp_Change = function()
+    {
+        createUserEntity.qqNumber = $("#qq").val();
+    };
+
+    this.webChat_Sharp_Change = function()
+    {
+        createUserEntity.webChat = $("#webChat").val();
     };
 
     this.onDeviceReadPhoneGap = function()
