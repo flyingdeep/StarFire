@@ -116,6 +116,10 @@ var processFacadeClass = function()
                     callback(e.result) ;
 
                 }
+                else if (e && e.success && e.success == "false")
+                {
+                    callback(0);
+                }
                 else
                 {
                     callback(null);

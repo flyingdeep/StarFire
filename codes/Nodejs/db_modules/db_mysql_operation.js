@@ -116,7 +116,7 @@ exports.insertData = function() //callback, presql ,input Json, pool
 	}
 });
 
-}
+};
 
 exports.deleteData = function() // callback, sqlstr, pool
 {

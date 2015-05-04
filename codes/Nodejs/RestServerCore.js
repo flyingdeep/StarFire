@@ -230,6 +230,14 @@ var registerUserCallbackPost = function(req, res, next)
                 }
             };
         }
+        else if (e == 0)
+        {
+            result.status = "true";
+            result.detail = {
+                "success" : "false",
+                "result": "Duplicated username"
+            };
+        }
         else
         {
             result.status = "false";

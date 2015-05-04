@@ -176,7 +176,8 @@ var eventHandlerManagerClass = function()
                 {
                     $.afui.showMask(hint_Message.CREATE_USER_CREATING_HINT);
                     commonHelper.createUserRequired(function(e){
-                        if(e)
+
+                        if(e && e!= 0)
                         {
                             localStorageHelper.localUserInfo.userName(createUserEntity.userName);
                             localStorageHelper.localUserInfo.password(createUserEntity.password);
@@ -193,12 +194,17 @@ var eventHandlerManagerClass = function()
                             $.afui.hideMask();
 
                         }
+                        else if (e ==0)
+                        {
+                            $.afui.hideMask();
+                            commonHelper.showToast(hint_Message.CREATE_USER_DUPLICATED_FAIL,"bc",true,"error");
+                        }
                         else
                         {
                             $.afui.hideMask();
                             commonHelper.showToast(hint_Message.CREATE_USER_FAIL,"bc",true,"error");
                         }
-                    },createUserEntity.userName,createUserEntity.userType,createUserEntity.userPreference,createUserEntity.provinceCityArea,createUserEntity.password);
+                    },createUserEntity.userName,createUserEntity.userType,createUserEntity.userPreference,createUserEntity.provinceCityArea,b64_md5(createUserEntity.password));
 
                     uploadPopup.hide();
                 },
@@ -211,7 +217,21 @@ var eventHandlerManagerClass = function()
 
     this.signUpUserPanel3_Sharp_SwipeRight = function()
     {
-
+        var updatePopup = $.afui.popup({
+            title: normal_Text.USER_OPTIONAL_CREATE_CONFIRM,
+            message: "",
+            doneText:normal_Text.YES,
+            cancelText: normal_Text.NO,
+            cancelCallback: function () {
+                updatePopup.hide();
+            },
+            doneCallback:function()
+            {
+                transferToPanel("#mapPanel", "slide");
+                 updatePopup.hide();
+            },
+            cancelOnly: false
+        });
     };
 
     this.signUpUserPanel3_Sharp_swipeLeft = function()
@@ -225,13 +245,13 @@ var eventHandlerManagerClass = function()
             innerContent = innerContent + "Email：" + createUserEntity.email + "<BR />";
             innerContent = innerContent + "QQ：" + createUserEntity.qqNumber + "<BR />";
             innerContent = innerContent + "微信：" + createUserEntity.webChat + "<BR />";
-            var uploadPopup = $.afui.popup({
+            var updatePopup = $.afui.popup({
                 title: normal_Text.USER_CREATE_CONFIRM,
                 message: innerContent,
                 doneText:normal_Text.YES,
                 cancelText: normal_Text.NO,
                 cancelCallback: function () {
-                    uploadPopup.hide();
+                    updatePopup.hide();
                 },
                 doneCallback:function()
                 {
@@ -254,7 +274,7 @@ var eventHandlerManagerClass = function()
                             userBasicInfoEntity.cellNumber = createUserEntity.cellNumber;
                             userBasicInfoEntity.webChat = createUserEntity.webChat;
                             userBasicInfoEntity.qqNumber = createUserEntity.qqNumber;
-                            transferToPanel("#signUpUserPanel3", "slide");
+                            transferToPanel("#mapPanel", "slide");
                             $.afui.hideMask();
 
                         }
@@ -264,7 +284,7 @@ var eventHandlerManagerClass = function()
                             commonHelper.showToast(hint_Message.CREATE_USER_FAIL,"bc",true,"error");
                         }
                     },createUserEntity.userName,createUserEntity.displayName,createUserEntity.userImage,createUserEntity.cellNumber,createUserEntity.webChat,createUserEntity.qqNumber);
-                    uploadPopup.hide();
+                    updatePopup.hide();
                 },
                 cancelOnly: false
             });

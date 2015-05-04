@@ -197,6 +197,10 @@ exports.userInfoClass = function()
               var presql = "insert into "+ TB_USER_INFO + " set createdate=now(),updatedate=now(),";
               mysqldbOperation.insertData(callback,presql,userinfo);
           }
+          else if (!err && !e )
+          {
+              callback(err,0);
+          }
             else
           {
               callback(err,false);

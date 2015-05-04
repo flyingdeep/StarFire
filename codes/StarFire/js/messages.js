@@ -25,6 +25,7 @@ var hint_Message =
     CREATE_USER_WEBCHAT_FORMAT_ERROR : "请输入正确的微信号",
     CREATE_USER_CELL_FORMAT_ERROR : "请输入正确的手机号码",
     CREATE_USER_FAIL:"创建用户失败，请检查网络连接状况",
+    CREATE_USER_DUPLICATED_FAIL:"创建用户失败，该用户已存在",
     CREATE_USER_SUCCESS :"创建用户成功！请继续完成用户资料填写",
     USER_UPLOAD_SIZE_EXCEED : "所选图片大于2M，请重新选择。",
     USER_IMAGE_UPLOAD_CANCEL : "图片上传已经取消"
@@ -36,6 +37,7 @@ var normal_Text =
     STAND_CONFIRM_POINT : "是否设定摊位位置？",
     USER_CREATE_CANCEL:"放弃创建用户？（已填数据将丢失）",
     USER_CREATE_CONFIRM:"请确认以下信息并创建用户:",
+    USER_OPTIONAL_CREATE_CONFIRM:"是否确定跳过详细信息填写？（已填写内容将丢失）",
     STAND_UPLOADING: "图片上传中...",
     USER_IMG_UPLOADING:"头像上传中",
     YES:"确定",
