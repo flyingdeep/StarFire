@@ -191,6 +191,11 @@ var eventHandlerManagerClass = function()
                             userBasicInfoEntity.provinceCityArea = createUserEntity.provinceCityArea;
                             userBasicInfoEntity.userPreference = createUserEntity.userPreference;
                             transferToPanel("#signUpUserPanel3", "slide");
+                            setTimeout(function()
+                            {
+                                commonHelper.showToast(hint_Message.CREATE_USER_SUCCESS,"bc",true,"success");
+
+                            },500);
                             $.afui.hideMask();
 
                         }
@@ -240,11 +245,12 @@ var eventHandlerManagerClass = function()
         {
             var innerContent ="";
             innerContent = innerContent + "用户名：" + createUserEntity.userName + "<BR />";
-            innerContent = innerContent + "昵称：" + createUserEntity.displayName + "<BR />";
-            innerContent = innerContent + "手机：" + createUserEntity.cellNumber + "<BR />";
-            innerContent = innerContent + "Email：" + createUserEntity.email + "<BR />";
-            innerContent = innerContent + "QQ：" + createUserEntity.qqNumber + "<BR />";
-            innerContent = innerContent + "微信：" + createUserEntity.webChat + "<BR />";
+            innerContent = innerContent + "昵称：" + (createUserEntity.displayName?createUserEntity.displayName:"未填写") + "<BR />";
+            innerContent = innerContent + "手机：" + (createUserEntity.cellNumber?createUserEntity.cellNumber:"未填写") + "<BR />";
+            innerContent = innerContent + "Email：" + (createUserEntity.email?createUserEntity.email:"未填写") + "<BR />";
+            innerContent = innerContent + "QQ：" + (createUserEntity.qqNumber?createUserEntity.qqNumber:"未填写") + "<BR />";
+            innerContent = innerContent + "微信：" + (createUserEntity.webChat?createUserEntity.webChat:"未填写") + "<BR />";
+
             var updatePopup = $.afui.popup({
                 title: normal_Text.USER_CREATE_CONFIRM,
                 message: innerContent,
@@ -281,7 +287,7 @@ var eventHandlerManagerClass = function()
                         else
                         {
                             $.afui.hideMask();
-                            commonHelper.showToast(hint_Message.CREATE_USER_FAIL,"bc",true,"error");
+                            commonHelper.showToast(hint_Message.CREATE_USER_OPTIONAL_FAIL,"bc",true,"error");
                         }
                     },createUserEntity.userName,createUserEntity.displayName,createUserEntity.userImage,createUserEntity.cellNumber,createUserEntity.webChat,createUserEntity.qqNumber);
                     updatePopup.hide();
@@ -293,11 +299,11 @@ var eventHandlerManagerClass = function()
 
 
 
-    this.signUpUserPanel3_Sharp_PanelLoad = function()
-    {
-        commonHelper.showToast(hint_Message.CREATE_USER_SUCCESS,"bc",true,"success");
-
-    };
+//    this.signUpUserPanel3_Sharp_PanelLoad = function()
+//    {
+//        commonHelper.showToast(hint_Message.CREATE_USER_SUCCESS,"bc",true,"success");
+//
+//    };
 
     this.loginButton_Sharp_Click = function() {
         if (!fieldValidationLogin())
@@ -358,8 +364,9 @@ var eventHandlerManagerClass = function()
 
     };
 
-    this.userPic_Sharp_Change = function()
+    this.userPic_Sharp_Change = function(evt)
     {
+
         inputSeed = (new Date()).getTime();
         var files = evt.target.files;
         for (var i = 0, f; f = files[i]; i++) {

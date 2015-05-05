@@ -39,7 +39,7 @@ var REG_EXPRESSION_USER_PASSWORD = /^[0-9a-zA-Z_.\+\-]{8,20}$/;
 var REG_EXPRESSION_EMAIL_FORMAT = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/;
 var REG_EXPRESSION_QQ_FORMAT = /^[0-9]{1,20}$/;
 var REG_EXPRESSION_WEBCHAT_FORMAT = /^[a-z_\d]{1,20}$/;
-var REG_EXPRESSION_CELL_FORMAT = /^[0-9]{13}$/;
+var REG_EXPRESSION_CELL_FORMAT = /^[0-9]{11}$/;
 var GPS_INTERVAL = 30000;
 var PHONE_VIBRATE = 3000;
 

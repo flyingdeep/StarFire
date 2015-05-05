@@ -28,6 +28,7 @@ var hint_Message =
     CREATE_USER_DUPLICATED_FAIL:"创建用户失败，该用户已存在",
     CREATE_USER_SUCCESS :"创建用户成功！请继续完成用户资料填写",
     USER_UPLOAD_SIZE_EXCEED : "所选图片大于2M，请重新选择。",
+    CREATE_USER_OPTIONAL_FAIL:"用户资料更新失败，请检查网络连接状况",
     USER_IMAGE_UPLOAD_CANCEL : "图片上传已经取消"
 
 };

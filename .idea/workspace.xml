@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7ad25bf-38ad-43db-8397-e87c816d9f56" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/Nodejs/RestServerCore.js" afterPath="$PROJECT_DIR$/codes/Nodejs/RestServerCore.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/Nodejs/biz_modules/db_biz_operation.js" afterPath="$PROJECT_DIR$/codes/Nodejs/biz_modules/db_biz_operation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/Nodejs/db_modules/db_mysql_operation.js" afterPath="$PROJECT_DIR$/codes/Nodejs/db_modules/db_mysql_operation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/js/config.js" afterPath="$PROJECT_DIR$/codes/StarFire/js/config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/default.html" afterPath="$PROJECT_DIR$/codes/StarFire/default.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/js/class/eventHandlerManager.js" afterPath="$PROJECT_DIR$/codes/StarFire/js/class/eventHandlerManager.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/js/messages.js" afterPath="$PROJECT_DIR$/codes/StarFire/js/messages.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes/StarFire/js/class/processFacade.js" afterPath="$PROJECT_DIR$/codes/StarFire/js/class/processFacade.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="StarFire.iws" />
@@ -37,8 +35,8 @@
       <file leaf-file-name="default.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/default.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.5172415" vertical-offset="1900" max-vertical-offset="10252">
-              <caret line="93" column="81" selection-start-line="93" selection-start-column="81" selection-end-line="93" selection-end-column="81" />
+            <state vertical-scroll-proportion="-1.862069" vertical-offset="1872" max-vertical-offset="10252">
+              <caret line="90" column="20" selection-start-line="90" selection-start-column="20" selection-end-line="90" selection-end-column="20" />
               <folding>
                 <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -49,8 +47,8 @@
       <file leaf-file-name="messages.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/js/messages.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="1144">
-              <caret line="39" column="56" selection-start-line="39" selection-start-column="56" selection-end-line="39" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="440" max-vertical-offset="1166">
+              <caret line="25" column="47" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -59,18 +57,8 @@
       <file leaf-file-name="RestServerCore.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/Nodejs/RestServerCore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4494" max-vertical-offset="35024">
-              <caret line="221" column="0" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="serviceFacade.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/codes/Nodejs/biz_modules/serviceFacade.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2624" max-vertical-offset="12078">
-              <caret line="130" column="30" selection-start-line="130" selection-start-column="30" selection-end-line="130" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="5522" max-vertical-offset="35024">
+              <caret line="256" column="26" selection-start-line="256" selection-start-column="4" selection-end-line="256" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -79,38 +67,8 @@
       <file leaf-file-name="db_biz_operation.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/Nodejs/biz_modules/db_biz_operation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.962963" vertical-offset="4217" max-vertical-offset="22726">
-              <caret line="199" column="0" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="db_mysql_operation.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/codes/Nodejs/db_modules/db_mysql_operation.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="16.037037" vertical-offset="1995" max-vertical-offset="5258">
-              <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="remoteProxy.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/remoteProxy.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="13230" max-vertical-offset="24398">
-              <caret line="593" column="9" selection-start-line="593" selection-start-column="9" selection-end-line="593" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="processFacade.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/processFacade.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2305" max-vertical-offset="3476">
-              <caret line="120" column="32" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="4488" max-vertical-offset="22726">
+              <caret line="204" column="0" selection-start-line="204" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -119,8 +77,8 @@
       <file leaf-file-name="commonHelper.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/commonHelper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3504" max-vertical-offset="5038">
-              <caret line="169" column="25" selection-start-line="169" selection-start-column="18" selection-end-line="169" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1941" max-vertical-offset="5038">
+              <caret line="93" column="46" selection-start-line="93" selection-start-column="46" selection-end-line="93" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -129,8 +87,48 @@
       <file leaf-file-name="eventHandlerManager.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/eventHandlerManager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7746479" vertical-offset="7887" max-vertical-offset="14190">
-              <caret line="376" column="13" selection-start-line="376" selection-start-column="13" selection-end-line="376" selection-end-column="13" />
+            <state vertical-scroll-proportion="-0.01305483" vertical-offset="10235" max-vertical-offset="14344">
+              <caret line="465" column="20" selection-start-line="465" selection-start-column="20" selection-end-line="465" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="processFacade.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/processFacade.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2821" max-vertical-offset="3476">
+              <caret line="131" column="9" selection-start-line="131" selection-start-column="9" selection-end-line="131" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bottomFunction.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/codes/StarFire/js/bottomFunction.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3792" max-vertical-offset="9746">
+              <caret line="179" column="5" selection-start-line="179" selection-start-column="5" selection-end-line="179" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/codes/StarFire/js/config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="638" max-vertical-offset="1166">
+              <caret line="41" column="43" selection-start-line="41" selection-start-column="43" selection-end-line="41" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Initial DB.sql" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/codes/Database Script/Initial DB.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.555555" vertical-offset="1881" max-vertical-offset="3322">
+              <caret line="96" column="35" selection-start-line="96" selection-start-column="35" selection-end-line="96" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -193,15 +191,15 @@
         <option value="$PROJECT_DIR$/codes/StarFire/js/globalVariables.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/js/common/imageUploadHelper.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/css/customize.css" />
-        <option value="$PROJECT_DIR$/codes/StarFire/default.html" />
-        <option value="$PROJECT_DIR$/codes/StarFire/js/config.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/js/class/commonHelper.js" />
-        <option value="$PROJECT_DIR$/codes/StarFire/js/bottomFunction.js" />
         <option value="$PROJECT_DIR$/codes/Nodejs/db_modules/db_mysql_operation.js" />
         <option value="$PROJECT_DIR$/codes/Nodejs/biz_modules/db_biz_operation.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/js/class/processFacade.js" />
-        <option value="$PROJECT_DIR$/codes/StarFire/js/messages.js" />
         <option value="$PROJECT_DIR$/codes/Nodejs/RestServerCore.js" />
+        <option value="$PROJECT_DIR$/codes/StarFire/default.html" />
+        <option value="$PROJECT_DIR$/codes/StarFire/js/config.js" />
+        <option value="$PROJECT_DIR$/codes/StarFire/js/bottomFunction.js" />
+        <option value="$PROJECT_DIR$/codes/StarFire/js/messages.js" />
         <option value="$PROJECT_DIR$/codes/StarFire/js/class/eventHandlerManager.js" />
       </list>
     </option>
@@ -209,8 +207,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -238,6 +236,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -494,9 +493,26 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarFire" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarFire" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="codes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Database Script" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -567,14 +583,6 @@
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
       <method />
     </configuration>
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
-      <method />
-    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -585,14 +593,12 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
-      <option name="cucumberJsArguments" />
-      <option name="executablePath" />
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
       <option name="filePath" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -600,6 +606,16 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
+      <option name="filePath" />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -811,15 +827,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884398" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32489452" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2420886" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36363637" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24175127" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3628692" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37598205" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21885522" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -827,11 +844,10 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32489452" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -861,20 +877,20 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/codes/Nodejs/RestServerCore.js</url>
+          <line>258</line>
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="86" />
+      <option name="time" value="89" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/codes/Nodejs/test_modules/JsHashMapTest.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="654">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/codes/StarFire/test/testMethod.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.670947" vertical-offset="0" max-vertical-offset="623">
@@ -1126,14 +1142,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3104" max-vertical-offset="3982">
           <caret line="172" column="17" selection-start-line="172" selection-start-column="17" selection-end-line="172" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="310" max-vertical-offset="1166">
-          <caret line="41" column="30" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -1153,50 +1161,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/bottomFunction.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2032" max-vertical-offset="9746">
-          <caret line="117" column="11" selection-start-line="117" selection-start-column="11" selection-end-line="117" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/codes/Nodejs/db_modules/db_mysql_operation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="16.037037" vertical-offset="1995" max-vertical-offset="5258">
-          <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/processFacade.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2305" max-vertical-offset="3476">
-          <caret line="120" column="32" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2017" max-vertical-offset="5258">
+          <caret line="72" column="1" selection-start-line="72" selection-start-column="1" selection-end-line="72" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/remoteProxy.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="12768" max-vertical-offset="24398">
-          <caret line="593" column="9" selection-start-line="593" selection-start-column="9" selection-end-line="593" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/messages.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="1144">
-          <caret line="39" column="56" selection-start-line="39" selection-start-column="56" selection-end-line="39" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/commonHelper.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3504" max-vertical-offset="5038">
-          <caret line="169" column="25" selection-start-line="169" selection-start-column="18" selection-end-line="169" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="13024" max-vertical-offset="24398">
+          <caret line="592" column="6" selection-start-line="592" selection-start-column="6" selection-end-line="592" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -1211,34 +1187,82 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/codes/Nodejs/biz_modules/db_biz_operation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.962963" vertical-offset="4217" max-vertical-offset="22726">
-          <caret line="199" column="0" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4488" max-vertical-offset="22726">
+          <caret line="204" column="0" selection-start-line="204" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/Database Script/Initial DB.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.555555" vertical-offset="1881" max-vertical-offset="3322">
+          <caret line="96" column="35" selection-start-line="96" selection-start-column="35" selection-end-line="96" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/commonHelper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1941" max-vertical-offset="5038">
+          <caret line="93" column="46" selection-start-line="93" selection-start-column="46" selection-end-line="93" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/codes/Nodejs/RestServerCore.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4494" max-vertical-offset="35024">
-          <caret line="221" column="0" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="5522" max-vertical-offset="35024">
+          <caret line="256" column="26" selection-start-line="256" selection-start-column="4" selection-end-line="256" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="638" max-vertical-offset="1166">
+          <caret line="41" column="43" selection-start-line="41" selection-start-column="43" selection-end-line="41" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/bottomFunction.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3792" max-vertical-offset="9746">
+          <caret line="179" column="5" selection-start-line="179" selection-start-column="5" selection-end-line="179" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/processFacade.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2821" max-vertical-offset="3476">
+          <caret line="131" column="9" selection-start-line="131" selection-start-column="9" selection-end-line="131" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/codes/StarFire/default.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.5172415" vertical-offset="1900" max-vertical-offset="10252">
-          <caret line="93" column="81" selection-start-line="93" selection-start-column="81" selection-end-line="93" selection-end-column="81" />
+        <state vertical-scroll-proportion="-1.862069" vertical-offset="1872" max-vertical-offset="10252">
+          <caret line="90" column="20" selection-start-line="90" selection-start-column="20" selection-end-line="90" selection-end-column="20" />
           <folding>
             <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/codes/StarFire/js/messages.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="440" max-vertical-offset="1166">
+          <caret line="25" column="47" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/codes/StarFire/js/class/eventHandlerManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7746479" vertical-offset="7887" max-vertical-offset="14190">
-          <caret line="376" column="13" selection-start-line="376" selection-start-column="13" selection-end-line="376" selection-end-column="13" />
+        <state vertical-scroll-proportion="-0.01305483" vertical-offset="10235" max-vertical-offset="14344">
+          <caret line="465" column="20" selection-start-line="465" selection-start-column="20" selection-end-line="465" selection-end-column="20" />
           <folding />
         </state>
       </provider>
