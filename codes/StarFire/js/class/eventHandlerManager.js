@@ -137,6 +137,7 @@ var eventHandlerManagerClass = function()
     this.signUpUserPanel2_Sharp_swipeLeft = function()
     {
 
+
         if (fieldValidationCreateUserRequired()) {
             var userTypeName = "";
             var userPreference;
@@ -263,6 +264,7 @@ var eventHandlerManagerClass = function()
                 {
                     $.afui.showMask(hint_Message.CREATE_USER_CREATING_EXTRA_HINT);
                     commonHelper.updateUserOptional(function(e){
+
                         if(e)
                         {
                             //commonHelper.showToast()
@@ -391,8 +393,9 @@ var eventHandlerManagerClass = function()
                 cancelText: normal_Text.NO,
                 cancelCallback: function () {
                     cancelUploadTag = true;
-                    this.hide();
-                    commonHelper.showToast(hint_Message.USER_IMAGE_UPLOAD_CANCEL,"bc",true,"warning");
+                    uploadPopup.hide();
+                    $.afui.showMask(normal_Text.CANCELING_ACTION);
+
                 },
                 cancelOnly: true
             });
@@ -403,6 +406,8 @@ var eventHandlerManagerClass = function()
                 uploadPopup.hide();
                 if (cancelUploadTag)
                 {
+                    $.afui.hideMask();
+                    commonHelper.showToast(hint_Message.USER_IMAGE_UPLOAD_CANCEL,"bc",true,"warning");
                     return;
                 }
                 if (e) {
@@ -453,8 +458,9 @@ var eventHandlerManagerClass = function()
                 cancelText: normal_Text.NO,
                 cancelCallback: function () {
                     cancelUploadTag = true;
-                    this.hide();
-                    commonHelper.showToast(hint_Message.STAND_IMAGE_UPLOAD_CANCEL,"bc",true,"warning");
+                    uploadPopup.hide();
+                    $.afui.showMask(normal_Text.CANCELING_ACTION);
+
                 },
                 cancelOnly: true
             });
@@ -465,6 +471,8 @@ var eventHandlerManagerClass = function()
                 uploadPopup.hide();
                 if (cancelUploadTag)
                 {
+                    $.afui.hideMask();
+                    commonHelper.showToast(hint_Message.STAND_IMAGE_UPLOAD_CANCEL,"bc",true,"warning");
                     return;
                 }
                 if (e) {

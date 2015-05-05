@@ -41,6 +41,7 @@ var normal_Text =
     USER_OPTIONAL_CREATE_CONFIRM:"是否确定跳过详细信息填写？（已填写内容将丢失）",
     STAND_UPLOADING: "图片上传中...",
     USER_IMG_UPLOADING:"头像上传中",
+    CANCELING_ACTION:"正在取消",
     YES:"确定",
     NO:"取消"
 

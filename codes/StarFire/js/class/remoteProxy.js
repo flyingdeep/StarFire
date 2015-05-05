@@ -611,7 +611,7 @@ var serverProxyClass = function(username,password)
                         "province_city_area" : provinceCityArea
                     };
                     reformJsonObject(userAuthJson);
-                    remoteClient.authenticateUserBase(function(resultJson)
+                    remoteClient.updateUserBase(function(resultJson)
                     {
                         if (resultJson && resultJson.status == "true")
                         {
