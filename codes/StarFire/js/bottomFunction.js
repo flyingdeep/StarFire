@@ -1,4 +1,4 @@
-function initialCreateStandFieldEvent()
+function initialCreateStandField()
 {
     if (!createStandEntity.standName)
     {
@@ -20,13 +20,13 @@ function initialCreateStandFieldEvent()
         $("#standDescription").val("");
     }
 
-    $("#standName").on("change",eventHandlerManager.standName_Sharp_Change);
-
-    $("#standTypeDiv").on("change",eventHandlerManager.standTypeDiv_Sharp_Change);
-
-    $("#subStandType").on("change",eventHandlerManager.subStandType_Sharp_Change);
-
-    $("#standDescription").on("change",eventHandlerManager.standDescription_Sharp_Change);
+//    $("#standName").on("change",eventHandlerManager.standName_Sharp_Change);
+//
+//    $("#standTypeDiv").on("change",eventHandlerManager.standTypeDiv_Sharp_Change);
+//
+//    $("#subStandType").on("change",eventHandlerManager.subStandType_Sharp_Change);
+//
+//    $("#standDescription").on("change",eventHandlerManager.standDescription_Sharp_Change);
 }
 
 function initialCreateUserField()
@@ -103,29 +103,29 @@ function createUserStand()
     userBasicInfoEntity.userId,userBasicInfoEntity.userName,createStandEntity.position,standImageTip,images);
 }
 
-function initialSignUpUserFieldEvent()
-{
-    $("#usernameCr").on("change",eventHandlerManager.usernameCr_Sharp_Change);
-
-    $("#passwordCr").on("change",eventHandlerManager.passwordCr_Sharp_Change);
-
-    $("#province").on("change",eventHandlerManager.province_Sharp_Change);
-
-    $("#city").on("change",eventHandlerManager.city_Sharp_Change);
-
-    $("#county").on("change",eventHandlerManager.county_Sharp_Change);
-
-    $("#nickname").on("change",eventHandlerManager.nickname_Sharp_Change);
-
-    $("#mailBox").on("change",eventHandlerManager.mailBox_Sharp_Change);
-
-    $("#cell").on("change",eventHandlerManager.cell_Sharp_Change);
-
-    $("#qq").on("change",eventHandlerManager.qq_Sharp_Change);
-
-    $("#webChat").on("change",eventHandlerManager.webChat_Sharp_Change);
-
-}
+//function initialSignUpUserFieldEvent()
+//{
+//    $("#usernameCr").on("change",eventHandlerManager.usernameCr_Sharp_Change);
+//
+//    $("#passwordCr").on("change",eventHandlerManager.passwordCr_Sharp_Change);
+//
+//    $("#province").on("change",eventHandlerManager.province_Sharp_Change);
+//
+//    $("#city").on("change",eventHandlerManager.city_Sharp_Change);
+//
+//    $("#county").on("change",eventHandlerManager.county_Sharp_Change);
+//
+//    $("#nickname").on("change",eventHandlerManager.nickname_Sharp_Change);
+//
+//    $("#mailBox").on("change",eventHandlerManager.mailBox_Sharp_Change);
+//
+//    $("#cell").on("change",eventHandlerManager.cell_Sharp_Change);
+//
+//    $("#qq").on("change",eventHandlerManager.qq_Sharp_Change);
+//
+//    $("#webChat").on("change",eventHandlerManager.webChat_Sharp_Change);
+//
+//}
 
 
 function standLocationNoneSetCheck()
@@ -157,6 +157,13 @@ function fieldValidationCreateOptional()
 {
     var result = true;
     var messageContent = "";
+
+    createUserEntity.displayName = $("#nickname").val();
+    createUserEntity.email = $("#mailBox").val();
+    createUserEntity.cellNumber = $("#cell").val();
+    createUserEntity.qqNumber = $("#qq").val();
+    createUserEntity.webChat = $("#webChat").val();
+
     if (createUserEntity.displayName && !REG_EXPRESSION_USER_DISPLAY_NAME.test(commonHelper.trim(createUserEntity.displayName)))
     {
         messageContent = messageContent + hint_Message.CREATE_USER_DISPLAY_NAME_LENGTH_ERROR + "<br />";
@@ -195,6 +202,11 @@ function fieldValidationCreateUserRequired()
 {
     var result = true;
     var messageContent = "";
+
+    createUserEntity.userName = $("#usernameCr").val();
+    createUserEntity.password = $("#passwordCr").val();
+    createUserEntity.provinceCityArea = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
+
     if (!createUserEntity.userName || commonHelper.trim(createUserEntity.userName).length==0)
     {
         messageContent = messageContent + hint_Message.CREATE_USER_USERNAME_LENGTH_ERROR + "<br />";
@@ -245,6 +257,12 @@ function fieldValidationCreateStand()
 
     var result = true;
     var messageContent = "";
+
+    createStandEntity.standName = $("#standName").val();
+    createStandEntity.standType = $("input[name='crStandType_Radio']:checked").val();
+    createStandEntity.standSubContent = $("#subStandType").val();
+    createStandEntity.description = $("#standDescription").val();
+
     if (!createStandEntity.standName || commonHelper.trim(createStandEntity.standName).length==0)
     {
         messageContent = messageContent + hint_Message.CREATE_STAND_STAND_NAME_CHARACTER_ERROR + "<br />";

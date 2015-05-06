@@ -38,7 +38,7 @@ var eventHandlerManagerClass = function()
 
 
     this.createStandPanel1_Sharp_PanelBeforeLoad = function(){
-        initialCreateStandFieldEvent();
+        initialCreateStandField();
         if ( $("#standTypeDiv").html() == "") {
             if (!staticStandTypeHtmlString) {
                 commonHelper.constructStandTypeHTML(function (e) {
@@ -91,7 +91,7 @@ var eventHandlerManagerClass = function()
     this.signUpButton_Sharp_Click = function()
     {
         initialCreateUserField();
-        initialSignUpUserFieldEvent();
+        //initialSignUpUserFieldEvent();
         transferToPanel("#signUpUserPanel1", "slide");
     };
 
@@ -136,7 +136,6 @@ var eventHandlerManagerClass = function()
 
     this.signUpUserPanel2_Sharp_swipeLeft = function()
     {
-
 
         if (fieldValidationCreateUserRequired()) {
             var userTypeName = "";
@@ -562,74 +561,74 @@ var eventHandlerManagerClass = function()
 
     };
 
-    this.standName_Sharp_Change = function()
-    {
-        createStandEntity.standName = $("#standName").val();
-    };
-
-    this.standTypeDiv_Sharp_Change = function()
-    {
-        createStandEntity.standType = $("input[name='crStandType_Radio']:checked").val();
-    };
-
-    this.subStandType_Sharp_Change = function()
-    {
-        createStandEntity.standSubContent = $("#subStandType").val();
-    };
-
-    this.standDescription_Sharp_Change = function()
-    {
-        createStandEntity.description = $("#standDescription").val();
-    };
-
-    this.usernameCr_Sharp_Change = function()
-    {
-        createUserEntity.userName = $("#usernameCr").val();
-    };
-
-    this.passwordCr_Sharp_Change = function()
-    {
-        createUserEntity.password = $("#passwordCr").val();
-    };
-
-    this.province_Sharp_Change = function()
-    {
-        createUserEntity.provinceCityArea = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
-    };
-
-    this.city_Sharp_Change = function()
-    {
-        createUserEntity.provinceCityArea = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
-    };
-
-    this.county_Sharp_Change = function()
-    {
-        createUserEntity.provinceCityArea = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
-    };
-
-    this.nickname_Sharp_Change = function()
-    {
-        createUserEntity.displayName = $("#nickname").val();
-    };
-
-    this.mailBox_Sharp_Change = function()
-    {
-        createUserEntity.email = $("#mailBox").val();
-    };
-
-    this.cell_Sharp_Change = function()
-    {
-        createUserEntity.cellNumber = $("#cell").val();
-    };
-    this.qq_Sharp_Change = function()
-    {
-        createUserEntity.qqNumber = $("#qq").val();
-    };
-
-    this.webChat_Sharp_Change = function()
-    {
-        createUserEntity.webChat = $("#webChat").val();
-    };
+//    this.standName_Sharp_Change = function()
+//    {
+//        createStandEntity.standName = $("#standName").val();
+//    };
+//
+//    this.standTypeDiv_Sharp_Change = function()
+//    {
+//        createStandEntity.standType = $("input[name='crStandType_Radio']:checked").val();
+//    };
+//
+//    this.subStandType_Sharp_Change = function()
+//    {
+//        createStandEntity.standSubContent = $("#subStandType").val();
+//    };
+//
+//    this.standDescription_Sharp_Change = function()
+//    {
+//        createStandEntity.description = $("#standDescription").val();
+//    };
+//
+//    this.usernameCr_Sharp_Change = function()
+//    {
+//        createUserEntity.userName = $("#usernameCr").val();
+//    };
+//
+//    this.passwordCr_Sharp_Change = function()
+//    {
+//        createUserEntity.password = $("#passwordCr").val();
+//    };
+//
+//    this.province_Sharp_Change = function()
+//    {
+//        createUserEntity.provinceCityArea = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
+//    };
+//
+//    this.city_Sharp_Change = function()
+//    {
+//        createUserEntity.provinceCityArea = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
+//    };
+//
+//    this.county_Sharp_Change = function()
+//    {
+//        createUserEntity.provinceCityArea = {"province": $("#province").val(),"city":$("#city").val(),"area":$("#county").val()};
+//    };
+//
+//    this.nickname_Sharp_Change = function()
+//    {
+//        createUserEntity.displayName = $("#nickname").val();
+//    };
+//
+//    this.mailBox_Sharp_Change = function()
+//    {
+//        createUserEntity.email = $("#mailBox").val();
+//    };
+//
+//    this.cell_Sharp_Change = function()
+//    {
+//        createUserEntity.cellNumber = $("#cell").val();
+//    };
+//    this.qq_Sharp_Change = function()
+//    {
+//        createUserEntity.qqNumber = $("#qq").val();
+//    };
+//
+//    this.webChat_Sharp_Change = function()
+//    {
+//        createUserEntity.webChat = $("#webChat").val();
+//    };
 
     this.onDeviceReadPhoneGap = function()
     {
