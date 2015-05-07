@@ -267,22 +267,49 @@ var eventHandlerManagerClass = function()
                         if(e)
                         {
                             //commonHelper.showToast()
-                            localStorageHelper.localUserInfo.displayName(e.displayName);
-                            localStorageHelper.localUserInfo.userImage(e.userImage);
-                            localStorageHelper.localUserInfo.email(e.email);
-                            localStorageHelper.localUserInfo.cellNumber(e.cellNumber);
-                            localStorageHelper.localUserInfo.webChat(e.webChat);
-                            localStorageHelper.localUserInfo.qqNumber(e.qqNumber);
-
-
-                            userBasicInfoEntity.displayName = createUserEntity.displayName;
-                            userBasicInfoEntity.userImage = createUserEntity.userImage;
-                            userBasicInfoEntity.email = createUserEntity.email;
-                            userBasicInfoEntity.cellNumber = createUserEntity.cellNumber;
-                            userBasicInfoEntity.webChat = createUserEntity.webChat;
-                            userBasicInfoEntity.qqNumber = createUserEntity.qqNumber;
-                            transferToPanel("#mapPanel", "slide");
+//                            localStorageHelper.localUserInfo.displayName(createUserEntity.displayName);
+//                            localStorageHelper.localUserInfo.userImage(createUserEntity.userImage);
+//                            localStorageHelper.localUserInfo.email(createUserEntity.email);
+//                            localStorageHelper.localUserInfo.cellNumber(createUserEntity.cellNumber);
+//                            localStorageHelper.localUserInfo.webChat(createUserEntity.webChat);
+//                            localStorageHelper.localUserInfo.qqNumber(createUserEntity.qqNumber);
+//
+//                            userBasicInfoEntity.displayName = createUserEntity.displayName;
+//                            userBasicInfoEntity.userImage = createUserEntity.userImage;
+//                            userBasicInfoEntity.email = createUserEntity.email;
+//                            userBasicInfoEntity.cellNumber = createUserEntity.cellNumber;
+//                            userBasicInfoEntity.webChat = createUserEntity.webChat;
+//                            userBasicInfoEntity.qqNumber = createUserEntity.qqNumber;
+                           // transferToPanel("#mapPanel", "slide");
                             $.afui.hideMask();
+                            $.afui.showMask(hint_Message.CREATE_USER_CREATING_EXTRA_SUCCESS_TO_LOGON);
+                            commonHelper.loginUser(function (e) {
+                                if (e) {
+
+                                    localStorageHelper.localUserInfo.userId(e.userId);
+                                    localStorageHelper.localUserInfo.userName(e.userName);
+                                    localStorageHelper.localUserInfo.password(e.password);
+                                    localStorageHelper.localUserInfo.displayName(e.displayName);
+                                    localStorageHelper.localUserInfo.userImage(e.userImage);
+                                    localStorageHelper.localUserInfo.userType(e.userType);
+                                    localStorageHelper.localUserInfo.email(e.email);
+                                    localStorageHelper.localUserInfo.cellNumber(e.cellNumber);
+                                    localStorageHelper.localUserInfo.webChat(e.webChat);
+                                    localStorageHelper.localUserInfo.qqNumber(e.qqNumber);
+                                    localStorageHelper.localUserInfo.provinceCityArea(e.provinceCityArea);
+                                    localStorageHelper.localUserInfo.createDate(e.createDate);
+                                    localStorageHelper.localUserInfo.updateDate(e.updateDate);
+                                    localStorageHelper.localUserInfo.userPreference(e.userPreference);
+
+                                    userBasicInfoEntity = e;
+                                    userPreference = userBasicInfoEntity.userPreference;
+                                    transferToPanel("#mapPanel", "up-reveal:dismiss");
+                                }
+                                else {
+
+                                    commonHelper.showToast(hint_Message.USER_LOGIN_FAIL,"bc",true,"error");
+                                }
+                            }, createUserEntity.username, createUserEntity.password);
 
                         }
                         else

@@ -11,6 +11,7 @@ var hint_Message =
     CREATE_STAND_CREATING_HINT : "正在创建摊位...",
     CREATE_USER_CREATING_HINT : "正在创建用户...",
     CREATE_USER_CREATING_EXTRA_HINT : "正在建立用户详细信息...",
+    CREATE_USER_CREATING_EXTRA_SUCCESS_TO_LOGON : "用户信息建立成功，正在登录并进入应用",
     CREATE_STAND_CREATING_ERROR:"创建摊位失败，请检查网络连接状态并重试",
     CREATE_STAND_CREATING_SUCCESS:"创建摊位成功！",
     USER_LOGIN_FAIL:"登录失败，请检查用户名和密码，并保持网络畅通",
