@@ -223,7 +223,7 @@ var eventHandlerManagerClass = function()
     this.signUpUserPanel3_Sharp_SwipeRight = function()
     {
         var updatePopup = $.afui.popup({
-            title: normal_Text.USER_OPTIONAL_CREATE_CONFIRM,
+            title: normal_Text.USER_OPTIONAL_CREATE_SKIP,
             message: "",
             doneText:normal_Text.YES,
             cancelText: normal_Text.NO,
@@ -232,8 +232,33 @@ var eventHandlerManagerClass = function()
             },
             doneCallback:function()
             {
-                transferToPanel("#mapPanel", "slide");
+
                  updatePopup.hide();
+                $.afui.showMask(hint_Message.CREATE_USER_SKIP_EXTRA_TO_LOGON);
+                commonHelper.loginUser(function (e) {
+                    if (e) {
+
+                        localStorageHelper.localUserInfo.userId(e.userId);
+                        localStorageHelper.localUserInfo.userName(e.userName);
+                        localStorageHelper.localUserInfo.password(e.password);
+                        localStorageHelper.localUserInfo.displayName(e.displayName);
+                        localStorageHelper.localUserInfo.userType(e.userType);
+                        localStorageHelper.localUserInfo.email(e.email);
+                        localStorageHelper.localUserInfo.provinceCityArea(e.provinceCityArea);
+                        localStorageHelper.localUserInfo.createDate(e.createDate);
+                        localStorageHelper.localUserInfo.updateDate(e.updateDate);
+                        localStorageHelper.localUserInfo.userPreference(e.userPreference);
+
+                        userBasicInfoEntity = e;
+                        userPreference = userBasicInfoEntity.userPreference;
+                        transferToPanel("#mapPanel", "up-reveal:dismiss");
+                        $.afui.hideMask();
+                    }
+                    else {
+
+                        commonHelper.showToast(hint_Message.USER_LOGIN_FAIL,"bc",true,"error");
+                    }
+                }, createUserEntity.userName, createUserEntity.password);
             },
             cancelOnly: false
         });
@@ -252,7 +277,7 @@ var eventHandlerManagerClass = function()
             innerContent = innerContent + "微信：" + (createUserEntity.webChat?createUserEntity.webChat:"未填写") + "<BR />";
 
             var updatePopup = $.afui.popup({
-                title: normal_Text.USER_CREATE_CONFIRM,
+                title: normal_Text.USER_OPTIONAL_CREATE_CONFIRM,
                 message: innerContent,
                 doneText:normal_Text.YES,
                 cancelText: normal_Text.NO,
@@ -283,6 +308,7 @@ var eventHandlerManagerClass = function()
                            // transferToPanel("#mapPanel", "slide");
                             $.afui.hideMask();
                             $.afui.showMask(hint_Message.CREATE_USER_CREATING_EXTRA_SUCCESS_TO_LOGON);
+
                             commonHelper.loginUser(function (e) {
                                 if (e) {
 
@@ -304,12 +330,13 @@ var eventHandlerManagerClass = function()
                                     userBasicInfoEntity = e;
                                     userPreference = userBasicInfoEntity.userPreference;
                                     transferToPanel("#mapPanel", "up-reveal:dismiss");
+                                    $.afui.hideMask();
                                 }
                                 else {
 
                                     commonHelper.showToast(hint_Message.USER_LOGIN_FAIL,"bc",true,"error");
                                 }
-                            }, createUserEntity.username, createUserEntity.password);
+                            }, createUserEntity.userName, createUserEntity.password);
 
                         }
                         else
